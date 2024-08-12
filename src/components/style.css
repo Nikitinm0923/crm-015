@@ -1214,5 +1214,6 @@ textarea {
 }
 
 hr {
+  color: var(--separator-line-color);
   opacity: 1;
 }
