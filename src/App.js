@@ -27,6 +27,12 @@ const App = () => {
     }
   }, [isLogin]);
 
+  useEffect(() => {
+    const html = document.querySelector("html");
+    const theme = localStorage.getItem("THEME") || "dark";
+    if (theme !== "dark") html.classList.add(theme);
+  }, []);
+
   const protectedRouter = createBrowserRouter(
     createRoutesFromElements(<Route path="/" Component={Home} />)
   );

@@ -736,8 +736,8 @@ export default function TradingView({
       chart.hideLoading();
       chart.redraw();
       window.document.getElementById("sidebar").style.pointerEvents = "unset";
-      window.document.getElementById("nav-buttons").style.pointerEvents =
-        "unset";
+      // window.document.getElementById("nav-buttons").style.pointerEvents =
+      //   "unset";
       const xAxis = series.xAxis;
       // xAxis.setExtremes(series.xData.at(-100), xAxis.dataMax);
       xAxis.setExtremes(
@@ -778,8 +778,8 @@ export default function TradingView({
     if (chartRef.current) {
       const chart = chartRef.current.chart;
       window.document.getElementById("sidebar").style.pointerEvents = "none";
-      window.document.getElementById("nav-buttons").style.pointerEvents =
-        "none";
+      // window.document.getElementById("nav-buttons").style.pointerEvents =
+      //   "none";
       chart.showLoading();
     }
 

@@ -21,12 +21,14 @@
   --highcharts-neutral-color-3: #080808;
   --highcharts-highlight-color-80: #cca352;
 
+  --border-color: #383a3f;
   --bs-body-bg: #25272d;
   --bs-body-color: #fff;
   --danger-color: #dc3545;
   --main-background-color: #1a1c22;
   --main-primary-button: #1fcb4f;
   --main-secondary-button: #dc3545;
+  --main-secondary-color-40: rgba(37, 39, 45, 0.4);
   --main-secondary-color: #25272d;
   --main-text-color: #fff;
   --separator-line-color: #fff;
@@ -53,12 +55,14 @@
   --highcharts-neutral-color-3: #f7f7f7;
   --highcharts-highlight-color-80: #335cad;
 
+  --border-color: #8ca3c2;
   --bs-body-bg: #d8e3f8;
   --bs-body-color: #8ca3c2;
   --danger-color: #dc3545;
   --main-background-color: #fff;
   --main-primary-button: #407adb;
   --main-secondary-button: #dc3545;
+  --main-secondary-color-40: rgba(216, 227, 248, 0.4);
   --main-secondary-color: #d8e3f8;
   --main-text-color: #8ca3c2;
   --separator-line-color: #93a8c6;
@@ -70,12 +74,14 @@
 }
 
 .purple {
+  --border-color: #fff;
   --bs-body-bg: #282454;
   --bs-body-color: #fff;
   --danger-color: #dc3545;
   --main-background-color: #1e1b3e;
   --main-primary-button: #7c54f5;
   --main-secondary-button: #dc3545;
+  --main-secondary-color-40: rgba(40, 36, 84, 0.4);
   --main-secondary-color: #282454;
   --main-text-color: #fff;
   --separator-line-color: #555272;
@@ -117,7 +123,6 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-/* Firefox */
 input[type="number"] {
   -moz-appearance: textfield;
 }
@@ -146,13 +151,8 @@ h6 {
 }
 
 label {
-  font-weight: 500;
-  /* font-size: 14px; */
   color: var(--main-text-color);
-}
-
-#newOrderForm label {
-  margin-top: 6px;
+  font-weight: 500;
 }
 
 input {
@@ -165,6 +165,7 @@ input {
   color: var(--main-text-color);
   text-align: center;
 }
+
 input:focus-visible {
   outline: 2px solid var(--main-secondary-color);
 }
@@ -176,86 +177,63 @@ input:focus-visible {
 #header {
   display: flex;
   height: 10%;
-  /* flex-direction: row; */
-  /* flex: 1; */
-  /* height: 100%; */
-  /* border-radius: 5px; */
-  /* margin: 0; */
-  /* padding: 0; */
 }
 
 #main-container {
+  background-color: var(--main-secondary-color);
   display: flex;
   height: 90%;
 }
 
 #logo {
-  display: flex;
   width: 100px;
-  border: 2px solid var(--bs-border-color); /* Example border style */
-  border-radius: 5px;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--bs-body-bg);
-  margin-left: 2px;
 }
 
 #header-info {
   display: flex;
   flex-direction: row;
   flex: 11;
-  background-color: var(--bs-body-bg);
-  border: none;
-  margin: 2px;
-  margin-left: 4px;
-  border-radius: 3px;
+  margin: 4px;
 }
 
 #balance {
   display: flex;
   flex-direction: row;
-  border: 3px solid var(--bs-border-color);
-  border-radius: 10px;
-  margin-right: 35px;
-  margin: 10px;
-  text-align: center;
-  box-shadow: 0px 0px 10px rgba(55, 60, 75, 0.5);
   justify-content: space-between;
+  text-align: center;
   width: 100%;
 }
 
 .balance-item {
-  /* height: 100%; */
-  /* margin: 0; */
-  /* padding: 0; */
-
+  align-items: center;
+  background-color: var(--main-secondary-color);
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
   flex: 1;
-  border-right: 2px solid var(--bs-border-color);
+  justify-content: center;
+  margin: 0 2px;
 }
 
 #balance-item-lang {
-  flex: 0.5;
+  display: flex;
+  flex-direction: row;
 }
 
 .balance-nums {
-  /* margin-block: 2%; */
-  width: 44%;
-  /* font-size: 12px; */
-  color: var(--main-numbersc);
-  text-align: center !important;
+  color: var(--main-primary-button);
+  font-size: 20px;
+  font-weight: 600;
   outline: none;
+  text-align: center !important;
+  width: 100%;
 }
 
 .balance-title {
+  background-color: var(--main-secondary-color);
+  font-size: 16px;
+  font-weight: 700;
   margin: 0;
-  /* margin-top: 3%; */
-  font-size: 1rem;
-  color: var(--main-textc);
 }
 
 .lang-flag:hover {
@@ -274,53 +252,38 @@ input:focus-visible {
 }
 
 #sidebar {
+  align-items: center;
+  background-color: inherit;
   display: flex;
   flex-direction: column;
-  /* max-width: 120px; */
-  border: 2px solid var(--bs-border-color);
-  border-radius: 3px;
   justify-content: center;
-  align-items: center;
   text-align: center;
-  margin: 2px;
-  background-color: var(--bs-body-bg);
   width: 100px;
-  /* min-width: 100px; */
 }
 
 #side-main-menu {
-  flex: 9;
+  border-top-right-radius: 5px;
   display: flex;
   flex-direction: column;
-  margin: 6px;
-  margin-bottom: 10%;
-  border-radius: 10px;
-  border: 3px solid var(--bs-border-color);
-  box-shadow: 0px 0px 10px rgba(55, 60, 75, 0.5);
-  width: 90%;
-  justify-content: space-evenly;
+  height: 80%;
+  margin: 4px 8px 1px 0;
+  width: 100%;
 }
 
 #side-out-menu {
-  flex: 4;
+  border-bottom-right-radius: 5px;
   display: flex;
   flex-direction: column;
-  margin: 6px;
-  margin-top: 5%;
-  margin-bottom: 7%;
-  border-radius: 5px;
-  border: 3px solid var(--bs-border-color);
-  box-shadow: 0px 0px 10px rgba(55, 60, 75, 0.5);
-  width: 85%;
-  /* display: flex;
-  flex-direction: column;
-  align-items: center; */
+  height: 20%;
+  margin: 1px 8px 0 0;
+  width: 100%;
 }
 
 .side-btn {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  padding: 24px 0;
 }
 
 ion-icon,
@@ -330,68 +293,47 @@ button {
 
 #side-out-extra,
 #side-logout {
-  flex: 1;
-  margin: 0;
-  margin-top: 25%;
-  margin-bottom: 5%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: 12px 0;
   text-align: center;
   width: 100%;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
 }
 
 .side-button {
   border: none;
-  border-radius: 3px;
-  height: 35%;
-  width: 75%;
-  color: var(--main-input-textc);
+  font-size: 12px;
+  font-weight: 600;
   margin: 0;
+  padding: 0;
 }
-
-/* .side-button:hover,
-.side-out-button:hover {
-  cursor: pointer;
-  border: none;
-  border-radius: 3px;
-  box-shadow: 0px 0px 5px var(--main-numbersc);
-  width: 86px;
-  font-weight: bold;
-} */
 
 .side-btn:hover,
 #side-out-extra:hover,
 #side-logout:hover {
-  cursor: pointer;
   border: none;
-  border-radius: 3px;
-  box-shadow: 0px 0px 5px var(--main-numbersc);
-  /* width: 86px; */
-  font-weight: bold;
+  cursor: pointer;
 }
 
 .side-out-button {
   border: none;
-  border-radius: 3px;
-  height: 50%;
-  width: 75%;
-  color: var(--main-input-textc);
+  font-size: 12px;
+  font-weight: 600;
   margin: 0;
+  padding: 0;
 }
 
 #faq {
   height: 100%;
   margin: 10px;
   padding: 50px;
-  /* color: white; */
-  /* line-height: 1.5em; */
 }
 
 #content {
-  border: 2px solid var(--bs-border-color);
-  border-radius: 5px;
-  background-color: var(--bs-body-bg);
+  background-color: var(--main-secondary-color);
+  height: 100%;
+  padding: 4px;
   width: calc(100% - 100px);
 }
 
@@ -605,32 +547,95 @@ acc-info-personal h3 {
   width: 50%;
 }
 
+#trade-div {
+  background-color: var(--main-secondary-color);
+}
+
 #trade {
+  background-color: var(--main-secondary-color);
   display: flex;
 }
 
 #newOrder {
-  /* flex: 1; */
-  width: 300px;
+  background-color: var(--main-secondary-color);
   border-radius: 5px;
-  box-shadow: 0px 0px 10px rgba(55, 60, 75, 0.5);
   overflow: auto;
+  width: 300px;
 }
 
 #newOrderData {
-  justify-content: center;
   align-items: center;
-  text-align: center;
-  padding-top: 0.5rem;
   height: 100%;
+  justify-content: center;
+  text-align: center;
+}
+
+#newOrderData h6 {
+  border-bottom: 1px solid var(--main-secondary-color);
+  color: var(--main-primary-button);
+  font-size: 20px;
+  font-weight: 700;
+  padding: 5px 0;
 }
 
 #newOrderForm {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-top: 2px solid var(--bs-border-color);
 }
+
+.btn-group {
+  margin: 8px 0;
+  width: 80%;
+}
+
+.btn-group button {
+  padding: 8px 0;
+}
+
+.vol-group {
+  display: flex;
+  margin: 4px 0;
+}
+
+.vol-group label {
+  font-weight: 600;
+  text-align: left;
+  width: 80%;
+}
+
+.vol-input {
+  align-items: center;
+  display: flex;
+}
+
+.vol-input span {
+  background-color: var(--main-secondary-color);
+  border-radius: 5px;
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  font-size: 24px;
+  height: 40px;
+  padding: 0 12px;
+  user-select: none;
+}
+
+.vol-input input {
+  height: 40px;
+  width: 50px;
+}
+
+.margin-label {
+  font-weight: 600;
+  margin: 2px 0;
+  text-align: left;
+  width: 80%;
+}
+
+.margin-label span {
+  font-weight: 400;
+}
+
 .custom-caret-up-icon,
 .custom-caret-down-icon {
   display: flex;
@@ -719,18 +724,31 @@ acc-info-personal h3 {
 }
 
 .newOrderButton {
-  width: 140px;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
 }
-.newOrderButton:hover {
-  font-weight: bold;
+
+.newOrderButton button {
+  border-radius: 5px;
+  border: none;
+  font-weight: 600;
+  padding: 8px 0;
+  width: 48%;
 }
 
 #chart {
+  background-color: var(--main-secondary-color);
+  border-radius: 5px;
   flex: 3;
-  text-align: center;
-  box-shadow: 0px 0px 10px rgba(55, 60, 75, 0.5);
+  margin-right: 8px;
   overflow: hidden;
-  /* height: max-content; */
+  text-align: center;
+}
+
+ul {
+  background-color: var(--main-secondary-color);
 }
 
 #assets {
@@ -738,29 +756,6 @@ acc-info-personal h3 {
   border-radius: 5px;
   overflow: auto;
   box-shadow: 0px 0px 10px rgba(55, 60, 75, 0.5);
-}
-
-#nav-buttons button {
-  color: var(--main-textc);
-  border-radius: 10px;
-  border: 1px solid var(--bs-border-color);
-  height: 28px;
-  width: 140px;
-  background-color: var(--bs-body-bg);
-  box-shadow: 0px 0px 4px var(--seco-grayc);
-  cursor: pointer;
-}
-
-#nav-buttons button:hover {
-  box-shadow: 0px 0px 4px var(--main-numbersc);
-  font-weight: bold;
-}
-
-#nav-buttons button.active {
-  font-weight: bold;
-  color: var(--main-numbersc);
-  border: 1px solid rgb(0, 255, 110);
-  box-shadow: 0px 0px 4px var(--main-numbersc);
 }
 
 #assetDeleteIcon {
@@ -771,19 +766,34 @@ acc-info-personal h3 {
 }
 
 #orders {
-  flex: 2;
-  border: 1px solid var(--bs-border-color); /* Example border style */
+  background-color: var(--main-background-color);
   border-radius: 1px;
-  /* max-height: 150px; Set the maximum height of the container */
-  overflow: auto; /* Add a scrolling bar when content overflows */
-  position: relative;
-  /* height: 100%; */
-  box-shadow: 0px 0px 10px rgba(55, 60, 75, 0.5);
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
+  margin-top: 8px;
+  overflow: auto;
+  position: relative;
 }
-#orders nav {
-  background-color: transparent !important;
+
+#orders * {
+  background-color: inherit;
+}
+
+#orders li button {
+  background-color: var(--main-secondary-color);
+  border-radius: 5px;
+  font-weight: 700;
+  margin: 8px 4px;
+  width: 100px;
+}
+
+#orders li button:hover {
+  border-color: var(--main-primary-button);
+}
+
+#orders li button.active {
+  border-color: var(--main-background-color);
 }
 
 .container {
@@ -794,15 +804,24 @@ acc-info-personal h3 {
   text-align: center !important;
 }
 
+.nav-item {
+  border-radius: 5px 5px 0 0;
+  margin-right: 0.5rem;
+}
+
 .nav-link {
-  color: var(--main-textc);
+  color: var(--main-text-color);
 }
 
-.nav-link.active {
-  color: green; /* Set the text color for the active tab */
+#chart .nav-link.active {
+  background-color: var(--main-background-color);
+  border-bottom: 3px solid var(--main-primary-button);
 }
 
-/* Apply some basic styling to the table */
+#chart .nav-link:hover {
+  color: var(--main-primary-button);
+}
+
 table {
   border-collapse: collapse;
   width: 100%;
@@ -852,9 +871,7 @@ ion-icon {
 }
 
 .active {
-  /* Change the background color to indicate it's active */
-  color: var(--main-numbersc);
-  font-weight: bold; /* Optionally, make the text bold for emphasis */
+  color: var(--main-primary-button);
 }
 
 /* Style for binance-api-symbols */
@@ -1083,14 +1100,12 @@ thead {
 
 .flag_theme {
   align-items: center;
-  /* background-color: #1a1c22; */
   display: flex;
   justify-content: center;
   margin-top: 16px;
 }
 
 .flag_theme > * {
-  /* background-color: #1a1c22; */
   margin: 0 8px;
 }
 
@@ -1216,4 +1231,14 @@ textarea {
 hr {
   color: var(--separator-line-color);
   opacity: 1;
+}
+
+.css-16h6fuu-indicatorContainer svg,
+.css-htbb98-indicatorContainer svg {
+  background-color: var(--main-secondary-color) !important;
+}
+
+.css-2fv632-ValueContainer,
+.css-2fv632-ValueContainer * {
+  background-color: var(--main-secondary-color);
 }
