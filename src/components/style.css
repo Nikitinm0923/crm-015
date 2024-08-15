@@ -240,6 +240,27 @@ input:focus-visible {
   box-shadow: 0px 0px 15px rgba(3, 82, 253, 0.4);
 }
 
+.acc-btn{
+  
+}
+
+.acc-info {
+  background-color: var(--main-secondary-color);
+  border-radius: 5px;
+  display: inline-block;
+  height: 500px;
+  position: absolute;
+  right: 1%;
+  top: 10%;
+  width: 200px;
+  z-index: 9999;
+}
+
+.acc-layout {
+  display: flex;
+  flex-direction: column;
+}
+
 #deposit {
   display: flex;
   flex: 1;
@@ -773,6 +794,7 @@ ul {
   flex-direction: column;
   margin-top: 8px;
   overflow: auto;
+  padding: 0 8px;
   position: relative;
 }
 
@@ -794,6 +816,27 @@ ul {
 
 #orders li button.active {
   border-color: var(--main-background-color);
+}
+
+.orders-ext {
+  display: inline-block;
+  margin: 8px;
+  position: absolute;
+  right: 0;
+}
+
+.orders-side {
+  align-items: center;
+  display: flex;
+}
+
+.orders-side button {
+  background-color: var(--main-secondary-color) !important;
+  border-radius: 5px;
+  border: none;
+  color: var(--main-primary-button);
+  font-weight: 700;
+  margin: 0 8px;
 }
 
 .container {
@@ -870,31 +913,14 @@ ion-icon {
   padding: 0;
 }
 
-.active {
-  color: var(--main-primary-button);
+.nav-link.active {
+  color: var(--main-primary-button) !important;
 }
-
-/* Style for binance-api-symbols */
-/* .dropdown {
-  max-height: 180px;
-  max-width: 100px;
-  overflow-y: auto;
-  border-radius: 2px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-  position: absolute;
-  background-color: rgb(32, 32, 43);
-  z-index: 2;
-}
-
-.dropdown-option {
-  padding: 5px;
-  cursor: pointer;
-} */
 
 thead {
   position: sticky;
   top: 0;
-  background-color: white; /* Set the desired background color */
+  background-color: white;
   z-index: 1;
 }
 /* MODALs */

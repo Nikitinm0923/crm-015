@@ -121,6 +121,7 @@ export default function HomeRu() {
   const [dealsRow, setDealsRow] = useState(5);
 
   const [dealType, setDealType] = useState("Buy");
+  const [showAccountInfo, setShowAccountInfo] = useState(false);
 
   const [userProfile, setUserProfile] = useState({
     name: "",
@@ -400,33 +401,19 @@ export default function HomeRu() {
 
   const customStylesOnDeals = {
     headCells: {
-      style: {
-        fontSize: "0.9rem",
-      },
+      style: { color: "inherit", fontSize: "1rem", fontWeight: "600" },
     },
-    rows: {
-      style: {
-        "*": {
-          backgroundColor: "unset",
-          color: "unset",
-        },
-        fontSize: "0.9rem",
-        minHeight: "26px !important",
-        // height: 36,
-      },
-    },
+    headRow: { style: { color: "var(--main-primary-button)" } },
     pagination: {
-      // pageButtonsStyle: {
-      //   border: "thin solid red",
-      // },
       style: {
         fontSize: "1rem",
-        minHeight: "min-content",
         height: "min-content",
-        // button: {
-        //   border: "thin solid blue",
-        // },
+        minHeight: "min-content",
       },
+    },
+    rows: { style: { fontSize: "0.9rem", minHeight: "26px !important" } },
+    table: {
+      style: { backgroundColor: "var(--main-secondary-color) !important" },
     },
   };
 
@@ -434,15 +421,8 @@ export default function HomeRu() {
     {
       when: (row) => row && row.id === selectedOrder.id,
       style: {
-        backgroundColor: "var(--main-numbersc)",
-        color: "#000",
-      },
-    },
-    {
-      when: (row) => !row || row.id !== selectedOrder.id,
-      style: {
-        backgroundColor: "inherit",
-        color: "inherit",
+        backgroundColor: "var(--main-primary-button)",
+        color: "var(--main-text-color)",
       },
     },
   ];
@@ -1144,6 +1124,22 @@ export default function HomeRu() {
                   y2="44"
                 />
               </svg>
+              {/* <button
+                className="acc-btn"
+                onClick={() => {
+                  setShowAccountInfo(true);
+                }}
+              >
+                Click me
+              </button>
+              {showAccountInfo && (
+                <div className="acc-info">
+                  <div className="acc-layout">
+                    <span>Active Account</span>
+                    <span>Other Account</span>
+                  </div>
+                </div>
+              )} */}
             </div>
           </div>
         </div>
@@ -1210,7 +1206,12 @@ export default function HomeRu() {
                 id="side-button-trade"
                 style={{
                   backgroundColor: "transparent",
-                  color: theme === "purple" && "var(--separator-line-color)",
+                  color:
+                    tab === "trade"
+                      ? "var(--main-primary-button)"
+                      : theme === "purple"
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
                 }}
               >
                 {t("trade")}
@@ -1254,7 +1255,12 @@ export default function HomeRu() {
                 id="side-button-assets"
                 style={{
                   backgroundColor: "transparent",
-                  color: theme === "purple" && "var(--separator-line-color)",
+                  color:
+                    tab === "assets"
+                      ? "var(--main-primary-button)"
+                      : theme === "purple"
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
                 }}
               >
                 {t("assets")}
@@ -1297,7 +1303,12 @@ export default function HomeRu() {
                 id="side-button-assets"
                 style={{
                   backgroundColor: "transparent",
-                  color: theme === "purple" && "var(--separator-line-color)",
+                  color:
+                    tab === "newOrder"
+                      ? "var(--main-primary-button)"
+                      : theme === "purple"
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
                 }}
               >
                 {t("newOrder")}
@@ -1341,7 +1352,12 @@ export default function HomeRu() {
                 id="side-button-account"
                 style={{
                   backgroundColor: "transparent",
-                  color: theme === "purple" && "var(--separator-line-color)",
+                  color:
+                    tab === "account"
+                      ? "var(--main-primary-button)"
+                      : theme === "purple"
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
                 }}
               >
                 {t("account")}
@@ -1379,7 +1395,12 @@ export default function HomeRu() {
                 id="help-button"
                 style={{
                   backgroundColor: "transparent",
-                  color: theme === "purple" && "var(--separator-line-color)",
+                  color:
+                    tab === "help"
+                      ? "var(--main-primary-button)"
+                      : theme === "purple"
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
                 }}
               >
                 {t("help")}
@@ -1720,7 +1741,7 @@ export default function HomeRu() {
                             onClick={() => {
                               setOrderData((p) => ({
                                 ...p,
-                                volume: p.volume + 1,
+                                volume: parseInt(p.volume) + 1,
                               }));
                             }}
                             style={{
@@ -1768,10 +1789,10 @@ export default function HomeRu() {
                       </div>
                     </div>
                     <label className="margin-label">
-                      Margin: <span>- USD</span>
+                      Margin: <span>{+calculatedSum?.toFixed(2)} USD</span>
                     </label>
                     <label className="margin-label">
-                      Pip Value: <span>{+calculatedSum?.toFixed(2)} USD</span>
+                      Pip Value: <span>- USD</span>
                     </label>
                     <svg
                       height="2"
@@ -1865,7 +1886,7 @@ export default function HomeRu() {
                             onClick={() => {
                               setOrderData((p) => ({
                                 ...p,
-                                tp: p.tp + 1,
+                                tp: parseInt(p.tp) + 1,
                               }));
                             }}
                             style={{
@@ -1912,7 +1933,7 @@ export default function HomeRu() {
                             onClick={() => {
                               setOrderData((p) => ({
                                 ...p,
-                                sl: p.sl + 1,
+                                sl: parseInt(p.sl) + 1,
                               }));
                             }}
                             style={{
@@ -1977,46 +1998,42 @@ export default function HomeRu() {
                 </div>
               </div>
             </div>
-            {/* <div
-            // id="nav-buttons"
-            // className="d-flex align-items-center justify-content-around py-4"
-            // style={{ height: "4%" }}
-            >
-              {/* <button
-                id="newDealButton"
-                className={showNewOrderPanel ? "active" : ""}
-                onClick={() => {
-                  openOrderPanel();
-                  // let a = document.getElementById("newOrder");
-                  // let d = window.getComputedStyle(a).display;
-                  // document.getElementById("newOrder").style.display =
-                  //   d === "flex" ? "none" : "flex";
-                }}
-              >
-                {t("newOrder")}
-              </button> */}
-            {/* <button
-                id="ordersHistoryButton"
-                className={showHistoryPanel ? "active" : ""}
-                onClick={() => {
-                  openOrderHistory();
-                }}
-              >
-                {t("ordersHistory")}
-              </button> */}
-            {/* <button
-                // id="ordersHistoryButton"
-                onClick={() => {
-                  setIsReportModalOpen(true);
-                }}
-              >
-                {t("orderReport")}
-              </button> 
-            </div> */}
             <div
               id="orders"
               style={{ height: isHidden ? "" : "37%", overflow: "auto" }}
             >
+              <div className="orders-ext">
+                <div className="orders-side">
+                  <button
+                    onClick={() => {
+                      setIsReportModalOpen(true);
+                    }}
+                    style={{ padding: "6px 18px" }}
+                  >
+                    {t("orderReport")}
+                  </button>
+                  <button
+                    onClick={() => {
+                      openOrderHistory();
+                    }}
+                    style={{ padding: "6px" }}
+                  >
+                    <svg
+                      height="19"
+                      style={{ fill: "var(--main-primary-button)" }}
+                      viewBox="0 0 19 19"
+                      width="19"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M16.6582 15.642L13.0796 12.0635L12.1199 13.0222L15.6995 16.6018L14.3478 17.9535L19 19.0001L17.9534 14.3467L16.6582 15.642Z" />
+                      <path d="M4.65229 1.04663L0 0L1.04663 4.65337L2.39834 3.30166L5.97794 6.88126L6.9388 5.9204L3.35811 2.3408L4.65229 1.04663Z" />
+                      <path d="M13.0502 6.9084L16.6288 3.3288L17.9533 4.65229L19 0L14.3466 1.04663L15.6712 2.37011L12.0916 5.94863L13.0502 6.9084Z" />
+                      <path d="M5.94863 12.0903L2.36903 15.6699L1.04663 14.3475L0 18.9998L4.65337 17.9532L3.3288 16.6297L6.9084 13.0512L5.94863 12.0903Z" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
               {/* <div
                 style={{
                   alignItems: "center",
