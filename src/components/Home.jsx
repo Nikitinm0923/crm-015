@@ -394,7 +394,6 @@ export default function HomeRu() {
         },
         fontSize: "0.9rem",
         minHeight: "26px !important",
-        // height: 36,
       },
     },
   };
@@ -551,25 +550,25 @@ export default function HomeRu() {
             title={row?.settings?.description}
           >
             <FontAwesomeIcon
-              id="assetDeleteIcon"
               className="ms-1 p-2 rounded"
-              title="Delete"
               icon={faClose}
+              id="assetDeleteIcon"
               onClick={() => handleDeleteAsset(row.id)}
+              title="Delete"
             />
           </div>
         ),
       compact: true,
-      // grow: 0.5,
       minWidth: "40px",
     },
   ];
+
   const conditionalRowStyles = [
     {
       when: (row) => row && row.symbol === orderData?.symbol?.value,
       style: {
-        backgroundColor: "var(--main-numbersc)",
-        color: "#000",
+        backgroundColor: "var(--main-primary-button)",
+        color: "var(--main-text-color)",
       },
     },
     {
@@ -1504,36 +1503,71 @@ export default function HomeRu() {
               }}
             >
               <div
+                className={`${tab === "assets" ? "" : "d-none"}`}
                 id="assets"
-                className={`h-100 px-1 ${tab === "assets" ? "" : "d-none"}`}
               >
                 <input
                   className="w-100"
                   onChange={(e) => setQuoteSearch(e.target.value)}
-                  placeholder="Search..."
+                  style={{ height: "32px" }}
                   type="search"
                   value={quoteSearch}
                 />
+                <svg
+                  height="21"
+                  style={{
+                    backgroundColor: "transparent",
+                    fill: "var(--main-primary-button)",
+                    position: "relative",
+                    right: "-90%",
+                    top: "-7%",
+                  }}
+                  viewBox="0 0 21 21"
+                  width="21"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M20.5027 17.9615L15.6746 13.1331C16.495 11.8271 16.9711 10.2835 16.9711 8.62696C16.9711 3.94035 13.1718 0.141602 8.48536 0.141602C3.79893 0.141602 0 3.94035 0 8.62696C0 13.3137 3.79875 17.1121 8.48536 17.1121C10.2881 17.1121 11.9579 16.5485 13.332 15.5908L18.1025 20.3618C18.434 20.6929 18.8686 20.8579 19.3026 20.8579C19.7372 20.8579 20.1712 20.6929 20.5032 20.3618C21.1657 19.6986 21.1657 18.6244 20.5027 17.9615ZM8.48536 14.363C5.31776 14.363 2.74966 11.7951 2.74966 8.62731C2.74966 5.45954 5.31776 2.89144 8.48536 2.89144C11.6531 2.89144 14.2211 5.45954 14.2211 8.62731C14.2211 11.7951 11.6531 14.363 8.48536 14.363Z" />
+                </svg>
                 <DataTable
                   columns={assetsColumns}
                   conditionalRowStyles={conditionalRowStyles}
-                  customStyles={customStylesAssetsTable}
+                  customStyles={{
+                    table: {
+                      style: {
+                        backgroundColor:
+                          "var(--main-secondary-color) !important",
+                      },
+                    },
+                    headCells: {
+                      style: {
+                        fontSize: "1rem",
+                        fontWeight: "600",
+                        color: "var(--main-primary-button)",
+                      },
+                    },
+                    rows: {
+                      style: {
+                        "*": { backgroundColor: "unset", color: "unset" },
+                        fontSize: "0.9rem",
+                        minHeight: "26px !important",
+                        userSelect: "none",
+                      },
+                    },
+                  }}
                   data={fillArrayWithEmptyRows(filteredQuotesSymbols, 10)}
                   dense
                   highlightOnHover
                   pointerOnHover
                   theme={theme}
                 />
-                <div className="text-center">
-                  <button
-                    className="newOrderButton btn btn-success border-0"
-                    onClick={() => {
-                      handleTradingModal();
-                    }}
-                  >
-                    + Add Symbol
-                  </button>
-                </div>
+                <button
+                  className="add-symbol-btn"
+                  onClick={() => {
+                    handleTradingModal();
+                  }}
+                >
+                  + Add Symbol
+                </button>
               </div>
               <div id="chart" className="rounded">
                 <ul className="nav nav-tabs">

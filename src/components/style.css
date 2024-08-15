@@ -839,17 +839,29 @@ ul {
 }
 
 #assets {
-  border: 2px solid var(--bs-border-color);
   border-radius: 5px;
+  height: 100%;
+  margin-right: 5px;
   overflow: auto;
-  box-shadow: 0px 0px 10px rgba(55, 60, 75, 0.5);
+  padding: 8px 10px;
+}
+
+.add-symbol-btn {
+  background-color: var(--main-primary-button);
+  border-radius: 5px;
+  border: none;
+  font-weight: 600;
+  margin-left: 25%;
+  padding: 8px;
+  width: 50%;
+}
+
+.add-symbol-btn:hover {
+  opacity: 0.8;
 }
 
 #assetDeleteIcon {
-  border: 1px solid var(--bs-border-color);
-}
-#assetDeleteIcon:hover {
-  box-shadow: 0px 0px 4px var(--main-numbersc);
+  color: var(--danger-color);
 }
 
 #orders {
