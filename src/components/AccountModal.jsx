@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Modal } from "react-bootstrap";
+import { Button, ButtonGroup, Modal } from "react-bootstrap";
 import {
   updateUserById,
   incrementLastAccountNo,
@@ -8,9 +8,10 @@ import {
 import { toast } from "react-toastify";
 
 const AccountModal = ({ onClose, userProfile }) => {
+  const [accountNo, setAccountNo] = useState("");
   const [accountType, setAccountType] = useState("Standard");
   const [isLoading, setIsLoading] = useState(true);
-  const [accountNo, setAccountNo] = useState("");
+  const [type, setType] = useState("Demo");
 
   useEffect(() => {
     const fetchLastAccount = async () => {
@@ -50,6 +51,7 @@ const AccountModal = ({ onClose, userProfile }) => {
         isDeleted: false,
         totalBalance: 0,
         totalMargin: 0,
+        type: type,
       });
       await updateUserById(userProfile.id, { accounts });
       await incrementLastAccountNo();
@@ -65,69 +67,91 @@ const AccountModal = ({ onClose, userProfile }) => {
   return (
     <>
       <Modal
-        show
-        onHide={onClose}
-        className="modal-style-edit modal-style-del"
         centered
+        className="modal-style-edit modal-style-del"
+        onHide={onClose}
+        show
       >
         <Modal.Header
-          className="bg-transparent border-0 rounded-0 text-center p-1 pb-0 align-items-center"
+          className="py-2"
           closeButton
+          style={{ borderBottom: "1px solid var(--main-secondary-color)" }}
         >
-          <p className="bg-transparent mb-0 w-100">Create an account number:</p>
+          <h3 className="mb-0">Open an account</h3>
         </Modal.Header>
-        <Modal.Body className="bg-secondry d-flex flex-column gap-3 p-3 pt-0">
-          <div className="d-flex flex-column justify-content-start align-items-start gap-2">
-            <label
-              className="form-check-label fs-6 my-2 ms-2"
-              htmlFor="flexRadioDefault1"
+        <Modal.Body className="d-flex flex-column align-items-center gap-3">
+          <ButtonGroup className="btn-group">
+            <Button
+              onClick={() => {
+                setType("Live");
+              }}
+              style={{
+                backgroundColor:
+                  type === "Live"
+                    ? "var(--main-primary-button)"
+                    : "var(--main-secondary-color)",
+              }}
+              variant=""
             >
-              Type:
-            </label>
-            <div className="d-flex gap-4 fs-6">
-              <div className="form-check form-check-inline">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="inlineRadioOptions"
-                  id="inlineRadio1"
-                  checked={accountType === "Standard"}
-                  onChange={() => setAccountType("Standard")}
-                />
-                <label className="form-check-label" htmlFor="inlineRadio1">
-                  Standard
-                </label>
-              </div>
-              <div className="form-check form-check-inline">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="inlineRadioOptions"
-                  id="inlineRadio2"
-                  checked={accountType === "Islamic"}
-                  onChange={() => setAccountType("Islamic")}
-                />
-                <label className="form-check-label" htmlFor="inlineRadio2">
-                  Islamic
-                </label>
-              </div>
+              Live
+            </Button>
+            <Button
+              onClick={() => {
+                setType("Demo");
+              }}
+              style={{
+                backgroundColor:
+                  type === "Demo"
+                    ? "var(--main-primary-button)"
+                    : "var(--main-secondary-color)",
+              }}
+              variant=""
+            >
+              Demo
+            </Button>
+          </ButtonGroup>
+          <div className="d-flex gap-4 fs-6">
+            <div className="form-check form-check-inline">
+              <input
+                checked={accountType === "Standard"}
+                className="form-check-input"
+                id="inlineRadio1"
+                name="inlineRadioOptions"
+                onChange={() => setAccountType("Standard")}
+                type="radio"
+              />
+              <label className="form-check-label" htmlFor="inlineRadio1">
+                Standard
+              </label>
+            </div>
+            <div className="form-check form-check-inline">
+              <input
+                checked={accountType === "Islamic"}
+                className="form-check-input"
+                id="inlineRadio2"
+                name="inlineRadioOptions"
+                onChange={() => setAccountType("Islamic")}
+                type="radio"
+              />
+              <label className="form-check-label" htmlFor="inlineRadio2">
+                Islamic
+              </label>
             </div>
           </div>
-          <div className="ps-3 fs-5">
-            Account Number:
-            <span className={`ms-2 text-success`}>
+          <div className="fs-5">
+            Account number:
+            <span className="ms-2" style={{ color: "var(--success-color)" }}>
               {accountNo || "Loading..."}
             </span>
           </div>
-          <div className="w-100 text-center my-2">
-            <button
-              className="modal-close-btn btn btn-success fs-5 rounded-4 mx-auto"
-              onClick={createNewAccount}
-              disabled={isLoading}
-            >
-              Create
-            </button>
-          </div>
+          <button
+            className="deposit-acc-btn"
+            disabled={isLoading}
+            onClick={createNewAccount}
+            style={{ width: "50%" }}
+          >
+            Create
+          </button>
         </Modal.Body>
       </Modal>
     </>

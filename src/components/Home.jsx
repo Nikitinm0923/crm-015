@@ -1124,22 +1124,74 @@ export default function HomeRu() {
                   y2="44"
                 />
               </svg>
-              {/* <button
+              <button
                 className="acc-btn"
                 onClick={() => {
-                  setShowAccountInfo(true);
+                  setShowAccountInfo(!showAccountInfo);
                 }}
               >
-                Click me
+                {defaultAccount?.type || "Type"}{" "}
+                {defaultAccount.account_no || "#"}
               </button>
               {showAccountInfo && (
                 <div className="acc-info">
                   <div className="acc-layout">
-                    <span>Active Account</span>
-                    <span>Other Account</span>
+                    <div className="active-acc">
+                      <label>Active Account</label>
+                      <span className="acc-tile">
+                        <span className="acc-tile-type">
+                          {defaultAccount?.type || "Type"}
+                        </span>
+                        <span>{defaultAccount.account_no || "#"}</span>
+                        <span>
+                          {parseInt(defaultAccount.totalBalance) || "0"} USD
+                        </span>
+                      </span>
+                    </div>
+                    <button className="deposit-acc-btn" onClick={() => {}}>
+                      Deposit Funds
+                    </button>
+                    <div className="other-acc">
+                      <label>Other Account</label>
+                      {accounts.map((acc) => (
+                        <>
+                          <span className="acc-tile">
+                            <span className="acc-tile-type">
+                              {acc?.type || "Type"}
+                            </span>
+                            <span>{acc.account_no || "#"}</span>
+                            <span>{parseInt(acc.totalBalance) || "0"} USD</span>
+                          </span>
+                          <svg
+                            height="1"
+                            style={{
+                              stroke: "var(--main-text-color)",
+                              width: "100%",
+                            }}
+                            viewBox="0 0 178 1"
+                            width="178"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <line
+                              opacity="0.1"
+                              y1="0.75"
+                              x2="178"
+                              y2="0.75"
+                              stroke-width="0.5"
+                            />
+                          </svg>
+                        </>
+                      ))}
+                    </div>
+                    <button
+                      className="open-acc-btn"
+                      onClick={() => setShowAccountModal(true)}
+                    >
+                      Open an account
+                    </button>
                   </div>
                 </div>
-              )} */}
+              )}
             </div>
           </div>
         </div>
