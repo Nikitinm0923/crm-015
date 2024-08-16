@@ -1,16 +1,15 @@
-// Example: EditModal.js
-import { useEffect, useState, useCallback } from "react";
-import { Modal } from "react-bootstrap";
-import Tab from "react-bootstrap/Tab";
-import Tabs from "react-bootstrap/Tabs";
-import DataTable from "react-data-table-component";
+import { fillArrayWithEmptyRows } from "../helper/helpers";
 import { generalColumns } from "../helper/Tablecolumns";
+import { getDepositsByUser } from "../helper/firebaseHelpers";
+import { Modal } from "react-bootstrap";
+import { setDepositsState } from "../redux/slicer/transactionSlicer";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState, useCallback } from "react";
+import DataTable from "react-data-table-component";
 import depositsColumns from "./columns/depositsColumns";
 import moment from "moment";
-import { useDispatch, useSelector } from "react-redux";
-import { getDepositsByUser } from "../helper/firebaseHelpers";
-import { fillArrayWithEmptyRows } from "../helper/helpers";
-import { setDepositsState } from "../redux/slicer/transactionSlicer";
+import Tab from "react-bootstrap/Tab";
+import Tabs from "react-bootstrap/Tabs";
 
 const ReportModal = ({
   onClose,
@@ -20,18 +19,26 @@ const ReportModal = ({
   bonus,
   bonusSpent,
 }) => {
-  const dispatch = useDispatch();
-  const orders = useSelector((state) =>
-    state.orders.filter(({ status }) => status != "Pending")
-  );
-  const deposits = useSelector((state) => state.deposits);
   const [key, setKey] = useState("tradeOperations");
   const [showRecord, setShowRecord] = useState("all");
+  const deposits = useSelector((state) => state.deposits);
+  const dispatch = useDispatch();
+  const orders = useSelector((state) =>
+    state.orders.filter(({ status }) => status !== "Pending")
+  );
 
   const totalProfit = orders.reduce((p, v) => p + +v.profit, 0);
 
   const customStyle = {
-    table: { style: { height: "70vh", backgroundColor: "#2f323d" } },
+    pagination: {
+      style: { backgroundColor: "var(--main-secondary-color)" },
+    },
+    table: {
+      style: {
+        backgroundColor: "var(--main-background-color)",
+        height: "65vh",
+      },
+    },
   };
 
   const setDeposits = useCallback((data) => {
@@ -44,17 +51,20 @@ const ReportModal = ({
 
   let deposited = 0,
     withdrawn = 0;
+
   deposits.forEach(({ type, sum }) => {
     if (type === "Deposit") deposited += sum;
     else if (type === "Withdraw") withdrawn += sum;
   });
+
   const today = moment();
 
   let filteredOrders;
-  if (showRecord == "all") {
+
+  if (showRecord === "all") {
     filteredOrders = orders;
   } else if (showRecord === "today") {
-    const todayStart = today.startOf("day"); // Start of today
+    const todayStart = today.startOf("day");
     const dataCreatedToday = orders.filter((order) => {
       return moment(order.createdAt).isSame(todayStart, "day");
     });
@@ -80,10 +90,11 @@ const ReportModal = ({
   }
 
   let filteredDeposits;
-  if (showRecord == "all") {
+
+  if (showRecord === "all") {
     filteredDeposits = deposits;
   } else if (showRecord === "today") {
-    const todayStart = today.startOf("day"); // Start of today
+    const todayStart = today.startOf("day");
     const dataCreatedToday = deposits.filter((dep) => {
       return moment(dep.createdAt).isSame(todayStart, "day");
     });
@@ -111,57 +122,58 @@ const ReportModal = ({
   return (
     <>
       <Modal
-        size="lg"
-        fullscreen={true}
-        show
-        onHide={onClose}
-        className="reports-modal"
         centered
+        className="reports-modal"
+        fullscreen
+        onHide={onClose}
+        show
+        size="lg"
       >
-        <Modal.Header closeButton>
-          <h5 className="mb-0 text-center w-100">Reports</h5>
+        <Modal.Header style={{ backgroundColor: "inherit" }} closeButton>
+          <h2
+            className="mb-0 text-center w-100"
+            style={{ backgroundColor: "inherit" }}
+          >
+            Reports
+          </h2>
         </Modal.Header>
-        <Modal.Body className="">
+        <Modal.Body style={{ backgroundColor: "inherit" }}>
           <Tabs activeKey={key} onSelect={(k) => setKey(k)}>
             <Tab eventKey="tradeOperations" title="Trade operations">
               <DataTable
                 columns={generalColumns}
-                data={fillArrayWithEmptyRows(filteredOrders, 5)}
                 customStyles={customStyle}
-                pagination
-                theme={theme}
-                paginationRowsPerPageOptions={[5, 10, 15, 20, 50]}
-                defaultSortFieldId="close-date"
+                data={fillArrayWithEmptyRows(filteredOrders, 5)}
                 defaultSortAsc={false}
+                defaultSortFieldId="close-date"
+                pagination
+                paginationRowsPerPageOptions={[5, 10, 15, 20, 50]}
+                theme={theme}
               />
             </Tab>
             <Tab eventKey="balanceOperations" title="Balance operations">
               <DataTable
                 columns={depositsColumns}
-                data={fillArrayWithEmptyRows(filteredDeposits, 5)}
                 customStyles={customStyle}
+                data={fillArrayWithEmptyRows(filteredDeposits, 5)}
                 pagination
-                theme={theme}
                 paginationRowsPerPageOptions={[5, 10, 15, 20, 50]}
+                theme={theme}
               />
             </Tab>
           </Tabs>
-          <div className="d-flex align-items-center justify-content-between mt-2">
-            <div>
-              <span className="me-2">Period</span>
-              <select
-                // style={{ backgroundColor: "rgba(80,80,80,255)" }}
-                onChange={(e) => {
-                  setShowRecord(e.target.value);
-                }}
-              >
-                <option label="All Operations" value="all"></option>
-                <option label="Today" value="today"></option>
-                <option label="Last Week" value="lastWeek"></option>
-                <option label="Last Month" value="lastMonth"></option>
-                <option label="Last 3 Month" value="last3Month"></option>
-              </select>
-            </div>
+          <div className="report-footer">
+            <select
+              onChange={(e) => {
+                setShowRecord(e.target.value);
+              }}
+            >
+              <option label="All Operations" value="all"></option>
+              <option label="Today" value="today"></option>
+              <option label="Last Week" value="lastWeek"></option>
+              <option label="Last Month" value="lastMonth"></option>
+              <option label="Last 3 Month" value="last3Month"></option>
+            </select>
             <span>Balance: {+parseFloat(balance)?.toFixed(2)}</span>
             <span>Bonus: {+parseFloat(bonus)?.toFixed(2)}</span>
             <span>Total profit: {+parseFloat(totalProfit)?.toFixed(2)}</span>
@@ -169,12 +181,7 @@ const ReportModal = ({
             <span>Deposited: {deposited}</span>
             <span>Withdrawn: {withdrawn}</span>
             <span>Total deals: {orders.length}</span>
-            <button
-              className={`btn px-4 py-1 rounded border-0 ${
-                theme === "dark" ? "btn-dark" : "btn-light"
-              }`}
-              onClick={onClose}
-            >
+            <button className="" onClick={onClose}>
               Close
             </button>
           </div>
