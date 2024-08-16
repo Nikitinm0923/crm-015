@@ -374,7 +374,14 @@ input:focus-visible {
   align-items: center;
   display: flex;
   flex-direction: column;
-  padding: 24px 0;
+  padding: 12px 0;
+}
+
+.side-btn-acc {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: 4px 0;
 }
 
 ion-icon,
@@ -400,9 +407,10 @@ button {
   padding: 0;
 }
 
+.side-btn-acc:hover,
 .side-btn:hover,
-#side-out-extra:hover,
-#side-logout:hover {
+#side-logout:hover,
+#side-out-extra:hover {
   border: none;
   cursor: pointer;
 }
@@ -416,9 +424,9 @@ button {
 }
 
 #faq {
+  border-radius: 5px;
   height: 100%;
-  margin: 10px;
-  padding: 50px;
+  padding: 64px;
 }
 
 #content {
@@ -429,26 +437,87 @@ button {
 }
 
 #account {
-  display: flex;
-  flex-direction: row;
-  flex: 1;
+  background-color: var(--main-background-color);
   border-radius: 5px;
-  background-color: var(--bs-body-bg);
-  margin: 10px;
 }
 
 #account-profile,
 #account-info {
-  flex: 2;
-  background-color: var(--main-elc);
-  border-radius: 5px;
-  margin: 0;
-  text-align: center;
-  justify-content: center;
   align-items: center;
-  box-shadow: 0px 0px 10px rgba(55, 60, 75, 0.5);
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
+}
+
+#account-profile h1 {
+  margin: 24px 0;
+}
+
+.account-card {
+  background-color: var(--main-secondary-color);
+  border-radius: 5px;
+  margin: 32px 0;
+  width: 50%;
+}
+
+.acc-selection {
+  align-items: center;
+  background-color: inherit;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.acc-selection label {
+  background-color: inherit;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+#account-input {
+  width: 45%;
+}
+
+.acc-main-content {
+  align-items: center;
+  background-color: inherit;
+  display: flex;
+  justify-content: space-evenly;
+  margin: 24px 0;
+}
+
+.acc-img-name {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: inherit;
+}
+
+.acc-img-name img {
+  border-radius: 20px;
+}
+
+.acc-img-name span {
+  color: var(--success-color);
+}
+
+.acc-img-name label,
+.acc-img-name span {
+  background-color: inherit;
+  font-weight: 700;
+}
+
+#create-account-button {
+  background-color: var(--main-primary-button);
+  border-radius: 5px;
+  border: none;
+  font-weight: 600;
+  padding: 8px 0;
+  width: 25%;
+}
+
+#create-account-button:hover {
+  opacity: 0.8;
 }
 
 #acc-img-placeholder {
@@ -461,20 +530,19 @@ button {
 
 #acc-profile-main,
 #acc-info-personal {
-  width: 80%;
-  border-top: 1px solid var(--bs-body-bg);
-  margin-top: 3%;
-  margin-bottom: 7%;
+  border-radius: 5px;
+  width: 50%;
 }
 
 .acc-profile-main-item,
 .acc-info-personal-item {
+  color: var(--main-text-color);
   display: flex;
+  font-size: 14px;
+  font-weight: 500;
   justify-content: space-between;
-  margin: 0;
-  padding: 0;
-  margin-top: 7%;
-  color: var(--main-textc);
+  margin: 12px 0;
+  padding: 0 12px;
 }
 
 .acc-info-personal-item input {
@@ -482,18 +550,13 @@ button {
   margin-top: -1px;
   color: var(--main-textc);
 }
-.acc-info-personal-item {
-  font-size: 13px;
-}
-.acc-info-personal-item h6 {
-  /* font-size: 15px; */
+
+#acc-profile-main hr {
+  color: var(--main-secondary-color);
 }
 
-.acc-profile-main-item {
-  font-size: 13px;
-}
-.acc-profile-main-item h6 {
-  /* font-size: 15px; */
+#acc-profile-main h6 {
+  margin: 0;
 }
 
 #documents-button {

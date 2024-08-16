@@ -120,6 +120,7 @@ export default function HomeRu() {
   const [activeAccountNo, setActiveAccountNo] = useState(null);
   const [dealsRow, setDealsRow] = useState(5);
 
+  const [accTab, setAccTab] = useState("");
   const [dealType, setDealType] = useState("Buy");
   const [showAccountInfo, setShowAccountInfo] = useState(false);
 
@@ -241,6 +242,7 @@ export default function HomeRu() {
       console.error("Error saving data to Firestore:", error);
     }
   };
+
   const [selectedKey, setSelectedKey] = useState(null);
 
   const getUserDataByUID = () => {
@@ -291,23 +293,21 @@ export default function HomeRu() {
     localStorage.setItem(
       "GAME_CONFIGS",
       JSON.stringify({
+        activeTab,
+        isReportModalOpen,
+        showHistoryPanel,
         showNewOrderPanel,
         tab,
-        activeTab,
         tabs,
-        showNewOrderPanel,
-        showHistoryPanel,
-        isReportModalOpen,
       })
     );
   }, [
+    activeTab,
+    isReportModalOpen,
+    showHistoryPanel,
     showNewOrderPanel,
     tab,
-    activeTab,
     tabs,
-    showNewOrderPanel,
-    showHistoryPanel,
-    isReportModalOpen,
   ]);
 
   useEffect(() => {
@@ -380,20 +380,24 @@ export default function HomeRu() {
   };
 
   const customStylesAssetsTable = {
+    table: {
+      style: {
+        backgroundColor: "var(--main-secondary-color) !important",
+      },
+    },
     headCells: {
       style: {
-        fontSize: "0.9rem",
+        fontSize: "1rem",
+        fontWeight: "600",
+        color: "var(--main-primary-button)",
       },
     },
     rows: {
       style: {
-        userSelect: "none",
-        "*": {
-          backgroundColor: "unset",
-          color: "unset",
-        },
+        "*": { backgroundColor: "unset", color: "unset" },
         fontSize: "0.9rem",
         minHeight: "26px !important",
+        userSelect: "none",
       },
     },
   };
@@ -689,7 +693,7 @@ export default function HomeRu() {
       const today = moment().utc();
       const weekDay = today.weekday();
       const hour = today.hour();
-      if (weekDay == 0 || weekDay == 6 || hour < 9 || hour >= 23) {
+      if (weekDay === 0 || weekDay === 6 || hour < 9 || hour >= 23) {
         return toast.error(
           `${
             group === "commodities" ? "Commodities" : group
@@ -715,7 +719,7 @@ export default function HomeRu() {
         : +parseFloat(closedPrice)?.toFixed(2);
 
     if (
-      type == "Buy" &&
+      type === "Buy" &&
       ((orderData.sl && orderData.sl >= closedPrice) ||
         (orderData.tp && orderData.tp <= orderData.symbolValue))
     ) {
@@ -723,7 +727,7 @@ export default function HomeRu() {
         "To Buy SL should be less than the bid value and TP should be greater than the current value"
       );
     } else if (
-      type == "Sell" &&
+      type === "Sell" &&
       ((orderData.sl && orderData.sl <= closedPrice) ||
         (orderData.tp && orderData.tp >= orderData.symbolValue))
     ) {
@@ -953,6 +957,14 @@ export default function HomeRu() {
     setTheme(t);
     localStorage.setItem("THEME", t);
   };
+
+  useEffect(() => {
+    if (tab !== "account") {
+      setAccTab("");
+      return;
+    }
+    if (accTab === "") setAccTab("acc-info");
+  }, [accTab, tab]);
 
   return (
     <>
@@ -1367,7 +1379,10 @@ export default function HomeRu() {
             </div>
             <div
               className="side-btn"
-              onClick={() => setTab("account")}
+              onClick={() => {
+                setTab("account");
+                setAccTab("acc-info");
+              }}
               style={{
                 backgroundColor:
                   tab === "account" && "var(--main-secondary-color-40)",
@@ -1412,6 +1427,226 @@ export default function HomeRu() {
                 }}
               >
                 {t("account")}
+              </button>
+            </div>
+            <svg
+              height="2"
+              style={{
+                stroke: "var(--main-secondary-color)",
+                width: "100%",
+                margin: "4px 0",
+              }}
+              viewBox="0 0 47 2"
+              width="47"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M1 1H46" stroke-linecap="round" stroke-width="2" />
+            </svg>
+            <div
+              className="side-btn-acc"
+              onClick={() => {
+                setTab("account");
+                setAccTab("acc-info");
+              }}
+              style={{
+                backgroundColor:
+                  accTab === "acc-info" && "var(--main-secondary-color-40)",
+              }}
+            >
+              <svg
+                height="28"
+                style={{
+                  backgroundColor: "transparent",
+                  fill:
+                    accTab === "acc-info"
+                      ? "var(--main-primary-button)"
+                      : theme === "purple"
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
+                }}
+                viewBox="0 0 28 28"
+                width="28"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M11.1855 13.1152C12.9871 13.1152 14.5484 12.4666 15.8215 11.1936C17.0946 9.92047 17.7431 8.35914 17.7431 6.5576C17.7431 4.75606 17.0946 3.19473 15.8215 1.92164C14.5484 0.648554 12.9871 0 11.1855 0C9.38399 0 7.82266 0.648554 6.54957 1.92164C5.27648 3.19473 4.62793 4.75606 4.62793 6.5576C4.62793 8.35914 5.27648 9.92047 6.54957 11.1936C7.82266 12.4666 9.38399 13.1152 11.1855 13.1152Z" />
+                <path d="M12.1223 23.1957V17.1745C12.1223 16.3658 12.2905 15.6772 12.5707 15.0847C12.1704 15.1728 11.762 15.2369 11.3617 15.2369C10.7772 15.2369 10.1847 15.1408 9.6082 14.9566C9.0157 14.7645 8.52728 14.5483 8.17498 14.3241C7.75862 14.0599 7.39031 13.8196 7.06203 13.6115C6.54158 13.2752 6.27736 13.1631 5.99712 13.1631C5.29252 13.1631 4.62795 13.2832 4.02744 13.5154C3.42693 13.7556 2.91449 14.0759 2.49013 14.4842C2.08178 14.8685 1.72147 15.3409 1.41721 15.8774C1.12096 16.3978 0.880752 16.9423 0.704602 17.4868C0.536458 18.0152 0.392335 18.5997 0.280239 19.2163C0.168144 19.8248 0.096082 20.4093 0.0560478 20.9377C0.0160137 21.4582 0 22.0026 0 22.5471C0 23.9643 0.448383 25.1173 1.34515 25.966C2.2259 26.8067 3.38689 27.2311 4.8041 27.2311H15.0609C13.2113 26.7987 12.1223 25.3735 12.1223 23.2037V23.1957Z" />
+                <path d="M23.7083 12.9395H17.6871C15.0689 12.9395 13.5076 14.5008 13.5076 17.119V23.1402C13.5076 25.7584 15.0689 27.3197 17.6871 27.3197H23.7083C26.3265 27.3197 27.8878 25.7584 27.8878 23.1402V17.119C27.8878 14.5008 26.3265 12.9395 23.7083 12.9395ZM19.2325 22.2114L17.6151 23.8287C17.511 23.9328 17.3669 23.9889 17.2307 23.9889C17.0946 23.9889 16.9505 23.9408 16.8464 23.8287L16.31 23.2923C16.0938 23.0841 16.0938 22.7398 16.31 22.5316C16.5181 22.3235 16.8544 22.3235 17.0706 22.5316L17.2307 22.6918L18.4638 21.4587C18.672 21.2505 19.0083 21.2505 19.2244 21.4587C19.4326 21.6669 19.4326 22.0112 19.2244 22.2194L19.2325 22.2114ZM19.2325 17.1831L17.6151 18.8005C17.511 18.9045 17.3669 18.9606 17.2307 18.9606C17.0946 18.9606 16.9505 18.9126 16.8464 18.8005L16.31 18.264C16.0938 18.0558 16.0938 17.7115 16.31 17.5033C16.5181 17.2952 16.8544 17.2952 17.0706 17.5033L17.2307 17.6635L18.4638 16.4304C18.672 16.2223 19.0083 16.2223 19.2244 16.4304C19.4326 16.6386 19.4326 16.9829 19.2244 17.1911L19.2325 17.1831ZM24.6931 23.4524H20.9219C20.6256 23.4524 20.3854 23.2042 20.3854 22.916C20.3854 22.6277 20.6337 22.3795 20.9219 22.3795H24.6931C24.9974 22.3795 25.2296 22.6277 25.2296 22.916C25.2296 23.2042 24.9894 23.4524 24.6931 23.4524ZM24.6931 18.4161H20.9219C20.6256 18.4161 20.3854 18.1679 20.3854 17.8797C20.3854 17.5914 20.6337 17.3432 20.9219 17.3432H24.6931C24.9974 17.3432 25.2296 17.5914 25.2296 17.8797C25.2296 18.1679 24.9894 18.4161 24.6931 18.4161Z" />
+              </svg>
+              <button
+                className={`side-button ${accTab === "acc-info" && " active"}`}
+                id="side-button-account"
+                style={{
+                  backgroundColor: "transparent",
+                  color:
+                    accTab === "acc-info"
+                      ? "var(--main-primary-button)"
+                      : theme === "purple"
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
+                }}
+              >
+                Account info
+              </button>
+            </div>
+            <div
+              className="side-btn-acc"
+              onClick={() => {
+                setTab("account");
+                setAccTab("personal-info");
+              }}
+              style={{
+                backgroundColor:
+                  accTab === "personal-info" &&
+                  "var(--main-secondary-color-40)",
+              }}
+            >
+              <svg
+                height="28"
+                style={{
+                  backgroundColor: "transparent",
+                  fill:
+                    accTab === "personal-info"
+                      ? "var(--main-primary-button)"
+                      : theme === "purple"
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
+                }}
+                viewBox="0 0 29 28"
+                width="29"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g clip-path="url(#clip0_578_3277)">
+                  <path d="M11.1856 13.4345C12.9871 13.4345 14.5484 12.786 15.8215 11.5129C17.0946 10.2398 17.7432 8.67847 17.7432 6.87693C17.7432 5.0754 17.0946 3.51406 15.8215 2.24098C14.5484 0.96789 12.9871 0.319336 11.1856 0.319336C9.38402 0.319336 7.82269 0.96789 6.5496 2.24098C5.27651 3.51406 4.62796 5.0754 4.62796 6.87693C4.62796 8.67847 5.27651 10.2398 6.5496 11.5129C7.82269 12.786 9.38402 13.4345 11.1856 13.4345Z" />
+                  <path d="M14.3723 26.0694C12.843 24.5401 12.0663 22.6665 12.0663 20.5046C12.0663 18.3428 12.843 16.4692 14.3723 14.9399C14.6605 14.6516 14.9648 14.3954 15.277 14.1632C15.0529 14.3073 14.8126 14.4675 14.5484 14.6356C14.1881 14.8598 13.7077 15.076 13.1152 15.2681C12.5307 15.4603 11.9382 15.5484 11.3617 15.5484C10.7852 15.5484 10.1847 15.4523 9.6082 15.2681C9.0157 15.076 8.52728 14.8598 8.17498 14.6356C7.75862 14.3714 7.39031 14.1312 7.06203 13.923C6.54158 13.5867 6.27736 13.4746 5.99712 13.4746C5.29252 13.4746 4.62795 13.5947 4.02744 13.8269C3.42693 14.0671 2.91449 14.3874 2.49013 14.7957C2.08178 15.1801 1.72147 15.6525 1.41721 16.1889C1.12096 16.7094 0.880752 17.2538 0.704602 17.7983C0.536458 18.3268 0.392335 18.9113 0.280239 19.5278C0.168144 20.1363 0.096082 20.7208 0.0560478 21.2492C0.0160137 21.7697 0 22.3142 0 22.8586C0 24.2758 0.448383 25.4288 1.34515 26.2775C2.2259 27.1183 3.38689 27.5426 4.8041 27.5426H16.39C15.6694 27.1743 14.9888 26.6859 14.3723 26.0694Z" />
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M20.8738 13.1787C16.8304 13.1787 13.5396 16.4615 13.5396 20.513C13.5396 24.5644 16.8224 27.8472 20.8738 27.8472C24.9253 27.8472 28.2081 24.5644 28.2081 20.513C28.2081 16.4615 24.9253 13.1787 20.8738 13.1787ZM19.8249 20.505V23.9959C19.8249 24.5724 20.2973 25.0448 20.8738 25.0448C21.4503 25.0448 21.9227 24.5724 21.9227 23.9959V20.505C21.9227 19.9285 21.4503 19.4561 20.8738 19.4561C20.2973 19.4561 19.8249 19.9285 19.8249 20.505ZM20.8738 15.9651C21.6425 15.9651 22.267 16.5896 22.267 17.3583C22.267 18.1269 21.6425 18.7515 20.8738 18.7515C20.1052 18.7515 19.4806 18.1269 19.4806 17.3583C19.4806 16.5896 20.1052 15.9651 20.8738 15.9651Z"
+                  />
+                </g>
+                <defs>
+                  <clipPath id="clip0_578_3277">
+                    <rect
+                      width="28.2081"
+                      height="27.5195"
+                      transform="translate(0 0.319336)"
+                    />
+                  </clipPath>
+                </defs>
+              </svg>
+              <button
+                className={`side-button ${
+                  accTab === "personal-info" && " active"
+                }`}
+                id="side-button-account"
+                style={{
+                  backgroundColor: "transparent",
+                  color:
+                    accTab === "personal-info"
+                      ? "var(--main-primary-button)"
+                      : theme === "purple"
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
+                }}
+              >
+                Personal info
+              </button>
+            </div>
+            <div
+              className="side-btn-acc"
+              onClick={() => {
+                setTab("account");
+                setAccTab("deposit");
+              }}
+              style={{
+                backgroundColor:
+                  accTab === "deposit" && "var(--main-secondary-color-40)",
+              }}
+            >
+              <svg
+                height="29"
+                style={{
+                  backgroundColor: "transparent",
+                  fill:
+                    accTab === "deposit"
+                      ? "var(--main-primary-button)"
+                      : theme === "purple"
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
+                }}
+                viewBox="0 0 25 29"
+                width="25"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M19.2306 17.2158C18.1594 17.2158 17.1122 17.5335 16.2214 18.1286C15.3307 18.7238 14.6365 19.5697 14.2265 20.5594C13.8166 21.5492 13.7093 22.6382 13.9183 23.6889C14.1273 24.7396 14.6432 25.7047 15.4007 26.4622C16.1582 27.2197 17.1233 27.7355 18.1739 27.9445C19.2246 28.1535 20.3137 28.0462 21.3034 27.6363C22.2931 27.2263 23.139 26.5321 23.7342 25.6414C24.3293 24.7507 24.647 23.7035 24.647 22.6322C24.647 21.1957 24.0764 19.818 23.0606 18.8022C22.0448 17.7865 20.6671 17.2158 19.2306 17.2158ZM21.8485 23.3762H19.2312C19.0338 23.3762 18.8446 23.2978 18.7051 23.1583C18.5655 23.0188 18.4871 22.8295 18.4871 22.6322V19.4813C18.4871 19.284 18.5655 19.0948 18.7051 18.9552C18.8446 18.8157 19.0338 18.7373 19.2312 18.7373C19.4285 18.7373 19.6177 18.8157 19.7573 18.9552C19.8968 19.0948 19.9752 19.284 19.9752 19.4813V21.8882H21.8485C22.0458 21.8882 22.235 21.9666 22.3746 22.1061C22.5141 22.2456 22.5925 22.4349 22.5925 22.6322C22.5925 22.8295 22.5141 23.0188 22.3746 23.1583C22.235 23.2978 22.0458 23.3762 21.8485 23.3762Z" />
+                <path d="M22.0366 10.3431C21.6827 10.3521 21.3293 10.358 20.9775 10.358C19.4833 10.3575 17.9901 10.2778 16.5044 10.1194H16.4916C15.6057 10.0168 14.7379 9.57729 14.0406 8.88217C13.3434 8.18705 12.9066 7.31709 12.8035 6.43172C12.8037 6.42748 12.8037 6.42322 12.8035 6.41897C12.6061 4.57212 12.5308 2.71426 12.5781 0.857505C9.7857 0.790199 6.99186 0.905234 4.21441 1.20187C2.35917 1.41711 0.58046 3.19635 0.364697 5.05159C-0.121566 9.60333 -0.121566 18.0553 0.364697 22.607C0.579928 24.4622 2.35917 26.2415 4.21441 26.4567C7.36412 26.7939 10.5345 26.8971 13.6995 26.7655C13.029 25.8665 12.5869 24.8182 12.411 23.7106C12.2351 22.603 12.3308 21.4693 12.6897 20.4069H5.27516C5.07783 20.4069 4.88859 20.3285 4.74906 20.189C4.60953 20.0494 4.53115 19.8602 4.53115 19.6629C4.53115 19.4655 4.60953 19.2763 4.74906 19.1368C4.88859 18.9972 5.07783 18.9188 5.27516 18.9188H13.4061C13.9971 17.9972 14.7964 17.2273 15.7396 16.6714H5.27516C5.07783 16.6714 4.88859 16.593 4.74906 16.4535C4.60953 16.314 4.53115 16.1247 4.53115 15.9274C4.53115 15.7301 4.60953 15.5408 4.74906 15.4013C4.88859 15.2618 5.07783 15.1834 5.27516 15.1834H16.8073C17.0046 15.1834 17.1939 15.2618 17.3334 15.4013C17.4729 15.5408 17.5513 15.7301 17.5513 15.9274V15.9317C19.056 15.5591 20.6419 15.6994 22.0579 16.3302C22.0988 14.3538 22.0913 12.2807 22.0366 10.3431ZM13.0894 12.9365H5.27728C5.07996 12.9365 4.89072 12.8581 4.75119 12.7186C4.61166 12.579 4.53327 12.3898 4.53327 12.1925C4.53327 11.9952 4.61166 11.8059 4.75119 11.6664C4.89072 11.5269 5.07996 11.4485 5.27728 11.4485H13.0894C13.2867 11.4485 13.4759 11.5269 13.6155 11.6664C13.755 11.8059 13.8334 11.9952 13.8334 12.1925C13.8334 12.3898 13.755 12.579 13.6155 12.7186C13.4759 12.8581 13.2867 12.9365 13.0894 12.9365Z" />
+                <path d="M16.6552 8.70382C18.4256 8.89318 20.2066 8.96579 21.9866 8.92118L21.9823 8.91427C19.8802 5.74082 17.1658 3.01894 13.998 0.908203C13.9521 2.69702 14.0247 4.48691 14.2154 6.26613C14.3514 7.44166 15.4791 8.56937 16.6552 8.70382Z" />
+              </svg>
+              <button
+                className={`side-button ${accTab === "deposit" && " active"}`}
+                id="side-button-account"
+                style={{
+                  backgroundColor: "transparent",
+                  color:
+                    accTab === "deposit"
+                      ? "var(--main-primary-button)"
+                      : theme === "purple"
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
+                }}
+              >
+                Deposit
+              </button>
+            </div>
+            <div
+              className="side-btn-acc"
+              onClick={() => {
+                setTab("account");
+                setAccTab("report");
+              }}
+              style={{
+                backgroundColor:
+                  accTab === "report" && "var(--main-secondary-color-40)",
+              }}
+            >
+              <svg
+                height="28"
+                style={{
+                  backgroundColor: "transparent",
+                  fill:
+                    accTab === "report"
+                      ? "var(--main-primary-button)"
+                      : theme === "purple"
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
+                }}
+                viewBox="0 0 28 28"
+                width="28"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M6.10352e-05 5.11719C6.10352e-05 4.5649 0.447776 4.11719 1.00006 4.11719H18.7647C19.317 4.11719 19.7647 4.5649 19.7647 5.11719V5.58777C19.7647 6.14006 19.317 6.58777 18.7647 6.58777H1.00006C0.447775 6.58777 6.10352e-05 6.14006 6.10352e-05 5.58777V5.11719Z" />
+                <path d="M17.2941 0H2.47059C1.45358 0 0.578119 0.617696 0.199676 1.49762C-0.0185283 2.00497 0.447715 2.47059 1 2.47059H18.7647C19.317 2.47059 19.7832 2.00497 19.565 1.49762C19.1866 0.617695 18.3111 0 17.2941 0Z" />
+                <path d="M2.47065 13.1765H17.2942C18.6565 13.1765 19.7647 12.0683 19.7647 10.7059V9.23535C19.7647 8.68307 19.317 8.23535 18.7647 8.23535H1.00006C0.447775 8.23535 6.10352e-05 8.68307 6.10352e-05 9.23535V10.7059C6.10352e-05 12.0683 1.10837 13.1765 2.47065 13.1765Z" />
+                <path d="M8.23712 19.9404C8.23712 19.3881 8.68484 18.9404 9.23712 18.9404H27.0018C27.5541 18.9404 28.0018 19.3881 28.0018 19.9404V20.411C28.0018 20.9633 27.5541 21.411 27.0018 21.411H9.23712C8.68484 21.411 8.23712 20.9633 8.23712 20.411V19.9404Z" />
+                <path d="M25.5312 14.8232H10.7077C9.6907 14.8232 8.81524 15.4409 8.4368 16.3209C8.21859 16.8282 8.68484 17.2938 9.23712 17.2938H27.0018C27.5541 17.2938 28.0203 16.8282 27.8021 16.3209C27.4237 15.4409 26.5483 14.8232 25.5312 14.8232Z" />
+                <path d="M4.11783 23.0589V20.634C4.11783 20.4391 4.35345 20.3415 4.49125 20.4793L5.02792 21.016C5.11334 21.1014 5.25184 21.1014 5.33727 21.016L6.19255 20.1607C6.27798 20.0753 6.27798 19.9367 6.19255 19.8513L3.44898 17.1078C3.36355 17.0224 3.22505 17.0224 3.13962 17.1078L0.396101 19.8514C0.310675 19.9368 0.310676 20.0753 0.396103 20.1607L1.25138 21.016C1.3368 21.1014 1.47531 21.1014 1.56074 21.016L2.09734 20.4794C2.23514 20.3416 2.47077 20.4392 2.47077 20.6341V23.0589C2.47077 24.4213 3.57908 25.5295 4.94136 25.5295H6.36966C6.49048 25.5295 6.58841 25.4316 6.58841 25.3108V24.1012C6.58841 23.9804 6.49048 23.8825 6.36966 23.8825H4.94136C4.48726 23.8825 4.11783 23.5131 4.11783 23.0589Z" />
+                <path d="M8.23712 23.8821V25.5292C8.23712 26.8915 9.34543 27.9998 10.7077 27.9998H25.5312C26.8936 27.9998 28.0018 26.8915 28.0018 25.5292V24.0586C28.0018 23.5063 27.5541 23.0586 27.0018 23.0586H9.06065C8.60583 23.0586 8.23712 23.4273 8.23712 23.8821Z" />
+                <path d="M24.1269 4.93152V7.35644C24.1269 7.55133 23.8913 7.64892 23.7535 7.51113L23.2168 6.97449C23.1314 6.88907 22.9929 6.88907 22.9075 6.97449L22.0522 7.82977C21.9667 7.9152 21.9667 8.05371 22.0522 8.13913L24.7957 10.8826C24.8812 10.9681 25.0197 10.9681 25.1051 10.8826L27.8486 8.13908C27.934 8.05365 27.934 7.91515 27.8486 7.82972L26.9933 6.97445C26.9079 6.88902 26.7694 6.88902 26.684 6.97445L26.1474 7.51108C26.0096 7.64889 25.774 7.55129 25.774 7.3564V4.93152C25.774 3.56924 24.6657 2.46094 23.3034 2.46094H21.8751C21.7542 2.46094 21.6563 2.55888 21.6563 2.67969V3.88924C21.6563 4.01006 21.7542 4.10799 21.8751 4.10799H23.3034C23.7575 4.10799 24.1269 4.47743 24.1269 4.93152Z" />
+              </svg>
+              <button
+                className={`side-button ${accTab === "report" && " active"}`}
+                id="side-button-account"
+                style={{
+                  backgroundColor: "transparent",
+                  color:
+                    accTab === "report"
+                      ? "var(--main-primary-button)"
+                      : theme === "purple"
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
+                }}
+              >
+                Report
               </button>
             </div>
           </div>
@@ -1531,29 +1766,7 @@ export default function HomeRu() {
                 <DataTable
                   columns={assetsColumns}
                   conditionalRowStyles={conditionalRowStyles}
-                  customStyles={{
-                    table: {
-                      style: {
-                        backgroundColor:
-                          "var(--main-secondary-color) !important",
-                      },
-                    },
-                    headCells: {
-                      style: {
-                        fontSize: "1rem",
-                        fontWeight: "600",
-                        color: "var(--main-primary-button)",
-                      },
-                    },
-                    rows: {
-                      style: {
-                        "*": { backgroundColor: "unset", color: "unset" },
-                        fontSize: "0.9rem",
-                        minHeight: "26px !important",
-                        userSelect: "none",
-                      },
-                    },
-                  }}
+                  customStyles={customStylesAssetsTable}
                   data={fillArrayWithEmptyRows(filteredQuotesSymbols, 10)}
                   dense
                   highlightOnHover
@@ -2213,634 +2426,616 @@ export default function HomeRu() {
           </div>
           {tab === "account" && (
             <div id="account" className="h-100">
-              <div id="account-profile">
-                <img
-                  id="acc-img-placeholder"
-                  src={accPlaceholder}
-                  alt="avatar"
-                />
-                <h4 style={{ margin: "0", "margin-bottom": "15px" }}>
-                  {defaultAccount?.account_no || "Test Lead #0001"}
-                </h4>
-                <p
-                  style={{ margin: "0", "margin-bottom": "15px", color: "red" }}
-                >
-                  {t("referralCode")} : {userProfile?.refCode}
-                </p>
-                <button
-                  id="create-account-button"
-                  className="btn btn-secondary"
-                  onClick={() => setShowAccountModal(true)}
-                >
-                  Create Account
-                </button>
-                {userProfile?.accounts?.length > 0 && (
-                  <div>
-                    <label className="m-4" htmlFor="symbol-input">
-                      Select Account
-                    </label>
-                    <Select
-                      id="account-input"
-                      options={accounts
-                        .filter((acc) => !acc?.isDeleted)
-                        ?.map((account) => ({
-                          value: account.account_no,
-                          label: account.account_no,
-                        }))}
-                      onChange={handleAccountChange}
-                      value={{
-                        value: defaultAccount?.account_no,
-                        label: defaultAccount?.account_no,
-                      }}
-                      styles={{
-                        container: (provided, state) => ({
-                          ...provided,
-                          minWidth: 130,
-                        }),
-                        dropdownIndicator: (provided, state) => ({
-                          ...provided,
-                          paddingBlock: 0,
-                        }),
-                        option: (provided, state) => ({
-                          ...provided,
-                          cursor: "pointer",
-                          backgroundColor: state.isSelected
-                            ? "var(--main-numbersc)"
-                            : "unset",
-                          color: state.isSelected
-                            ? "black"
-                            : "var(--main-input-textc)",
-                          "&:hover": {
-                            backgroundColor: state.isSelected
-                              ? ""
-                              : "var(--bs-body-bg)",
-                          },
-                        }),
-                        singleValue: (provided) => ({
-                          ...provided,
-                          color: "var(--main-input-textc)",
-                        }),
-                        control: (provided) => ({
-                          ...provided,
-                          backgroundColor: "inherit",
-                          minHeight: 24,
-                        }),
-                      }}
-                      theme={(theme) => {
-                        return {
-                          ...theme,
-                          colors: {
-                            ...theme.colors,
-                            primary: "var(--main-input-textc)",
-                          },
-                        };
-                      }}
-                      isSearchable={false}
-                    />
-                    <div className="d-flex align-items-center justify-content-center gap-3 mt-2">
-                      <h6>Type: </h6>
-                      <h6>{defaultAccount?.account_type}</h6>
+              {accTab === "acc-info" && (
+                <div id="account-profile">
+                  <h1>Account Information</h1>
+                  <div className="account-card">
+                    {userProfile?.accounts?.length > 0 && (
+                      <div className="acc-selection">
+                        <label className="m-4" htmlFor="symbol-input">
+                          Select Account
+                        </label>
+                        <Select
+                          id="account-input"
+                          onChange={handleAccountChange}
+                          options={accounts
+                            .filter((acc) => !acc?.isDeleted)
+                            ?.map((account) => ({
+                              label: `${account.account_no} ${account.account_type}`,
+                              value: account.account_no,
+                            }))}
+                          value={{
+                            label: `${defaultAccount.account_no} ${defaultAccount.account_type}`,
+                            value: defaultAccount.account_no,
+                          }}
+                          styles={{
+                            container: (provided, state) => ({ ...provided }),
+                            control: (provided) => ({
+                              ...provided,
+                              backgroundColor: "inherit",
+                            }),
+                            dropdownIndicator: (provided, state) => ({
+                              ...provided,
+                              paddingBlock: 0,
+                            }),
+                            option: (provided, state) => ({
+                              ...provided,
+                              cursor: "pointer",
+                              backgroundColor: state.isSelected
+                                ? "var(--main-primary-button)"
+                                : "unset",
+                              color: "var(--main-text-color)",
+                              "&:hover": {
+                                backgroundColor: state.isSelected
+                                  ? ""
+                                  : "var(--main-primary-button)",
+                              },
+                            }),
+                            singleValue: (provided) => ({
+                              ...provided,
+                              color: "var(--main-text-color)",
+                            }),
+                          }}
+                          theme={(theme) => {
+                            return {
+                              ...theme,
+                              colors: {
+                                ...theme.colors,
+                                primary: "var(--main-text-color)",
+                              },
+                            };
+                          }}
+                          isSearchable={false}
+                        />
+                      </div>
+                    )}
+                    <div className="acc-main-content">
+                      <div className="acc-img-name">
+                        <img
+                          alt=""
+                          height={120}
+                          src={accPlaceholder}
+                          width="auto"
+                        />
+                        <label>{userProfile.name}</label>
+                        <label>{userProfile.surname}</label>
+                        <label>
+                          Status: <span>Verified</span>
+                        </label>
+                      </div>
+                      <div id="acc-profile-main">
+                        <div className="acc-profile-main-item">
+                          <h6>{t("balance")} (USD):</h6>
+                          <h6>{+parseFloat(totalBalance)?.toFixed(2)}</h6>
+                        </div>
+                        <hr />
+                        <div className="acc-profile-main-item">
+                          <h6>{t("Free")} (USD):</h6>
+                          <h6>{+parseFloat(freeMargin - bonus)?.toFixed(2)}</h6>
+                        </div>
+                        <hr />
+                        <div className="acc-profile-main-item">
+                          <h6>{t("Bonus")} (USD):</h6>
+                          <h6>{+parseFloat(bonus)?.toFixed(2)}</h6>
+                        </div>
+                        <hr />
+                        <div className="acc-profile-main-item">
+                          <h6>{t("deposited")} (USD):</h6>
+                          <h6>
+                            {accountDeposits
+                              .filter(({ type }) => type === "Deposit")
+                              .reduce((p, { sum }) => p + +sum, 0)}
+                          </h6>
+                        </div>
+                        <hr />
+                        <div className="acc-profile-main-item">
+                          <h6>{t("withdrawn")} (USD):</h6>
+                          <h6>
+                            {accountDeposits
+                              .filter(({ type }) => type === "Withdraw")
+                              .reduce((p, { sum }) => p + +sum, 0)}
+                          </h6>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                )}
-                <div id="acc-profile-main">
-                  <div className="acc-profile-main-item">
-                    <h6>{t("balance")} (USD):</h6>
-                    <h6>{+parseFloat(totalBalance)?.toFixed(2)}</h6>
-                  </div>
-                  <div className="acc-profile-main-item">
-                    <h6>{t("Free")} (USD):</h6>
-                    <h6>{+parseFloat(freeMargin - bonus)?.toFixed(2)}</h6>
-                  </div>
-                  <div className="acc-profile-main-item">
-                    <h6>{t("Bonus")} (USD):</h6>
-                    <h6>{+parseFloat(bonus)?.toFixed(2)}</h6>
-                  </div>
-                  <div className="acc-profile-main-item">
-                    <h6>{t("deposited")} (USD):</h6>
-                    <h6>
-                      {accountDeposits
-                        .filter(({ type }) => type === "Deposit")
-                        .reduce((p, { sum }) => p + +sum, 0)}
-                    </h6>
-                  </div>
-                  <div className="acc-profile-main-item">
-                    <h6>{t("withdrawn")} (USD):</h6>
-                    <h6>
-                      {accountDeposits
-                        .filter(({ type }) => type === "Withdraw")
-                        .reduce((p, { sum }) => p + +sum, 0)}
-                    </h6>
-                  </div>
-                </div>
-                <div id="verif-buttons">
                   <button
-                    id="documents-button"
-                    // data-bs-toggle="modal"
-                    // data-bs-target="#verification-docs"
-                    onClick={() => setUploadModal(true)}
+                    id="create-account-button"
+                    onClick={() => setShowAccountModal(true)}
                   >
-                    {t("verification")}
+                    Create New Account
                   </button>
-                </div>
-                {/* The Upload Modal */}
-                {uploadModal && (
-                  <div
-                    className="modal fade show"
-                    id="verification-docs"
-                    style={{
-                      display: "flex",
-                    }}
-                  >
+                  {/* <div id="verif-buttons">
+                    <button
+                      id="documents-button"
+                      onClick={() => setUploadModal(true)}
+                    >
+                      {t("verification")}
+                    </button>
+                  </div>
+                  {uploadModal && (
                     <div
-                      className="modal-dialog modal-lg"
-                      style={{ display: "flex" }}
+                      className="modal fade show"
+                      id="verification-docs"
+                      style={{
+                        display: "flex",
+                      }}
                     >
                       <div
-                        className="modal-content"
-                        style={{ "border-radius": "0px", height: "50vh" }}
+                        className="modal-dialog modal-lg"
+                        style={{ display: "flex" }}
                       >
-                        {/* Modal Header */}
-                        <div className="modal-header">
-                          <h4 className="modal-title">{t("uploadDocs")}</h4>
-                          <button
-                            type="button"
-                            className="btn-close"
-                            data-bs-dismiss="modal"
-                            onClick={() => setUploadModal(false)}
-                          />
-                        </div>
-                        {/* Modal body */}
-                        <div className="modal-body">
-                          <form encType="multipart/form-data">
-                            <div className="mb-3">
-                              <label
-                                htmlFor="verificationFile"
-                                className="form-label"
-                              >
-                                {t("chooseFile")}
-                              </label>
-                              <input
-                                type="file"
-                                className="form-control"
-                                id="verificationFile"
-                                name="verificationFile"
-                                accept=".pdf, .doc, .docx"
-                                style={{ height: "100%" }}
-                              />
-                            </div>
+                        <div
+                          className="modal-content"
+                          style={{ "border-radius": "0px", height: "50vh" }}
+                        >
+                          <div className="modal-header">
+                            <h4 className="modal-title">{t("uploadDocs")}</h4>
                             <button
-                              type="submit"
-                              className="btn btn-primary"
-                              id="uploadButton"
-                              style={{ color: "rgb(0, 255, 110)" }}
+                              type="button"
+                              className="btn-close"
+                              data-bs-dismiss="modal"
+                              onClick={() => setUploadModal(false)}
+                            />
+                          </div>
+                          <div className="modal-body">
+                            <form encType="multipart/form-data">
+                              <div className="mb-3">
+                                <label
+                                  htmlFor="verificationFile"
+                                  className="form-label"
+                                >
+                                  {t("chooseFile")}
+                                </label>
+                                <input
+                                  type="file"
+                                  className="form-control"
+                                  id="verificationFile"
+                                  name="verificationFile"
+                                  accept=".pdf, .doc, .docx"
+                                  style={{ height: "100%" }}
+                                />
+                              </div>
+                              <button
+                                type="submit"
+                                className="btn btn-primary"
+                                id="uploadButton"
+                                style={{ color: "rgb(0, 255, 110)" }}
+                              >
+                                {t("upload")}
+                              </button>
+                            </form>
+                          </div>
+                          <div className="modal-footer">
+                            <button
+                              type="button"
+                              className="btn btn-danger"
+                              data-bs-dismiss="modal"
+                              onClick={() => setUploadModal(false)}
                             >
-                              {t("upload")}
+                              {t("close")}
                             </button>
-                          </form>
-                        </div>
-                        {/* Modal footer */}
-                        <div className="modal-footer">
-                          <button
-                            type="button"
-                            className="btn btn-danger"
-                            data-bs-dismiss="modal"
-                            onClick={() => setUploadModal(false)}
-                          >
-                            {t("close")}
-                          </button>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                )}
-                {/* The Success Modal */}
-                {successModal && (
-                  <div className="modal" id="successModal">
-                    <div className="modal-dialog">
-                      <div className="modal-content">
-                        {/* Modal Header */}
-                        <div className="modal-header">
-                          <h4 className="modal-title">{t("success")}</h4>
-                          <button
-                            type="button"
-                            className="btn-close"
-                            data-bs-dismiss="modal"
-                          />
+                  )}
+                  {successModal && (
+                    <div className="modal" id="successModal">
+                      <div className="modal-dialog">
+                        <div className="modal-content">
+                          <div className="modal-header">
+                            <h4 className="modal-title">{t("success")}</h4>
+                            <button
+                              type="button"
+                              className="btn-close"
+                              data-bs-dismiss="modal"
+                            />
+                          </div>
+                          <div className="modal-body">{t("thankyou")}</div>
                         </div>
-                        {/* Modal body */}
-                        <div className="modal-body">{t("thankyou")}</div>
                       </div>
                     </div>
-                  </div>
-                )}
-              </div>
-              <div id="account-info">
-                <h3
-                  style={{
-                    "margin-top": "40px",
-                    "margin-bottom": "20px",
-                    width: "80%",
-                    "font-size": "25px",
-                  }}
-                >
-                  {t("personalInfo")}
-                </h3>
-                <div id="acc-info-personal">
-                  <div className="acc-info-personal-item">
-                    <h6>{t("name")}</h6>
-                    <input
-                      type="text"
-                      name="name"
-                      value={userProfile?.name}
-                      onChange={(e) => handleChange(e)}
-                      readOnly={!isEditable}
-                    />
-                  </div>
-                  <div className="acc-info-personal-item">
-                    <h6>{t("surname")}</h6>
-                    <input
-                      type="text"
-                      name="surname"
-                      value={userProfile?.surname}
-                      placeholder="Surname"
-                      onChange={(e) => handleChange(e)}
-                      readOnly={!isEditable}
-                    />
-                  </div>
-                  <div className="acc-info-personal-item">
-                    <h6>{t("email")}</h6>
-                    <input
-                      type="text"
-                      name="email"
-                      id="userEmail"
-                      value={userProfile?.email}
-                      placeholder=""
-                      readOnly
-                    />
-                  </div>
-                  <div className="acc-info-personal-item">
-                    <h6>{t("phone")}</h6>
-                    <input
-                      type="number"
-                      name="phone"
-                      value={userProfile?.phone}
-                      placeholder="+7777038475"
-                      onChange={(e) => handleChange(e)}
-                      readOnly={!isEditable}
-                    />
-                  </div>
-                  <div className="acc-info-personal-item">
-                    <h6>{t("Password")}</h6>
-                    <div className="position-relative">
+                  )} */}
+                </div>
+              )}
+              {accTab === "personal-info" && (
+                <div id="account-info">
+                  <h3
+                    style={{
+                      "margin-top": "40px",
+                      "margin-bottom": "20px",
+                      width: "80%",
+                      "font-size": "25px",
+                    }}
+                  >
+                    {t("personalInfo")}
+                  </h3>
+                  <div id="acc-info-personal">
+                    <div className="acc-info-personal-item">
+                      <h6>{t("name")}</h6>
                       <input
-                        type={passwordShown ? "text" : "password"}
-                        name="password"
-                        value={userProfile?.password}
-                        placeholder="Password"
+                        type="text"
+                        name="name"
+                        value={userProfile?.name}
                         onChange={(e) => handleChange(e)}
                         readOnly={!isEditable}
                       />
-                      <FontAwesomeIcon
-                        cursor="pointer"
-                        className="position-absolute ms-1"
-                        style={{ top: 4 }}
-                        icon={passwordShown ? faEyeSlash : faEye}
-                        onClick={() => setPasswordShown(!passwordShown)}
+                    </div>
+                    <div className="acc-info-personal-item">
+                      <h6>{t("surname")}</h6>
+                      <input
+                        type="text"
+                        name="surname"
+                        value={userProfile?.surname}
+                        placeholder="Surname"
+                        onChange={(e) => handleChange(e)}
+                        readOnly={!isEditable}
+                      />
+                    </div>
+                    <div className="acc-info-personal-item">
+                      <h6>{t("email")}</h6>
+                      <input
+                        type="text"
+                        name="email"
+                        id="userEmail"
+                        value={userProfile?.email}
+                        placeholder=""
+                        readOnly
+                      />
+                    </div>
+                    <div className="acc-info-personal-item">
+                      <h6>{t("phone")}</h6>
+                      <input
+                        type="number"
+                        name="phone"
+                        value={userProfile?.phone}
+                        placeholder="+7777038475"
+                        onChange={(e) => handleChange(e)}
+                        readOnly={!isEditable}
+                      />
+                    </div>
+                    <div className="acc-info-personal-item">
+                      <h6>{t("Password")}</h6>
+                      <div className="position-relative">
+                        <input
+                          type={passwordShown ? "text" : "password"}
+                          name="password"
+                          value={userProfile?.password}
+                          placeholder="Password"
+                          onChange={(e) => handleChange(e)}
+                          readOnly={!isEditable}
+                        />
+                        <FontAwesomeIcon
+                          cursor="pointer"
+                          className="position-absolute ms-1"
+                          style={{ top: 4 }}
+                          icon={passwordShown ? faEyeSlash : faEye}
+                          onClick={() => setPasswordShown(!passwordShown)}
+                        />
+                      </div>
+                    </div>
+                    <div className="acc-info-personal-item">
+                      <h6>{t("country")}</h6>
+                      <input
+                        type="text"
+                        value={userProfile?.country}
+                        name="country"
+                        placeholder="Country"
+                        onChange={(e) => handleChange(e)}
+                        readOnly={!isEditable}
+                      />
+                    </div>
+                    <div className="acc-info-personal-item">
+                      <h6>{t("city")}</h6>
+                      <input
+                        type="text"
+                        value={userProfile?.city}
+                        name="city"
+                        placeholder="City"
+                        onChange={(e) => handleChange(e)}
+                        readOnly={!isEditable}
+                      />
+                    </div>
+                    <div className="acc-info-personal-item">
+                      <h6>{t("dateRegister")}</h6>
+                      <input
+                        type="text"
+                        value={moment(
+                          userProfile?.createdAt?.seconds * 1000
+                        )?.format("DD/MM/YYYY")}
+                        name="dateRegister"
+                        placeholder=""
+                        // onChange={e=> handleChange(e)}
+                        readOnly={true}
+                      />
+                    </div>
+                    <div className="acc-info-personal-item">
+                      <h6>{t("comment")}:</h6>
+                      <input
+                        type="text"
+                        value={userProfile?.comment}
+                        name="comment"
+                        id="comment"
+                        placeholder="Comment"
+                        onChange={(e) => handleChange(e)}
+                        readOnly={!isEditable}
                       />
                     </div>
                   </div>
-                  <div className="acc-info-personal-item">
-                    <h6>{t("country")}</h6>
-                    <input
-                      type="text"
-                      value={userProfile?.country}
-                      name="country"
-                      placeholder="Country"
-                      onChange={(e) => handleChange(e)}
-                      readOnly={!isEditable}
-                    />
-                  </div>
-                  <div className="acc-info-personal-item">
-                    <h6>{t("city")}</h6>
-                    <input
-                      type="text"
-                      value={userProfile?.city}
-                      name="city"
-                      placeholder="City"
-                      onChange={(e) => handleChange(e)}
-                      readOnly={!isEditable}
-                    />
-                  </div>
-                  <div className="acc-info-personal-item">
-                    <h6>{t("dateRegister")}</h6>
-                    <input
-                      type="text"
-                      value={moment(
-                        userProfile?.createdAt?.seconds * 1000
-                      )?.format("DD/MM/YYYY")}
-                      name="dateRegister"
-                      placeholder=""
-                      // onChange={e=> handleChange(e)}
-                      readOnly={true}
-                    />
-                  </div>
-                  <div className="acc-info-personal-item">
-                    <h6>{t("comment")}:</h6>
-                    <input
-                      type="text"
-                      value={userProfile?.comment}
-                      name="comment"
-                      id="comment"
-                      placeholder="Comment"
-                      onChange={(e) => handleChange(e)}
-                      readOnly={!isEditable}
-                    />
-                  </div>
-                </div>
-                <div id="acc-info-buttons">
-                  <button
-                    id="acc-save-button"
-                    onClick={() =>
-                      isEditable ? handleSaveClick() : setIsEditable(true)
-                    }
-                  >
-                    {isEditable ? "Save" : "Edit"}
-                  </button>
-                </div>
-              </div>
-              <div id="account-transactions">
-                <h3
-                  style={{
-                    "border-bottom": "1px solid var(--main-bgc)",
-                    "font-size": "25px",
-                    "padding-bottom": "25px",
-                    "padding-top": "0",
-                    "margin-top": "40px",
-                    "margin-bottom": "30px",
-                    width: "80%",
-                  }}
-                >
-                  {t("transactions")}
-                </h3>
-                <div className="transactions-table">
-                  <DataTable
-                    columns={depositsColumns}
-                    data={fillArrayWithEmptyRows(accountDeposits, 5)}
-                    customStyles={{
-                      table: {
-                        style: {
-                          minHeight: "50vh",
-                        },
-                      },
-                    }}
-                    pagination
-                    theme={theme}
-                    paginationRowsPerPageOptions={[5, 10, 15, 20, 50]}
-                    dense
-                  />
-                </div>
-                <div id="transaction-request">
-                  <button
-                    id="deposit-button"
-                    onClick={() => setDepositModal(true)}
-                  >
-                    {t("deposit")}
-                  </button>
-                  {/* The Modal */}
-                  {depositModal && (
-                    <div
-                      className="modal show fade"
-                      id="deposit-modal"
-                      style={{
-                        display: "flex",
-                      }}
+                  <div id="acc-info-buttons">
+                    <button
+                      id="acc-save-button"
+                      onClick={() =>
+                        isEditable ? handleSaveClick() : setIsEditable(true)
+                      }
                     >
+                      {isEditable ? "Save" : "Edit"}
+                    </button>
+                  </div>
+                </div>
+              )}
+              {accTab === "deposit" && (
+                <div id="account-transactions">
+                  <h3
+                    style={{
+                      "border-bottom": "1px solid var(--main-bgc)",
+                      "font-size": "25px",
+                      "padding-bottom": "25px",
+                      "padding-top": "0",
+                      "margin-top": "40px",
+                      "margin-bottom": "30px",
+                      width: "80%",
+                    }}
+                  >
+                    {t("transactions")}
+                  </h3>
+                  <div className="transactions-table">
+                    <DataTable
+                      columns={depositsColumns}
+                      data={fillArrayWithEmptyRows(accountDeposits, 5)}
+                      customStyles={{
+                        table: {
+                          style: {
+                            minHeight: "50vh",
+                          },
+                        },
+                      }}
+                      pagination
+                      theme={theme}
+                      paginationRowsPerPageOptions={[5, 10, 15, 20, 50]}
+                      dense
+                    />
+                  </div>
+                  <div id="transaction-request">
+                    <button
+                      id="deposit-button"
+                      onClick={() => setDepositModal(true)}
+                    >
+                      {t("deposit")}
+                    </button>
+                    {depositModal && (
                       <div
-                        className="modal-dialog modal-lg"
-                        style={{ "margin-top": "10%" }}
+                        className="modal show fade"
+                        id="deposit-modal"
+                        style={{
+                          display: "flex",
+                        }}
                       >
-                        <div className="modal-content">
-                          {/* Modal Header */}
-                          <div className="modal-header">
-                            <h4 className="modal-title">{t("deposit")}</h4>
-                            <button
-                              type="button"
-                              className="btn-close"
-                              data-bs-dismiss="modal"
-                              onClick={() => {
-                                setDepositModal(false);
-                              }}
-                            />
-                          </div>
-                          {/* Modal body */}
-                          <div
-                            className="modal-body"
-                            style={{ display: "contents", height: "500px" }}
-                          >
+                        <div
+                          className="modal-dialog modal-lg"
+                          style={{ "margin-top": "10%" }}
+                        >
+                          <div className="modal-content">
+                            {/* Modal Header */}
+                            <div className="modal-header">
+                              <h4 className="modal-title">{t("deposit")}</h4>
+                              <button
+                                type="button"
+                                className="btn-close"
+                                data-bs-dismiss="modal"
+                                onClick={() => {
+                                  setDepositModal(false);
+                                }}
+                              />
+                            </div>
                             <div
-                              id="modal-contents"
-                              style={{
-                                height: "500px",
-                                display: "inherit",
-                              }}
+                              className="modal-body"
+                              style={{ display: "contents", height: "500px" }}
                             >
                               <div
+                                id="modal-contents"
                                 style={{
-                                  display: "flex",
-                                  justifyContent: "center",
+                                  height: "500px",
+                                  display: "inherit",
                                 }}
                               >
-                                <Form.Select style={{ width: 200 }}>
-                                  <option>Choose method</option>
-                                  <option value="1">VISA/MasterCard</option>
-                                  <option value="2">Crypto</option>
-                                  <option value="3">Other</option>
-                                </Form.Select>
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    justifyContent: "center",
+                                  }}
+                                >
+                                  <Form.Select style={{ width: 200 }}>
+                                    <option>Choose method</option>
+                                    <option value="1">VISA/MasterCard</option>
+                                    <option value="2">Crypto</option>
+                                    <option value="3">Other</option>
+                                  </Form.Select>
+                                </div>
+                                <label>{t("accountNumber")}</label>
+                                <input type="text" className="text-center" />
+                                <label>{t("amount")}</label>
+                                <input type="text" className="text-center" />
                               </div>
-                              <label>{t("accountNumber")}</label>
-                              <input type="text" className="text-center" />
-                              <label>{t("amount")}</label>
-                              <input type="text" className="text-center" />
                             </div>
-                          </div>
-                          {/* Modal footer */}
-                          <div
-                            className="modal-footer"
-                            style={{
-                              display: "flex",
-                              "-webkit-align-items": "center",
-                              "-webkit-box-align": "center",
-                              "-ms-flex-align": "center",
-                              "align-items": "center",
-                              "-webkit-box-pack": "center",
-                              "-webkit-justify-content": "center",
-                              "-ms-flex-pack": "center",
-                              "justify-content": "center",
-                            }}
-                          >
-                            <button
-                              id="accept-deposit"
-                              type="button"
-                              className="btn btn-primary"
-                              data-bs-dismiss="modal"
-                              style={{ color: "aquamarine" }}
-                              onClick={() => {
-                                setDepositModal(false);
-                                setDepositSuccessModal(true);
-                              }}
-                            >
-                              {t("confirm")}
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                  {/* The Success Modal */}
-                  {depositSuccessModal && (
-                    <div
-                      className="modal show fade"
-                      id="dep-successModal"
-                      style={{
-                        display: "flex",
-                      }}
-                    >
-                      <div className="modal-dialog">
-                        <div className="modal-content">
-                          {/* Modal Header */}
-                          <div className="modal-header">
-                            <h4 className="modal-title">{t("success")}</h4>
-                            <button
-                              type="button"
-                              className="btn-close"
-                              data-bs-dismiss="modal"
-                              onClick={() => setDepositSuccessModal(false)}
-                            />
-                          </div>
-                          {/* Modal body */}
-                          <div className="modal-body">
-                            {t("depositSubmit")} <br />
-                            {t("wait")}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                  <button
-                    id="withdraw-request-button"
-                    onClick={() => setWithdrawlModal(true)}
-                  >
-                    {t("withdraw")}
-                  </button>
-                  {/* The Modal */}
-                  {withdrawlModal && (
-                    <div
-                      className="modal show fade"
-                      id="withdraw-modal"
-                      style={{
-                        display: "flex",
-                      }}
-                    >
-                      <div
-                        className="modal-dialog modal-lg"
-                        style={{ "margin-top": "10%" }}
-                      >
-                        <div className="modal-content">
-                          {/* Modal Header */}
-                          <div className="modal-header">
-                            <h4 className="modal-title">
-                              {t("fundsWithdrawal")}
-                            </h4>
-                            <button
-                              type="button"
-                              className="btn-close"
-                              data-bs-dismiss="modal"
-                              onClick={() => {
-                                setWithdrawlModal(false);
-                              }}
-                            />
-                          </div>
-                          {/* Modal body */}
-                          <div
-                            className="modal-body"
-                            style={{ display: "contents", height: "500px" }}
-                          >
                             <div
-                              id="modal-contents"
-                              style={{ height: "500px", display: "inherit" }}
-                            >
-                              <label htmlFor>{t("accountNumber")}</label>
-                              <input type="text" name id />
-                              <label htmlFor>{t("amount")}</label>
-                              <input type="text" name id />
-                            </div>
-                          </div>
-                          {/* Modal footer */}
-                          <div
-                            className="modal-footer"
-                            style={{
-                              display: "flex",
-                              "-webkit-align-items": "center",
-                              "-webkit-box-align": "center",
-                              "-ms-flex-align": "center",
-                              "align-items": "center",
-                              "-webkit-box-pack": "center",
-                              "-webkit-justify-content": "center",
-                              "-ms-flex-pack": "center",
-                              "justify-content": "center",
-                            }}
-                          >
-                            <button
-                              id="accept-withdraw"
-                              type="button"
-                              className="btn btn-primary"
-                              data-bs-dismiss="modal"
-                              style={{ color: "aquamarine" }}
-                              onClick={() => {
-                                setWithdrawlModal(false);
-                                setWithdrawlSuccessModal(true);
+                              className="modal-footer"
+                              style={{
+                                display: "flex",
+                                "-webkit-align-items": "center",
+                                "-webkit-box-align": "center",
+                                "-ms-flex-align": "center",
+                                "align-items": "center",
+                                "-webkit-box-pack": "center",
+                                "-webkit-justify-content": "center",
+                                "-ms-flex-pack": "center",
+                                "justify-content": "center",
                               }}
                             >
-                              {t("confirm")}
-                            </button>
+                              <button
+                                id="accept-deposit"
+                                type="button"
+                                className="btn btn-primary"
+                                data-bs-dismiss="modal"
+                                style={{ color: "aquamarine" }}
+                                onClick={() => {
+                                  setDepositModal(false);
+                                  setDepositSuccessModal(true);
+                                }}
+                              >
+                                {t("confirm")}
+                              </button>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  )}
-                  {/* The Success Modal */}
-                  {withdrawlSuccessModal && (
-                    <div
-                      className="modal fade show"
-                      id="wd-successModal"
-                      style={{
-                        display: "flex",
-                      }}
+                    )}
+                    {depositSuccessModal && (
+                      <div
+                        className="modal show fade"
+                        id="dep-successModal"
+                        style={{
+                          display: "flex",
+                        }}
+                      >
+                        <div className="modal-dialog">
+                          <div className="modal-content">
+                            <div className="modal-header">
+                              <h4 className="modal-title">{t("success")}</h4>
+                              <button
+                                type="button"
+                                className="btn-close"
+                                data-bs-dismiss="modal"
+                                onClick={() => setDepositSuccessModal(false)}
+                              />
+                            </div>
+                            <div className="modal-body">
+                              {t("depositSubmit")} <br />
+                              {t("wait")}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                    <button
+                      id="withdraw-request-button"
+                      onClick={() => setWithdrawlModal(true)}
                     >
-                      <div className="modal-dialog">
-                        <div className="modal-content">
-                          {/* Modal Header */}
-                          <div className="modal-header">
-                            <h4 className="modal-title">{t("success")}</h4>
-                            <button
-                              type="button"
-                              className="btn-close"
-                              data-bs-dismiss="modal"
-                              onClick={() => setWithdrawlSuccessModal(false)}
-                            />
-                          </div>
-                          {/* Modal body */}
-                          <div className="modal-body">
-                            {t("requestSuccess")} <br />
-                            {t("furtherInstructions")}
+                      {t("withdraw")}
+                    </button>
+                    {withdrawlModal && (
+                      <div
+                        className="modal show fade"
+                        id="withdraw-modal"
+                        style={{
+                          display: "flex",
+                        }}
+                      >
+                        <div
+                          className="modal-dialog modal-lg"
+                          style={{ "margin-top": "10%" }}
+                        >
+                          <div className="modal-content">
+                            <div className="modal-header">
+                              <h4 className="modal-title">
+                                {t("fundsWithdrawal")}
+                              </h4>
+                              <button
+                                type="button"
+                                className="btn-close"
+                                data-bs-dismiss="modal"
+                                onClick={() => {
+                                  setWithdrawlModal(false);
+                                }}
+                              />
+                            </div>
+                            <div
+                              className="modal-body"
+                              style={{ display: "contents", height: "500px" }}
+                            >
+                              <div
+                                id="modal-contents"
+                                style={{ height: "500px", display: "inherit" }}
+                              >
+                                <label htmlFor>{t("accountNumber")}</label>
+                                <input type="text" name id />
+                                <label htmlFor>{t("amount")}</label>
+                                <input type="text" name id />
+                              </div>
+                            </div>
+                            <div
+                              className="modal-footer"
+                              style={{
+                                display: "flex",
+                                "-webkit-align-items": "center",
+                                "-webkit-box-align": "center",
+                                "-ms-flex-align": "center",
+                                "align-items": "center",
+                                "-webkit-box-pack": "center",
+                                "-webkit-justify-content": "center",
+                                "-ms-flex-pack": "center",
+                                "justify-content": "center",
+                              }}
+                            >
+                              <button
+                                id="accept-withdraw"
+                                type="button"
+                                className="btn btn-primary"
+                                data-bs-dismiss="modal"
+                                style={{ color: "aquamarine" }}
+                                onClick={() => {
+                                  setWithdrawlModal(false);
+                                  setWithdrawlSuccessModal(true);
+                                }}
+                              >
+                                {t("confirm")}
+                              </button>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  )}
+                    )}
+                    {withdrawlSuccessModal && (
+                      <div
+                        className="modal fade show"
+                        id="wd-successModal"
+                        style={{
+                          display: "flex",
+                        }}
+                      >
+                        <div className="modal-dialog">
+                          <div className="modal-content">
+                            <div className="modal-header">
+                              <h4 className="modal-title">{t("success")}</h4>
+                              <button
+                                type="button"
+                                className="btn-close"
+                                data-bs-dismiss="modal"
+                                onClick={() => setWithdrawlSuccessModal(false)}
+                              />
+                            </div>
+                            <div className="modal-body">
+                              {t("requestSuccess")} <br />
+                              {t("furtherInstructions")}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </div>
+              )}
               <div id="account-mobile-buttons" className="hidden">
                 <button>{t("personalInfo")}</button>
                 <button>{t("transactions")}</button>
@@ -2856,7 +3051,6 @@ export default function HomeRu() {
                 <dd>{t("ANS1")}</dd>
                 <dt>{t("Q2")}</dt>
                 <dd>{t("ANS2")}</dd>
-                {/* Add more general questions and answers here */}
               </dl>
               <h2>{t("accountManagement")}</h2>
               <dl>
@@ -2864,7 +3058,6 @@ export default function HomeRu() {
                 <dd>{t("ANS3")}</dd>
                 <dt>{t("Q4")}</dt>
                 <dd>{t("ANS4")}</dd>
-                {/* Add more account management questions and answers here */}
               </dl>
               <h2>{t("tradingInvestment")}</h2>
               <dl>
@@ -2872,7 +3065,6 @@ export default function HomeRu() {
                 <dd>{t("ANS5")}</dd>
                 <dt>{t("Q6")}</dt>
                 <dd>{t("ANS6")}</dd>
-                {/* Add more trading and investment questions and answers here */}
               </dl>
             </div>
           )}
