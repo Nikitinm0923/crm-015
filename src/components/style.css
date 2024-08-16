@@ -587,6 +587,7 @@ button {
 
 #personal-info {
   align-items: center;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
