@@ -2640,130 +2640,160 @@ export default function HomeRu() {
                 </div>
               )}
               {accTab === "personal-info" && (
-                <div id="account-info">
-                  <h3
-                    style={{
-                      "margin-top": "40px",
-                      "margin-bottom": "20px",
-                      width: "80%",
-                      "font-size": "25px",
-                    }}
-                  >
-                    {t("personalInfo")}
-                  </h3>
+                <div id="personal-info">
+                  <div className="personal-info-options">
+                    <ButtonGroup className="btn-group">
+                      <Button
+                        onClick={() => {}}
+                        style={{
+                          backgroundColor:
+                            dealType === "Buy"
+                              ? "var(--main-primary-button)"
+                              : "var(--main-secondary-color)",
+                        }}
+                        variant=""
+                      >
+                        Personal Information
+                      </Button>
+                      <Button
+                        onClick={() => {}}
+                        style={{
+                          backgroundColor:
+                            dealType === "Sell"
+                              ? "var(--main-primary-button)"
+                              : "var(--main-secondary-color)",
+                        }}
+                        variant=""
+                      >
+                        Verification
+                      </Button>
+                      <Button
+                        onClick={() => {}}
+                        style={{
+                          backgroundColor:
+                            dealType === "Sell"
+                              ? "var(--main-primary-button)"
+                              : "var(--main-secondary-color)",
+                        }}
+                        variant=""
+                      >
+                        Change password
+                      </Button>
+                    </ButtonGroup>
+                  </div>
                   <div id="acc-info-personal">
                     <div className="acc-info-personal-item">
                       <h6>{t("name")}</h6>
                       <input
-                        type="text"
                         name="name"
-                        value={userProfile?.name}
                         onChange={(e) => handleChange(e)}
                         readOnly={!isEditable}
+                        type="text"
+                        value={userProfile?.name}
                       />
                     </div>
                     <div className="acc-info-personal-item">
                       <h6>{t("surname")}</h6>
                       <input
-                        type="text"
                         name="surname"
-                        value={userProfile?.surname}
-                        placeholder="Surname"
                         onChange={(e) => handleChange(e)}
+                        placeholder="Surname"
                         readOnly={!isEditable}
+                        type="text"
+                        value={userProfile?.surname}
                       />
                     </div>
                     <div className="acc-info-personal-item">
                       <h6>{t("email")}</h6>
                       <input
-                        type="text"
-                        name="email"
                         id="userEmail"
-                        value={userProfile?.email}
+                        name="email"
                         placeholder=""
                         readOnly
+                        type="text"
+                        value={userProfile?.email}
                       />
                     </div>
                     <div className="acc-info-personal-item">
                       <h6>{t("phone")}</h6>
                       <input
-                        type="number"
                         name="phone"
-                        value={userProfile?.phone}
-                        placeholder="+7777038475"
                         onChange={(e) => handleChange(e)}
+                        placeholder="+7777038475"
                         readOnly={!isEditable}
+                        type="number"
+                        value={userProfile?.phone}
                       />
                     </div>
                     <div className="acc-info-personal-item">
                       <h6>{t("Password")}</h6>
-                      <div className="position-relative">
+                      <div
+                        className="position-relative"
+                        style={{ backgroundColor: "inherit" }}
+                      >
                         <input
-                          type={passwordShown ? "text" : "password"}
                           name="password"
-                          value={userProfile?.password}
-                          placeholder="Password"
                           onChange={(e) => handleChange(e)}
+                          placeholder="Password"
                           readOnly={!isEditable}
+                          type={passwordShown ? "text" : "password"}
+                          value={userProfile?.password}
                         />
                         <FontAwesomeIcon
-                          cursor="pointer"
                           className="position-absolute ms-1"
-                          style={{ top: 4 }}
+                          cursor="pointer"
                           icon={passwordShown ? faEyeSlash : faEye}
                           onClick={() => setPasswordShown(!passwordShown)}
+                          style={{ backgroundColor: "inherit", top: 10 }}
                         />
                       </div>
                     </div>
                     <div className="acc-info-personal-item">
                       <h6>{t("country")}</h6>
                       <input
+                        name="country"
+                        onChange={(e) => handleChange(e)}
+                        placeholder="Country"
+                        readOnly={!isEditable}
                         type="text"
                         value={userProfile?.country}
-                        name="country"
-                        placeholder="Country"
-                        onChange={(e) => handleChange(e)}
-                        readOnly={!isEditable}
                       />
                     </div>
                     <div className="acc-info-personal-item">
                       <h6>{t("city")}</h6>
                       <input
+                        name="city"
+                        onChange={(e) => handleChange(e)}
+                        placeholder="City"
+                        readOnly={!isEditable}
                         type="text"
                         value={userProfile?.city}
-                        name="city"
-                        placeholder="City"
-                        onChange={(e) => handleChange(e)}
-                        readOnly={!isEditable}
                       />
                     </div>
                     <div className="acc-info-personal-item">
                       <h6>{t("dateRegister")}</h6>
                       <input
+                        name="dateRegister"
+                        placeholder=""
+                        readOnly={true}
                         type="text"
                         value={moment(
                           userProfile?.createdAt?.seconds * 1000
                         )?.format("DD/MM/YYYY")}
-                        name="dateRegister"
-                        placeholder=""
-                        // onChange={e=> handleChange(e)}
-                        readOnly={true}
                       />
                     </div>
                     <div className="acc-info-personal-item">
                       <h6>{t("comment")}:</h6>
                       <input
+                        id="comment"
+                        name="comment"
+                        onChange={(e) => handleChange(e)}
+                        placeholder="Comment"
+                        readOnly={!isEditable}
                         type="text"
                         value={userProfile?.comment}
-                        name="comment"
-                        id="comment"
-                        placeholder="Comment"
-                        onChange={(e) => handleChange(e)}
-                        readOnly={!isEditable}
                       />
                     </div>
-                  </div>
-                  <div id="acc-info-buttons">
                     <button
                       id="acc-save-button"
                       onClick={() =>
