@@ -532,15 +532,44 @@ button {
   width: 50%;
 }
 
-#acc-info-personal {
+#acc-info-personal,
+#acc-change-pass {
   background-color: var(--main-secondary-color);
   border-radius: 5px;
   padding: 32px;
   width: 50%;
 }
 
+#acc-change-pass h2 {
+  background-color: inherit;
+  margin: 0;
+  text-align: center;
+}
+
+.acc-change-pass-btn {
+  align-items: center;
+  background-color: inherit;
+  display: flex;
+  justify-content: flex-end;
+  margin: 24px 0;
+}
+
+.acc-change-pass-btn button {
+  border-radius: 5px;
+  border: none;
+  font-weight: 600;
+  margin: 0 12px;
+  padding: 8px 0;
+  width: 25%;
+}
+
+.acc-change-pass-btn button:hover {
+  opacity: 0.8;
+}
+
 .acc-profile-main-item,
-.acc-info-personal-item {
+.acc-info-personal-item,
+.acc-change-pass-item {
   align-items: center;
   color: var(--main-text-color);
   display: flex;
@@ -551,18 +580,21 @@ button {
   padding: 0 12px;
 }
 
-.acc-info-personal-item {
+.acc-info-personal-item,
+.acc-change-pass-item {
   background-color: inherit;
 }
 
-.acc-info-personal-item input {
+.acc-info-personal-item input,
+.acc-change-pass-item input {
   background-color: var(--main-background-color);
   color: var(--main-text-color);
   height: 28px;
   width: 256px;
 }
 
-.acc-info-personal-item h6 {
+.acc-info-personal-item h6,
+.acc-change-pass-item h6 {
   background-color: inherit;
   font-weight: 700;
   margin: 0;
@@ -618,6 +650,60 @@ button {
 
 #acc-save-button:hover {
   opacity: 0.8;
+}
+
+#verification-docs {
+  background-color: var(--main-secondary-color) !important;
+  border-radius: 5px;
+  padding: 32px 64px;
+  width: 50%;
+}
+
+#verification-docs h3 {
+  background-color: inherit;
+  font-weight: 600;
+  margin: 0 0 32px 0;
+  text-align: center;
+}
+
+#verification-docs h6 {
+  background-color: inherit;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+  text-align: center;
+}
+
+#verification-docs p {
+  background-color: inherit;
+  font-weight: 500;
+  opacity: 0.8;
+  text-align: center;
+}
+
+#verification-docs form div {
+  background-color: var(--main-secondary-color);
+  display: flex;
+  flex-direction: column;
+}
+
+#verification-docs form div label {
+  background-color: inherit;
+}
+
+#verification-docs form div input {
+  background-color: var(--main-background-color);
+  height: 32px;
+  margin: 0 0 12px 0;
+  padding: 5px;
+}
+
+#verification-docs form button {
+  background-color: var(--main-primary-button);
+  border: none;
+  padding: 8px 0;
+  width: 100%;
+  font-weight: 600;
+  border-radius: 5px;
 }
 
 #account-transactions {

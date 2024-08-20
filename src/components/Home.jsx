@@ -121,6 +121,7 @@ export default function HomeRu() {
   const [dealsRow, setDealsRow] = useState(5);
 
   const [accTab, setAccTab] = useState("");
+  const [personalInfoTab, setPersonalInfoTab] = useState("personal-info");
   const [dealType, setDealType] = useState("Buy");
   const [showAccountInfo, setShowAccountInfo] = useState(false);
 
@@ -1601,8 +1602,7 @@ export default function HomeRu() {
             <div
               className="side-btn-acc"
               onClick={() => {
-                setTab("account");
-                setAccTab("report");
+                setIsReportModalOpen(true);
               }}
               style={{
                 backgroundColor:
@@ -2545,98 +2545,6 @@ export default function HomeRu() {
                   >
                     Create New Account
                   </button>
-                  {/* <div id="verif-buttons">
-                    <button
-                      id="documents-button"
-                      onClick={() => setUploadModal(true)}
-                    >
-                      {t("verification")}
-                    </button>
-                  </div>
-                  {uploadModal && (
-                    <div
-                      className="modal fade show"
-                      id="verification-docs"
-                      style={{
-                        display: "flex",
-                      }}
-                    >
-                      <div
-                        className="modal-dialog modal-lg"
-                        style={{ display: "flex" }}
-                      >
-                        <div
-                          className="modal-content"
-                          style={{ "border-radius": "0px", height: "50vh" }}
-                        >
-                          <div className="modal-header">
-                            <h4 className="modal-title">{t("uploadDocs")}</h4>
-                            <button
-                              type="button"
-                              className="btn-close"
-                              data-bs-dismiss="modal"
-                              onClick={() => setUploadModal(false)}
-                            />
-                          </div>
-                          <div className="modal-body">
-                            <form encType="multipart/form-data">
-                              <div className="mb-3">
-                                <label
-                                  htmlFor="verificationFile"
-                                  className="form-label"
-                                >
-                                  {t("chooseFile")}
-                                </label>
-                                <input
-                                  type="file"
-                                  className="form-control"
-                                  id="verificationFile"
-                                  name="verificationFile"
-                                  accept=".pdf, .doc, .docx"
-                                  style={{ height: "100%" }}
-                                />
-                              </div>
-                              <button
-                                type="submit"
-                                className="btn btn-primary"
-                                id="uploadButton"
-                                style={{ color: "rgb(0, 255, 110)" }}
-                              >
-                                {t("upload")}
-                              </button>
-                            </form>
-                          </div>
-                          <div className="modal-footer">
-                            <button
-                              type="button"
-                              className="btn btn-danger"
-                              data-bs-dismiss="modal"
-                              onClick={() => setUploadModal(false)}
-                            >
-                              {t("close")}
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                  {successModal && (
-                    <div className="modal" id="successModal">
-                      <div className="modal-dialog">
-                        <div className="modal-content">
-                          <div className="modal-header">
-                            <h4 className="modal-title">{t("success")}</h4>
-                            <button
-                              type="button"
-                              className="btn-close"
-                              data-bs-dismiss="modal"
-                            />
-                          </div>
-                          <div className="modal-body">{t("thankyou")}</div>
-                        </div>
-                      </div>
-                    </div>
-                  )} */}
                 </div>
               )}
               {accTab === "personal-info" && (
@@ -2644,10 +2552,12 @@ export default function HomeRu() {
                   <div className="personal-info-options">
                     <ButtonGroup className="btn-group">
                       <Button
-                        onClick={() => {}}
+                        onClick={() => {
+                          setPersonalInfoTab("personal-info");
+                        }}
                         style={{
                           backgroundColor:
-                            dealType === "Buy"
+                            personalInfoTab === "personal-info"
                               ? "var(--main-primary-button)"
                               : "var(--main-secondary-color)",
                         }}
@@ -2656,10 +2566,12 @@ export default function HomeRu() {
                         Personal Information
                       </Button>
                       <Button
-                        onClick={() => {}}
+                        onClick={() => {
+                          setPersonalInfoTab("verification");
+                        }}
                         style={{
                           backgroundColor:
-                            dealType === "Sell"
+                            personalInfoTab === "verification"
                               ? "var(--main-primary-button)"
                               : "var(--main-secondary-color)",
                         }}
@@ -2668,10 +2580,12 @@ export default function HomeRu() {
                         Verification
                       </Button>
                       <Button
-                        onClick={() => {}}
+                        onClick={() => {
+                          setPersonalInfoTab("change-pass");
+                        }}
                         style={{
                           backgroundColor:
-                            dealType === "Sell"
+                            personalInfoTab === "change-pass"
                               ? "var(--main-primary-button)"
                               : "var(--main-secondary-color)",
                         }}
@@ -2681,160 +2595,244 @@ export default function HomeRu() {
                       </Button>
                     </ButtonGroup>
                   </div>
-                  <div id="acc-info-personal">
-                    <div className="acc-info-personal-item">
-                      <h6>{t("name")}</h6>
-                      <input
-                        name="name"
-                        onChange={(e) => handleChange(e)}
-                        readOnly={!isEditable}
-                        type="text"
-                        value={userProfile?.name}
-                      />
-                    </div>
-                    <div className="acc-info-personal-item">
-                      <h6>{t("surname")}</h6>
-                      <input
-                        name="surname"
-                        onChange={(e) => handleChange(e)}
-                        placeholder="Surname"
-                        readOnly={!isEditable}
-                        type="text"
-                        value={userProfile?.surname}
-                      />
-                    </div>
-                    <div className="acc-info-personal-item">
-                      <h6>{t("email")}</h6>
-                      <input
-                        id="userEmail"
-                        name="email"
-                        placeholder=""
-                        readOnly
-                        type="text"
-                        value={userProfile?.email}
-                      />
-                    </div>
-                    <div className="acc-info-personal-item">
-                      <h6>{t("phone")}</h6>
-                      <input
-                        name="phone"
-                        onChange={(e) => handleChange(e)}
-                        placeholder="+7777038475"
-                        readOnly={!isEditable}
-                        type="number"
-                        value={userProfile?.phone}
-                      />
-                    </div>
-                    <div className="acc-info-personal-item">
-                      <h6>{t("Password")}</h6>
-                      <div
-                        className="position-relative"
-                        style={{ backgroundColor: "inherit" }}
-                      >
+                  {personalInfoTab === "personal-info" && (
+                    <div id="acc-info-personal">
+                      <div className="acc-info-personal-item">
+                        <h6>{t("name")}</h6>
                         <input
-                          name="password"
+                          name="name"
                           onChange={(e) => handleChange(e)}
-                          placeholder="Password"
                           readOnly={!isEditable}
-                          type={passwordShown ? "text" : "password"}
-                          value={userProfile?.password}
-                        />
-                        <FontAwesomeIcon
-                          className="position-absolute ms-1"
-                          cursor="pointer"
-                          icon={passwordShown ? faEyeSlash : faEye}
-                          onClick={() => setPasswordShown(!passwordShown)}
-                          style={{ backgroundColor: "inherit", top: 10 }}
+                          type="text"
+                          value={userProfile?.name}
                         />
                       </div>
+                      <div className="acc-info-personal-item">
+                        <h6>{t("surname")}</h6>
+                        <input
+                          name="surname"
+                          onChange={(e) => handleChange(e)}
+                          placeholder="Surname"
+                          readOnly={!isEditable}
+                          type="text"
+                          value={userProfile?.surname}
+                        />
+                      </div>
+                      <div className="acc-info-personal-item">
+                        <h6>{t("email")}</h6>
+                        <input
+                          id="userEmail"
+                          name="email"
+                          placeholder=""
+                          readOnly
+                          type="text"
+                          value={userProfile?.email}
+                        />
+                      </div>
+                      <div className="acc-info-personal-item">
+                        <h6>{t("phone")}</h6>
+                        <input
+                          name="phone"
+                          onChange={(e) => handleChange(e)}
+                          placeholder="+7777038475"
+                          readOnly={!isEditable}
+                          type="number"
+                          value={userProfile?.phone}
+                        />
+                      </div>
+                      <div className="acc-info-personal-item">
+                        <h6>{t("Password")}</h6>
+                        <div
+                          className="position-relative"
+                          style={{ backgroundColor: "inherit" }}
+                        >
+                          <input
+                            name="password"
+                            onChange={(e) => handleChange(e)}
+                            placeholder="Password"
+                            readOnly={!isEditable}
+                            type={passwordShown ? "text" : "password"}
+                            value={userProfile?.password}
+                          />
+                          <FontAwesomeIcon
+                            className="position-absolute ms-1"
+                            cursor="pointer"
+                            icon={passwordShown ? faEyeSlash : faEye}
+                            onClick={() => setPasswordShown(!passwordShown)}
+                            style={{ backgroundColor: "inherit", top: 10 }}
+                          />
+                        </div>
+                      </div>
+                      <div className="acc-info-personal-item">
+                        <h6>{t("country")}</h6>
+                        <input
+                          name="country"
+                          onChange={(e) => handleChange(e)}
+                          placeholder="Country"
+                          readOnly={!isEditable}
+                          type="text"
+                          value={userProfile?.country}
+                        />
+                      </div>
+                      <div className="acc-info-personal-item">
+                        <h6>{t("city")}</h6>
+                        <input
+                          name="city"
+                          onChange={(e) => handleChange(e)}
+                          placeholder="City"
+                          readOnly={!isEditable}
+                          type="text"
+                          value={userProfile?.city}
+                        />
+                      </div>
+                      <div className="acc-info-personal-item">
+                        <h6>{t("dateRegister")}</h6>
+                        <input
+                          name="dateRegister"
+                          placeholder=""
+                          readOnly={true}
+                          type="text"
+                          value={moment(
+                            userProfile?.createdAt?.seconds * 1000
+                          )?.format("DD/MM/YYYY")}
+                        />
+                      </div>
+                      <div className="acc-info-personal-item">
+                        <h6>{t("comment")}:</h6>
+                        <input
+                          id="comment"
+                          name="comment"
+                          onChange={(e) => handleChange(e)}
+                          placeholder="Comment"
+                          readOnly={!isEditable}
+                          type="text"
+                          value={userProfile?.comment}
+                        />
+                      </div>
+                      <button
+                        id="acc-save-button"
+                        onClick={() =>
+                          isEditable ? handleSaveClick() : setIsEditable(true)
+                        }
+                      >
+                        {isEditable ? "Save" : "Edit"}
+                      </button>
                     </div>
-                    <div className="acc-info-personal-item">
-                      <h6>{t("country")}</h6>
-                      <input
-                        name="country"
-                        onChange={(e) => handleChange(e)}
-                        placeholder="Country"
-                        readOnly={!isEditable}
-                        type="text"
-                        value={userProfile?.country}
-                      />
+                  )}
+                  {personalInfoTab === "verification" && (
+                    <div id="verification-docs">
+                      <h3>Upload Your Documents for Verification</h3>
+                      <h6>Choose file</h6>
+                      <p>File size should be less than 10 mb</p>
+                      <form encType="multipart/form-data">
+                        <div>
+                          <label htmlFor="idFront">
+                            Front side/first page of ID card/passport/IDcard
+                          </label>
+                          <input
+                            accept=".pdf, .doc, .docx"
+                            id="idFront"
+                            name="idFront"
+                            type="file"
+                          />
+                        </div>
+                        <div>
+                          <label tmlFor="idBack">
+                            Backside of IDcard/registration page/passport
+                          </label>
+                          <input
+                            accept=".pdf, .doc, .docx"
+                            id="idBack"
+                            name="idBack"
+                            type="file"
+                          />
+                        </div>
+                        <div>
+                          <label htmlFor="resAddress">
+                            Confirmation of residential address
+                          </label>
+                          <input
+                            accept=".pdf, .doc, .docx"
+                            id="resAddress"
+                            name="resAddress"
+                            type="file"
+                          />
+                        </div>
+                        <div>
+                          <label htmlFor="creditCardFront">
+                            Credit card front
+                          </label>
+                          <input
+                            accept=".pdf, .doc, .docx"
+                            id="creditCardFront"
+                            name="creditCardFront"
+                            type="file"
+                          />
+                        </div>
+                        <div>
+                          <label htmlFor="creditCardBack">
+                            Credit card back
+                          </label>
+                          <input
+                            accept=".pdf, .doc, .docx"
+                            id="creditCardBack"
+                            name="creditCardBack"
+                            type="file"
+                          />
+                        </div>
+                        <button type="submit">Submit</button>
+                      </form>
                     </div>
-                    <div className="acc-info-personal-item">
-                      <h6>{t("city")}</h6>
-                      <input
-                        name="city"
-                        onChange={(e) => handleChange(e)}
-                        placeholder="City"
-                        readOnly={!isEditable}
-                        type="text"
-                        value={userProfile?.city}
-                      />
+                  )}
+                  {personalInfoTab === "change-pass" && (
+                    <div id="acc-change-pass">
+                      <h2>Change Password</h2>
+                      <div className="acc-change-pass-item">
+                        <h6>New Password:</h6>
+                        <input
+                          id="pass"
+                          name="pass"
+                          onChange={(e) => {}}
+                          type="password"
+                          value=""
+                        />
+                      </div>
+                      <div className="acc-change-pass-item">
+                        <h6>Confirm Password:</h6>
+                        <input
+                          id="confirm-pass"
+                          name="confirm-pass"
+                          onChange={(e) => {}}
+                          type="password"
+                          value=""
+                        />
+                      </div>
+                      <div className="acc-change-pass-btn">
+                        <button
+                          style={{
+                            backgroundColor: "var(--main-primary-button)",
+                          }}
+                          onClick={() => {}}
+                        >
+                          Submit
+                        </button>
+                        <button onClick={() => {}}>Cancel</button>
+                      </div>
                     </div>
-                    <div className="acc-info-personal-item">
-                      <h6>{t("dateRegister")}</h6>
-                      <input
-                        name="dateRegister"
-                        placeholder=""
-                        readOnly={true}
-                        type="text"
-                        value={moment(
-                          userProfile?.createdAt?.seconds * 1000
-                        )?.format("DD/MM/YYYY")}
-                      />
-                    </div>
-                    <div className="acc-info-personal-item">
-                      <h6>{t("comment")}:</h6>
-                      <input
-                        id="comment"
-                        name="comment"
-                        onChange={(e) => handleChange(e)}
-                        placeholder="Comment"
-                        readOnly={!isEditable}
-                        type="text"
-                        value={userProfile?.comment}
-                      />
-                    </div>
-                    <button
-                      id="acc-save-button"
-                      onClick={() =>
-                        isEditable ? handleSaveClick() : setIsEditable(true)
-                      }
-                    >
-                      {isEditable ? "Save" : "Edit"}
-                    </button>
-                  </div>
+                  )}
                 </div>
               )}
               {accTab === "deposit" && (
                 <div id="account-transactions">
-                  <h3
-                    style={{
-                      "border-bottom": "1px solid var(--main-bgc)",
-                      "font-size": "25px",
-                      "padding-bottom": "25px",
-                      "padding-top": "0",
-                      "margin-top": "40px",
-                      "margin-bottom": "30px",
-                      width: "80%",
-                    }}
-                  >
-                    {t("transactions")}
-                  </h3>
                   <div className="transactions-table">
                     <DataTable
                       columns={depositsColumns}
+                      customStyles={{ table: { style: { minHeight: "50vh" } } }}
                       data={fillArrayWithEmptyRows(accountDeposits, 5)}
-                      customStyles={{
-                        table: {
-                          style: {
-                            minHeight: "50vh",
-                          },
-                        },
-                      }}
-                      pagination
-                      theme={theme}
-                      paginationRowsPerPageOptions={[5, 10, 15, 20, 50]}
                       dense
+                      pagination
+                      paginationRowsPerPageOptions={[5, 10, 15, 20, 50]}
+                      theme={theme}
                     />
                   </div>
                   <div id="transaction-request">
@@ -2857,7 +2855,6 @@ export default function HomeRu() {
                           style={{ "margin-top": "10%" }}
                         >
                           <div className="modal-content">
-                            {/* Modal Header */}
                             <div className="modal-header">
                               <h4 className="modal-title">{t("deposit")}</h4>
                               <button
@@ -3066,10 +3063,6 @@ export default function HomeRu() {
                   </div>
                 </div>
               )}
-              <div id="account-mobile-buttons" className="hidden">
-                <button>{t("personalInfo")}</button>
-                <button>{t("transactions")}</button>
-              </div>
             </div>
           )}
           {tab === "help" && (
