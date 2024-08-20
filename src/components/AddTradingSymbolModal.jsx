@@ -1,26 +1,14 @@
-import React, { useEffect, useState } from "react";
+import { addQuotesToUser } from "../helper/firebaseHelpers";
 import { Modal } from "react-bootstrap";
 import { toast } from "react-toastify";
-import { addQuotesToUser } from "../helper/firebaseHelpers";
 import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
 
 let groups = [
-  {
-    key: "Crypto",
-    value: "crypto",
-  },
-  {
-    key: "Currencies",
-    value: "currencies",
-  },
-  {
-    key: "Stocks",
-    value: "stocks",
-  },
-  {
-    key: "Commodities",
-    value: "commodities",
-  },
+  { key: "Commodities", value: "commodities" },
+  { key: "Crypto", value: "crypto" },
+  { key: "Currencies", value: "currencies" },
+  { key: "Stocks", value: "stocks" },
 ];
 
 const AddTradingSymbol = ({
@@ -30,10 +18,10 @@ const AddTradingSymbol = ({
   userQuotes,
   userId,
 }) => {
-  const assetGroups = useSelector((state) => state.assetGroups);
   const [formData, setFormData] = useState({ symbol: "" });
   const [group, setGroup] = useState("crypto");
   const { symbol } = formData;
+  const assetGroups = useSelector((state) => state.assetGroups);
 
   useEffect(() => {
     setFormData({
@@ -82,15 +70,32 @@ const AddTradingSymbol = ({
 
   return (
     <div>
-      <Modal show={show} onHide={handleCloseModal}>
-        <Modal.Header closeButton={handleCloseModal}>Add Symbol</Modal.Header>
-        <Modal.Body>
-          <form className="form" onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label className="form-label">Group</label>
+      <Modal
+        centered
+        className="asset-modal"
+        onHide={handleCloseModal}
+        show={show}
+      >
+        <Modal.Header
+          closeButton={handleCloseModal}
+          style={{
+            backgroundColor: "var(--main-secondary-color)",
+          }}
+        >
+          Add Symbol
+        </Modal.Header>
+        <Modal.Body
+          style={{
+            backgroundColor: "var(--main-secondary-color)",
+            borderRadius: "5px",
+          }}
+        >
+          <form style={{ backgroundColor: "inherit" }} onSubmit={handleSubmit}>
+            <div className="form-item">
+              <label htmlFor="group">Group:</label>
               <select
+                id="group"
                 name="group"
-                className="form-control"
                 onChange={(e) => setGroup(e.target.value)}
               >
                 {groups?.map((el, idx) => (
@@ -100,15 +105,11 @@ const AddTradingSymbol = ({
                 ))}
               </select>
             </div>
-            <div className="form-group">
-              <label className="form-label">Select symbol</label>
-              <select
-                name="symbol"
-                className="form-control"
-                onChange={handleChange}
-              >
+            <div className="form-item">
+              <label htmlFor="symbol">Select Symbol:</label>
+              <select id="symbol" name="symbol" onChange={handleChange}>
                 <option value="" disabled>
-                  Select symbol
+                  Select Symbol
                 </option>
                 {filteredSymbols?.map((el, idx) => (
                   <option key={idx} value={el?.id}>
@@ -117,10 +118,14 @@ const AddTradingSymbol = ({
                 ))}
               </select>
             </div>
-            <div className="form-group mt-3">
-              <button type="submit" className="btn btn-success">
+            <div className="asset-btn-group">
+              <button
+                style={{ backgroundColor: "var(--main-primary-button)" }}
+                type="submit"
+              >
                 Submit
               </button>
+              <button onClick={handleCloseModal}>Cancel</button>
             </div>
           </form>
         </Modal.Body>
