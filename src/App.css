@@ -19,15 +19,6 @@
   max-height: 45vh !important;
 }
 
-.transactions-table nav,
-.transactions-table nav * {
-  background-color: var(--main-bgc);
-}
-
-.transactions-table > div > div > div {
-  background-color: unset;
-}
-
 .highcharts-background {
   fill: var(--bs-body-bg);
 }

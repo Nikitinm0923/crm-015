@@ -121,9 +121,10 @@ export default function HomeRu() {
   const [dealsRow, setDealsRow] = useState(5);
 
   const [accTab, setAccTab] = useState("");
-  const [personalInfoTab, setPersonalInfoTab] = useState("personal-info");
   const [dealType, setDealType] = useState("Buy");
+  const [personalInfoTab, setPersonalInfoTab] = useState("personal-info");
   const [showAccountInfo, setShowAccountInfo] = useState(false);
+  const [transType, setTransType] = useState("Deposit");
 
   const [userProfile, setUserProfile] = useState({
     name: "",
@@ -2824,11 +2825,67 @@ export default function HomeRu() {
               )}
               {accTab === "deposit" && (
                 <div id="account-transactions">
+                  <div className="transactions-btn">
+                    <ButtonGroup className="btn-group">
+                      <Button
+                        onClick={() => {
+                          setTransType("Deposit");
+                        }}
+                        style={{
+                          backgroundColor:
+                            transType === "Deposit"
+                              ? "var(--main-primary-button)"
+                              : "var(--main-secondary-color)",
+                        }}
+                        variant=""
+                      >
+                        Deposit
+                      </Button>
+                      <Button
+                        onClick={() => {
+                          setTransType("Withdrawal");
+                        }}
+                        style={{
+                          backgroundColor:
+                            transType === "Withdrawal"
+                              ? "var(--main-primary-button)"
+                              : "var(--main-secondary-color)",
+                        }}
+                        variant=""
+                      >
+                        Withdrawal
+                      </Button>
+                    </ButtonGroup>
+                  </div>
                   <div className="transactions-table">
                     <DataTable
                       columns={depositsColumns}
-                      customStyles={{ table: { style: { minHeight: "50vh" } } }}
-                      data={fillArrayWithEmptyRows(accountDeposits, 5)}
+                      customStyles={{
+                        cells: {
+                          style: {
+                            backgroundColor: "var(--main-secondary-color)",
+                          },
+                        },
+                        headCells: {
+                          style: {
+                            backgroundColor: "var(--main-secondary-color)",
+                          },
+                        },
+                        rows: {
+                          style: {
+                            backgroundColor:
+                              "var(--main-secondary-color) !important",
+                          },
+                        },
+                        table: {
+                          style: {
+                            backgroundColor:
+                              "var(--main-secondary-color) !important",
+                            minHeight: "50vh",
+                          },
+                        },
+                      }}
+                      data={fillArrayWithEmptyRows(accountDeposits, 10)}
                       dense
                       pagination
                       paginationRowsPerPageOptions={[5, 10, 15, 20, 50]}
@@ -2836,12 +2893,15 @@ export default function HomeRu() {
                     />
                   </div>
                   <div id="transaction-request">
-                    <button
-                      id="deposit-button"
-                      onClick={() => setDepositModal(true)}
-                    >
-                      {t("deposit")}
-                    </button>
+                    {transType === "Deposit" ? (
+                      <button onClick={() => setDepositModal(true)}>
+                        Deposit Funds
+                      </button>
+                    ) : (
+                      <button onClick={() => setWithdrawlModal(true)}>
+                        Withdraw Funds
+                      </button>
+                    )}
                     {depositModal && (
                       <div
                         className="modal show fade"
@@ -2955,12 +3015,6 @@ export default function HomeRu() {
                         </div>
                       </div>
                     )}
-                    <button
-                      id="withdraw-request-button"
-                      onClick={() => setWithdrawlModal(true)}
-                    >
-                      {t("withdraw")}
-                    </button>
                     {withdrawlModal && (
                       <div
                         className="modal show fade"
