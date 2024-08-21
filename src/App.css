@@ -1,98 +1,16 @@
-.reportTab {
-  max-height: 10vh;
-}
-
 .greenText {
   color: green;
 }
-
+.innerTradingDiv {
+  max-height: 45vh !important;
+  min-height: 45vh;
+}
 .orangeText {
   color: orange;
 }
-
 .redText {
   color: red;
 }
-
-.innerTradingDiv {
-  min-height: 45vh;
-  max-height: 45vh !important;
-}
-
-.highcharts-background {
-  fill: var(--bs-body-bg);
-}
-
-.highcharts-bindings-wrapper {
-  width: 60px !important;
-}
-
-.highcharts-toggle-toolbar.highcharts-arrow-left {
-  left: 50px !important;
-}
-
-.highcharts-menu-wrapper {
-  background-color: var(--main-elc);
-}
-
-.highcharts-bindings-wrapper .highcharts-stocktools-toolbar li {
-  background-color: var(--main-elc) !important;
-}
-
-.highcharts-bindings-wrapper li > button.highcharts-menu-item-btn {
-  filter: invert(1);
-}
-
-.light .highcharts-bindings-wrapper li > button.highcharts-menu-item-btn {
-  filter: none;
-}
-
-.highcharts-axis-labels text {
-  fill: white !important;
-}
-
-.light .highcharts-axis-labels text {
-  fill: unset !important;
-}
-
-.highcharts-axis-labels.highcharts-xaxis-labels.highcharts-navigator-xaxis
-  .highcharts-text-outline {
-  stroke-width: 0px;
-}
-
-.highcharts-annotation-shapes path {
-  stroke: rgba(255, 255, 255, 0.75);
-  stroke-width: 1px;
-}
-
-.light .highcharts-annotation-shapes path {
-  stroke: rgba(0, 0, 0, 0.75);
-}
-
-.highcharts-label.highcharts-annotation-label.highcharts-no-tooltip {
-  filter: invert(1);
-}
-
-.light .highcharts-label.highcharts-annotation-label.highcharts-no-tooltip {
-  filter: none;
-}
-
-.highcharts-indicator-list button.highcharts-indicator-list-item {
-  background-color: unset;
-}
-
-.highcharts-grid-line {
-  stroke: rgb(30, 30, 30);
-}
-
-.light .highcharts-grid-line {
-  stroke: rgb(230, 230, 230);
-}
-
-.highcharts-range-selector-buttons {
-  filter: invert(1);
-}
-
-.light .highcharts-range-selector-buttons {
-  filter: none;
+.reportTab {
+  max-height: 10vh;
 }
