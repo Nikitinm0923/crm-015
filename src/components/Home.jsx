@@ -2337,7 +2337,6 @@ export default function HomeRu() {
                   </button>
                 </div>
               </div>
-
               {/* <div
                 style={{
                   alignItems: "center",
@@ -2898,11 +2897,17 @@ export default function HomeRu() {
                   </div>
                   <div id="transaction-request">
                     {transType === "Deposit" ? (
-                      <button onClick={() => setDepositModal(true)}>
+                      <button
+                        className="btn"
+                        onClick={() => setDepositModal(true)}
+                      >
                         Deposit Funds
                       </button>
                     ) : (
-                      <button onClick={() => setWithdrawlModal(true)}>
+                      <button
+                        className="btn"
+                        onClick={() => setWithdrawlModal(true)}
+                      >
                         Withdraw Funds
                       </button>
                     )}
@@ -2911,82 +2916,96 @@ export default function HomeRu() {
                         className="modal show fade"
                         id="deposit-modal"
                         style={{
+                          alignItems: "center",
                           display: "flex",
+                          justifyContent: "center",
                         }}
                       >
-                        <div
-                          className="modal-dialog modal-lg"
-                          style={{ "margin-top": "10%" }}
-                        >
+                        <div className="modal-dialog modal-lg">
                           <div className="modal-content">
-                            <div className="modal-header">
-                              <h4 className="modal-title">{t("deposit")}</h4>
+                            <div
+                              className="modal-header"
+                              style={{ backgroundColor: "inherit" }}
+                            >
+                              <h4
+                                className="modal-title"
+                                style={{ backgroundColor: "inherit" }}
+                              >
+                                Deposit Funds
+                              </h4>
                               <button
-                                type="button"
                                 className="btn-close"
                                 data-bs-dismiss="modal"
                                 onClick={() => {
                                   setDepositModal(false);
                                 }}
+                                type="button"
                               />
                             </div>
                             <div
                               className="modal-body"
-                              style={{ display: "contents", height: "500px" }}
+                              style={{ backgroundColor: "inherit" }}
                             >
                               <div
                                 id="modal-contents"
-                                style={{
-                                  height: "500px",
-                                  display: "inherit",
-                                }}
+                                style={{ backgroundColor: "inherit" }}
                               >
-                                <div
-                                  style={{
-                                    display: "flex",
-                                    justifyContent: "center",
-                                  }}
-                                >
-                                  <Form.Select style={{ width: 200 }}>
-                                    <option>Choose method</option>
+                                <div className="deposit-modal-item">
+                                  <label htmlFor="method">Choose Method:</label>
+                                  <Form.Select
+                                    id="method"
+                                    style={{ height: "32px", width: "60%" }}
+                                  >
+                                    <option disabled>Choose Method</option>
                                     <option value="1">VISA/MasterCard</option>
                                     <option value="2">Crypto</option>
                                     <option value="3">Other</option>
                                   </Form.Select>
                                 </div>
-                                <label>{t("accountNumber")}</label>
-                                <input type="text" className="text-center" />
-                                <label>{t("amount")}</label>
-                                <input type="text" className="text-center" />
+                                <div className="deposit-modal-item">
+                                  <label htmlFor="acc-num">
+                                    Account Number:
+                                  </label>
+                                  <input
+                                    className="text-center"
+                                    id="acc-num"
+                                    type="text"
+                                  />
+                                </div>
+                                <div className="deposit-modal-item">
+                                  <label htmlFor="amount">Amount:</label>
+                                  <input
+                                    className="text-center"
+                                    id="amount"
+                                    type="text"
+                                  />
+                                </div>
+                                <div className="btn-grp">
+                                  <button
+                                    className="btn-i"
+                                    id="accept-deposit"
+                                    onClick={() => {
+                                      setDepositModal(false);
+                                      setDepositSuccessModal(true);
+                                    }}
+                                    style={{
+                                      backgroundColor:
+                                        "var(--main-primary-button)",
+                                    }}
+                                    type="button"
+                                  >
+                                    Deposit
+                                  </button>
+                                  <button
+                                    className="btn-i"
+                                    onClick={() => {
+                                      setDepositModal(false);
+                                    }}
+                                  >
+                                    Cancel
+                                  </button>
+                                </div>
                               </div>
-                            </div>
-                            <div
-                              className="modal-footer"
-                              style={{
-                                display: "flex",
-                                "-webkit-align-items": "center",
-                                "-webkit-box-align": "center",
-                                "-ms-flex-align": "center",
-                                "align-items": "center",
-                                "-webkit-box-pack": "center",
-                                "-webkit-justify-content": "center",
-                                "-ms-flex-pack": "center",
-                                "justify-content": "center",
-                              }}
-                            >
-                              <button
-                                id="accept-deposit"
-                                type="button"
-                                className="btn btn-primary"
-                                data-bs-dismiss="modal"
-                                style={{ color: "aquamarine" }}
-                                onClick={() => {
-                                  setDepositModal(false);
-                                  setDepositSuccessModal(true);
-                                }}
-                              >
-                                {t("confirm")}
-                              </button>
                             </div>
                           </div>
                         </div>
@@ -2996,24 +3015,29 @@ export default function HomeRu() {
                       <div
                         className="modal show fade"
                         id="dep-successModal"
-                        style={{
-                          display: "flex",
-                        }}
+                        style={{ display: "flex" }}
                       >
                         <div className="modal-dialog">
-                          <div className="modal-content">
-                            <div className="modal-header">
-                              <h4 className="modal-title">{t("success")}</h4>
+                          <div
+                            className="modal-content"
+                            style={{ backgroundColor: "inherit" }}
+                          >
+                            <div
+                              className="modal-header"
+                              style={{ backgroundColor: "inherit" }}
+                            >
                               <button
-                                type="button"
                                 className="btn-close"
                                 data-bs-dismiss="modal"
                                 onClick={() => setDepositSuccessModal(false)}
+                                type="button"
                               />
                             </div>
-                            <div className="modal-body">
-                              {t("depositSubmit")} <br />
-                              {t("wait")}
+                            <div
+                              className="modal-body"
+                              style={{ backgroundColor: "inherit" }}
+                            >
+                              <p>Funds Deposited Successfully!</p>
                             </div>
                           </div>
                         </div>
@@ -3022,70 +3046,126 @@ export default function HomeRu() {
                     {withdrawlModal && (
                       <div
                         className="modal show fade"
-                        id="withdraw-modal"
+                        id="deposit-modal"
                         style={{
+                          alignItems: "center",
                           display: "flex",
+                          justifyContent: "center",
                         }}
                       >
-                        <div
-                          className="modal-dialog modal-lg"
-                          style={{ "margin-top": "10%" }}
-                        >
+                        <div className="modal-dialog modal-lg">
                           <div className="modal-content">
-                            <div className="modal-header">
-                              <h4 className="modal-title">
-                                {t("fundsWithdrawal")}
+                            <div
+                              className="modal-header"
+                              style={{ backgroundColor: "inherit" }}
+                            >
+                              <h4
+                                className="modal-title"
+                                style={{ backgroundColor: "inherit" }}
+                              >
+                                Withdraw Funds
                               </h4>
                               <button
-                                type="button"
                                 className="btn-close"
                                 data-bs-dismiss="modal"
                                 onClick={() => {
                                   setWithdrawlModal(false);
                                 }}
+                                type="button"
                               />
                             </div>
                             <div
                               className="modal-body"
-                              style={{ display: "contents", height: "500px" }}
+                              style={{ backgroundColor: "inherit" }}
                             >
                               <div
                                 id="modal-contents"
-                                style={{ height: "500px", display: "inherit" }}
+                                style={{ backgroundColor: "inherit" }}
                               >
-                                <label htmlFor>{t("accountNumber")}</label>
-                                <input type="text" name id />
-                                <label htmlFor>{t("amount")}</label>
-                                <input type="text" name id />
+                                <div className="deposit-modal-item">
+                                  <label htmlFor="acc-num">Account:</label>
+                                  <Form.Select
+                                    id="acc-num"
+                                    style={{ height: "32px", width: "60%" }}
+                                  >
+                                    <option disabled>Select Account</option>
+                                    {accounts
+                                      .filter((acc) => !acc?.isDeleted)
+                                      ?.map((a) => (
+                                        <option value={a.account_no}>
+                                          {a.account_no}
+                                        </option>
+                                      ))}
+                                  </Form.Select>
+                                </div>
+                                <div className="deposit-modal-item">
+                                  <label htmlFor="amount">Amount:</label>
+                                  <input
+                                    className="text-center"
+                                    id="amount"
+                                    type="text"
+                                  />
+                                </div>
+                                <div className="deposit-modal-item">
+                                  <label htmlFor="method">
+                                    Payment Method:
+                                  </label>
+                                  <Form.Select
+                                    id="method"
+                                    style={{ height: "32px", width: "60%" }}
+                                  >
+                                    <option disabled>Choose Method</option>
+                                    <option value="1">VISA/MasterCard</option>
+                                    <option value="2">Crypto</option>
+                                    <option value="3">Other</option>
+                                  </Form.Select>
+                                </div>
+                                <div className="deposit-modal-item">
+                                  <label htmlFor="card-num">
+                                    Card/Wallet number:
+                                  </label>
+                                  <input
+                                    className="text-center"
+                                    id="card-num"
+                                    type="text"
+                                  />
+                                </div>
+                                <div className="deposit-modal-item">
+                                  <label htmlFor="phone-num">
+                                    Phone Number:
+                                  </label>
+                                  <input
+                                    className="text-center"
+                                    id="phone-num"
+                                    type="text"
+                                  />
+                                </div>
+                                <div className="btn-grp">
+                                  <button
+                                    className="btn-i"
+                                    id="accept-deposit"
+                                    onClick={() => {
+                                      setWithdrawlModal(false);
+                                      setWithdrawlSuccessModal(true);
+                                    }}
+                                    style={{
+                                      backgroundColor:
+                                        "var(--main-primary-button)",
+                                    }}
+                                    type="button"
+                                  >
+                                    Submit
+                                  </button>
+                                  <button
+                                    className="btn-i"
+                                    onClick={() => {
+                                      setWithdrawlModal(false);
+                                    }}
+                                  >
+                                    Cancel
+                                  </button>
+                                </div>
                               </div>
-                            </div>
-                            <div
-                              className="modal-footer"
-                              style={{
-                                display: "flex",
-                                "-webkit-align-items": "center",
-                                "-webkit-box-align": "center",
-                                "-ms-flex-align": "center",
-                                "align-items": "center",
-                                "-webkit-box-pack": "center",
-                                "-webkit-justify-content": "center",
-                                "-ms-flex-pack": "center",
-                                "justify-content": "center",
-                              }}
-                            >
-                              <button
-                                id="accept-withdraw"
-                                type="button"
-                                className="btn btn-primary"
-                                data-bs-dismiss="modal"
-                                style={{ color: "aquamarine" }}
-                                onClick={() => {
-                                  setWithdrawlModal(false);
-                                  setWithdrawlSuccessModal(true);
-                                }}
-                              >
-                                {t("confirm")}
-                              </button>
                             </div>
                           </div>
                         </div>
@@ -3093,26 +3173,31 @@ export default function HomeRu() {
                     )}
                     {withdrawlSuccessModal && (
                       <div
-                        className="modal fade show"
-                        id="wd-successModal"
-                        style={{
-                          display: "flex",
-                        }}
+                        className="modal show fade"
+                        id="dep-successModal"
+                        style={{ display: "flex" }}
                       >
                         <div className="modal-dialog">
-                          <div className="modal-content">
-                            <div className="modal-header">
-                              <h4 className="modal-title">{t("success")}</h4>
+                          <div
+                            className="modal-content"
+                            style={{ backgroundColor: "inherit" }}
+                          >
+                            <div
+                              className="modal-header"
+                              style={{ backgroundColor: "inherit" }}
+                            >
                               <button
-                                type="button"
                                 className="btn-close"
                                 data-bs-dismiss="modal"
                                 onClick={() => setWithdrawlSuccessModal(false)}
+                                type="button"
                               />
                             </div>
-                            <div className="modal-body">
-                              {t("requestSuccess")} <br />
-                              {t("furtherInstructions")}
+                            <div
+                              className="modal-body"
+                              style={{ backgroundColor: "inherit" }}
+                            >
+                              <p>Application Submited Successfully!</p>
                             </div>
                           </div>
                         </div>

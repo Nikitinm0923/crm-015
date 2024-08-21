@@ -138,14 +138,6 @@ input[type="number"] {
   text-align: center;
 }
 
-h4 {
-  color: var(--main-text-color);
-}
-
-h6 {
-  color: var(--main-text-color);
-}
-
 .btn-success {
   --bs-btn-bg: var(--success-color);
 }
@@ -749,7 +741,7 @@ button {
   background-color: var(--main-secondary-color);
 }
 
-#transaction-request button {
+#transaction-request .btn {
   background-color: var(--main-text-color);
   border-radius: 5px;
   border: none;
@@ -759,8 +751,79 @@ button {
   width: 256px;
 }
 
-#transaction-request button:hover {
+#transaction-request .btn:hover {
   opacity: 0.8;
+}
+
+#deposit-modal .modal-dialog {
+  border-radius: 5px;
+  border: none;
+  width: 50%;
+  background-color: var(--main-secondary-color);
+}
+
+#deposit-modal .btn-close {
+  margin: 0;
+}
+
+#deposit-modal .deposit-modal-item {
+  align-items: center;
+  background-color: inherit;
+  display: flex;
+  justify-content: space-between;
+  margin: 2% 15%;
+}
+
+#deposit-modal .deposit-modal-item label {
+  background-color: inherit;
+}
+
+#deposit-modal .deposit-modal-item input {
+  border-radius: 5px;
+  border: none;
+  height: 32px;
+  width: 60%;
+}
+
+#deposit-modal .deposit-modal-item input,
+#deposit-modal .deposit-modal-item select {
+  background-color: var(--main-background-color);
+}
+
+#deposit-modal .btn-grp {
+  align-items: center;
+  background-color: inherit;
+  display: flex;
+  justify-content: flex-end;
+  margin: 12px 0;
+}
+
+#deposit-modal .btn-grp .btn-i {
+  border-radius: 5px;
+  border: none;
+  font-weight: 500;
+  margin: 0 2%;
+  padding: 8px 0;
+  width: 20%;
+}
+
+#deposit-modal .btn-grp .btn-i:hover {
+  opacity: 0.8;
+}
+
+#dep-successModal .modal-dialog {
+  background-color: var(--main-secondary-color);
+  border-radius: 5px;
+  border: none;
+  width: 25%;
+}
+
+#dep-successModal .modal-dialog p {
+  background-color: inherit;
+  color: var(--main-primary-button);
+  font-weight: 700;
+  margin: 15% 0;
+  text-align: center;
 }
 
 #trans-his {
@@ -1389,16 +1452,16 @@ thead {
 .btn-close {
   filter: var(--bs-btn-close-white-filter);
 }
-h4 {
-  color: var(--main-numbersc);
-}
+
 .modal {
   background-color: rgba(0, 0, 0, 0.5);
   align-items: center;
 }
+
 .modal-dialog {
   width: 100%;
 }
+
 .iCBOUB svg path,
 .iCBOUB svg circle {
   color: var(--main-numbersc);
@@ -1416,23 +1479,29 @@ h4 {
 .css-qbdosj-Input {
   background-color: transparent !important;
 }
+
 .Toastify__toast-theme--dark {
   background-color: gray !important;
   margin-top: 10px;
 }
+
 .Toastify__toast-container--top-right {
   background-color: transparent !important;
   margin-bottom: 10px;
 }
+
 .Toastify__toast-body {
   background-color: gray !important;
 }
+
 .Toastify__toast-body > div:last-child {
   background-color: gray !important;
 }
+
 .Toastify--animate-icon {
   background-color: gray !important;
 }
+
 .cursor-pointer {
   cursor: pointer !important;
 }
@@ -1454,20 +1523,14 @@ h4 {
   padding-inline: 4px;
   margin-inline-start: 4px;
 }
+
 #timeframe button.selected {
   background-color: var(--highcharts-neutral-color-20);
 }
+
 #timeframe button:hover {
   background-color: var(--highcharts-neutral-color-20);
 }
-
-/* button,
-input,
-optgroup,
-select,
-textarea {
-  font-size: 0.9rem;
-} */
 
 #resize-bar {
   background-color: var(--main-textc);
