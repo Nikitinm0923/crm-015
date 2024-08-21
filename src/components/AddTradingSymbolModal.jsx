@@ -80,6 +80,7 @@ const AddTradingSymbol = ({
           closeButton={handleCloseModal}
           style={{
             backgroundColor: "var(--main-secondary-color)",
+            fontWeight: "600",
           }}
         >
           Add Symbol

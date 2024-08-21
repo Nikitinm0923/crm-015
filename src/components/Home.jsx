@@ -1124,7 +1124,11 @@ export default function HomeRu() {
               </div>
               <svg
                 height="36"
-                style={{ stroke: "var(--separator-line-color)" }}
+                style={{
+                  backgroundColor: "var(--separator-line-color)",
+                  opacity: "0.61",
+                  stroke: "var(--separator-line-color)",
+                }}
                 viewBox="0 0 1 44"
                 width="1"
                 xmlns="http://www.w3.org/2000/svg"
