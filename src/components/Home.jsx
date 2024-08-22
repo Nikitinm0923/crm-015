@@ -2077,7 +2077,12 @@ export default function HomeRu() {
                         <label htmlFor="open-at">Open at</label>
                         <div className="vol-input">
                           <span
-                            onClick={() => {}}
+                            disabled={!enableOpenPrice}
+                            onClick={() => {
+                              setOpenPriceValue(
+                                Math.max(parseInt(openPriceValue) - 1, 0)
+                              );
+                            }}
                             style={{
                               position: "relative",
                               right: "-8px",
@@ -2087,15 +2092,24 @@ export default function HomeRu() {
                             -
                           </span>
                           <input
-                            id="open-at"
-                            name="volume"
-                            onChange={() => {}}
-                            step={0.1}
+                            className={enableOpenPrice ? "" : "disabled"}
+                            disabled={!enableOpenPrice}
+                            id="symbol-current-value"
+                            name="symbolValue"
+                            onChange={(e) => setOpenPriceValue(e.target.value)}
+                            readOnly={!enableOpenPrice}
                             type="number"
-                            value=""
+                            value={
+                              enableOpenPrice
+                                ? openPriceValue
+                                : +orderData?.symbolValue
+                            }
                           />
                           <span
-                            onClick={() => {}}
+                            disabled={!enableOpenPrice}
+                            onClick={() => {
+                              setOpenPriceValue(parseInt(openPriceValue) + 1);
+                            }}
                             style={{
                               position: "relative",
                               right: "8px",
@@ -2110,9 +2124,41 @@ export default function HomeRu() {
                     <label className="margin-label">
                       Margin: <span>{+calculatedSum?.toFixed(2)} USD</span>
                     </label>
-                    <label className="margin-label">
-                      Pip Value: <span>- USD</span>
-                    </label>
+                    <div className="d-flex gap-4 mt-2">
+                      <div className="form-check">
+                        <input
+                          checked={!enableOpenPrice}
+                          className="form-check-input"
+                          id="market"
+                          onClick={(e) => setEnableOpenPrice(false)}
+                          type="radio"
+                        />
+                        <label
+                          className="form-check-label m-0"
+                          htmlFor="market"
+                        >
+                          Market
+                        </label>
+                      </div>
+                      <div className="form-check">
+                        <input
+                          checked={enableOpenPrice}
+                          className="form-check-input"
+                          id="limit"
+                          onClick={(e) => {
+                            if (openPriceValue !== orderData.symbolValue)
+                              setOpenPriceValue(
+                                parseFloat(orderData.symbolValue)
+                              );
+                            setEnableOpenPrice(true);
+                          }}
+                          type="radio"
+                        />
+                        <label className="form-check-label m-0" htmlFor="limit">
+                          Limit
+                        </label>
+                      </div>
+                    </div>
                     <svg
                       height="2"
                       style={{
@@ -2131,44 +2177,6 @@ export default function HomeRu() {
                         y2="1.00003"
                       />
                     </svg>
-                    {/* <label className="mt-1">
-                      Total: {+calculatedSum?.toFixed(2)} USDT
-                    </label> */}
-                    {/* <div className="d-flex gap-3 mt-2">
-                      <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          id="market"
-                          checked={!enableOpenPrice}
-                          onClick={(e) => setEnableOpenPrice(false)}
-                        />
-                        <label
-                          className="form-check-label m-0"
-                          htmlFor="market"
-                        >
-                          Market
-                        </label>
-                      </div>
-                      <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          id="limit"
-                          checked={enableOpenPrice}
-                          onClick={(e) => {
-                            if (openPriceValue !== orderData.symbolValue)
-                              setOpenPriceValue(
-                                parseFloat(orderData.symbolValue)
-                              );
-                            setEnableOpenPrice(true);
-                          }}
-                        />
-                        <label className="form-check-label m-0" htmlFor="limit">
-                          Limit
-                        </label>
-                      </div>
-                    </div> */}
                     <div className="vol-group">
                       <div>
                         <label htmlFor="take-profit">Take Profit</label>

@@ -940,7 +940,7 @@ button {
 
 .vol-input input {
   height: 40px;
-  width: 50px;
+  width: 70px;
 }
 
 .margin-label {
@@ -1772,4 +1772,9 @@ hr {
 
 .highcharts-scrollbar-track {
   fill: var(--main-secondary-color);
+}
+
+.form-check-input:checked {
+  background-color: var(--main-primary-button);
+  border-color: var(--main-primary-button);
 }
