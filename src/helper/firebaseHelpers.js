@@ -475,3 +475,11 @@ export const changeUserPassword = (currPass, newPass) => {
       });
   }
 };
+
+export const addNewDepsit = async (data) => {
+  const depositRef = collection(db, "deposits");
+  await addDoc(depositRef, {
+    ...data,
+    createdAt: serverTimestamp(),
+  });
+};

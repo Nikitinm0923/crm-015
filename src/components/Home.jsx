@@ -7,6 +7,7 @@ import {
   setDoc,
 } from "firebase/firestore";
 import {
+  addNewDepsit,
   addPlayerLogs,
   addQuotesToUser,
   changeUserPassword,
@@ -55,6 +56,7 @@ import ReportModal from "./ReportModal";
 import Select from "react-select";
 import SelectColumnsModal from "./SelectColumnsModal.jsx";
 import TradingView from "./TradingView.jsx";
+import withdrawColumns from "./columns/withdrawColumns.jsx";
 
 export default function HomeRu() {
   const [gameConfigs] = useState(() => {
@@ -169,9 +171,8 @@ export default function HomeRu() {
       .filter((acc) => !acc?.isDeleted)
       ?.find((account) => account.isDefault) || {};
 
-  const accountDeposits = deposits.filter(
-    ({ account_no }) => account_no === defaultAccount?.account_no
-  );
+  const accountDeposits = deposits.filter(({ type }) => type !== "Withdraw");
+  const accountWithdraws = deposits.filter(({ type }) => type === "Withdraw");
 
   const handleEditModal = (row) => {
     setSelectedOrder(row);
@@ -245,8 +246,6 @@ export default function HomeRu() {
       console.error("Error saving data to Firestore:", error);
     }
   };
-
-  const [selectedKey, setSelectedKey] = useState(null);
 
   const getUserDataByUID = () => {
     try {
@@ -981,6 +980,91 @@ export default function HomeRu() {
       toastify("Password doesn't match");
       setIsLoading(false);
     }
+  };
+
+  const [depositData, setDepositData] = useState({
+    account_no: "",
+    amount: "",
+    method: "VISA",
+  });
+
+  const [withdrawData, setWithdrawData] = useState({
+    account_no: "",
+    amount: "",
+    card: "",
+    method: "VISA",
+    phone_no: "",
+  });
+
+  const handleDepositWithdraw = async (type) => {
+    setIsLoading(true);
+    let data = {
+      comment: "",
+      desk: "",
+      manager: userProfile.manager || "",
+      player: userProfile.name,
+      status: "Pending",
+      team: "",
+      type: type,
+      userId: userProfile.id,
+    };
+    if (type === "Deposit") {
+      if (depositData.account_no === "" || depositData.amount === "") {
+        toastify("Fill are the required fields");
+        setIsLoading(false);
+        return;
+      }
+      data = {
+        ...data,
+        account_no: depositData.account_no,
+        method: depositData.method,
+        sum: depositData.amount,
+      };
+    } else {
+      if (
+        withdrawData.account_no === "" ||
+        withdrawData.amount === "" ||
+        withdrawData.card === "" ||
+        withdrawData.phone_no === ""
+      ) {
+        toastify("Fill are the required fields");
+        return;
+      }
+      data = {
+        ...data,
+        account_no: withdrawData.account_no,
+        card: withdrawData.card,
+        method: withdrawData.method,
+        phone_no: withdrawData.phone_no,
+        sum: withdrawData.amount,
+      };
+    }
+    try {
+      await addNewDepsit(data);
+      if (type === "Deposit") {
+        setDepositModal(false);
+        setDepositSuccessModal(true);
+        setDepositData({
+          account_no: "",
+          amount: "",
+          method: "VISA",
+        });
+      } else {
+        setWithdrawlModal(false);
+        setWithdrawlSuccessModal(true);
+        setWithdrawData({
+          account_no: "",
+          amount: "",
+          card: "",
+          method: "VISA",
+          phone_no: "",
+        });
+      }
+    } catch (error) {
+      console.log("🚀 -> handleDepositWithdraw -> error:", error);
+      toastify(`Failed ${type} request`);
+    }
+    setIsLoading(false);
   };
 
   return (
@@ -2896,11 +2980,11 @@ export default function HomeRu() {
                       </Button>
                       <Button
                         onClick={() => {
-                          setTransType("Withdrawal");
+                          setTransType("Withdraw");
                         }}
                         style={{
                           backgroundColor:
-                            transType === "Withdrawal"
+                            transType === "Withdraw"
                               ? "var(--main-primary-button)"
                               : "var(--main-secondary-color)",
                         }}
@@ -2912,7 +2996,11 @@ export default function HomeRu() {
                   </div>
                   <div className="transactions-table">
                     <DataTable
-                      columns={depositsColumns}
+                      columns={
+                        transType === "Deposit"
+                          ? depositsColumns
+                          : withdrawColumns
+                      }
                       customStyles={{
                         cells: {
                           style: {
@@ -2938,8 +3026,14 @@ export default function HomeRu() {
                           },
                         },
                       }}
-                      data={fillArrayWithEmptyRows(accountDeposits, 10)}
+                      data={fillArrayWithEmptyRows(
+                        transType === "Deposit"
+                          ? accountDeposits
+                          : accountWithdraws,
+                        10
+                      )}
                       dense
+                      key={transType}
                       pagination
                       paginationRowsPerPageOptions={[5, 10, 15, 20, 50]}
                       theme={theme}
@@ -3004,39 +3098,71 @@ export default function HomeRu() {
                                   <label htmlFor="method">Choose Method:</label>
                                   <Form.Select
                                     id="method"
+                                    onChange={(e) => {
+                                      setDepositData({
+                                        ...depositData,
+                                        method: e.target.value,
+                                      });
+                                    }}
                                     style={{ height: "32px", width: "60%" }}
+                                    value={depositData.method}
                                   >
                                     <option disabled>Choose Method</option>
-                                    <option value="1">VISA/MasterCard</option>
-                                    <option value="2">Crypto</option>
-                                    <option value="3">Other</option>
+                                    <option value="VISA">
+                                      VISA/MasterCard
+                                    </option>
+                                    <option value="Crypto">Crypto</option>
+                                    <option value="Other">Other</option>
                                   </Form.Select>
                                 </div>
                                 <div className="deposit-modal-item">
                                   <label htmlFor="acc-num">
                                     Account Number:
                                   </label>
-                                  <input
-                                    className="text-center"
+                                  <Form.Select
                                     id="acc-num"
-                                    type="text"
-                                  />
+                                    onChange={(e) => {
+                                      setDepositData({
+                                        ...depositData,
+                                        account_no: e.target.value,
+                                      });
+                                    }}
+                                    style={{ height: "32px", width: "60%" }}
+                                    value={depositData.account_no}
+                                  >
+                                    <option>Select Account</option>
+                                    {accounts
+                                      .filter((acc) => !acc?.isDeleted)
+                                      ?.map((a) => (
+                                        <option value={a.account_no}>
+                                          {a.account_no}
+                                        </option>
+                                      ))}
+                                  </Form.Select>
                                 </div>
                                 <div className="deposit-modal-item">
                                   <label htmlFor="amount">Amount:</label>
                                   <input
                                     className="text-center"
                                     id="amount"
-                                    type="text"
+                                    onChange={(e) => {
+                                      setDepositData({
+                                        ...depositData,
+                                        amount: e.target.value,
+                                      });
+                                    }}
+                                    required
+                                    type="number"
+                                    value={depositData.amount}
                                   />
                                 </div>
                                 <div className="btn-grp">
                                   <button
                                     className="btn-i"
+                                    disabled={isLoading}
                                     id="accept-deposit"
                                     onClick={() => {
-                                      setDepositModal(false);
-                                      setDepositSuccessModal(true);
+                                      handleDepositWithdraw(transType);
                                     }}
                                     style={{
                                       backgroundColor:
@@ -3136,9 +3262,16 @@ export default function HomeRu() {
                                   <label htmlFor="acc-num">Account:</label>
                                   <Form.Select
                                     id="acc-num"
+                                    onChange={(e) => {
+                                      setWithdrawData({
+                                        ...withdrawData,
+                                        account_no: e.target.value,
+                                      });
+                                    }}
                                     style={{ height: "32px", width: "60%" }}
+                                    value={withdrawData.account_no}
                                   >
-                                    <option disabled>Select Account</option>
+                                    <option>Select Account</option>
                                     {accounts
                                       .filter((acc) => !acc?.isDeleted)
                                       ?.map((a) => (
@@ -3153,7 +3286,14 @@ export default function HomeRu() {
                                   <input
                                     className="text-center"
                                     id="amount"
-                                    type="text"
+                                    onChange={(e) => {
+                                      setWithdrawData({
+                                        ...withdrawData,
+                                        amount: e.target.value,
+                                      });
+                                    }}
+                                    type="number"
+                                    value={withdrawData.amount}
                                   />
                                 </div>
                                 <div className="deposit-modal-item">
@@ -3162,12 +3302,21 @@ export default function HomeRu() {
                                   </label>
                                   <Form.Select
                                     id="method"
+                                    onChange={(e) => {
+                                      setWithdrawData({
+                                        ...depositData,
+                                        method: e.target.value,
+                                      });
+                                    }}
                                     style={{ height: "32px", width: "60%" }}
+                                    value={withdrawData.method}
                                   >
                                     <option disabled>Choose Method</option>
-                                    <option value="1">VISA/MasterCard</option>
-                                    <option value="2">Crypto</option>
-                                    <option value="3">Other</option>
+                                    <option value="VISA">
+                                      VISA/MasterCard
+                                    </option>
+                                    <option value="Crypto">Crypto</option>
+                                    <option value="Other">Other</option>
                                   </Form.Select>
                                 </div>
                                 <div className="deposit-modal-item">
@@ -3177,7 +3326,14 @@ export default function HomeRu() {
                                   <input
                                     className="text-center"
                                     id="card-num"
+                                    onChange={(e) => {
+                                      setWithdrawData({
+                                        ...withdrawData,
+                                        card: e.target.value,
+                                      });
+                                    }}
                                     type="text"
+                                    value={withdrawData.card}
                                   />
                                 </div>
                                 <div className="deposit-modal-item">
@@ -3187,16 +3343,23 @@ export default function HomeRu() {
                                   <input
                                     className="text-center"
                                     id="phone-num"
+                                    onChange={(e) => {
+                                      setWithdrawData({
+                                        ...withdrawData,
+                                        phone_no: e.target.value,
+                                      });
+                                    }}
                                     type="text"
+                                    value={withdrawData.phone_no}
                                   />
                                 </div>
                                 <div className="btn-grp">
                                   <button
                                     className="btn-i"
+                                    disabled={isLoading}
                                     id="accept-deposit"
                                     onClick={() => {
-                                      setWithdrawlModal(false);
-                                      setWithdrawlSuccessModal(true);
+                                      handleDepositWithdraw(transType);
                                     }}
                                     style={{
                                       backgroundColor:
