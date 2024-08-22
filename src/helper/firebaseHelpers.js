@@ -1,21 +1,23 @@
 import {
+  addDoc,
   collection,
+  deleteDoc,
   doc,
   getDoc,
+  getDocs,
+  limit,
+  onSnapshot,
+  orderBy,
+  query,
+  serverTimestamp,
+  setDoc,
   updateDoc,
   where,
-  query,
-  onSnapshot,
-  serverTimestamp,
-  deleteDoc,
-  addDoc,
-  limit,
-  setDoc,
-  orderBy,
-  getDocs,
-  } from "firebase/firestore";
-import { db } from "../firebase";
+} from "firebase/firestore";
+import { auth, db } from "../firebase";
 import { convertTimestamptToDate } from "./helpers";
+import { toastify } from "./toastHelper";
+import { updatePassword, signInWithEmailAndPassword } from "firebase/auth";
 
 export const fetchAllOrdersByUserId = (userId, setState) => {
   if (!userId) return;
@@ -25,7 +27,6 @@ export const fetchAllOrdersByUserId = (userId, setState) => {
       orderBy("createdTime", "desc"),
       where("userId", "==", userId)
     );
-
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const orders = [];
       querySnapshot.forEach((doc) => {
@@ -40,17 +41,16 @@ export const fetchAllOrdersByUserId = (userId, setState) => {
     });
     return () => unsubscribe();
   } catch (error) {
-    console.error("Error fetching orders:", error);
+    console.error("Error fetching orders: ", error);
   }
 };
 
-//update user onlineStatus
 export const updateOnlineStatus = async (userId, newStatus) => {
   try {
     const userRef = doc(db, "users", userId);
     await updateDoc(userRef, { onlineStatus: newStatus });
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -59,28 +59,20 @@ export const updateUserById = async (id, payload) => {
   await updateDoc(userDocRef, payload);
 };
 
-//Get user data
-
 export const getUserData = async (userId) => {
   try {
     let data = {};
     const q = collection(db, "users", where("docId", "==", userId));
-
     const snapshot = await getDoc(q);
-
     if (snapshot.empty) {
-      console.log("No matching documents.");
       return;
     }
-
     snapshot.forEach((doc) => {
-      console.log(doc.id, "=>", doc.data());
       data = doc.data;
     });
-    console.log(123123, data);
     return data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -88,13 +80,12 @@ export const getColumnsById = async (id, setState) => {
   try {
     const userDocRef = doc(db, "columns", id);
     const columnDocSnapshot = await getDoc(userDocRef);
-
     if (columnDocSnapshot.exists()) {
       const columnData = columnDocSnapshot.data();
       setState(columnData.dealsColumns);
     }
   } catch (error) {
-    console.error("Error fetching column:", error);
+    console.error("Error fetching column: ", error);
   }
 };
 
@@ -121,10 +112,8 @@ export const getData = (collectionName) => {
           reject(error);
         }
       );
-      // Optionally returning unsubscribe function for cleanup if needed
-      // return unsubscribe;
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error: ", error);
       reject(error);
     }
   });
@@ -138,15 +127,11 @@ export const getSymbolValue = (symbol) => {
       const unsubscribe = onSnapshot(q, (querySnapshot) => {
         let price = null;
         querySnapshot.forEach((doc) => {
-          // doc.data() is never undefined for query doc snapshots
           price = doc.data().price;
         });
         const parsePrice = parseFloat(price);
         resolve(parsePrice);
       });
-      // If you need to handle errors within the snapshot listener
-      // querySnapshot should have an error handler
-      // querySnapshot.onError((error) => reject(error));
     } catch (error) {
       reject(error);
     }
@@ -159,7 +144,7 @@ export const addQuotesToUser = async (userId, symbols) => {
     await updateDoc(userRef, { quotes: symbols });
     return true;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -167,48 +152,33 @@ export const addUserNewBalance = async (userId, amount) => {
   try {
     const userDocRef = doc(db, "users", userId);
     const userDocSnapshot = await getDoc(userDocRef);
-
     if (userDocSnapshot.exists()) {
       const userData = userDocSnapshot.data();
       const currentBalanceString = userData.totalBalance || 0;
       const currentBalance = parseFloat(currentBalanceString);
       const updatedBalance = currentBalance + parseFloat(amount);
-
-      // Update the balance in the database directly
       await setDoc(
         userDocRef,
         { totalBalance: updatedBalance },
         { merge: true }
       );
-
       const depositRef = collection(db, "deposits");
-
       await addDoc(depositRef, {
         userId: userId,
         amount: parseFloat(amount),
         comment: "Bonus",
         createdAt: serverTimestamp(),
       });
-
-      console.log("Balance updated successfully!");
-    } else {
-      console.error("User ID does not exist in the database.");
     }
   } catch (error) {
-    console.error("Error updating balance:", error);
+    console.error("Error updating balance: ", error);
   }
 };
 
 export const getAllSymbols = (setState) => {
-  // const q = query(
-  //   collection(db, "symbols"),
-  //   where("symbol", "in", ["BTCUSDT", "ETHUSDT", "DOGEUSDT"])
-  // );
   const symbolsRef = collection(db, "symbols");
-
   const unsubscribe = onSnapshot(
     symbolsRef,
-    // q,
     (snapshot) => {
       const realSymbols = [],
         duplicateSymbols = [];
@@ -218,7 +188,6 @@ export const getAllSymbols = (setState) => {
           ? duplicateSymbols.push(symbol)
           : realSymbols.push(symbol);
       });
-
       const symbolsData = realSymbols
         .map((s) => {
           return s.duplicates?.length
@@ -231,11 +200,10 @@ export const getAllSymbols = (setState) => {
             : s;
         })
         .flat();
-
       setState(realSymbols);
     },
     (error) => {
-      console.error("Error fetching data:", error);
+      console.error("Error fetching data: ", error);
     }
   );
   return unsubscribe;
@@ -249,7 +217,6 @@ export const getDepositsByUser = (userId, setState) => {
       orderBy("createdAt", "desc"),
       where("userId", "==", userId)
     );
-
     const unsubscribe = onSnapshot(
       userDepositsQuery,
       (snapshot) => {
@@ -265,12 +232,12 @@ export const getDepositsByUser = (userId, setState) => {
         setState(depositsData);
       },
       (error) => {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching data: ", error);
       }
     );
     return () => unsubscribe();
   } catch (error) {
-    console.error("Error:", error);
+    console.error("Error: ", error);
   }
 };
 
@@ -282,7 +249,6 @@ export const getAllBonus = (userId, setState) => {
       where("userId", "==", userId),
       where("type", "==", "Bonus")
     );
-
     const unsubscribe = onSnapshot(
       userDepositsQuery,
       (snapshot) => {
@@ -297,21 +263,18 @@ export const getAllBonus = (userId, setState) => {
         setState(allBonus);
       },
       (error) => {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching data: ", error);
       }
     );
     return () => unsubscribe();
   } catch (error) {
-    console.error("Error:", error);
+    console.error("Error: ", error);
   }
 };
 
 export const deleteDocument = async (collectionPath, documentId) => {
   const documentRef = doc(db, collectionPath, documentId);
   await deleteDoc(documentRef);
-  console.log(
-    `Document with ID ${documentId} deleted successfully from ${collectionPath}`
-  );
 };
 
 export const getSymbolPriceHistory = async (id, setState) => {
@@ -323,21 +286,9 @@ export const getSymbolPriceHistory = async (id, setState) => {
         query(priceHistoryCollectionRef, orderBy("updatedAt", "desc"), limit(2))
       )
     ).docs;
-
     if (!daysDocs.length) return;
-
     let prevDayData = [];
-    // if (daysDocs[1] && daysDocs[1].exists()) {
-    //   const prevDaySnapshot = await getDocs(
-    //     collection(daysDocs[1].ref, "hours")
-    //   );
-    //   prevDaySnapshot.forEach((snap) => {
-    //     prevDayData[snap.id] = snap.data()?.data || [];
-    //   });
-    //   prevDayData = prevDayData.filter((d) => d);
-    // }
     let includePrevData = false;
-
     const hourCollectionRef = collection(daysDocs[0].ref, "hours");
     const unsubscribe = onSnapshot(
       hourCollectionRef,
@@ -347,7 +298,6 @@ export const getSymbolPriceHistory = async (id, setState) => {
           chartData[hourSnap.id] = hourSnap.data()?.data || [];
         });
         chartData = chartData.filter((d) => d);
-
         if (includePrevData) {
           includePrevData = false;
           setState([...prevDayData, ...chartData]);
@@ -361,12 +311,12 @@ export const getSymbolPriceHistory = async (id, setState) => {
         }
       },
       (error) => {
-        console.log("error", error.message);
+        console.error("Error: ", error.message);
       }
     );
     return unsubscribe;
   } catch (error) {
-    console.error("Error in getting priceHistory document:", error.message);
+    console.error("Error in getting priceHistory document: ", error.message);
   }
 };
 
@@ -385,12 +335,8 @@ export const getSymbolPriceHistoryInAir = async ({
       query(priceHistoryCollectionRef, orderBy("updatedAt", "desc"))
     );
     if (daysSnap.empty) return;
-
     const prevDates = [];
     daysSnap.forEach((day) => prevDates.push({ id: day.id, ref: day.ref }));
-
-    // console.log("prevdates => ", prevDates);
-    // const requireDate = prevDates.find((day) => day.id < date);
     const timeframe = dataGroup.flat().reverse().join("");
     const daysSlice =
       timeframe === "1minute"
@@ -409,17 +355,13 @@ export const getSymbolPriceHistoryInAir = async ({
     const requireDates = prevDates
       .filter((day) => day.id < date)
       .slice(0, daysSlice);
-    console.log("requireDates", requireDates);
     let data = [];
     const promises = requireDates.map(async (requireDate) => {
       if (requireDate && requireDate.ref) {
-        console.log("getting", requireDate);
         return getDocs(collection(requireDate.ref, "hours"));
       }
     });
-    console.log("start promises executing");
     const prevDaySnapshot = await Promise.all(promises);
-    console.log("end promises executing");
     prevDaySnapshot.forEach((prevDaySnapshot) => {
       let prevDayData = [];
       prevDaySnapshot.forEach((snap) => {
@@ -436,7 +378,7 @@ export const getSymbolPriceHistoryInAir = async ({
     setState(data, true, timeframe, isTimeframeClick);
   } catch (error) {
     setLoading(false);
-    console.log("Error in getting priceHistory document:", error);
+    console.error("Error in getting priceHistory document: ", error);
   }
 };
 
@@ -446,7 +388,7 @@ export async function getDocument(collectionPath, documentId) {
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) return { id: docSnap.id, ...docSnap.data() };
   } catch (error) {
-    console.error("Error fetching document:", error.message);
+    console.error("Error fetching document: ", error.message);
   }
 }
 
@@ -455,7 +397,7 @@ export async function updateDocument(id, collectionPath, payload) {
     const docRef = doc(db, collectionPath, id);
     await updateDoc(docRef, payload);
   } catch (error) {
-    console.error("Error updating document:", error.message);
+    console.error("Error updating document: ", error.message);
   }
 }
 
@@ -470,7 +412,7 @@ export const getBlockedIPs = async () => {
     }));
     return blockedIPs;
   } catch (error) {
-    console.log("Error while getting blocked ips");
+    console.error("Error while getting blocked ips.");
   }
 };
 
@@ -516,4 +458,20 @@ export const addPlayerLogs = async (action, userId) => {
     date: serverTimestamp(),
     userId: userId,
   });
+};
+
+export const changeUserPassword = (currPass, newPass) => {
+  const userCredential = JSON.parse(localStorage.getItem("USER"));
+  const email = userCredential.user.email;
+  if (email) {
+    signInWithEmailAndPassword(auth, email, currPass)
+      .then((userCredential) => {
+        updatePassword(userCredential.user, newPass).then(() => {
+          toastify("Password updated successfully", "success");
+        });
+      })
+      .catch(() => {
+        toastify("Current password is incorrect");
+      });
+  }
 };

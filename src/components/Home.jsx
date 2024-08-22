@@ -9,6 +9,7 @@ import {
 import {
   addPlayerLogs,
   addQuotesToUser,
+  changeUserPassword,
   fetchAllOrdersByUserId,
   getAllSymbols,
   getAssetGroups,
@@ -87,8 +88,6 @@ export default function HomeRu() {
   const assetGroups = useSelector((state) => state.assetGroups);
   const orders = useSelector((state) => state.orders);
   const deposits = useSelector((state) => state.deposits);
-  const [uploadModal, setUploadModal] = useState(false);
-  const [successModal, setSuccessModal] = useState(false);
   const [depositModal, setDepositModal] = useState(false);
   const [withdrawlModal, setWithdrawlModal] = useState(false);
   const [depositSuccessModal, setDepositSuccessModal] = useState(false);
@@ -117,11 +116,13 @@ export default function HomeRu() {
   const [enableOpenPrice, setEnableOpenPrice] = useState(false);
   const [openPriceValue, setOpenPriceValue] = useState(null);
   const [isTradingModal, setIsTradingModal] = useState(false);
-  const [activeAccountNo, setActiveAccountNo] = useState(null);
   const [dealsRow, setDealsRow] = useState(5);
 
   const [accTab, setAccTab] = useState("");
+  const [confirmPass, setConfirmPass] = useState("");
   const [dealType, setDealType] = useState("Buy");
+  const [newPass, setNewPass] = useState("");
+  const [pass, setPass] = useState("");
   const [personalInfoTab, setPersonalInfoTab] = useState("personal-info");
   const [showAccountInfo, setShowAccountInfo] = useState(false);
   const [transType, setTransType] = useState("Deposit");
@@ -967,6 +968,20 @@ export default function HomeRu() {
     }
     if (accTab === "") setAccTab("acc-info");
   }, [accTab, tab]);
+
+  const handleChangePass = async () => {
+    setIsLoading(true);
+    if (newPass === confirmPass) {
+      changeUserPassword(pass, newPass);
+      setConfirmPass("");
+      setNewPass("");
+      setPass("");
+      setIsLoading(false);
+    } else {
+      toastify("Password doesn't match");
+      setIsLoading(false);
+    }
+  };
 
   return (
     <>
@@ -2792,13 +2807,27 @@ export default function HomeRu() {
                     <div id="acc-change-pass">
                       <h2>Change Password</h2>
                       <div className="acc-change-pass-item">
+                        <h6>Current Password:</h6>
+                        <input
+                          id="pass"
+                          name="pass"
+                          onChange={(e) => {
+                            setPass(e.target.value);
+                          }}
+                          type="password"
+                          value={pass}
+                        />
+                      </div>
+                      <div className="acc-change-pass-item">
                         <h6>New Password:</h6>
                         <input
                           id="pass"
                           name="pass"
-                          onChange={(e) => {}}
+                          onChange={(e) => {
+                            setNewPass(e.target.value);
+                          }}
                           type="password"
-                          value=""
+                          value={newPass}
                         />
                       </div>
                       <div className="acc-change-pass-item">
@@ -2806,21 +2835,34 @@ export default function HomeRu() {
                         <input
                           id="confirm-pass"
                           name="confirm-pass"
-                          onChange={(e) => {}}
+                          onChange={(e) => {
+                            setConfirmPass(e.target.value);
+                          }}
                           type="password"
-                          value=""
+                          value={confirmPass}
                         />
                       </div>
                       <div className="acc-change-pass-btn">
                         <button
+                          disabled={isLoading}
                           style={{
                             backgroundColor: "var(--main-primary-button)",
                           }}
-                          onClick={() => {}}
+                          onClick={() => {
+                            handleChangePass();
+                          }}
                         >
                           Submit
                         </button>
-                        <button onClick={() => {}}>Cancel</button>
+                        <button
+                          onClick={() => {
+                            setConfirmPass("");
+                            setNewPass("");
+                            setPass("");
+                          }}
+                        >
+                          Cancel
+                        </button>
                       </div>
                     </div>
                   )}
