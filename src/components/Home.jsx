@@ -2004,7 +2004,7 @@ export default function HomeRu() {
                         container: (provided, state) => ({
                           ...provided,
                           backgroundColor: "var(--main-background-color)",
-                          width: "80%",
+                          width: "90%",
                         }),
                         control: (provided) => ({
                           ...provided,
@@ -2063,7 +2063,7 @@ export default function HomeRu() {
                       value={orderData.symbol}
                       selectedValue={orderData.symbol}
                     />
-                    <ButtonGroup className="btn-group">
+                    <ButtonGroup className="btn-group" style={{ width: "90%" }}>
                       <Button
                         onClick={() => setDealType("Buy")}
                         style={{
@@ -2096,7 +2096,7 @@ export default function HomeRu() {
                         stroke: "var(--main-secondary-color)",
                       }}
                       viewBox="0 0 300 2"
-                      width="80%"
+                      width="90%"
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <line
@@ -2250,7 +2250,7 @@ export default function HomeRu() {
                         stroke: "var(--main-secondary-color)",
                       }}
                       viewBox="0 0 300 2"
-                      width="80%"
+                      width="90%"
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <line
@@ -2365,7 +2365,7 @@ export default function HomeRu() {
                         stroke: "var(--main-secondary-color)",
                       }}
                       viewBox="0 0 300 2"
-                      width="80%"
+                      width="90%"
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <line
@@ -2382,11 +2382,14 @@ export default function HomeRu() {
                           placeOrder(e, dealType);
                         }}
                         style={{
-                          backgroundColor: "var(--main-primary-button)",
+                          backgroundColor:
+                            dealType === "Buy"
+                              ? "var(--main-primary-button)"
+                              : "var(--main-secondary-button)",
                         }}
                         type="submit"
                       >
-                        BUY
+                        {dealType === "Buy" ? "BUY" : "SELL"}
                       </button>
                       <button
                         onClick={(e) => {

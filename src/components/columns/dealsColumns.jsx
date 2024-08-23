@@ -1,10 +1,5 @@
+import { faClose, faEdit } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faEdit,
-  faClose,
-  faCaretDown,
-  faCaretUp,
-} from "@fortawesome/free-solid-svg-icons";
 
 const dealsColumns = ({
   t = () => {},
@@ -12,19 +7,12 @@ const dealsColumns = ({
   handleCloseBtn,
   showColumns = {},
 } = {}) => [
-  // {
-  //   name: "Id",
-  //   selector: (row, i) => row && i + 1,
-  //   grow: 0.5,
-  //   omit: !showColumns.id,
-  // },
   {
-    name: t("date"), // Translate the header using your t function
+    grow: 1.5,
+    name: t("date"),
+    omit: !showColumns.date,
     selector: (row) => row.createdTime && row.createdTime,
     sortable: true,
-    compact: true,
-    grow: 1.5,
-    omit: !showColumns.date,
   },
   {
     name: t("symbol"),
@@ -33,111 +21,107 @@ const dealsColumns = ({
     omit: !showColumns.symbol,
   },
   {
+    compact: true,
     name: t("type"),
     selector: (row) =>
       row ? (
-        row.type == "Buy" ? (
-          <div className="order-column">
-            <div className="custom-caret-up-icon">
-              <FontAwesomeIcon icon={faCaretUp} />
-              <div style={{ marginLeft: "3px" }}>{row.type}</div>
-            </div>
-          </div>
+        row.type === "Buy" ? (
+          <span style={{ color: "var(--success-color)", fontWeight: "600" }}>
+            {row.type}
+          </span>
         ) : (
-          <div className="order-column">
-            <div className="custom-caret-down-icon">
-              <FontAwesomeIcon icon={faCaretDown} />
-              <div style={{ marginLeft: "3px" }}>{row.type}</div>
-            </div>
-          </div>
+          <span style={{ color: "var(--danger-color)", fontWeight: "600" }}>
+            {row.type}
+          </span>
         )
       ) : (
         ""
       ),
-    sortable: true,
-    compact: true,
     omit: !showColumns.type,
+    sortable: true,
   },
   {
     name: t("volume"),
+    omit: !showColumns.volume,
     selector: (row) => row && row.volume,
     sortable: true,
-    omit: !showColumns.volume,
   },
   {
     name: t("openPrice"),
+    omit: !showColumns.openPrice,
     selector: (row) => row && +row.symbolValue,
     sortable: true,
-    omit: !showColumns.openPrice,
   },
   {
     name: "SL / TP",
-    selector: (row) => row && row.sltp,
     omit: !showColumns.sltp,
+    selector: (row) => row && row.sltp,
   },
   {
-    name: "Additional parameters",
+    compact: true,
+    grow: 2.5,
+    name: "Additional Parameters",
+    omit: !showColumns.additionalParameters,
     selector: (row) =>
       row &&
       `Spread: ${+parseFloat(row.spread)?.toFixed(4)} / Swap: ${+parseFloat(
         row.swap
       )?.toFixed(4)} / Fee: ${+parseFloat(row.fee)?.toFixed(4)}`,
-    grow: 2.5,
-    compact: true,
-    omit: !showColumns.additionalParameters,
   },
   {
+    compact: true,
     name: "Margin",
+    omit: !showColumns.margin,
     selector: (row) => row && +parseFloat(row.sum)?.toFixed(4),
     sortable: true,
-    compact: true,
-    omit: !showColumns.margin,
   },
   {
+    compact: true,
     name: "Current Price",
+    omit: !showColumns.currentPrice,
     selector: (row) => row && row.currentPrice,
     sortable: true,
-    compact: true,
-    omit: !showColumns.currentPrice,
   },
   {
     name: t("profit"),
+    omit: !showColumns.profit,
     selector: (row) =>
       row && (
-        <div
-          className={`"order-column" ${
-            row.profit < 0
-              ? "text-danger"
-              : row.profit == 0
-              ? "text-muted"
-              : "text-success"
-          }`}
+        <span
+          style={{
+            color:
+              row.profit < 0
+                ? "var(--danger-color)"
+                : row.profit === 0
+                ? ""
+                : "var(--success-color)",
+          }}
         >
           {row.profit}
-        </div>
+        </span>
       ),
     sortable: true,
-    omit: !showColumns.profit,
   },
   {
     name: t("Action"),
+    omit: !showColumns.action,
     selector: (row) =>
       row && (
         <div>
           <FontAwesomeIcon
             icon={faEdit}
-            size="lg"
             onClick={() => handleEditModal(row)}
+            size="lg"
           />
           <FontAwesomeIcon
-            icon={faClose}
-            size="lg"
             className="ms-3"
+            icon={faClose}
+            id="closeDealIcon"
             onClick={() => handleCloseBtn(row)}
+            size="lg"
           />
         </div>
       ),
-    omit: !showColumns.action,
   },
 ];
 

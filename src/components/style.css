@@ -947,7 +947,7 @@ button {
   font-weight: 600;
   margin: 2px 0;
   text-align: left;
-  width: 80%;
+  width: 90%;
 }
 
 .margin-label span {
@@ -1041,7 +1041,7 @@ button {
   align-items: center;
   display: flex;
   justify-content: space-between;
-  width: 80%;
+  width: 90%;
 }
 
 .newOrderButton button {
@@ -1089,6 +1089,10 @@ ul {
 
 #assetDeleteIcon {
   color: var(--danger-color);
+}
+
+#closeDealIcon path {
+  fill: var(--danger-color);
 }
 
 #orders {

@@ -19,7 +19,7 @@ const AddTradingSymbol = ({
   userId,
 }) => {
   const [formData, setFormData] = useState({ symbol: "" });
-  const [group, setGroup] = useState("crypto");
+  const [group, setGroup] = useState("commodities");
   const { symbol } = formData;
   const assetGroups = useSelector((state) => state.assetGroups);
 
