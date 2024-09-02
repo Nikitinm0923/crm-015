@@ -37,6 +37,8 @@
   --chart-background-color: #25272d;
   --chart-gain-color: #28a79b;
   --chart-loss-color: #e10000;
+
+  --main-tertiary-color: #282C35;
 }
 
 .light {
@@ -239,6 +241,10 @@ input:focus-visible {
   font-weight: 500;
   margin: 0 12px;
   padding: 0 12px;
+}
+
+.acc-btn span {
+  background-color: var(--main-primary-button);
 }
 
 .acc-info {
@@ -1810,4 +1816,22 @@ hr {
 .form-check-input:checked {
   background-color: var(--main-primary-button);
   border-color: var(--main-primary-button);
+}
+
+
+
+/* .hide-on-mobile {
+  display: block!important;
+} */
+
+.hide-on-desktop {
+  display: none!important;
+}
+
+#header #balance .help-box {
+  display: none;
+}
+
+#header #balance .page-title {
+  display: none;
 }
