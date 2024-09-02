@@ -13,6 +13,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "highcharts/css/annotations/popup.css";
 import "highcharts/css/stocktools/gui.css";
 import "./components/style.css";
+import "./components/responsive.css";
 
 const App = () => {
   const [isLogin] = useState(() =>

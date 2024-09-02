@@ -1,0 +1,17 @@
+@media only screen and (max-width: 768px){
+    #side-out-menu{
+        display: none;
+    }
+    #sidebar{
+        width: 100%;
+        height: auto;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+    }
+    #side-main-menu{
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0 30px;
+    }
+}
