@@ -1906,7 +1906,7 @@ export default function HomeRu() {
                 </button>
               </div>
               <div id="chart" className="rounded">
-                <ul className="nav nav-tabs">
+                <ul className="nav nav-tabs hide-on-mobile">
                   {tabs?.map((tab) => (
                     <li className="nav-item" key={tab}>
                       <a
@@ -1994,6 +1994,18 @@ export default function HomeRu() {
                     </svg>
                   </li>
                 </ul>
+                <div className="mobile-tabs">
+                  <Dropdown>
+                    <Dropdown.Toggle className="drpdwn" id="dropdown-basic">
+                      GBPUSD
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu>
+                      <Dropdown.Item href="#/action-1">GBP</Dropdown.Item>
+                      <Dropdown.Item href="#/action-1">USD</Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </div>
                 {tabs?.map((tab, i) => {
                   return (
                     <TradingView
@@ -2431,7 +2443,7 @@ export default function HomeRu() {
                 </div>
               </div>
             </div>
-            <div className="mobile-trade-box w-100">
+            <div className="mobile-trade-box w-100 hide-on-desktop">
               <p className="title">
                 Volume
               </p>

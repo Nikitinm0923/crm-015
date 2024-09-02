@@ -1835,3 +1835,11 @@ hr {
 #header #balance .page-title {
   display: none;
 }
+
+.mobile-tabs{
+  display: none;
+}
+
+/* .min-h-100{
+  min-height: 0%;
+} */

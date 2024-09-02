@@ -81,8 +81,13 @@
         display: block !important;
     }
 
+    #main-container {
+        height: calc(100% - 130px);
+    }
+
     #main-container #content {
         width: 100%;
+        height: 100%;
     }
 
     #side-out-menu {
@@ -194,21 +199,41 @@
         display: none;
     }
 
-    #trade-div{
+    #trade-div {
         padding: 10px;
         background-color: var(--main-tertiary-color);
+        overflow: scroll;
     }
 
     #trade {
-        height: 80% !important;
+        height: 100% !important;
         border-radius: 5px 5px 0 0;
         background-color: var(--main-background-color);
     }
 
 
+    /* Mobile Trade Dropdown */
+    .mobile-tabs {
+        padding: 10px 15px;
+        text-align: left;
+        display: block;
+    }
+
+    .mobile-tabs .drpdwn,
+    .mobile-tabs .drpdwn:focus {
+        background-color: var(--bs-body-bg);
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .mobile-tabs .drpdwn::after {
+        margin-left: 15px;
+    }
+
+
     /* Mobile Trade Box */
     .mobile-trade-box {
-        padding: 14px 10px 20px 10px;
+        padding: 10px 10px 10px 10px;
         background-color: var(--main-background-color);
         border-radius: 0 0 5px 5px;
     }
