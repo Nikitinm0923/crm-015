@@ -47,9 +47,11 @@
     background-color: inherit;
   }
 
-  .login_wrapper .login_text::before,
-  .signup_wrapper .signup_text::before {
-    border-radius: 5px;
+  .login_wrapper .login_text,
+  .login_wrapper .login_text p,
+  .signup_wrapper .signup_text,
+  .signup_wrapper .signup_text p {
+    background-color: inherit;
   }
 
   .login_wrapper .login_link,

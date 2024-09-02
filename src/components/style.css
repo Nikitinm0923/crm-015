@@ -1370,23 +1370,52 @@ thead {
   transform: translate(-50%, -50%);
 }
 
-.signup_text::before {
+/* .signup_text::before {
   background-color: var(--main-background-color);
   content: "Don't have an account?";
   left: 50%;
   padding: 0 8px;
   position: absolute;
   transform: translate(-50%, -50%);
+} */
+
+.login_text,
+.signup_text {
+  align-items: center;
+  display: flex;
+  justify-content: center;
 }
 
-.login_text::before {
+.login_text::before,
+.signup_text::before {
+  background-color: var(--main-text-color);
+  content: "";
+  height: 1px;
+  position: relative;
+  right: 5px;
+  top: -5px;
+  width: 25%;
+}
+
+.login_text::after,
+.signup_text::after {
+  background-color: var(--main-text-color);
+  content: "";
+  height: 1px;
+  position: relative;
+  right: -5px;
+  top: -5px;
+  width: 25%;
+}
+
+/* .login_text::before {
   background-color: var(--main-background-color);
   content: "Do you have an account?";
   left: 50%;
   padding: 0 4px;
   position: absolute;
   transform: translate(-50%, -50%);
-}
+} */
 
 .sign_up_link {
   align-self: center;

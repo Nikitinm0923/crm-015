@@ -265,7 +265,10 @@ export default function Auth() {
             </button>
           </div>
           <div className="signup_wrapper">
-            <hr className="signup_text" />
+            {/* <hr className="signup_text" /> */}
+            <div className="signup_text">
+              <p>Don't have an account?</p>
+            </div>
             <button className="sign_up_link" onClick={() => setTab(2)}>
               Sign Up
             </button>
@@ -386,7 +389,10 @@ export default function Auth() {
             Sign Up
           </button>
           <div className="login_wrapper" style={{ marginTop: "16px" }}>
-            <hr className="login_text" />
+            {/* <hr className="login_text" /> */}
+            <div className="login_text">
+              <p>Do you have an account?</p>
+            </div>
             <button className="login_link " onClick={() => setTab(1)}>
               Log in
             </button>
