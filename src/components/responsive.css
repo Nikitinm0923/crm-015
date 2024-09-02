@@ -1,17 +1,86 @@
-@media only screen and (max-width: 768px){
-    #side-out-menu{
-        display: none;
-    }
-    #sidebar{
-        width: 100%;
-        height: auto;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-    }
-    #side-main-menu{
-        flex-direction: row;
-        justify-content: space-between;
-        padding: 0 30px;
-    }
+@media only screen and (max-width: 768px) {
+  /* AUTH start */
+
+  #loginForm,
+  .signup_form {
+    background-color: transparent;
+    width: 90%;
+  }
+
+  #loginForm h1,
+  .signup_form h1 {
+    background-color: inherit;
+    font-size: xx-large;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  #loginForm .fields,
+  .signup_form .fields {
+    background-color: inherit;
+    margin: 64px 0;
+  }
+
+  .signup_form .fields {
+    margin: 32px 0;
+  }
+
+  #loginForm .fields input,
+  .signup_form .fields input {
+    background-color: var(--main-text-color);
+    color: var(--main-background-color);
+  }
+
+  #loginForm .fields input::placeholder,
+  .signup_form .fields input::placeholder {
+    color: var(--main-background-color);
+    font-weight: 400;
+  }
+
+  #loginForm .or_text,
+  #loginForm .login_other {
+    display: none;
+  }
+
+  .login_wrapper,
+  .signup_wrapper {
+    background-color: inherit;
+  }
+
+  .login_wrapper .login_text::before,
+  .signup_wrapper .signup_text::before {
+    border-radius: 5px;
+  }
+
+  .login_wrapper .login_link,
+  .signup_wrapper .sign_up_link {
+    background-color: inherit;
+    margin: 16px 0;
+  }
+
+  .flag_theme,
+  .flag_theme .dropdown,
+  .flag_theme .dropdown svg {
+    background-color: inherit;
+  }
+
+  /* AUTH end */
+
+  #side-out-menu {
+    display: none;
+  }
+
+  #sidebar {
+    width: 100%;
+    height: auto;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+  }
+
+  #side-main-menu {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 30px;
+  }
 }
