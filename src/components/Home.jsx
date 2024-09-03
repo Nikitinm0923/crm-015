@@ -2515,9 +2515,98 @@ export default function HomeRu() {
                 </div>
               </div>
             </div>
+            {/* New Order Page (Portfolio) */}
+            <div className="mobile-stat-box hide-on-desktop">
+              <p className="title">
+                Statistics
+              </p>
+              <div className="row g-0 mobile-stat-row">
+                <div className="col-6">
+                  <div className="stat-box">
+                    <p className="name">
+                      {t("Equity")}:
+                    </p>
+                    <p className={`balance-nums ${equity < 0 ? "text-danger" : equity === 0 ? "text-muted" : ""
+                      }`}>
+                      {+parseFloat(equity)?.toFixed(2)}
+                    </p>
+                  </div>
+                </div>
+                <div className="col-6">
+                  <div className="stat-box">
+                    <p className="name">
+                      {t("profit")}:
+                    </p>
+                    <p className={`balance-nums ${activeOrdersProfit < 0
+                      ? "text-danger"
+                      : activeOrdersProfit === 0
+                        ? "text-muted"
+                        : ""
+                      }`}>
+                      {+parseFloat(activeOrdersProfit)?.toFixed(2)}
+                    </p>
+                  </div>
+                </div>
+                <div className="col-6">
+                  <div className="stat-box">
+                    <p className="name">
+                      {t("freeMargin")}:
+                    </p>
+                    <p className={`balance-nums ${freeMargin < 0
+                      ? "text-danger"
+                      : freeMargin === 0
+                        ? "text-muted"
+                        : ""
+                      }`}>
+                      {+parseFloat(freeMargin)?.toFixed(2)}
+                    </p>
+                  </div>
+                </div>
+                <div className="col-6">
+                  <div className="stat-box">
+                    <p className="name">
+                      Margin:
+                    </p>
+                    <p className={`balance-nums ${totalMargin < 0
+                      ? "text-danger"
+                      : totalMargin === 0
+                        ? "text-muted"
+                        : ""
+                      }`}>
+                      {+parseFloat(totalMargin)?.toFixed(2)}
+                    </p>
+                  </div>
+                </div>
+                <div className="col-6">
+                  <div className="stat-box">
+                    <p className="name">
+                      Level:
+                    </p>
+                    <p className={`balance-nums ${level < 0 ? "text-danger" : level === 0 ? "text-muted" : ""
+                      }`}>
+                      {`${+parseFloat(level)?.toFixed(2)}%`}
+                    </p>
+                  </div>
+                </div>
+                <div className="col-6">
+                  <div className="stat-box">
+                    <p className="name">
+                      Balance:
+                    </p>
+                    <p className={`balance-nums ${level < 0 ? "text-danger" : level === 0 ? "text-muted" : ""
+                      }`}>
+                      {+parseFloat(totalBalance)?.toFixed(2)}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p className="orders-title hide-on-desktop">
+              Order Details
+            </p>
             <div
               id="orders"
-              style={{ height: isHidden ? "" : "37%", overflow: "auto" }}
+              style={{ height: isHidden ? "" : "38%", overflow: "auto" }}
             >
               <div className="orders-ext">
                 <div className="orders-side">
@@ -2639,6 +2728,11 @@ export default function HomeRu() {
                   </Tab>
                 </Tabs>
               )}
+            </div>
+            <div className="order-bnt-box hide-on-desktop">
+              <button type="button" className="regular-dark-btn">
+                new order
+              </button>
             </div>
           </div>
           {tab === "account" && (
