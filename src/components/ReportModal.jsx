@@ -10,6 +10,7 @@ import depositsColumns from "./columns/depositsColumns";
 import moment from "moment";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
+import "./responsive.css"
 
 const ReportModal = ({
   onClose,
@@ -138,30 +139,111 @@ const ReportModal = ({
           </h2>
         </Modal.Header>
         <Modal.Body style={{ backgroundColor: "inherit" }}>
-          <Tabs activeKey={key} onSelect={(k) => setKey(k)}>
-            <Tab eventKey="tradeOperations" title="Trade operations">
-              <DataTable
-                columns={generalColumns}
-                customStyles={customStyle}
-                data={fillArrayWithEmptyRows(filteredOrders, 5)}
-                defaultSortAsc={false}
-                defaultSortFieldId="close-date"
-                pagination
-                paginationRowsPerPageOptions={[5, 10, 15, 20, 50]}
-                theme={theme}
-              />
-            </Tab>
-            <Tab eventKey="balanceOperations" title="Balance operations">
-              <DataTable
-                columns={depositsColumns}
-                customStyles={customStyle}
-                data={fillArrayWithEmptyRows(filteredDeposits, 5)}
-                pagination
-                paginationRowsPerPageOptions={[5, 10, 15, 20, 50]}
-                theme={theme}
-              />
-            </Tab>
-          </Tabs>
+
+          <div className="reports-overview-box hide-on-desktop">
+            <p className="title">
+              Overview
+            </p>
+            <ul>
+              <li>
+                <div className="">
+                  <p className="name">
+                    Balance:
+                  </p>
+                  <p className="number">
+                    {+parseFloat(balance)?.toFixed(2)}
+                  </p>
+                </div>
+              </li>
+              <li>
+                <div className="">
+                  <p className="name">
+                    Bonus:
+                  </p>
+                  <p className="number">
+                    {+parseFloat(bonus)?.toFixed(2)}
+                  </p>
+                </div>
+              </li>
+              <li>
+                <div className="">
+                  <p className="name">
+                    Total profit:
+                  </p>
+                  <p className="number">
+                    {+parseFloat(totalProfit)?.toFixed(2)}
+                  </p>
+                </div>
+              </li>
+              <li>
+                <div className="">
+                  <p className="name">
+                    Bonus spent:
+                  </p>
+                  <p className="number">
+                    {+bonusSpent?.toFixed(2)}
+                  </p>
+                </div>
+              </li>
+              <li>
+                <div className="">
+                  <p className="name">
+                    Deposited:
+                  </p>
+                  <p className="number">
+                    {deposited}
+                  </p>
+                </div>
+              </li>
+              <li>
+                <div className="">
+                  <p className="name">
+                    Withdrawn:
+                  </p>
+                  <p className="number">
+                    {withdrawn}
+                  </p>
+                </div>
+              </li>
+              <li>
+                <div className="">
+                  <p className="name">
+                    Total deals:
+                  </p>
+                  <p className="number">
+                    {orders.length}
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div className="report-tabs">
+            <Tabs activeKey={key} onSelect={(k) => setKey(k)}>
+              <Tab eventKey="tradeOperations" title="Trade operations">
+                <DataTable
+                  columns={generalColumns}
+                  customStyles={customStyle}
+                  data={fillArrayWithEmptyRows(filteredOrders, 5)}
+                  defaultSortAsc={false}
+                  defaultSortFieldId="close-date"
+                  pagination
+                  paginationRowsPerPageOptions={[5, 10, 15, 20, 50]}
+                  theme={theme}
+                />
+              </Tab>
+              <Tab eventKey="balanceOperations" title="Balance operations">
+                <DataTable
+                  columns={depositsColumns}
+                  customStyles={customStyle}
+                  data={fillArrayWithEmptyRows(filteredDeposits, 5)}
+                  pagination
+                  paginationRowsPerPageOptions={[5, 10, 15, 20, 50]}
+                  theme={theme}
+                />
+              </Tab>
+            </Tabs>
+          </div>
           <div className="report-footer">
             <select
               onChange={(e) => {
@@ -181,7 +263,7 @@ const ReportModal = ({
             <span>Deposited: {deposited}</span>
             <span>Withdrawn: {withdrawn}</span>
             <span>Total deals: {orders.length}</span>
-            <button className="" onClick={onClose}>
+            <button className="hide-on-mobile" onClick={onClose}>
               Close
             </button>
           </div>

@@ -964,19 +964,24 @@ button {
 .custom-caret-down-icon {
   display: flex;
 }
+
 .custom-caret-up-icon .fa-caret-up path {
   color: lime !important;
 }
+
 .custom-caret-down-icon .fa-caret-down path {
   color: red !important;
 }
+
 .order-actions {
   display: flex;
   padding: 3px 10px;
 }
+
 .order-actions .custom-delete-icon {
   margin-left: 5px;
 }
+
 .order-actions .custom-delete-icon .fa-xmark {
   font-size: 15px;
 }
@@ -1014,7 +1019,8 @@ button {
   background-color: #605e5e;
   padding: 20px;
   border-radius: 8px;
-  max-width: 300px; /* Adjust the maximum width */
+  max-width: 300px;
+  /* Adjust the maximum width */
   width: 100%;
   opacity: 1;
   transform: scale(1);
@@ -1032,12 +1038,14 @@ button {
   transform: scale(0.8);
   pointer-events: none;
 }
+
 .fWGDho div:first-child {
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
 }
+
 .order-column {
   width: 100% !important;
   height: 100% !important;
@@ -1087,6 +1095,10 @@ ul {
   margin-left: 25%;
   padding: 8px;
   width: 50%;
+}
+
+.add-symbol-btn span {
+  background-color: var(--main-primary-button);
 }
 
 .add-symbol-btn:hover {
@@ -1191,15 +1203,18 @@ table {
 }
 
 orders-table {
-  max-height: 100%; /* Set the maximum height of the container */
+  max-height: 100%;
+  /* Set the maximum height of the container */
 }
 
 .sticky-header {
   position: sticky;
   /* border: 3px solid var(--bs-border-color); */
   top: 0;
-  background-color: whitesmoke; /* Ensure header remains visible */
-  z-index: 100; /* Ensure header is above table rows */
+  background-color: whitesmoke;
+  /* Ensure header remains visible */
+  z-index: 100;
+  /* Ensure header is above table rows */
 }
 
 th,
@@ -1210,13 +1225,16 @@ td {
   color: var(--main-textc);
   background-color: var(--bs-body-bg);
   margin: 0;
-  white-space: nowrap; /* Prevent content from wrapping */
-  text-overflow: ellipsis; /* Show ellipsis for hidden content */
+  white-space: nowrap;
+  /* Prevent content from wrapping */
+  text-overflow: ellipsis;
+  /* Show ellipsis for hidden content */
 }
 
 /* Adjust position of table body to accommodate fixed header */
 .table-body {
-  margin-top: 40px; /* Adjust this value based on the header height */
+  margin-top: 40px;
+  /* Adjust this value based on the header height */
 }
 
 /* ionic icons */
@@ -1238,6 +1256,7 @@ thead {
   background-color: white;
   z-index: 1;
 }
+
 /* MODALs */
 
 /* Styles for the modal overlay */
@@ -1248,8 +1267,10 @@ thead {
   left: 0;
   width: 100px;
   height: 180px;
-  background-color: rgba(0, 0, 0, 0); /* Semi-transparent background */
-  z-index: 5; /* Ensure it's on top of other content */
+  background-color: rgba(0, 0, 0, 0);
+  /* Semi-transparent background */
+  z-index: 5;
+  /* Ensure it's on top of other content */
   justify-content: center;
   align-items: center;
   border: 0.5px solid gray;
@@ -1258,7 +1279,8 @@ thead {
 /* Styles for the dropdown within the modal */
 #symbol-dropdown {
   max-height: 180px;
-  max-width: 100px; /* Adjust as needed */
+  max-width: 100px;
+  /* Adjust as needed */
   overflow-y: auto;
   border: none;
   border-radius: 5px;
@@ -1475,7 +1497,7 @@ thead {
   margin-top: 16px;
 }
 
-.flag_theme > * {
+.flag_theme>* {
   margin: 0 8px;
 }
 
@@ -1533,7 +1555,7 @@ thead {
   background-color: gray !important;
 }
 
-.Toastify__toast-body > div:last-child {
+.Toastify__toast-body>div:last-child {
   background-color: gray !important;
 }
 
@@ -1754,8 +1776,7 @@ hr {
   fill: var(--main-text-color) !important;
 }
 
-.highcharts-axis-labels.highcharts-xaxis-labels.highcharts-navigator-xaxis
-  .highcharts-text-outline {
+.highcharts-axis-labels.highcharts-xaxis-labels.highcharts-navigator-xaxis .highcharts-text-outline {
   stroke-width: 0px;
 }
 
@@ -1771,7 +1792,7 @@ hr {
   width: 60px !important;
 }
 
-.highcharts-bindings-wrapper li > button.highcharts-menu-item-btn {
+.highcharts-bindings-wrapper li>button.highcharts-menu-item-btn {
   filter: invert(1);
 }
 
@@ -1825,7 +1846,7 @@ hr {
 } */
 
 .hide-on-desktop {
-  display: none!important;
+  display: none !important;
 }
 
 #header #balance .help-box {
@@ -1836,10 +1857,20 @@ hr {
   display: none;
 }
 
-.mobile-tabs{
+.mobile-tabs {
   display: none;
 }
 
 /* .min-h-100{
   min-height: 0%;
 } */
+
+
+.modal-body .reports-overview-box {
+  background-color: #fff;
+}
+
+.modal-body .reports-overview-box ul {
+  display: block;
+  list-style-type: none;
+}

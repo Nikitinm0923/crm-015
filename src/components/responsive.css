@@ -178,11 +178,14 @@
     .id-btn {
         margin: 0;
         background-color: var(--main-tertiary-color);
-        border-radius: 5px 0 0 5px;
+        border-radius: 5px;
+        /* padding: 5px 35px 5px 15px; */
         padding: 5px 15px;
         font-size: 12px;
         font-weight: 500;
         color: var(--main-primary-button);
+        margin-right: 10px;
+        position: relative;
     }
 
     .id-btn span {
@@ -191,6 +194,13 @@
         font-size: 10px;
         font-weight: 700;
         line-height: 12px;
+    }
+
+    .id-btn svg {
+        position: absolute;
+        top: 16px;
+        right: 10px;
+        display: none !important;
     }
 
 
@@ -207,7 +217,9 @@
 
     #trade {
         height: auto !important;
-        border-radius: 5px 5px 0 0;
+        /* border-radius: 5px 5px 0 0; */
+        border-radius: 5px;
+        padding: 20px;
         background-color: var(--main-background-color);
     }
 
@@ -374,7 +386,7 @@
 
     #orders .order-tabs .nav-item button.active {
         background-color: var(--main-primary-button);
-        color: var(--main-text-color)!important;
+        color: var(--main-text-color) !important;
     }
 
     #orders .order-tabs .nav-item:nth-child(1) button {
@@ -387,18 +399,18 @@
         border-bottom-left-radius: 0;
     }
 
-    .order-bnt-box{
+    .order-bnt-box {
         text-align: center;
         background-color: var(--main-tertiary-color);
         padding-top: 15px;
         padding-bottom: 10px;
     }
 
-    .order-bnt-box button{
+    .order-bnt-box button {
         width: 80%;
     }
 
-    .regular-dark-btn{
+    .regular-dark-btn {
         background-color: var(--main-background-color);
         border: 0;
         padding: 10px 20px;
@@ -407,8 +419,56 @@
         font-size: 14px;
         font-weight: 600;
     }
-        .regular-dark-btn:hover{
-            background-color: var(--main-primary-button);
 
-        }
+    .regular-dark-btn:hover {
+        background-color: var(--main-primary-button);
+
+    }
+
+
+    /* Assets CSS */
+
+    #assets .add-symbol-btn {
+        position: absolute;
+        bottom: 90px;
+        right: 20px;
+        border-radius: 50rem;
+        width: 50px;
+        height: 50px;
+        font-size: 28px;
+        padding: 0;
+    }
+
+    #assets .add-symbol-btn span {
+        display: none;
+    }
+
+    .search-input-icon {
+        top: -27px !important;
+        fill: var(--main-text-color) !important;
+    }
+
+    .sc-dItHI {
+        color: var(--main-primary-button) !important;
+    }
+
+
+    /* HEader Account Modal CSS */
+    .acc-info {
+        right: 3.5%;
+        top: 7.75%;
+    }
+
+
+
+
+    /* Reports Modal CSS */
+    .modal-body .reports-overview-box {
+        background-color: #fff;
+    }
+
+    .modal-body .reports-overview-box ul {
+        display: block;
+        list-style-type: none;
+    }
 }

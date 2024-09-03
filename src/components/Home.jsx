@@ -1277,6 +1277,10 @@ export default function HomeRu() {
               >
                 <span>{defaultAccount?.type || "Type"} </span>
                 {defaultAccount.account_no || "#"}
+                <svg className="hide-on-desktop" width="13" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6.14002 7C5.91993 7 5.69987 6.91597 5.53208 6.74825L0.251916 1.46804C-0.0839719 1.13215 -0.0839719 0.587565 0.251916 0.251814C0.587667 -0.0839379 1.13214 -0.0839379 1.46806 0.251814L6.14002 4.92404L10.812 0.251977C11.1479 -0.0837747 11.6923 -0.0837747 12.028 0.251977C12.3641 0.587728 12.3641 1.13231 12.028 1.4682L6.74795 6.74842C6.58007 6.91616 6.36002 7 6.14002 7Z" fill="white" />
+                </svg>
+
               </button>
               {showAccountInfo && (
                 <div className="acc-info">
@@ -1883,6 +1887,7 @@ export default function HomeRu() {
                   value={quoteSearch}
                 />
                 <svg
+                  className="search-input-icon"
                   height="21"
                   style={{
                     backgroundColor: "transparent",
@@ -1913,7 +1918,7 @@ export default function HomeRu() {
                     handleTradingModal();
                   }}
                 >
-                  + Add Symbol
+                  + <span>Add Symbol</span>
                 </button>
               </div>
               <div id="chart" className="rounded">
