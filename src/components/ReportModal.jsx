@@ -10,7 +10,6 @@ import depositsColumns from "./columns/depositsColumns";
 import moment from "moment";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
-import "./responsive.css"
 
 const ReportModal = ({
   onClose,
@@ -139,37 +138,24 @@ const ReportModal = ({
           </h2>
         </Modal.Header>
         <Modal.Body style={{ backgroundColor: "inherit" }}>
-
           <div className="reports-overview-box hide-on-desktop">
-            <p className="title">
-              Overview
-            </p>
+            <p className="title">Overview</p>
             <ul>
               <li>
                 <div className="">
-                  <p className="name">
-                    Balance:
-                  </p>
-                  <p className="number">
-                    {+parseFloat(balance)?.toFixed(2)}
-                  </p>
+                  <p className="name">Balance:</p>
+                  <p className="number">{+parseFloat(balance)?.toFixed(2)}</p>
                 </div>
               </li>
               <li>
                 <div className="">
-                  <p className="name">
-                    Bonus:
-                  </p>
-                  <p className="number">
-                    {+parseFloat(bonus)?.toFixed(2)}
-                  </p>
+                  <p className="name">Bonus:</p>
+                  <p className="number">{+parseFloat(bonus)?.toFixed(2)}</p>
                 </div>
               </li>
               <li>
                 <div className="">
-                  <p className="name">
-                    Total profit:
-                  </p>
+                  <p className="name">Total profit:</p>
                   <p className="number">
                     {+parseFloat(totalProfit)?.toFixed(2)}
                   </p>
@@ -177,42 +163,26 @@ const ReportModal = ({
               </li>
               <li>
                 <div className="">
-                  <p className="name">
-                    Bonus spent:
-                  </p>
-                  <p className="number">
-                    {+bonusSpent?.toFixed(2)}
-                  </p>
+                  <p className="name">Bonus spent:</p>
+                  <p className="number">{+bonusSpent?.toFixed(2)}</p>
                 </div>
               </li>
               <li>
                 <div className="">
-                  <p className="name">
-                    Deposited:
-                  </p>
-                  <p className="number">
-                    {deposited}
-                  </p>
+                  <p className="name">Deposited:</p>
+                  <p className="number">{deposited}</p>
                 </div>
               </li>
               <li>
                 <div className="">
-                  <p className="name">
-                    Withdrawn:
-                  </p>
-                  <p className="number">
-                    {withdrawn}
-                  </p>
+                  <p className="name">Withdrawn:</p>
+                  <p className="number">{withdrawn}</p>
                 </div>
               </li>
               <li>
                 <div className="">
-                  <p className="name">
-                    Total deals:
-                  </p>
-                  <p className="number">
-                    {orders.length}
-                  </p>
+                  <p className="name">Total deals:</p>
+                  <p className="number">{orders.length}</p>
                 </div>
               </li>
             </ul>

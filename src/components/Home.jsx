@@ -1067,6 +1067,46 @@ export default function HomeRu() {
     setIsLoading(false);
   };
 
+  const [showNewOrderPageMobile, setShowNewOrderPageMobile] = useState(false);
+
+  const [isMobileUI, setIsMobileUI] = useState(false);
+  window
+    .matchMedia("(max-width: 768px)")
+    .addEventListener("change", (event) => {
+      if (event.matches) {
+        setIsMobileUI(true);
+      } else {
+        setIsMobileUI(false);
+      }
+    });
+  useEffect(() => {
+    if (window.matchMedia("(max-width: 768px)").matches) {
+      setIsMobileUI(true);
+    } else {
+      setIsMobileUI(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    const tradeDiv = document.getElementById("trade");
+    if (!isMobileUI) {
+      tradeDiv.style.cssText = "height:60%;";
+      tradeDiv.style.removeProperty("border-radius");
+      tradeDiv.style.removeProperty("padding");
+      return;
+    }
+    if (showNewOrderPanel) {
+      tradeDiv.style.cssText =
+        "border-radius:5px;height:65%!important;padding:20px;";
+    } else if (tab === "assets") {
+      tradeDiv.style.cssText =
+        "border-radius:5px;height:65%!important;padding:unset;";
+    } else {
+      tradeDiv.style.cssText =
+        "border-radius:5px 5px 0 0;height:auto!important;padding:unset;";
+    }
+  }, [isMobileUI, showNewOrderPanel, tab]);
+
   return (
     <>
       <div id="header">
@@ -1096,7 +1136,9 @@ export default function HomeRu() {
             </div>
             <div className="page-title">
               <p className="">
-                {tab === "newOrder"
+                {showNewOrderPageMobile
+                  ? "Portfolio"
+                  : tab === "newOrder"
                   ? "New Order"
                   : tab.charAt(0).toUpperCase() + tab.slice(1)}
               </p>
@@ -1277,10 +1319,19 @@ export default function HomeRu() {
               >
                 <span>{defaultAccount?.type || "Type"} </span>
                 {defaultAccount.account_no || "#"}
-                <svg className="hide-on-desktop" width="13" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M6.14002 7C5.91993 7 5.69987 6.91597 5.53208 6.74825L0.251916 1.46804C-0.0839719 1.13215 -0.0839719 0.587565 0.251916 0.251814C0.587667 -0.0839379 1.13214 -0.0839379 1.46806 0.251814L6.14002 4.92404L10.812 0.251977C11.1479 -0.0837747 11.6923 -0.0837747 12.028 0.251977C12.3641 0.587728 12.3641 1.13231 12.028 1.4682L6.74795 6.74842C6.58007 6.91616 6.36002 7 6.14002 7Z" fill="white" />
+                <svg
+                  className="hide-on-desktop"
+                  width="13"
+                  height="7"
+                  viewBox="0 0 13 7"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M6.14002 7C5.91993 7 5.69987 6.91597 5.53208 6.74825L0.251916 1.46804C-0.0839719 1.13215 -0.0839719 0.587565 0.251916 0.251814C0.587667 -0.0839379 1.13214 -0.0839379 1.46806 0.251814L6.14002 4.92404L10.812 0.251977C11.1479 -0.0837747 11.6923 -0.0837747 12.028 0.251977C12.3641 0.587728 12.3641 1.13231 12.028 1.4682L6.74795 6.74842C6.58007 6.91616 6.36002 7 6.14002 7Z"
+                    fill="white"
+                  />
                 </svg>
-
               </button>
               {showAccountInfo && (
                 <div className="acc-info">
@@ -1350,7 +1401,11 @@ export default function HomeRu() {
           <div id="side-main-menu">
             <div
               className="side-btn"
-              onClick={() => setTab("trade")}
+              onClick={() => {
+                setShowNewOrderPageMobile(false);
+                setShowNewOrderPanel(false);
+                setTab("trade");
+              }}
               style={{
                 backgroundColor:
                   tab === "trade" && "var(--main-secondary-color-40)",
@@ -1421,7 +1476,9 @@ export default function HomeRu() {
             <div
               className="side-btn"
               onClick={() => {
-                setTab(tab === "assets" ? "trade" : "assets");
+                setShowNewOrderPageMobile(false);
+                setShowNewOrderPanel(false);
+                setTab("assets");
               }}
               style={{
                 backgroundColor:
@@ -1470,8 +1527,13 @@ export default function HomeRu() {
             <div
               className="side-btn"
               onClick={() => {
-                openOrderPanel();
-                setTab("newOrder");
+                if (isMobileUI) {
+                  setShowNewOrderPageMobile(true);
+                  setTab("newOrder");
+                } else {
+                  setShowNewOrderPanel(true);
+                  setTab("newOrder");
+                }
               }}
               style={{
                 backgroundColor:
@@ -1518,8 +1580,10 @@ export default function HomeRu() {
             <div
               className="side-btn"
               onClick={() => {
-                setTab("account");
                 setAccTab("acc-info");
+                setShowNewOrderPageMobile(false);
+                setShowNewOrderPanel(false);
+                setTab("account");
               }}
               style={{
                 backgroundColor:
@@ -1869,7 +1933,9 @@ export default function HomeRu() {
             id="trade-div"
           >
             <div
-              className={showHistoryPanel ? "d-none" : ""}
+              className={
+                showHistoryPanel || showNewOrderPageMobile ? "d-none" : ""
+              }
               id="trade"
               style={{
                 height: isHidden ? "92%" : "60%",
@@ -2469,276 +2535,414 @@ export default function HomeRu() {
                 </div>
               </div>
             </div>
-            <div className="mobile-trade-box w-100 hide-on-desktop">
-              <p className="title">Volume</p>
-              <div className="inner-box">
-                <div className="left-box">
-                  <Button
-                    className="w-100"
-                    onClick={() => setDealType("Buy")}
-                    style={{
-                      backgroundColor:
-                        dealType === "Buy"
-                          ? "var(--main-primary-button)"
-                          : "var(--main-secondary-color)",
-                    }}
-                    variant=""
-                  >
-                    BUY
-                  </Button>
-                </div>
-                <div className="center-box">
-                  <input
-                    id="symbol-amount"
-                    name="volume"
-                    onChange={(e) => {
-                      const { value } = e.target;
-                      setOrderData((p) => ({
-                        ...p,
-                        volume: !value ? "" : parseFloat(value),
-                      }));
-                    }}
-                    step={0.1}
-                    type="number"
-                    value={orderData.volume}
-                  />
-                </div>
-                <div className="right-box">
-                  <Button
-                    className="w-100"
-                    onClick={() => setDealType("Sell")}
-                    style={{
-                      backgroundColor:
-                        dealType === "Sell"
-                          ? "var(--danger-color)"
-                          : "var(--danger-color)",
-                    }}
-                    variant=""
-                  >
-                    SELL
-                  </Button>
-                </div>
-              </div>
-            </div>
-            {/* New Order Page (Portfolio) */}
-            <div className="mobile-stat-box hide-on-desktop">
-              <p className="title">
-                Statistics
-              </p>
-              <div className="row g-0 mobile-stat-row">
-                <div className="col-6">
-                  <div className="stat-box">
-                    <p className="name">
-                      {t("Equity")}:
-                    </p>
-                    <p className={`balance-nums ${equity < 0 ? "text-danger" : equity === 0 ? "text-muted" : ""
-                      }`}>
-                      {+parseFloat(equity)?.toFixed(2)}
-                    </p>
-                  </div>
-                </div>
-                <div className="col-6">
-                  <div className="stat-box">
-                    <p className="name">
-                      {t("profit")}:
-                    </p>
-                    <p className={`balance-nums ${activeOrdersProfit < 0
-                      ? "text-danger"
-                      : activeOrdersProfit === 0
-                        ? "text-muted"
-                        : ""
-                      }`}>
-                      {+parseFloat(activeOrdersProfit)?.toFixed(2)}
-                    </p>
-                  </div>
-                </div>
-                <div className="col-6">
-                  <div className="stat-box">
-                    <p className="name">
-                      {t("freeMargin")}:
-                    </p>
-                    <p className={`balance-nums ${freeMargin < 0
-                      ? "text-danger"
-                      : freeMargin === 0
-                        ? "text-muted"
-                        : ""
-                      }`}>
-                      {+parseFloat(freeMargin)?.toFixed(2)}
-                    </p>
-                  </div>
-                </div>
-                <div className="col-6">
-                  <div className="stat-box">
-                    <p className="name">
-                      Margin:
-                    </p>
-                    <p className={`balance-nums ${totalMargin < 0
-                      ? "text-danger"
-                      : totalMargin === 0
-                        ? "text-muted"
-                        : ""
-                      }`}>
-                      {+parseFloat(totalMargin)?.toFixed(2)}
-                    </p>
-                  </div>
-                </div>
-                <div className="col-6">
-                  <div className="stat-box">
-                    <p className="name">
-                      Level:
-                    </p>
-                    <p className={`balance-nums ${level < 0 ? "text-danger" : level === 0 ? "text-muted" : ""
-                      }`}>
-                      {`${+parseFloat(level)?.toFixed(2)}%`}
-                    </p>
-                  </div>
-                </div>
-                <div className="col-6">
-                  <div className="stat-box">
-                    <p className="name">
-                      Balance:
-                    </p>
-                    <p className={`balance-nums ${level < 0 ? "text-danger" : level === 0 ? "text-muted" : ""
-                      }`}>
-                      {+parseFloat(totalBalance)?.toFixed(2)}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <p className="orders-title hide-on-desktop">
-              Order Details
-            </p>
-            <div
-              id="orders"
-              style={{ height: isHidden ? "" : "38%", overflow: "auto" }}
-            >
-              <div className="orders-ext">
-                <div className="orders-side">
-                  <button
-                    onClick={() => {
-                      setIsReportModalOpen(true);
-                    }}
-                    style={{ padding: "6px 18px" }}
-                  >
-                    {t("orderReport")}
-                  </button>
-                  <button
-                    onClick={() => {
-                      openOrderHistory();
-                    }}
-                    style={{ padding: "6px" }}
-                  >
-                    <svg
-                      height="19"
-                      style={{ fill: "var(--main-primary-button)" }}
-                      viewBox="0 0 19 19"
-                      width="19"
-                      xmlns="http://www.w3.org/2000/svg"
+            {tab === "trade" && (
+              <div className="mobile-trade-box w-100 hide-on-desktop">
+                <p className="title">Volume</p>
+                <div className="inner-box">
+                  <div className="left-box">
+                    <Button
+                      className="w-100"
+                      onClick={() => {
+                        setDealType("Buy");
+                        setShowNewOrderPageMobile(false);
+                        setShowNewOrderPanel(true);
+                        setTab("newOrder");
+                      }}
+                      style={{
+                        backgroundColor: "var(--main-primary-button)",
+                      }}
+                      variant=""
                     >
-                      <path d="M16.6582 15.642L13.0796 12.0635L12.1199 13.0222L15.6995 16.6018L14.3478 17.9535L19 19.0001L17.9534 14.3467L16.6582 15.642Z" />
-                      <path d="M4.65229 1.04663L0 0L1.04663 4.65337L2.39834 3.30166L5.97794 6.88126L6.9388 5.9204L3.35811 2.3408L4.65229 1.04663Z" />
-                      <path d="M13.0502 6.9084L16.6288 3.3288L17.9533 4.65229L19 0L14.3466 1.04663L15.6712 2.37011L12.0916 5.94863L13.0502 6.9084Z" />
-                      <path d="M5.94863 12.0903L2.36903 15.6699L1.04663 14.3475L0 18.9998L4.65337 17.9532L3.3288 16.6297L6.9084 13.0512L5.94863 12.0903Z" />
-                    </svg>
-                  </button>
+                      BUY
+                    </Button>
+                  </div>
+                  <div className="center-box">
+                    <input
+                      id="symbol-amount"
+                      name="volume"
+                      onChange={(e) => {
+                        const { value } = e.target;
+                        setOrderData((p) => ({
+                          ...p,
+                          volume: !value ? "" : parseFloat(value),
+                        }));
+                      }}
+                      step={0.1}
+                      type="number"
+                      value={orderData.volume}
+                    />
+                  </div>
+                  <div className="right-box">
+                    <Button
+                      className="w-100"
+                      onClick={() => {
+                        setDealType("Sell");
+                        setShowNewOrderPageMobile(false);
+                        setShowNewOrderPanel(true);
+                        setTab("newOrder");
+                      }}
+                      style={{
+                        backgroundColor: "var(--danger-color)",
+                      }}
+                      variant=""
+                    >
+                      SELL
+                    </Button>
+                  </div>
                 </div>
               </div>
-              {/* <div
-                style={{
-                  alignItems: "center",
-                  display: "flex",
-                  height: isHidden ? "" : "16px",
-                  justifyContent: "space-between",
-                }}
+            )}
+            {!isMobileUI && (
+              <div
+                id="orders"
+                style={{ height: isHidden ? "" : "38%", overflow: "auto" }}
               >
-                <div style={{ visibility: "hidden" }}></div>
-                {!isHidden && <div id="resize-bar"></div>}
-                <button
-                  className="btn btn-secondary btn-sm px-4"
-                  onClick={() => {
-                    isHidden && setDealsRow(5);
-                    setIsHidden(!isHidden);
+                <div className="orders-ext">
+                  <div className="orders-side">
+                    <button
+                      onClick={() => {
+                        setIsReportModalOpen(true);
+                      }}
+                      style={{ padding: "6px 18px" }}
+                    >
+                      {t("orderReport")}
+                    </button>
+                    <button
+                      onClick={() => {
+                        openOrderHistory();
+                      }}
+                      style={{ padding: "6px" }}
+                    >
+                      <svg
+                        height="19"
+                        style={{ fill: "var(--main-primary-button)" }}
+                        viewBox="0 0 19 19"
+                        width="19"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M16.6582 15.642L13.0796 12.0635L12.1199 13.0222L15.6995 16.6018L14.3478 17.9535L19 19.0001L17.9534 14.3467L16.6582 15.642Z" />
+                        <path d="M4.65229 1.04663L0 0L1.04663 4.65337L2.39834 3.30166L5.97794 6.88126L6.9388 5.9204L3.35811 2.3408L4.65229 1.04663Z" />
+                        <path d="M13.0502 6.9084L16.6288 3.3288L17.9533 4.65229L19 0L14.3466 1.04663L15.6712 2.37011L12.0916 5.94863L13.0502 6.9084Z" />
+                        <path d="M5.94863 12.0903L2.36903 15.6699L1.04663 14.3475L0 18.9998L4.65337 17.9532L3.3288 16.6297L6.9084 13.0512L5.94863 12.0903Z" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                {/* <div
+                  style={{
+                    alignItems: "center",
+                    display: "flex",
+                    height: isHidden ? "" : "16px",
+                    justifyContent: "space-between",
                   }}
                 >
-                  {isHidden ? "Show deals" : "Hide deals"}
-                </button>
-              </div> */}
-              {!isHidden && (
-                <Tabs
-                  activeKey={dealsTab}
-                  className="order-tabs"
-                  onContextMenu={(e) => {
-                    e.preventDefault();
-                    setShowColumnsModal(true);
-                  }}
-                  onSelect={(k) => setDealsTab(k)}
+                  <div style={{ visibility: "hidden" }}></div>
+                  {!isHidden && <div id="resize-bar"></div>}
+                  <button
+                    className="btn btn-secondary btn-sm px-4"
+                    onClick={() => {
+                      isHidden && setDealsRow(5);
+                      setIsHidden(!isHidden);
+                    }}
+                  >
+                    {isHidden ? "Show deals" : "Hide deals"}
+                  </button>
+                </div> */}
+                {!isHidden && (
+                  <Tabs
+                    activeKey={dealsTab}
+                    className="order-tabs"
+                    onContextMenu={(e) => {
+                      e.preventDefault();
+                      setShowColumnsModal(true);
+                    }}
+                    onSelect={(k) => setDealsTab(k)}
+                  >
+                    <Tab eventKey="activeTab" title="Active">
+                      <DataTable
+                        columns={dealsColumns({
+                          t,
+                          handleEditModal,
+                          handleCloseBtn,
+                          showColumns,
+                        })}
+                        conditionalRowStyles={conditionalRowStylesOnOrders}
+                        customStyles={customStylesOnDeals}
+                        data={fillArrayWithEmptyRows(
+                          activeOrders,
+                          dealsRow -
+                            (activeOrders.length % dealsRow) +
+                            activeOrders.length
+                        )}
+                        dense
+                        highlightOnHover
+                        key={dealsRow}
+                        onRowDoubleClicked={handleDoubleClickOnOrders}
+                        pagination
+                        paginationComponentOptions={{ noRowsPerPage: 1 }}
+                        paginationPerPage={dealsRow}
+                        paginationTotalRows={activeOrders.length}
+                        pointerOnHover
+                        responsive
+                        theme={theme}
+                      />
+                    </Tab>
+                    <Tab eventKey="delayedTab" title="Delayed">
+                      <DataTable
+                        columns={dealsColumns({
+                          t,
+                          handleEditModal,
+                          handleCloseBtn,
+                          showColumns,
+                        }).filter(({ name }) => name !== "Profit")}
+                        conditionalRowStyles={conditionalRowStylesOnOrders}
+                        customStyles={customStylesOnDeals}
+                        data={fillArrayWithEmptyRows(
+                          delayedOrders,
+                          dealsRow -
+                            (delayedOrders.length % dealsRow) +
+                            delayedOrders.length
+                        )}
+                        dense
+                        highlightOnHover
+                        key={dealsRow}
+                        pagination
+                        paginationComponentOptions={{ noRowsPerPage: 1 }}
+                        paginationPerPage={dealsRow}
+                        paginationTotalRows={delayedOrders.length}
+                        pointerOnHover
+                        responsive
+                        theme={theme}
+                      />
+                    </Tab>
+                  </Tabs>
+                )}
+              </div>
+            )}
+            {/* New Order Page (Portfolio) */}
+            {showNewOrderPageMobile && (
+              <>
+                <div className="mobile-stat-box hide-on-desktop">
+                  <p className="title">Statistics</p>
+                  <div className="row g-0 mobile-stat-row">
+                    <div className="col-6">
+                      <div className="stat-box">
+                        <p className="name">{t("Equity")}:</p>
+                        <p
+                          className={`balance-nums ${
+                            equity < 0
+                              ? "text-danger"
+                              : equity === 0
+                              ? "text-muted"
+                              : ""
+                          }`}
+                        >
+                          {+parseFloat(equity)?.toFixed(2)}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="col-6">
+                      <div className="stat-box">
+                        <p className="name">{t("profit")}:</p>
+                        <p
+                          className={`balance-nums ${
+                            activeOrdersProfit < 0
+                              ? "text-danger"
+                              : activeOrdersProfit === 0
+                              ? "text-muted"
+                              : ""
+                          }`}
+                        >
+                          {+parseFloat(activeOrdersProfit)?.toFixed(2)}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="col-6">
+                      <div className="stat-box">
+                        <p className="name">{t("freeMargin")}:</p>
+                        <p
+                          className={`balance-nums ${
+                            freeMargin < 0
+                              ? "text-danger"
+                              : freeMargin === 0
+                              ? "text-muted"
+                              : ""
+                          }`}
+                        >
+                          {+parseFloat(freeMargin)?.toFixed(2)}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="col-6">
+                      <div className="stat-box">
+                        <p className="name">Margin:</p>
+                        <p
+                          className={`balance-nums ${
+                            totalMargin < 0
+                              ? "text-danger"
+                              : totalMargin === 0
+                              ? "text-muted"
+                              : ""
+                          }`}
+                        >
+                          {+parseFloat(totalMargin)?.toFixed(2)}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="col-6">
+                      <div className="stat-box">
+                        <p className="name">Level:</p>
+                        <p
+                          className={`balance-nums ${
+                            level < 0
+                              ? "text-danger"
+                              : level === 0
+                              ? "text-muted"
+                              : ""
+                          }`}
+                        >
+                          {`${+parseFloat(level)?.toFixed(2)}%`}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="col-6">
+                      <div className="stat-box">
+                        <p className="name">Balance:</p>
+                        <p
+                          className={`balance-nums ${
+                            level < 0
+                              ? "text-danger"
+                              : level === 0
+                              ? "text-muted"
+                              : ""
+                          }`}
+                        >
+                          {+parseFloat(totalBalance)?.toFixed(2)}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <p className="orders-title hide-on-desktop">Order Details</p>
+                <div
+                  id="orders"
+                  style={{ height: isHidden ? "" : "38%", overflow: "auto" }}
                 >
-                  <Tab eventKey="activeTab" title="Active">
-                    <DataTable
-                      columns={dealsColumns({
-                        t,
-                        handleEditModal,
-                        handleCloseBtn,
-                        showColumns,
-                      })}
-                      conditionalRowStyles={conditionalRowStylesOnOrders}
-                      customStyles={customStylesOnDeals}
-                      data={fillArrayWithEmptyRows(
-                        activeOrders,
-                        dealsRow -
-                          (activeOrders.length % dealsRow) +
-                          activeOrders.length
-                      )}
-                      dense
-                      highlightOnHover
-                      key={dealsRow}
-                      onRowDoubleClicked={handleDoubleClickOnOrders}
-                      pagination
-                      paginationComponentOptions={{ noRowsPerPage: 1 }}
-                      paginationPerPage={dealsRow}
-                      paginationTotalRows={activeOrders.length}
-                      pointerOnHover
-                      responsive
-                      theme={theme}
-                    />
-                  </Tab>
-                  <Tab eventKey="delayedTab" title="Delayed">
-                    <DataTable
-                      columns={dealsColumns({
-                        t,
-                        handleEditModal,
-                        handleCloseBtn,
-                        showColumns,
-                      }).filter(({ name }) => name !== "Profit")}
-                      conditionalRowStyles={conditionalRowStylesOnOrders}
-                      customStyles={customStylesOnDeals}
-                      data={fillArrayWithEmptyRows(
-                        delayedOrders,
-                        dealsRow -
-                          (delayedOrders.length % dealsRow) +
-                          delayedOrders.length
-                      )}
-                      dense
-                      highlightOnHover
-                      key={dealsRow}
-                      pagination
-                      paginationComponentOptions={{ noRowsPerPage: 1 }}
-                      paginationPerPage={dealsRow}
-                      paginationTotalRows={delayedOrders.length}
-                      pointerOnHover
-                      responsive
-                      theme={theme}
-                    />
-                  </Tab>
-                </Tabs>
-              )}
-            </div>
-            <div className="order-bnt-box hide-on-desktop">
-              <button type="button" className="regular-dark-btn">
-                new order
-              </button>
-            </div>
+                  <div className="orders-ext">
+                    <div className="orders-side">
+                      <button
+                        onClick={() => {
+                          setIsReportModalOpen(true);
+                        }}
+                        style={{ padding: "6px 18px" }}
+                      >
+                        {t("orderReport")}
+                      </button>
+                      <button
+                        onClick={() => {
+                          openOrderHistory();
+                        }}
+                        style={{ padding: "6px" }}
+                      >
+                        <svg
+                          height="19"
+                          style={{ fill: "var(--main-primary-button)" }}
+                          viewBox="0 0 19 19"
+                          width="19"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path d="M16.6582 15.642L13.0796 12.0635L12.1199 13.0222L15.6995 16.6018L14.3478 17.9535L19 19.0001L17.9534 14.3467L16.6582 15.642Z" />
+                          <path d="M4.65229 1.04663L0 0L1.04663 4.65337L2.39834 3.30166L5.97794 6.88126L6.9388 5.9204L3.35811 2.3408L4.65229 1.04663Z" />
+                          <path d="M13.0502 6.9084L16.6288 3.3288L17.9533 4.65229L19 0L14.3466 1.04663L15.6712 2.37011L12.0916 5.94863L13.0502 6.9084Z" />
+                          <path d="M5.94863 12.0903L2.36903 15.6699L1.04663 14.3475L0 18.9998L4.65337 17.9532L3.3288 16.6297L6.9084 13.0512L5.94863 12.0903Z" />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                  {!isHidden && (
+                    <Tabs
+                      activeKey={dealsTab}
+                      className="order-tabs"
+                      onContextMenu={(e) => {
+                        e.preventDefault();
+                        setShowColumnsModal(true);
+                      }}
+                      onSelect={(k) => setDealsTab(k)}
+                    >
+                      <Tab eventKey="activeTab" title="Active">
+                        <DataTable
+                          columns={dealsColumns({
+                            t,
+                            handleEditModal,
+                            handleCloseBtn,
+                            showColumns,
+                          })}
+                          conditionalRowStyles={conditionalRowStylesOnOrders}
+                          customStyles={customStylesOnDeals}
+                          data={fillArrayWithEmptyRows(
+                            activeOrders,
+                            dealsRow -
+                              (activeOrders.length % dealsRow) +
+                              activeOrders.length
+                          )}
+                          dense
+                          highlightOnHover
+                          key={dealsRow}
+                          onRowDoubleClicked={handleDoubleClickOnOrders}
+                          pagination
+                          paginationComponentOptions={{ noRowsPerPage: 1 }}
+                          paginationPerPage={dealsRow}
+                          paginationTotalRows={activeOrders.length}
+                          pointerOnHover
+                          responsive
+                          theme={theme}
+                        />
+                      </Tab>
+                      <Tab eventKey="delayedTab" title="Delayed">
+                        <DataTable
+                          columns={dealsColumns({
+                            t,
+                            handleEditModal,
+                            handleCloseBtn,
+                            showColumns,
+                          }).filter(({ name }) => name !== "Profit")}
+                          conditionalRowStyles={conditionalRowStylesOnOrders}
+                          customStyles={customStylesOnDeals}
+                          data={fillArrayWithEmptyRows(
+                            delayedOrders,
+                            dealsRow -
+                              (delayedOrders.length % dealsRow) +
+                              delayedOrders.length
+                          )}
+                          dense
+                          highlightOnHover
+                          key={dealsRow}
+                          pagination
+                          paginationComponentOptions={{ noRowsPerPage: 1 }}
+                          paginationPerPage={dealsRow}
+                          paginationTotalRows={delayedOrders.length}
+                          pointerOnHover
+                          responsive
+                          theme={theme}
+                        />
+                      </Tab>
+                    </Tabs>
+                  )}
+                </div>
+                <div className="order-bnt-box hide-on-desktop">
+                  <button
+                    className="regular-dark-btn"
+                    onClick={() => {
+                      setShowNewOrderPageMobile(false);
+                      setShowNewOrderPanel(true);
+                    }}
+                    type="button"
+                  >
+                    new order
+                  </button>
+                </div>
+              </>
+            )}
           </div>
           {tab === "account" && (
             <div id="account" className="h-100">
