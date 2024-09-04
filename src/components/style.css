@@ -1867,10 +1867,17 @@ hr {
 
 
 .modal-body .reports-overview-box {
-  background-color: #fff;
+  /* background-color: #fff; */
+}
+
+/* .modal-body .reports-overview-box .title{
+  color: var(--main-text-color);
+  font-weight: 600;
+  font-size: 18px;
+
 }
 
 .modal-body .reports-overview-box ul {
   display: block;
   list-style-type: none;
-}
+} */

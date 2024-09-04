@@ -130,6 +130,7 @@ const ReportModal = ({
         onHide={onClose}
         show
         size="lg"
+        backdrop={false}
       >
         <Modal.Header style={{ backgroundColor: "inherit" }} closeButton>
           <h2
@@ -181,7 +182,7 @@ const ReportModal = ({
                   <p className="number">{withdrawn}</p>
                 </div>
               </li>
-              <li>
+              <li className="border-0">
                 <div className="">
                   <p className="name">Total deals:</p>
                   <p className="number">{orders.length}</p>
@@ -215,8 +216,20 @@ const ReportModal = ({
                 />
               </Tab>
             </Tabs>
+            <select
+            className="hide-on-desktop"
+              onChange={(e) => {
+                setShowRecord(e.target.value);
+              }}
+            >
+              <option label="All Operations" value="all"></option>
+              <option label="Today" value="today"></option>
+              <option label="Last Week" value="lastWeek"></option>
+              <option label="Last Month" value="lastMonth"></option>
+              <option label="Last 3 Month" value="last3Month"></option>
+            </select>
           </div>
-          <div className="report-footer">
+          <div className="report-footer hide-on-mobile">
             <select
               onChange={(e) => {
                 setShowRecord(e.target.value);
