@@ -5,6 +5,7 @@ import { Modal } from "react-bootstrap";
 import { setDepositsState } from "../redux/slicer/transactionSlicer";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import DataTable from "react-data-table-component";
 import depositsColumns from "./columns/depositsColumns";
 import moment from "moment";
@@ -21,6 +22,7 @@ const ReportModal = ({
 }) => {
   const [key, setKey] = useState("tradeOperations");
   const [showRecord, setShowRecord] = useState("all");
+  const { t } = useTranslation();
   const deposits = useSelector((state) => state.deposits);
   const dispatch = useDispatch();
   const orders = useSelector((state) =>
@@ -134,7 +136,7 @@ const ReportModal = ({
             className="mb-0 text-center w-100"
             style={{ backgroundColor: "inherit" }}
           >
-            Reports
+            {t("reports")}
           </h2>
         </Modal.Header>
         <Modal.Body style={{ backgroundColor: "inherit" }}>
@@ -190,7 +192,7 @@ const ReportModal = ({
 
           <div className="report-tabs">
             <Tabs activeKey={key} onSelect={(k) => setKey(k)}>
-              <Tab eventKey="tradeOperations" title="Trade operations">
+              <Tab eventKey="tradeOperations" title={t("tradeOperations")}>
                 <DataTable
                   columns={generalColumns}
                   customStyles={customStyle}
@@ -202,7 +204,7 @@ const ReportModal = ({
                   theme={theme}
                 />
               </Tab>
-              <Tab eventKey="balanceOperations" title="Balance operations">
+              <Tab eventKey="balanceOperations" title={t("balanceOperations")}>
                 <DataTable
                   columns={depositsColumns}
                   customStyles={customStyle}
@@ -220,21 +222,35 @@ const ReportModal = ({
                 setShowRecord(e.target.value);
               }}
             >
-              <option label="All Operations" value="all"></option>
-              <option label="Today" value="today"></option>
-              <option label="Last Week" value="lastWeek"></option>
-              <option label="Last Month" value="lastMonth"></option>
-              <option label="Last 3 Month" value="last3Month"></option>
+              <option label={t("allOperations")} value="all"></option>
+              <option label={t("today")} value="today"></option>
+              <option label={t("lastWeek")} value="lastWeek"></option>
+              <option label={t("lastMonth")} value="lastMonth"></option>
+              <option label={t("last3Months")} value="last3Month"></option>
             </select>
-            <span>Balance: {+parseFloat(balance)?.toFixed(2)}</span>
-            <span>Bonus: {+parseFloat(bonus)?.toFixed(2)}</span>
-            <span>Total profit: {+parseFloat(totalProfit)?.toFixed(2)}</span>
-            <span>Bonus spent: {+bonusSpent?.toFixed(2)}</span>
-            <span>Deposited: {deposited}</span>
-            <span>Withdrawn: {withdrawn}</span>
-            <span>Total deals: {orders.length}</span>
+            <span>
+              {t("balance")}: {+parseFloat(balance)?.toFixed(2)}
+            </span>
+            <span>
+              {t("bonus")}: {+parseFloat(bonus)?.toFixed(2)}
+            </span>
+            <span>
+              {t("totalProfit")}: {+parseFloat(totalProfit)?.toFixed(2)}
+            </span>
+            <span>
+              {t("bonusSpent")}: {+bonusSpent?.toFixed(2)}
+            </span>
+            <span>
+              {t("deposited")}: {deposited}
+            </span>
+            <span>
+              {t("withdrawn")}: {withdrawn}
+            </span>
+            <span>
+              {t("totalDeals")}: {orders.length}
+            </span>
             <button className="hide-on-mobile" onClick={onClose}>
-              Close
+              {t("close")}
             </button>
           </div>
         </Modal.Body>

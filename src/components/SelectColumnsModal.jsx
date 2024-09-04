@@ -1,23 +1,23 @@
-import { useEffect } from "react";
-import { Modal, Form } from "react-bootstrap";
+import { Form, Modal } from "react-bootstrap";
 import { updateShowColumnsById } from "../helper/firebaseHelpers";
+import { useEffect } from "react";
 
 const SelectColumnsModal = ({ userId, setModal, columns, setColumns }) => {
   const closeModal = () => setModal(false);
 
   useEffect(
     () => () => updateShowColumnsById(userId, { dealsColumns: columns }),
-    [columns]
+    [columns, userId]
   );
 
   return (
     <Modal
-      show
-      onHide={closeModal}
-      dialogClassName="position-absolute columns-modal"
-      backdropClassName="opacity-0"
       animation
+      backdropClassName="opacity-0"
+      dialogClassName="position-absolute columns-modal"
       keyboard
+      onHide={closeModal}
+      show
       size="sm"
     >
       <Modal.Header className="py-1 ">Show/Hide Columns</Modal.Header>
@@ -25,8 +25,8 @@ const SelectColumnsModal = ({ userId, setModal, columns, setColumns }) => {
         {Object.keys(columns).map((column) => {
           return (
             <Form.Check
-              label={column.toUpperCase()}
               checked={columns[column]}
+              label={column.toUpperCase()}
               onChange={(e) =>
                 setColumns((p) => ({ ...p, [column]: e.target.checked }))
               }

@@ -1,16 +1,15 @@
-// Example: EditModal.js
+import { Modal } from "react-bootstrap";
 import React from "react";
-import { Button, Modal } from "react-bootstrap";
 
 const MessageModal = ({ onClose, show, title, message }) => {
   return (
     <>
       <Modal
-        size="sm"
-        show={show}
-        onHide={onClose}
-        className="modal-style-edit modal-style-del"
         centered
+        className="modal-style-edit modal-style-del"
+        onHide={onClose}
+        show={show}
+        size="sm"
       >
         <Modal.Header
           className="bg-transparent border-0 rounded-0 text-center p-1 pb-0 align-items-center"

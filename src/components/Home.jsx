@@ -498,7 +498,7 @@ export default function HomeRu() {
       sortable: true,
     },
     {
-      name: "Bid",
+      name: t("bid"),
       selector: (row) => {
         if (!row) return;
         const { settings } = row;
@@ -523,7 +523,7 @@ export default function HomeRu() {
       compact: true,
     },
     {
-      name: "Ask",
+      name: t("ask"),
       selector: (row) => {
         if (!row) return;
         const { settings } = row;
@@ -1144,7 +1144,7 @@ export default function HomeRu() {
               </p>
             </div>
             <div className="balance-item hide-on-mobile">
-              <h2 className="balance-title">{t("Equity")}:</h2>
+              <h2 className="balance-title">{t("equity")}:</h2>
               <input
                 className={`balance-nums ${
                   equity < 0 ? "text-danger" : equity === 0 ? "text-muted" : ""
@@ -1185,7 +1185,7 @@ export default function HomeRu() {
               />
             </div>
             <div className="balance-item hide-on-mobile">
-              <h2 className="balance-title">Margin:</h2>
+              <h2 className="balance-title">{t("margin")}:</h2>
               <input
                 className={`balance-nums ${
                   totalMargin < 0
@@ -1200,7 +1200,7 @@ export default function HomeRu() {
               />
             </div>
             <div className="balance-item hide-on-mobile">
-              <h2 className="balance-title">Level:</h2>
+              <h2 className="balance-title">{t("level")}:</h2>
               <input
                 className={`balance-nums ${
                   level < 0 ? "text-danger" : level === 0 ? "text-muted" : ""
@@ -1280,12 +1280,12 @@ export default function HomeRu() {
                     </svg>
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
-                    {["Dark", "Light", "Purple"].map((t, i) => (
+                    {["Dark", "Light", "Purple"].map((theme, i) => (
                       <Dropdown.Item
                         key={i}
-                        onClick={() => changeTheme(t.toLowerCase())}
+                        onClick={() => changeTheme(theme.toLowerCase())}
                       >
-                        {t}
+                        {t(theme.toLowerCase())}
                       </Dropdown.Item>
                     ))}
                   </Dropdown.Menu>
@@ -1337,7 +1337,7 @@ export default function HomeRu() {
                 <div className="acc-info">
                   <div className="acc-layout">
                     <div className="active-acc">
-                      <label>Active Account</label>
+                      <label>{t("activeAccount")}</label>
                       <span className="acc-tile">
                         <span className="acc-tile-type">
                           {defaultAccount?.type || "Type"}
@@ -1349,10 +1349,10 @@ export default function HomeRu() {
                       </span>
                     </div>
                     <button className="deposit-acc-btn" onClick={() => {}}>
-                      Deposit Funds
+                      {t("depositFunds")}
                     </button>
                     <div className="other-acc">
-                      <label>Other Account</label>
+                      <label>{t("otherAccount")}</label>
                       {accounts.map((acc) => (
                         <>
                           <span className="acc-tile">
@@ -1387,7 +1387,7 @@ export default function HomeRu() {
                       className="open-acc-btn"
                       onClick={() => setShowAccountModal(true)}
                     >
-                      Open an account
+                      {t("openAccount")}
                     </button>
                   </div>
                 </div>
@@ -1688,7 +1688,7 @@ export default function HomeRu() {
                       : "var(--main-text-color)",
                 }}
               >
-                Account info
+                {t("accountInfo")}
               </button>
             </div>
             <div
@@ -1752,7 +1752,7 @@ export default function HomeRu() {
                       : "var(--main-text-color)",
                 }}
               >
-                Personal info
+                {t("personalInfo")}
               </button>
             </div>
             <div
@@ -1798,7 +1798,7 @@ export default function HomeRu() {
                       : "var(--main-text-color)",
                 }}
               >
-                Deposit
+                {t("deposit")}
               </button>
             </div>
             <div
@@ -1848,7 +1848,7 @@ export default function HomeRu() {
                       : "var(--main-text-color)",
                 }}
               >
-                Report
+                {t("report")}
               </button>
             </div>
           </div>
@@ -1984,7 +1984,7 @@ export default function HomeRu() {
                     handleTradingModal();
                   }}
                 >
-                  + <span>Add Symbol</span>
+                  + <span>{t("addSymbol")}</span>
                 </button>
               </div>
               <div id="chart" className="rounded">
@@ -2114,7 +2114,7 @@ export default function HomeRu() {
               </div>
               <div id="newOrder" className={showNewOrderPanel ? "" : "d-none"}>
                 <div id="newOrderData">
-                  <h6>New Order</h6>
+                  <h6>{t("newOrder")}</h6>
                   <form id="newOrderForm">
                     <Select
                       id="symbol-input"
@@ -2197,7 +2197,7 @@ export default function HomeRu() {
                         }}
                         variant=""
                       >
-                        BUY
+                        {t("buy").toUpperCase()}
                       </Button>
                       <Button
                         onClick={() => setDealType("Sell")}
@@ -2209,7 +2209,7 @@ export default function HomeRu() {
                         }}
                         variant=""
                       >
-                        SELL
+                        {t("sell").toUpperCase()}
                       </Button>
                     </ButtonGroup>
                     <svg
@@ -2232,7 +2232,7 @@ export default function HomeRu() {
                     </svg>
                     <div className="vol-group">
                       <div>
-                        <label htmlFor="symbol-amount">Volume</label>
+                        <label htmlFor="symbol-amount">{t("volume")}</label>
                         <div className="vol-input">
                           <span
                             onClick={() => {
@@ -2281,7 +2281,7 @@ export default function HomeRu() {
                         </div>
                       </div>
                       <div>
-                        <label htmlFor="open-at">Open at</label>
+                        <label htmlFor="open-at">{t("openAt")}</label>
                         <div className="vol-input">
                           <span
                             disabled={!enableOpenPrice}
@@ -2329,7 +2329,8 @@ export default function HomeRu() {
                       </div>
                     </div>
                     <label className="margin-label">
-                      Margin: <span>{+calculatedSum?.toFixed(2)} USD</span>
+                      {t("margin")}:{" "}
+                      <span>{+calculatedSum?.toFixed(2)} USD</span>
                     </label>
                     <div className="d-flex gap-4 mt-2">
                       <div className="form-check">
@@ -2344,7 +2345,7 @@ export default function HomeRu() {
                           className="form-check-label m-0"
                           htmlFor="market"
                         >
-                          Market
+                          {t("market")}
                         </label>
                       </div>
                       <div className="form-check">
@@ -2362,7 +2363,7 @@ export default function HomeRu() {
                           type="radio"
                         />
                         <label className="form-check-label m-0" htmlFor="limit">
-                          Limit
+                          {t("limit")}
                         </label>
                       </div>
                     </div>
@@ -2386,7 +2387,7 @@ export default function HomeRu() {
                     </svg>
                     <div className="vol-group">
                       <div>
-                        <label htmlFor="take-profit">Take Profit</label>
+                        <label htmlFor="take-profit">{t("takeProfit")}</label>
                         <div className="vol-input">
                           <span
                             onClick={() => {
@@ -2434,7 +2435,7 @@ export default function HomeRu() {
                         </div>
                       </div>
                       <div>
-                        <label htmlFor="stop-loss">Stop Loss</label>
+                        <label htmlFor="stop-loss">{t("stopLoss")}</label>
                         <div className="vol-input">
                           <span
                             onClick={() => {
@@ -2512,7 +2513,9 @@ export default function HomeRu() {
                         }}
                         type="submit"
                       >
-                        {dealType === "Buy" ? "BUY" : "SELL"}
+                        {dealType === "Buy"
+                          ? t("buy").toUpperCase()
+                          : t("sell").toUpperCase()}
                       </button>
                       <button
                         onClick={(e) => {
@@ -2528,7 +2531,7 @@ export default function HomeRu() {
                           backgroundColor: "var(--main-secondary-color)",
                         }}
                       >
-                        CANCEL
+                        {t("cancel").toUpperCase()}
                       </button>
                     </div>
                   </form>
@@ -2537,7 +2540,7 @@ export default function HomeRu() {
             </div>
             {tab === "trade" && (
               <div className="mobile-trade-box w-100 hide-on-desktop">
-                <p className="title">Volume</p>
+                <p className="title">{t("volume")}</p>
                 <div className="inner-box">
                   <div className="left-box">
                     <Button
@@ -2553,7 +2556,7 @@ export default function HomeRu() {
                       }}
                       variant=""
                     >
-                      BUY
+                      {t("buy").toUpperCase()}
                     </Button>
                   </div>
                   <div className="center-box">
@@ -2586,7 +2589,7 @@ export default function HomeRu() {
                       }}
                       variant=""
                     >
-                      SELL
+                      {t("sell").toUpperCase()}
                     </Button>
                   </div>
                 </div>
@@ -2658,7 +2661,7 @@ export default function HomeRu() {
                     }}
                     onSelect={(k) => setDealsTab(k)}
                   >
-                    <Tab eventKey="activeTab" title="Active">
+                    <Tab eventKey="activeTab" title={t("active")}>
                       <DataTable
                         columns={dealsColumns({
                           t,
@@ -2687,7 +2690,7 @@ export default function HomeRu() {
                         theme={theme}
                       />
                     </Tab>
-                    <Tab eventKey="delayedTab" title="Delayed">
+                    <Tab eventKey="delayedTab" title={t("delayed")}>
                       <DataTable
                         columns={dealsColumns({
                           t,
@@ -2948,12 +2951,12 @@ export default function HomeRu() {
             <div id="account" className="h-100">
               {accTab === "acc-info" && (
                 <div id="account-profile">
-                  <h1>Account Information</h1>
+                  <h1>{t("accountInfo")}</h1>
                   <div className="account-card">
                     {userProfile?.accounts?.length > 0 && (
                       <div className="acc-selection">
                         <label className="m-4" htmlFor="symbol-input">
-                          Select Account
+                          {t("selectAccount")}
                         </label>
                         <Select
                           id="account-input"
@@ -3020,7 +3023,7 @@ export default function HomeRu() {
                         <label>{userProfile.name}</label>
                         <label>{userProfile.surname}</label>
                         <label>
-                          Status: <span>Verified</span>
+                          {t("status")}: <span>{t("verified")}</span>
                         </label>
                       </div>
                       <div id="acc-profile-main">
@@ -3030,12 +3033,12 @@ export default function HomeRu() {
                         </div>
                         <hr />
                         <div className="acc-profile-main-item">
-                          <h6>{t("Free")} (USD):</h6>
+                          <h6>{t("free")} (USD):</h6>
                           <h6>{+parseFloat(freeMargin - bonus)?.toFixed(2)}</h6>
                         </div>
                         <hr />
                         <div className="acc-profile-main-item">
-                          <h6>{t("Bonus")} (USD):</h6>
+                          <h6>{t("bonus")} (USD):</h6>
                           <h6>{+parseFloat(bonus)?.toFixed(2)}</h6>
                         </div>
                         <hr />
@@ -3063,7 +3066,7 @@ export default function HomeRu() {
                     id="create-account-button"
                     onClick={() => setShowAccountModal(true)}
                   >
-                    Create New Account
+                    {t("createNewAccount")}
                   </button>
                 </div>
               )}
@@ -3083,7 +3086,7 @@ export default function HomeRu() {
                         }}
                         variant=""
                       >
-                        Personal Information
+                        {t("personalInfo")}
                       </Button>
                       <Button
                         onClick={() => {
@@ -3097,7 +3100,7 @@ export default function HomeRu() {
                         }}
                         variant=""
                       >
-                        Verification
+                        {t("verification")}
                       </Button>
                       <Button
                         onClick={() => {
@@ -3111,14 +3114,14 @@ export default function HomeRu() {
                         }}
                         variant=""
                       >
-                        Change password
+                        {t("changePassword")}
                       </Button>
                     </ButtonGroup>
                   </div>
                   {personalInfoTab === "personal-info" && (
                     <div id="acc-info-personal">
                       <div className="acc-info-personal-item">
-                        <h6>{t("name")}</h6>
+                        <h6>{t("name")}:</h6>
                         <input
                           name="name"
                           onChange={(e) => handleChange(e)}
@@ -3128,7 +3131,7 @@ export default function HomeRu() {
                         />
                       </div>
                       <div className="acc-info-personal-item">
-                        <h6>{t("surname")}</h6>
+                        <h6>{t("surname")}:</h6>
                         <input
                           name="surname"
                           onChange={(e) => handleChange(e)}
@@ -3139,7 +3142,7 @@ export default function HomeRu() {
                         />
                       </div>
                       <div className="acc-info-personal-item">
-                        <h6>{t("email")}</h6>
+                        <h6>{t("email")}:</h6>
                         <input
                           id="userEmail"
                           name="email"
@@ -3150,7 +3153,7 @@ export default function HomeRu() {
                         />
                       </div>
                       <div className="acc-info-personal-item">
-                        <h6>{t("phone")}</h6>
+                        <h6>{t("phone")}:</h6>
                         <input
                           name="phone"
                           onChange={(e) => handleChange(e)}
@@ -3161,7 +3164,7 @@ export default function HomeRu() {
                         />
                       </div>
                       <div className="acc-info-personal-item">
-                        <h6>{t("Password")}</h6>
+                        <h6>{t("password")}:</h6>
                         <div
                           className="position-relative"
                           style={{ backgroundColor: "inherit" }}
@@ -3184,7 +3187,7 @@ export default function HomeRu() {
                         </div>
                       </div>
                       <div className="acc-info-personal-item">
-                        <h6>{t("country")}</h6>
+                        <h6>{t("country")}:</h6>
                         <input
                           name="country"
                           onChange={(e) => handleChange(e)}
@@ -3195,7 +3198,7 @@ export default function HomeRu() {
                         />
                       </div>
                       <div className="acc-info-personal-item">
-                        <h6>{t("city")}</h6>
+                        <h6>{t("city")}:</h6>
                         <input
                           name="city"
                           onChange={(e) => handleChange(e)}
@@ -3206,7 +3209,7 @@ export default function HomeRu() {
                         />
                       </div>
                       <div className="acc-info-personal-item">
-                        <h6>{t("dateRegister")}</h6>
+                        <h6>{t("dateRegister")}:</h6>
                         <input
                           name="dateRegister"
                           placeholder=""
@@ -3235,20 +3238,18 @@ export default function HomeRu() {
                           isEditable ? handleSaveClick() : setIsEditable(true)
                         }
                       >
-                        {isEditable ? "Save" : "Edit"}
+                        {isEditable ? t("save") : t("edit")}
                       </button>
                     </div>
                   )}
                   {personalInfoTab === "verification" && (
                     <div id="verification-docs">
-                      <h3>Upload Your Documents for Verification</h3>
-                      <h6>Choose file</h6>
-                      <p>File size should be less than 10 mb</p>
+                      <h3>{t("uploadDocuments")}</h3>
+                      <h6>{t("chooseFile")}</h6>
+                      <p>{t("fileSizeLimit")}</p>
                       <form encType="multipart/form-data">
                         <div>
-                          <label htmlFor="idFront">
-                            Front side/first page of ID card/passport/IDcard
-                          </label>
+                          <label htmlFor="idFront">{t("frontSideId")}</label>
                           <input
                             accept=".pdf, .doc, .docx"
                             id="idFront"
@@ -3257,9 +3258,7 @@ export default function HomeRu() {
                           />
                         </div>
                         <div>
-                          <label tmlFor="idBack">
-                            Backside of IDcard/registration page/passport
-                          </label>
+                          <label tmlFor="idBack">{t("backSideId")}</label>
                           <input
                             accept=".pdf, .doc, .docx"
                             id="idBack"
@@ -3269,7 +3268,7 @@ export default function HomeRu() {
                         </div>
                         <div>
                           <label htmlFor="resAddress">
-                            Confirmation of residential address
+                            {t("addressConfirmation")}
                           </label>
                           <input
                             accept=".pdf, .doc, .docx"
@@ -3280,7 +3279,7 @@ export default function HomeRu() {
                         </div>
                         <div>
                           <label htmlFor="creditCardFront">
-                            Credit card front
+                            {t("creditCardFront")}
                           </label>
                           <input
                             accept=".pdf, .doc, .docx"
@@ -3291,7 +3290,7 @@ export default function HomeRu() {
                         </div>
                         <div>
                           <label htmlFor="creditCardBack">
-                            Credit card back
+                            {t("creditCardBack")}
                           </label>
                           <input
                             accept=".pdf, .doc, .docx"
@@ -3300,15 +3299,15 @@ export default function HomeRu() {
                             type="file"
                           />
                         </div>
-                        <button type="submit">Submit</button>
+                        <button type="submit">{t("submit")}</button>
                       </form>
                     </div>
                   )}
                   {personalInfoTab === "change-pass" && (
                     <div id="acc-change-pass">
-                      <h2>Change Password</h2>
+                      <h2>{t("changePassword")}</h2>
                       <div className="acc-change-pass-item">
-                        <h6>Current Password:</h6>
+                        <h6>{t("currentPassword")}:</h6>
                         <input
                           id="pass"
                           name="pass"
@@ -3320,7 +3319,7 @@ export default function HomeRu() {
                         />
                       </div>
                       <div className="acc-change-pass-item">
-                        <h6>New Password:</h6>
+                        <h6>{t("newPassword")}:</h6>
                         <input
                           id="pass"
                           name="pass"
@@ -3332,7 +3331,7 @@ export default function HomeRu() {
                         />
                       </div>
                       <div className="acc-change-pass-item">
-                        <h6>Confirm Password:</h6>
+                        <h6>{t("confirmPassword")}:</h6>
                         <input
                           id="confirm-pass"
                           name="confirm-pass"
@@ -3353,7 +3352,7 @@ export default function HomeRu() {
                             handleChangePass();
                           }}
                         >
-                          Submit
+                          {t("submit")}
                         </button>
                         <button
                           onClick={() => {
@@ -3362,7 +3361,7 @@ export default function HomeRu() {
                             setPass("");
                           }}
                         >
-                          Cancel
+                          {t("cancel")}
                         </button>
                       </div>
                     </div>
@@ -3385,7 +3384,7 @@ export default function HomeRu() {
                         }}
                         variant=""
                       >
-                        Deposit
+                        {t("deposit")}
                       </Button>
                       <Button
                         onClick={() => {
@@ -3399,7 +3398,7 @@ export default function HomeRu() {
                         }}
                         variant=""
                       >
-                        Withdrawal
+                        {t("withdraw")}
                       </Button>
                     </ButtonGroup>
                   </div>
@@ -3454,14 +3453,14 @@ export default function HomeRu() {
                         className="btn"
                         onClick={() => setDepositModal(true)}
                       >
-                        Deposit Funds
+                        {t("depositFunds")}
                       </button>
                     ) : (
                       <button
                         className="btn"
                         onClick={() => setWithdrawlModal(true)}
                       >
-                        Withdraw Funds
+                        {t("withdrawFunds")}
                       </button>
                     )}
                     {depositModal && (
@@ -3484,7 +3483,7 @@ export default function HomeRu() {
                                 className="modal-title"
                                 style={{ backgroundColor: "inherit" }}
                               >
-                                Deposit Funds
+                                {t("depositFunds")}
                               </h4>
                               <button
                                 className="btn-close"
@@ -3504,7 +3503,9 @@ export default function HomeRu() {
                                 style={{ backgroundColor: "inherit" }}
                               >
                                 <div className="deposit-modal-item">
-                                  <label htmlFor="method">Choose Method:</label>
+                                  <label htmlFor="method">
+                                    {t("chooseMethod")}:
+                                  </label>
                                   <Form.Select
                                     id="method"
                                     onChange={(e) => {
@@ -3516,7 +3517,9 @@ export default function HomeRu() {
                                     style={{ height: "32px", width: "60%" }}
                                     value={depositData.method}
                                   >
-                                    <option disabled>Choose Method</option>
+                                    <option disabled>
+                                      {t("chooseMethod")}
+                                    </option>
                                     <option value="VISA">
                                       VISA/MasterCard
                                     </option>
@@ -3526,7 +3529,7 @@ export default function HomeRu() {
                                 </div>
                                 <div className="deposit-modal-item">
                                   <label htmlFor="acc-num">
-                                    Account Number:
+                                    {t("accountNumber")}:
                                   </label>
                                   <Form.Select
                                     id="acc-num"
@@ -3539,7 +3542,7 @@ export default function HomeRu() {
                                     style={{ height: "32px", width: "60%" }}
                                     value={depositData.account_no}
                                   >
-                                    <option>Select Account</option>
+                                    <option>{t("selectAccount")}</option>
                                     {accounts
                                       .filter((acc) => !acc?.isDeleted)
                                       ?.map((a) => (
@@ -3550,7 +3553,7 @@ export default function HomeRu() {
                                   </Form.Select>
                                 </div>
                                 <div className="deposit-modal-item">
-                                  <label htmlFor="amount">Amount:</label>
+                                  <label htmlFor="amount">{t("amount")}:</label>
                                   <input
                                     className="text-center"
                                     id="amount"
@@ -3579,7 +3582,7 @@ export default function HomeRu() {
                                     }}
                                     type="button"
                                   >
-                                    Deposit
+                                    {t("deposit")}
                                   </button>
                                   <button
                                     className="btn-i"
@@ -3587,7 +3590,7 @@ export default function HomeRu() {
                                       setDepositModal(false);
                                     }}
                                   >
-                                    Cancel
+                                    {t("cancel")}
                                   </button>
                                 </div>
                               </div>
@@ -3622,7 +3625,7 @@ export default function HomeRu() {
                               className="modal-body"
                               style={{ backgroundColor: "inherit" }}
                             >
-                              <p>Funds Deposited Successfully!</p>
+                              <p>{t("fundsDepositedSuccess")}</p>
                             </div>
                           </div>
                         </div>
@@ -3648,7 +3651,7 @@ export default function HomeRu() {
                                 className="modal-title"
                                 style={{ backgroundColor: "inherit" }}
                               >
-                                Withdraw Funds
+                                {t("withdrawFunds")}
                               </h4>
                               <button
                                 className="btn-close"
@@ -3668,7 +3671,9 @@ export default function HomeRu() {
                                 style={{ backgroundColor: "inherit" }}
                               >
                                 <div className="deposit-modal-item">
-                                  <label htmlFor="acc-num">Account:</label>
+                                  <label htmlFor="acc-num">
+                                    {t("account")}:
+                                  </label>
                                   <Form.Select
                                     id="acc-num"
                                     onChange={(e) => {
@@ -3680,7 +3685,7 @@ export default function HomeRu() {
                                     style={{ height: "32px", width: "60%" }}
                                     value={withdrawData.account_no}
                                   >
-                                    <option>Select Account</option>
+                                    <option>{t("selectAccount")}</option>
                                     {accounts
                                       .filter((acc) => !acc?.isDeleted)
                                       ?.map((a) => (
@@ -3691,7 +3696,7 @@ export default function HomeRu() {
                                   </Form.Select>
                                 </div>
                                 <div className="deposit-modal-item">
-                                  <label htmlFor="amount">Amount:</label>
+                                  <label htmlFor="amount">{t("amount")}:</label>
                                   <input
                                     className="text-center"
                                     id="amount"
@@ -3707,7 +3712,7 @@ export default function HomeRu() {
                                 </div>
                                 <div className="deposit-modal-item">
                                   <label htmlFor="method">
-                                    Payment Method:
+                                    {t("paymentMethod")}:
                                   </label>
                                   <Form.Select
                                     id="method"
@@ -3720,7 +3725,9 @@ export default function HomeRu() {
                                     style={{ height: "32px", width: "60%" }}
                                     value={withdrawData.method}
                                   >
-                                    <option disabled>Choose Method</option>
+                                    <option disabled>
+                                      {t("chooseMethod")}
+                                    </option>
                                     <option value="VISA">
                                       VISA/MasterCard
                                     </option>
@@ -3730,7 +3737,7 @@ export default function HomeRu() {
                                 </div>
                                 <div className="deposit-modal-item">
                                   <label htmlFor="card-num">
-                                    Card/Wallet number:
+                                    {t("cardWalletNumber")}:
                                   </label>
                                   <input
                                     className="text-center"
@@ -3747,7 +3754,7 @@ export default function HomeRu() {
                                 </div>
                                 <div className="deposit-modal-item">
                                   <label htmlFor="phone-num">
-                                    Phone Number:
+                                    {t("phoneNumber")}:
                                   </label>
                                   <input
                                     className="text-center"
@@ -3776,7 +3783,7 @@ export default function HomeRu() {
                                     }}
                                     type="button"
                                   >
-                                    Submit
+                                    {t("submit")}
                                   </button>
                                   <button
                                     className="btn-i"
@@ -3784,7 +3791,7 @@ export default function HomeRu() {
                                       setWithdrawlModal(false);
                                     }}
                                   >
-                                    Cancel
+                                    {t("cancel")}
                                   </button>
                                 </div>
                               </div>
@@ -3819,7 +3826,7 @@ export default function HomeRu() {
                               className="modal-body"
                               style={{ backgroundColor: "inherit" }}
                             >
-                              <p>Application Submited Successfully!</p>
+                              <p>{t("applicationSubmittedSuccess")}</p>
                             </div>
                           </div>
                         </div>
@@ -3867,63 +3874,61 @@ export default function HomeRu() {
       )}
       {isDelModalOpen && (
         <DelOrderModal
-          show={isDelModalOpen}
+          defaultAccount={defaultAccount}
           onClose={handleCloseModal}
           selectedOrder={selectedOrder}
+          show={isDelModalOpen}
           symbols={dbSymbols}
           userProfile={userProfile}
-          defaultAccount={defaultAccount}
         />
       )}
       {showCancelOrderModal && (
         <CancelOrderModal
+          defaultAccount={defaultAccount}
           selectedOrder={selectedOrder}
           setShow={setShowCancelOrderModal}
           userProfile={userProfile}
-          defaultAccount={defaultAccount}
         />
       )}
       {isReportModalOpen && (
         <ReportModal
-          onClose={handleCloseReportModal}
-          userId={currentUserId}
-          theme={theme}
           balance={totalBalance}
           bonus={bonus}
           bonusSpent={bonusSpent}
+          onClose={handleCloseReportModal}
+          theme={theme}
+          userId={currentUserId}
         />
       )}
       {messageModal?.show && (
         <MessageModal
-          show={messageModal?.show}
-          onClose={handleCloseModal}
-          title={messageModal?.title}
           message={messageModal?.message}
+          onClose={handleCloseModal}
+          show={messageModal?.show}
+          title={messageModal?.title}
         />
       )}
-
       {isTradingModal && (
         <AddTradingSymbolModal
+          handleCloseModal={handleCloseModal}
           show={isTradingModal}
           symbols={dbSymbols}
-          handleCloseModal={handleCloseModal}
-          userQuotes={userQuotes}
           userId={currentUserId}
+          userQuotes={userQuotes}
         />
       )}
-
       {showColumnsModal && (
         <SelectColumnsModal
-          userId={currentUserId}
-          setModal={setShowColumnsModal}
           columns={showColumns}
           setColumns={setShowColumns}
+          setModal={setShowColumnsModal}
+          userId={currentUserId}
         />
       )}
       {showAccountModal && (
         <AccountModal
-          onClose={() => setShowAccountModal(false)}
           currentUserId={currentUserId}
+          onClose={() => setShowAccountModal(false)}
           userProfile={userProfile}
         />
       )}

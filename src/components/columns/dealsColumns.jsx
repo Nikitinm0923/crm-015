@@ -53,14 +53,14 @@ const dealsColumns = ({
     sortable: true,
   },
   {
-    name: "SL / TP",
+    name: t("slTp"),
     omit: !showColumns.sltp,
     selector: (row) => row && row.sltp,
   },
   {
     compact: true,
     grow: 2.5,
-    name: "Additional Parameters",
+    name: t("additionalParameters"),
     omit: !showColumns.additionalParameters,
     selector: (row) =>
       row &&
@@ -70,14 +70,14 @@ const dealsColumns = ({
   },
   {
     compact: true,
-    name: "Margin",
+    name: t("margin"),
     omit: !showColumns.margin,
     selector: (row) => row && +parseFloat(row.sum)?.toFixed(4),
     sortable: true,
   },
   {
     compact: true,
-    name: "Current Price",
+    name: t("currentPrice"),
     omit: !showColumns.currentPrice,
     selector: (row) => row && row.currentPrice,
     sortable: true,
@@ -103,7 +103,7 @@ const dealsColumns = ({
     sortable: true,
   },
   {
-    name: t("Action"),
+    name: t("action"),
     omit: !showColumns.action,
     selector: (row) =>
       row && (

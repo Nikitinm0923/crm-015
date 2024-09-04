@@ -6,12 +6,14 @@ import {
   getDocument,
 } from "../helper/firebaseHelpers";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const AccountModal = ({ onClose, userProfile }) => {
   const [accountNo, setAccountNo] = useState("");
   const [accountType, setAccountType] = useState("Standard");
   const [isLoading, setIsLoading] = useState(true);
   const [type, setType] = useState("Demo");
+  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchLastAccount = async () => {
@@ -77,7 +79,7 @@ const AccountModal = ({ onClose, userProfile }) => {
           closeButton
           style={{ borderBottom: "1px solid var(--main-secondary-color)" }}
         >
-          <h3 className="mb-0">Open an account</h3>
+          <h3 className="mb-0">{t("openAccount")}</h3>
         </Modal.Header>
         <Modal.Body className="d-flex flex-column align-items-center gap-3">
           <ButtonGroup className="btn-group">
@@ -139,7 +141,7 @@ const AccountModal = ({ onClose, userProfile }) => {
             </div>
           </div>
           <div className="fs-5">
-            Account number:
+            {t("accountNumber")}:
             <span className="ms-2" style={{ color: "var(--success-color)" }}>
               {accountNo || "Loading..."}
             </span>
