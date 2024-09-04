@@ -1402,6 +1402,7 @@ export default function HomeRu() {
             <div
               className="side-btn"
               onClick={() => {
+                setIsReportModalOpen(false);
                 setShowNewOrderPageMobile(false);
                 setShowNewOrderPanel(false);
                 setTab("trade");
@@ -1476,6 +1477,7 @@ export default function HomeRu() {
             <div
               className="side-btn"
               onClick={() => {
+                setIsReportModalOpen(false);
                 setShowNewOrderPageMobile(false);
                 setShowNewOrderPanel(false);
                 setTab("assets");
@@ -1529,11 +1531,11 @@ export default function HomeRu() {
               onClick={() => {
                 if (isMobileUI) {
                   setShowNewOrderPageMobile(true);
-                  setTab("newOrder");
                 } else {
                   setShowNewOrderPanel(true);
-                  setTab("newOrder");
                 }
+                setIsReportModalOpen(false);
+                setTab("newOrder");
               }}
               style={{
                 backgroundColor:
@@ -1581,6 +1583,7 @@ export default function HomeRu() {
               className="side-btn"
               onClick={() => {
                 setAccTab("acc-info");
+                setIsReportModalOpen(false);
                 setShowNewOrderPageMobile(false);
                 setShowNewOrderPanel(false);
                 setTab("account");

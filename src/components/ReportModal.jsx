@@ -142,7 +142,7 @@ const ReportModal = ({
         </Modal.Header>
         <Modal.Body style={{ backgroundColor: "inherit" }}>
           <div className="reports-overview-box hide-on-desktop">
-            <p className="title">Overview</p>
+            <p className="title">{t("overview")}</p>
             <ul>
               <li>
                 <div className="">
@@ -190,7 +190,6 @@ const ReportModal = ({
               </li>
             </ul>
           </div>
-
           <div className="report-tabs">
             <Tabs activeKey={key} onSelect={(k) => setKey(k)}>
               <Tab eventKey="tradeOperations" title={t("tradeOperations")}>
@@ -217,7 +216,7 @@ const ReportModal = ({
               </Tab>
             </Tabs>
             <select
-            className="hide-on-desktop"
+              className="hide-on-desktop"
               onChange={(e) => {
                 setShowRecord(e.target.value);
               }}
