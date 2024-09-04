@@ -6,7 +6,7 @@ const resources = {
   english: {
     translation: {
       account: "Account",
-      accountInfo: "Account Information",
+      accountInfo: "Account info",
       accountManagement: "Account Management",
       accountNumber: "Account Number",
       action: "Action",
@@ -97,7 +97,7 @@ const resources = {
       overview: "Overview",
       password: "Password",
       paymentMethod: "Payment Method",
-      personalInfo: "Personal information",
+      personalInfo: "Personal info",
       phone: "Phone",
       phoneNumber: "Phone number",
       profit: "Profit",
