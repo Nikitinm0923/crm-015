@@ -448,7 +448,7 @@
 
     /* Reports Modal CSS */
 
-    .reports-modal{
+    .reports-modal {
         height: 82.5%;
         top: 63px;
         background-color: var(--main-tertiary-color);
@@ -586,4 +586,104 @@
         outline: 0;
         box-shadow: none;
     }
+
+    /* Account Page */
+
+    #account {
+        background-color: var(--main-tertiary-color);
+        overflow-y: scroll;
+    }
+
+    #account #account-profile {
+        background-color: var(--main-tertiary-color);
+    }
+
+    #account h1 {
+        display: none;
+    }
+
+    .account-card {
+        width: 100%;
+        background-color: var(--main-tertiary-color);
+        margin-bottom: 0;
+    }
+
+    .account-card .acc-selection {
+        display: none;
+    }
+
+    .account-card #acc-profile-main {
+        display: none;
+    }
+
+    .account-card .acc-main-content {
+        display: block;
+    }
+
+    .account-card .acc-img-name {
+        margin-bottom: 50px;
+    }
+
+    .account-card .account-sublink-box ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        background-color: var(--main-background-color);
+    }
+
+    .account-card .account-sublink-box ul li {
+        border-bottom: 1px solid var(--main-secondary-color);
+    }
+
+    .account-card .account-sublink-box ul li button {
+        background-color: var(--main-background-color);
+        border: none;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 25px;
+    }
+
+    .account-card .account-sublink-box ul li button:nth-child(1) div {
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        gap: 25px;
+    }
+
+    .account-card .account-sublink-box ul li button p {
+        margin-bottom: 0;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .account-card .acc-img-name label:nth-of-type(1) {
+        font-size: 16px;
+        font-weight: 700;
+        padding-top: 5px;
+    }
+
+    .account-card .acc-img-name label:nth-of-type(2) {
+        display: none;
+    }
+
+    .account-card .acc-img-name label:nth-of-type(3) {
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    .logout-btn{
+        background-color: #7C7C7C;
+        padding: 11px 30px;
+        border-radius: 5px;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--main-text-color);
+        border: none;
+    }
+        .logout-btn svg{
+            background-color: transparent;
+            margin-right: 10px;
+        }
 }
