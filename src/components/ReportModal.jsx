@@ -146,19 +146,19 @@ const ReportModal = ({
             <ul>
               <li>
                 <div className="">
-                  <p className="name">Balance:</p>
+                  <p className="name">{t("balance")}:</p>
                   <p className="number">{+parseFloat(balance)?.toFixed(2)}</p>
                 </div>
               </li>
               <li>
                 <div className="">
-                  <p className="name">Bonus:</p>
+                  <p className="name">{t("bonus")}:</p>
                   <p className="number">{+parseFloat(bonus)?.toFixed(2)}</p>
                 </div>
               </li>
               <li>
                 <div className="">
-                  <p className="name">Total profit:</p>
+                  <p className="name">{t("totalProfit")}:</p>
                   <p className="number">
                     {+parseFloat(totalProfit)?.toFixed(2)}
                   </p>
@@ -166,25 +166,25 @@ const ReportModal = ({
               </li>
               <li>
                 <div className="">
-                  <p className="name">Bonus spent:</p>
+                  <p className="name">{t("bonusSpent")}:</p>
                   <p className="number">{+bonusSpent?.toFixed(2)}</p>
                 </div>
               </li>
               <li>
                 <div className="">
-                  <p className="name">Deposited:</p>
+                  <p className="name">{t("deposited")}:</p>
                   <p className="number">{deposited}</p>
                 </div>
               </li>
               <li>
                 <div className="">
-                  <p className="name">Withdrawn:</p>
+                  <p className="name">{t("withdrawn")}:</p>
                   <p className="number">{withdrawn}</p>
                 </div>
               </li>
               <li className="border-0">
                 <div className="">
-                  <p className="name">Total deals:</p>
+                  <p className="name">{t("totalDeals")}:</p>
                   <p className="number">{orders.length}</p>
                 </div>
               </li>
@@ -222,11 +222,11 @@ const ReportModal = ({
                 setShowRecord(e.target.value);
               }}
             >
-              <option label="All Operations" value="all"></option>
-              <option label="Today" value="today"></option>
-              <option label="Last Week" value="lastWeek"></option>
-              <option label="Last Month" value="lastMonth"></option>
-              <option label="Last 3 Month" value="last3Month"></option>
+              <option label={t("allOperations")} value="all"></option>
+              <option label={t("today")} value="today"></option>
+              <option label={t("lastWeek")} value="lastWeek"></option>
+              <option label={t("lastMonth")} value="lastMonth"></option>
+              <option label={t("last3Months")} value="last3Month"></option>
             </select>
           </div>
           <div className="report-footer hide-on-mobile">
