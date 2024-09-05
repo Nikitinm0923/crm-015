@@ -673,7 +673,7 @@
         font-weight: 500;
     }
 
-    .logout-btn{
+    .logout-btn {
         background-color: #7C7C7C;
         padding: 11px 30px;
         border-radius: 5px;
@@ -682,8 +682,100 @@
         color: var(--main-text-color);
         border: none;
     }
-        .logout-btn svg{
-            background-color: transparent;
-            margin-right: 10px;
-        }
+
+    .logout-btn svg {
+        background-color: transparent;
+        margin-right: 10px;
+    }
+
+    /* Account Management Screen */
+    .account-management {
+        min-height: calc(100vh - 142px);
+        background-color: var(--main-tertiary-color);
+        padding: 50px 10px 20px 10px;
+
+    }
+
+    .account-management .account-stat-box {
+        width: 100%;
+        background-color: var(--main-background-color);
+        margin: 50px 0 30px 0;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    .account-management .account-stat-box ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .account-management .account-stat-box ul li {
+        border-bottom: 1px solid var(--main-tertiary-color);
+    }
+
+    .account-management .account-stat-box ul li div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 22px;
+    }
+
+    .account-management .account-stat-box ul li div p {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--main-text-color);
+        margin-bottom: 0;
+    }
+
+    .account-management .select-account-box {
+        background-color: var(--main-tertiary-color);
+        padding-top: 50px;
+    }
+
+    .account-management .select-account-box .acc-selection {
+        display: block;
+        text-align: center;
+        background-color: var(--main-tertiary-color);
+    }
+
+    .account-management .select-account-box .acc-selection #account-input {
+        width: 80%;
+        margin: 0 auto;
+        text-align: left;
+    }
+
+    .account-management .select-account-box .acc-selection #account-input span {
+        display: none;
+    }
+
+    .account-management .swith-button-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--main-tertiary-color);
+    }
+
+    .account-management .swith-button-box button {
+        background: #3C3E43;
+        border: 0;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .account-management .swith-button-box button.active {
+        background-color: var(--main-primary-button);
+    }
+
+    .account-management .swith-button-box button:nth-child(1) {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .account-management .swith-button-box button:nth-child(2) {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
 }

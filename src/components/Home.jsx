@@ -1155,10 +1155,10 @@ export default function HomeRu() {
               <h2 className="balance-title">{t("profit")}:</h2>
               <input
                 className={`balance-nums ${activeOrdersProfit < 0
-                    ? "text-danger"
-                    : activeOrdersProfit === 0
-                      ? "text-muted"
-                      : ""
+                  ? "text-danger"
+                  : activeOrdersProfit === 0
+                    ? "text-muted"
+                    : ""
                   }`}
                 readOnly={true}
                 type="number"
@@ -1169,10 +1169,10 @@ export default function HomeRu() {
               <h2 className="balance-title">{t("freeMargin")}:</h2>
               <input
                 className={`balance-nums ${freeMargin < 0
-                    ? "text-danger"
-                    : freeMargin === 0
-                      ? "text-muted"
-                      : ""
+                  ? "text-danger"
+                  : freeMargin === 0
+                    ? "text-muted"
+                    : ""
                   }`}
                 readOnly={true}
                 type="number"
@@ -1183,10 +1183,10 @@ export default function HomeRu() {
               <h2 className="balance-title">{t("margin")}:</h2>
               <input
                 className={`balance-nums ${totalMargin < 0
-                    ? "text-danger"
-                    : totalMargin === 0
-                      ? "text-muted"
-                      : ""
+                  ? "text-danger"
+                  : totalMargin === 0
+                    ? "text-muted"
+                    : ""
                   }`}
                 readOnly={true}
                 type="number"
@@ -1921,8 +1921,8 @@ export default function HomeRu() {
         <div id="content">
           <div
             className={`h-100 ${tab === "trade" || tab === "assets" || tab === "newOrder"
-                ? ""
-                : "d-none"
+              ? ""
+              : "d-none"
               }`}
             id="trade-div"
           >
@@ -2727,10 +2727,10 @@ export default function HomeRu() {
                         <p className="name">{t("Equity")}:</p>
                         <p
                           className={`balance-nums ${equity < 0
-                              ? "text-danger"
-                              : equity === 0
-                                ? "text-muted"
-                                : ""
+                            ? "text-danger"
+                            : equity === 0
+                              ? "text-muted"
+                              : ""
                             }`}
                         >
                           {+parseFloat(equity)?.toFixed(2)}
@@ -2742,10 +2742,10 @@ export default function HomeRu() {
                         <p className="name">{t("profit")}:</p>
                         <p
                           className={`balance-nums ${activeOrdersProfit < 0
-                              ? "text-danger"
-                              : activeOrdersProfit === 0
-                                ? "text-muted"
-                                : ""
+                            ? "text-danger"
+                            : activeOrdersProfit === 0
+                              ? "text-muted"
+                              : ""
                             }`}
                         >
                           {+parseFloat(activeOrdersProfit)?.toFixed(2)}
@@ -2757,10 +2757,10 @@ export default function HomeRu() {
                         <p className="name">{t("freeMargin")}:</p>
                         <p
                           className={`balance-nums ${freeMargin < 0
-                              ? "text-danger"
-                              : freeMargin === 0
-                                ? "text-muted"
-                                : ""
+                            ? "text-danger"
+                            : freeMargin === 0
+                              ? "text-muted"
+                              : ""
                             }`}
                         >
                           {+parseFloat(freeMargin)?.toFixed(2)}
@@ -2772,10 +2772,10 @@ export default function HomeRu() {
                         <p className="name">Margin:</p>
                         <p
                           className={`balance-nums ${totalMargin < 0
-                              ? "text-danger"
-                              : totalMargin === 0
-                                ? "text-muted"
-                                : ""
+                            ? "text-danger"
+                            : totalMargin === 0
+                              ? "text-muted"
+                              : ""
                             }`}
                         >
                           {+parseFloat(totalMargin)?.toFixed(2)}
@@ -2787,10 +2787,10 @@ export default function HomeRu() {
                         <p className="name">Level:</p>
                         <p
                           className={`balance-nums ${level < 0
-                              ? "text-danger"
-                              : level === 0
-                                ? "text-muted"
-                                : ""
+                            ? "text-danger"
+                            : level === 0
+                              ? "text-muted"
+                              : ""
                             }`}
                         >
                           {`${+parseFloat(level)?.toFixed(2)}%`}
@@ -2802,10 +2802,10 @@ export default function HomeRu() {
                         <p className="name">Balance:</p>
                         <p
                           className={`balance-nums ${level < 0
-                              ? "text-danger"
-                              : level === 0
-                                ? "text-muted"
-                                : ""
+                            ? "text-danger"
+                            : level === 0
+                              ? "text-muted"
+                              : ""
                             }`}
                         >
                           {+parseFloat(totalBalance)?.toFixed(2)}
@@ -3967,6 +3967,131 @@ export default function HomeRu() {
               )}
             </div>
           )}
+          <div className="account-management hide-on-desktop">
+            <div className="swith-button-box">
+              <button>New account</button>
+              <button className="active">My account</button>
+            </div>
+            <div className="select-account-box">
+              {userProfile?.accounts?.length > 0 && (
+                <div className="acc-selection">
+                  <label className="m-4" htmlFor="symbol-input">
+                    {t("selectAccount")}:
+                  </label>
+                  <Select
+                    id="account-input"
+                    onChange={handleAccountChange}
+                    options={accounts
+                      .filter((acc) => !acc?.isDeleted)
+                      ?.map((account) => ({
+                        label: `${account.account_no} ${account.account_type}`,
+                        value: account.account_no,
+                      }))}
+                    value={{
+                      label: `${defaultAccount.account_no} ${defaultAccount.account_type}`,
+                      value: defaultAccount.account_no,
+                    }}
+                    styles={{
+                      container: (provided, state) => ({ ...provided }),
+                      control: (provided) => ({
+                        ...provided,
+                        backgroundColor: "inherit",
+                      }),
+                      dropdownIndicator: (provided, state) => ({
+                        ...provided,
+                        paddingBlock: 0,
+                      }),
+                      option: (provided, state) => ({
+                        ...provided,
+                        cursor: "pointer",
+                        backgroundColor: state.isSelected
+                          ? "var(--main-primary-button)"
+                          : "unset",
+                        color: "var(--main-text-color)",
+                        "&:hover": {
+                          backgroundColor: state.isSelected
+                            ? ""
+                            : "var(--main-primary-button)",
+                        },
+                      }),
+                      singleValue: (provided) => ({
+                        ...provided,
+                        color: "var(--main-text-color)",
+                      }),
+                    }}
+                    theme={(theme) => {
+                      return {
+                        ...theme,
+                        colors: {
+                          ...theme.colors,
+                          primary: "var(--main-text-color)",
+                        },
+                      };
+                    }}
+                    isSearchable={false}
+                  />
+                </div>
+              )}
+            </div>
+            <div className="account-stat-box">
+              <ul>
+                <li>
+                  <div className="">
+                    <p className="name">
+                      {t("balance")} (USD):
+                    </p>
+                    <p className="number">
+                      {+parseFloat(totalBalance)?.toFixed(2)}
+                    </p>
+                  </div>
+                </li>
+                <li>
+                  <div className="">
+                    <p className="name">
+                      {t("free")} (USD):
+                    </p>
+                    <p className="number">
+                      {+parseFloat(freeMargin - bonus)?.toFixed(2)}
+                    </p>
+                  </div>
+                </li>
+                <li>
+                  <div className="">
+                    <p className="name">
+                      {t("bonus")} (USD):
+                    </p>
+                    <p className="number">
+                      {+parseFloat(bonus)?.toFixed(2)}
+                    </p>
+                  </div>
+                </li>
+                <li>
+                  <div className="">
+                    <p className="name">
+                      {t("deposited")} (USD):
+                    </p>
+                    <p className="number">
+                      {accountDeposits
+                        .filter(({ type }) => type === "Deposit")
+                        .reduce((p, { sum }) => p + +sum, 0)}
+                    </p>
+                  </div>
+                </li>
+                <li className="border-0">
+                  <div className="">
+                    <p className="name">
+                      {t("withdrawn")} (USD):
+                    </p>
+                    <p className="number">
+                      {accountDeposits
+                        .filter(({ type }) => type === "Withdraw")
+                        .reduce((p, { sum }) => p + +sum, 0)}
+                    </p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
           {tab === "help" && (
             <div id="faq">
               <h1>{t("FAQ")}</h1>
