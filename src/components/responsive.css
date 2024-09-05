@@ -778,4 +778,59 @@
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
     }
+
+
+    /* Acount Modal CSS */
+    .acc-modal-ne {
+        background: transparent;
+    }
+
+    .acc-modal-ne .modal-dialog {
+        margin: 0;
+    }
+
+    .acc-modal-ne .modal-content {
+        min-height: calc(100vh - 135px);
+        top: 0px;
+    }
+
+    .acc-modal-ne .modal-content .modal-header {
+        display: none;
+    }
+
+    .acc-modal-ne .modal-content .modal-body {
+        padding: 50px 10px;
+    }
+
+
+    .acc-modal-ne .modal-content .modal-body .swith-button-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--main-tertiary-color);
+        margin-bottom: 100px;
+    }
+
+    .acc-modal-ne .modal-content .modal-body .swith-button-box button {
+        background: #3C3E43;
+        border: 0;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .acc-modal-ne .modal-content .modal-body .swith-button-box button.active {
+        background-color: var(--main-primary-button);
+    }
+
+    .acc-modal-ne .modal-content .modal-body .swith-button-box button:nth-child(1) {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .acc-modal-ne .modal-content .modal-body .swith-button-box button:nth-child(2) {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
 }

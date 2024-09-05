@@ -70,8 +70,9 @@ const AccountModal = ({ onClose, userProfile }) => {
     <>
       <Modal
         centered
-        className="modal-style-edit modal-style-del"
+        className="modal-style-edit modal-style-del acc-modal-ne"
         onHide={onClose}
+        backdrop={false}
         show
       >
         <Modal.Header
@@ -82,6 +83,10 @@ const AccountModal = ({ onClose, userProfile }) => {
           <h3 className="mb-0">{t("openAccount")}</h3>
         </Modal.Header>
         <Modal.Body className="d-flex flex-column align-items-center gap-3">
+          <div className="swith-button-box">
+            <button className="active">New account</button>
+            <button>My account</button>
+          </div>
           <ButtonGroup className="btn-group">
             <Button
               onClick={() => {
