@@ -808,8 +808,8 @@
     }
 
     .acc-modal-ne .modal-content .modal-body div,
-        .acc-modal-ne .modal-content .modal-body div label,
-                .acc-modal-ne .modal-content .modal-body div span {
+    .acc-modal-ne .modal-content .modal-body div label,
+    .acc-modal-ne .modal-content .modal-body div span {
         background-color: var(--main-tertiary-color);
     }
 
@@ -849,5 +849,40 @@
     #acc-info-personal,
     #acc-change-pass {
         width: 90%;
+        margin-bottom: 20px;
+    }
+
+    .acc-profile-main-item,
+    .acc-info-personal-item,
+    .acc-change-pass-item {
+        display: block;
+        margin-bottom: 20px;
+        padding: 0;
+    }
+
+    .acc-info-personal-item input,
+    .acc-change-pass-item input {
+        min-height: 40px;
+        text-align: left;
+        width: 100%;
+    }
+
+    .acc-info-personal-item h6,
+    .acc-change-pass-item h6 {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--main-text-color);
+        margin-bottom: 5px;
+    }
+
+    .eye-icon {
+        right: 10px;
+        top: 16px !important;
+    }
+
+    .personal-info-options button {
+        font-size: 12px;
+        font-weight: 600;
+        padding: 12px!important;
     }
 }

@@ -237,6 +237,15 @@ export default function TradingView({
         remove: function (e) {},
       },
     },
+    exporting: {
+      buttons: {
+        contextButton: {
+          align: 'center',  // Align button to the center
+          verticalAlign: 'bottom',  // Position button at the bottom
+          y: -10,  // Adjust if needed to move slightly upwards
+        }
+      }
+    },
     plotOptions: {
       candlestick: {
         color: "var(--chart-loss-color)",

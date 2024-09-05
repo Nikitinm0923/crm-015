@@ -3503,7 +3503,7 @@ export default function HomeRu() {
                             value={userProfile?.password}
                           />
                           <FontAwesomeIcon
-                            className="position-absolute ms-1"
+                            className="position-absolute ms-1 eye-icon"
                             cursor="pointer"
                             icon={passwordShown ? faEyeSlash : faEye}
                             onClick={() => setPasswordShown(!passwordShown)}
