@@ -3084,7 +3084,13 @@ export default function HomeRu() {
                             </button>
                           </li>
                           <li>
-                            <button type="button">
+                            <button
+                              onClick={() => {
+                                setShowNewOrderPageMobile(true);
+                                setTab("newOrder");
+                              }}
+                              type="button"
+                            >
                               <div className="">
                                 <svg
                                   width="28"
@@ -3106,7 +3112,6 @@ export default function HomeRu() {
                                     fill="white"
                                   />
                                 </svg>
-
                                 <p className="name">Portfolio</p>
                               </div>
                               <div className="">
@@ -3126,7 +3131,13 @@ export default function HomeRu() {
                             </button>
                           </li>
                           <li>
-                            <button type="button">
+                            <button
+                              onClick={() => {
+                                setAccTab("personal-info");
+                                setTab("account");
+                              }}
+                              type="button"
+                            >
                               <div className="">
                                 <svg
                                   width="29"
@@ -3161,7 +3172,6 @@ export default function HomeRu() {
                                     </clipPath>
                                   </defs>
                                 </svg>
-
                                 <p className="name">{t("personalInfo")}</p>
                               </div>
                               <div className="">
@@ -3181,7 +3191,13 @@ export default function HomeRu() {
                             </button>
                           </li>
                           <li>
-                            <button type="button">
+                            <button
+                              onClick={() => {
+                                setAccTab("deposit");
+                                setTab("account");
+                              }}
+                              type="button"
+                            >
                               <div className="">
                                 <svg
                                   width="25"
@@ -3203,7 +3219,6 @@ export default function HomeRu() {
                                     fill="white"
                                   />
                                 </svg>
-
                                 <p className="name">{t("deposit")}</p>
                               </div>
                               <div className="">
@@ -3223,7 +3238,13 @@ export default function HomeRu() {
                             </button>
                           </li>
                           <li>
-                            <button type="button">
+                            <button
+                              onClick={() => {
+                                setAccTab("deposit");
+                                setTab("account");
+                              }}
+                              type="button"
+                            >
                               <div className="">
                                 <svg
                                   width="25"
@@ -3245,7 +3266,6 @@ export default function HomeRu() {
                                     fill="white"
                                   />
                                 </svg>
-
                                 <p className="name">Withdrawal</p>
                               </div>
                               <div className="">
@@ -3265,7 +3285,12 @@ export default function HomeRu() {
                             </button>
                           </li>
                           <li>
-                            <button type="button">
+                            <button
+                              onClick={() => {
+                                setIsReportModalOpen(true);
+                              }}
+                              type="button"
+                            >
                               <div className="">
                                 <svg
                                   width="25"
