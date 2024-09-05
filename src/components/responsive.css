@@ -782,16 +782,20 @@
 
     /* Acount Modal CSS */
     .acc-modal-ne {
-        background: transparent;
+        background: var(--main-tertiary-color);
+        height: calc(70vh - 135px);
+        top: 200px;
     }
 
     .acc-modal-ne .modal-dialog {
         margin: 0;
+        height: fit-content;
     }
 
     .acc-modal-ne .modal-content {
-        min-height: calc(100vh - 135px);
-        top: 0px;
+
+        background-color: var(--main-tertiary-color);
+        border: 0;
     }
 
     .acc-modal-ne .modal-content .modal-header {
@@ -800,6 +804,13 @@
 
     .acc-modal-ne .modal-content .modal-body {
         padding: 50px 10px;
+        background-color: var(--main-tertiary-color);
+    }
+
+    .acc-modal-ne .modal-content .modal-body div,
+        .acc-modal-ne .modal-content .modal-body div label,
+                .acc-modal-ne .modal-content .modal-body div span {
+        background-color: var(--main-tertiary-color);
     }
 
 
@@ -832,5 +843,11 @@
     .acc-modal-ne .modal-content .modal-body .swith-button-box button:nth-child(2) {
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
+    }
+
+    /* Personal Info Page CSS */
+    #acc-info-personal,
+    #acc-change-pass {
+        width: 90%;
     }
 }

@@ -83,10 +83,10 @@ const AccountModal = ({ onClose, userProfile }) => {
           <h3 className="mb-0">{t("openAccount")}</h3>
         </Modal.Header>
         <Modal.Body className="d-flex flex-column align-items-center gap-3">
-          <div className="swith-button-box">
+          {/* <div className="swith-button-box hide-on-desktop">
             <button className="active">New account</button>
             <button>My account</button>
-          </div>
+          </div> */}
           <ButtonGroup className="btn-group">
             <Button
               onClick={() => {
