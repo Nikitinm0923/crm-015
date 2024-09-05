@@ -64,13 +64,13 @@ export default function HomeRu() {
     return obj
       ? JSON.parse(obj)
       : {
-        showNewOrderPanel: false,
-        tab: "trade",
-        activeTab: "",
-        tabs: [],
-        isReportModalOpen: false,
-        showHistoryPanel: false,
-      };
+          showNewOrderPanel: false,
+          tab: "trade",
+          activeTab: "",
+          tabs: [],
+          isReportModalOpen: false,
+          showHistoryPanel: false,
+        };
   });
   const [tab, setTab] = useState(gameConfigs.tab || "trade");
   const [dealsTab, setDealsTab] = useState("activeTab");
@@ -268,8 +268,9 @@ export default function HomeRu() {
   const setOrders = useCallback((data) => {
     const mappedOrders = data.map((order) => ({
       ...order,
-      sltp: `${+parseFloat(order?.sl)?.toFixed(2) || ""} / ${+parseFloat(order?.tp)?.toFixed(2) || ""
-        }`,
+      sltp: `${+parseFloat(order?.sl)?.toFixed(2) || ""} / ${
+        +parseFloat(order?.tp)?.toFixed(2) || ""
+      }`,
     }));
     dispatch(setOrdersState(mappedOrders));
   }, []);
@@ -468,8 +469,8 @@ export default function HomeRu() {
     .filter((s) => s);
   const filteredQuotesSymbols = quoteSearch
     ? userQuotesSymbols.filter(({ symbol }) =>
-      symbol.toUpperCase().includes(quoteSearch.toUpperCase())
-    )
+        symbol.toUpperCase().includes(quoteSearch.toUpperCase())
+      )
     : userQuotesSymbols;
 
   // const crypto = [],
@@ -696,7 +697,8 @@ export default function HomeRu() {
       const hour = today.hour();
       if (weekDay === 0 || weekDay === 6 || hour < 9 || hour >= 23) {
         return toast.error(
-          `${group === "commodities" ? "Commodities" : group
+          `${
+            group === "commodities" ? "Commodities" : group
           } Market open on Mon-Fri: 9AM-23PM`
         );
       }
@@ -1066,6 +1068,7 @@ export default function HomeRu() {
   };
 
   const [showNewOrderPageMobile, setShowNewOrderPageMobile] = useState(false);
+  const [showAccounManagement, setShowAccounManagement] = useState(false);
 
   const [isMobileUI, setIsMobileUI] = useState(false);
   window
@@ -1121,8 +1124,8 @@ export default function HomeRu() {
                       tab === "help"
                         ? "var(--main-primary-button)"
                         : theme === "purple"
-                          ? "var(--separator-line-color)"
-                          : "var(--main-text-color)",
+                        ? "var(--separator-line-color)"
+                        : "var(--main-text-color)",
                   }}
                   viewBox="0 0 26 26"
                   width="26"
@@ -1137,15 +1140,16 @@ export default function HomeRu() {
                 {showNewOrderPageMobile
                   ? "Portfolio"
                   : tab === "newOrder"
-                    ? "New Order"
-                    : tab.charAt(0).toUpperCase() + tab.slice(1)}
+                  ? "New Order"
+                  : tab.charAt(0).toUpperCase() + tab.slice(1)}
               </p>
             </div>
             <div className="balance-item hide-on-mobile">
               <h2 className="balance-title">{t("equity")}:</h2>
               <input
-                className={`balance-nums ${equity < 0 ? "text-danger" : equity === 0 ? "text-muted" : ""
-                  }`}
+                className={`balance-nums ${
+                  equity < 0 ? "text-danger" : equity === 0 ? "text-muted" : ""
+                }`}
                 readOnly={true}
                 type="number"
                 value={+parseFloat(equity)?.toFixed(2)}
@@ -1154,12 +1158,13 @@ export default function HomeRu() {
             <div className="balance-item hide-on-mobile">
               <h2 className="balance-title">{t("profit")}:</h2>
               <input
-                className={`balance-nums ${activeOrdersProfit < 0
-                  ? "text-danger"
-                  : activeOrdersProfit === 0
+                className={`balance-nums ${
+                  activeOrdersProfit < 0
+                    ? "text-danger"
+                    : activeOrdersProfit === 0
                     ? "text-muted"
                     : ""
-                  }`}
+                }`}
                 readOnly={true}
                 type="number"
                 value={+parseFloat(activeOrdersProfit)?.toFixed(2)}
@@ -1168,12 +1173,13 @@ export default function HomeRu() {
             <div className="balance-item hide-on-mobile">
               <h2 className="balance-title">{t("freeMargin")}:</h2>
               <input
-                className={`balance-nums ${freeMargin < 0
-                  ? "text-danger"
-                  : freeMargin === 0
+                className={`balance-nums ${
+                  freeMargin < 0
+                    ? "text-danger"
+                    : freeMargin === 0
                     ? "text-muted"
                     : ""
-                  }`}
+                }`}
                 readOnly={true}
                 type="number"
                 value={+parseFloat(freeMargin)?.toFixed(2)}
@@ -1182,12 +1188,13 @@ export default function HomeRu() {
             <div className="balance-item hide-on-mobile">
               <h2 className="balance-title">{t("margin")}:</h2>
               <input
-                className={`balance-nums ${totalMargin < 0
-                  ? "text-danger"
-                  : totalMargin === 0
+                className={`balance-nums ${
+                  totalMargin < 0
+                    ? "text-danger"
+                    : totalMargin === 0
                     ? "text-muted"
                     : ""
-                  }`}
+                }`}
                 readOnly={true}
                 type="number"
                 value={+parseFloat(totalMargin)?.toFixed(2)}
@@ -1196,8 +1203,9 @@ export default function HomeRu() {
             <div className="balance-item hide-on-mobile">
               <h2 className="balance-title">{t("level")}:</h2>
               <input
-                className={`balance-nums ${level < 0 ? "text-danger" : level === 0 ? "text-muted" : ""
-                  }`}
+                className={`balance-nums ${
+                  level < 0 ? "text-danger" : level === 0 ? "text-muted" : ""
+                }`}
                 readOnly={true}
                 type="text"
                 value={`${+parseFloat(level)?.toFixed(2)}%`}
@@ -1341,7 +1349,7 @@ export default function HomeRu() {
                         </span>
                       </span>
                     </div>
-                    <button className="deposit-acc-btn" onClick={() => { }}>
+                    <button className="deposit-acc-btn" onClick={() => {}}>
                       {t("depositFunds")}
                     </button>
                     <div className="other-acc">
@@ -1396,6 +1404,7 @@ export default function HomeRu() {
               className="side-btn"
               onClick={() => {
                 setIsReportModalOpen(false);
+                setShowAccounManagement(false);
                 setShowNewOrderPageMobile(false);
                 setShowNewOrderPanel(false);
                 setTab("trade");
@@ -1413,8 +1422,8 @@ export default function HomeRu() {
                     tab === "trade"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                        ? "var(--separator-line-color)"
-                        : "var(--main-text-color)",
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
                 }}
                 viewBox="0 0 30 30"
                 width="30"
@@ -1460,8 +1469,8 @@ export default function HomeRu() {
                     tab === "trade"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                        ? "var(--separator-line-color)"
-                        : "var(--main-text-color)",
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
                 }}
               >
                 {t("trade")}
@@ -1471,6 +1480,7 @@ export default function HomeRu() {
               className="side-btn"
               onClick={() => {
                 setIsReportModalOpen(false);
+                setShowAccounManagement(false);
                 setShowNewOrderPageMobile(false);
                 setShowNewOrderPanel(false);
                 setTab("assets");
@@ -1488,8 +1498,8 @@ export default function HomeRu() {
                     tab === "assets"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                        ? "var(--separator-line-color)"
-                        : "var(--main-text-color)",
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
                 }}
                 viewBox="0 0 39 39"
                 width="39"
@@ -1512,8 +1522,8 @@ export default function HomeRu() {
                     tab === "assets"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                        ? "var(--separator-line-color)"
-                        : "var(--main-text-color)",
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
                 }}
               >
                 {t("assets")}
@@ -1528,6 +1538,7 @@ export default function HomeRu() {
                   setShowNewOrderPanel(true);
                 }
                 setIsReportModalOpen(false);
+                setShowAccounManagement(false);
                 setTab("newOrder");
               }}
               style={{
@@ -1543,8 +1554,8 @@ export default function HomeRu() {
                     tab === "newOrder"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                        ? "var(--separator-line-color)"
-                        : "var(--main-text-color)",
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
                 }}
                 viewBox="0 0 45 34"
                 width="45"
@@ -1565,8 +1576,8 @@ export default function HomeRu() {
                     tab === "newOrder"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                        ? "var(--separator-line-color)"
-                        : "var(--main-text-color)",
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
                 }}
               >
                 {t("newOrder")}
@@ -1577,6 +1588,7 @@ export default function HomeRu() {
               onClick={() => {
                 setAccTab("acc-info");
                 setIsReportModalOpen(false);
+                setShowAccounManagement(false);
                 setShowNewOrderPageMobile(false);
                 setShowNewOrderPanel(false);
                 setTab("account");
@@ -1594,8 +1606,8 @@ export default function HomeRu() {
                     tab === "account"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                        ? "var(--separator-line-color)"
-                        : "var(--main-text-color)",
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
                 }}
                 viewBox="0 0 34 34"
                 width="34"
@@ -1620,8 +1632,8 @@ export default function HomeRu() {
                     tab === "account"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                        ? "var(--separator-line-color)"
-                        : "var(--main-text-color)",
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
                 }}
               >
                 {t("account")}
@@ -1660,8 +1672,8 @@ export default function HomeRu() {
                     accTab === "acc-info"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                        ? "var(--separator-line-color)"
-                        : "var(--main-text-color)",
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
                 }}
                 viewBox="0 0 28 28"
                 width="28"
@@ -1680,8 +1692,8 @@ export default function HomeRu() {
                     accTab === "acc-info"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                        ? "var(--separator-line-color)"
-                        : "var(--main-text-color)",
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
                 }}
               >
                 {t("accountInfo")}
@@ -1707,8 +1719,8 @@ export default function HomeRu() {
                     accTab === "personal-info"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                        ? "var(--separator-line-color)"
-                        : "var(--main-text-color)",
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
                 }}
                 viewBox="0 0 29 28"
                 width="29"
@@ -1734,8 +1746,9 @@ export default function HomeRu() {
                 </defs>
               </svg>
               <button
-                className={`side-button ${accTab === "personal-info" && " active"
-                  }`}
+                className={`side-button ${
+                  accTab === "personal-info" && " active"
+                }`}
                 id="side-button-account"
                 style={{
                   backgroundColor: "transparent",
@@ -1743,8 +1756,8 @@ export default function HomeRu() {
                     accTab === "personal-info"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                        ? "var(--separator-line-color)"
-                        : "var(--main-text-color)",
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
                 }}
               >
                 {t("personalInfo")}
@@ -1769,8 +1782,8 @@ export default function HomeRu() {
                     accTab === "deposit"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                        ? "var(--separator-line-color)"
-                        : "var(--main-text-color)",
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
                 }}
                 viewBox="0 0 25 29"
                 width="25"
@@ -1789,8 +1802,8 @@ export default function HomeRu() {
                     accTab === "deposit"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                        ? "var(--separator-line-color)"
-                        : "var(--main-text-color)",
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
                 }}
               >
                 {t("deposit")}
@@ -1814,8 +1827,8 @@ export default function HomeRu() {
                     accTab === "report"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                        ? "var(--separator-line-color)"
-                        : "var(--main-text-color)",
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
                 }}
                 viewBox="0 0 28 28"
                 width="28"
@@ -1839,8 +1852,8 @@ export default function HomeRu() {
                     accTab === "report"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                        ? "var(--separator-line-color)"
-                        : "var(--main-text-color)",
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
                 }}
               >
                 {t("report")}
@@ -1864,8 +1877,8 @@ export default function HomeRu() {
                     tab === "help"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                        ? "var(--separator-line-color)"
-                        : "var(--main-text-color)",
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
                 }}
                 viewBox="0 0 26 26"
                 width="26"
@@ -1882,8 +1895,8 @@ export default function HomeRu() {
                     tab === "help"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                        ? "var(--separator-line-color)"
-                        : "var(--main-text-color)",
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
                 }}
               >
                 {t("help")}
@@ -1920,10 +1933,11 @@ export default function HomeRu() {
         </div>
         <div id="content">
           <div
-            className={`h-100 ${tab === "trade" || tab === "assets" || tab === "newOrder"
-              ? ""
-              : "d-none"
-              }`}
+            className={`h-100 ${
+              tab === "trade" || tab === "assets" || tab === "newOrder"
+                ? ""
+                : "d-none"
+            }`}
             id="trade-div"
           >
             <div
@@ -2668,8 +2682,8 @@ export default function HomeRu() {
                         data={fillArrayWithEmptyRows(
                           activeOrders,
                           dealsRow -
-                          (activeOrders.length % dealsRow) +
-                          activeOrders.length
+                            (activeOrders.length % dealsRow) +
+                            activeOrders.length
                         )}
                         dense
                         highlightOnHover
@@ -2697,8 +2711,8 @@ export default function HomeRu() {
                         data={fillArrayWithEmptyRows(
                           delayedOrders,
                           dealsRow -
-                          (delayedOrders.length % dealsRow) +
-                          delayedOrders.length
+                            (delayedOrders.length % dealsRow) +
+                            delayedOrders.length
                         )}
                         dense
                         highlightOnHover
@@ -2726,12 +2740,13 @@ export default function HomeRu() {
                       <div className="stat-box">
                         <p className="name">{t("Equity")}:</p>
                         <p
-                          className={`balance-nums ${equity < 0
-                            ? "text-danger"
-                            : equity === 0
+                          className={`balance-nums ${
+                            equity < 0
+                              ? "text-danger"
+                              : equity === 0
                               ? "text-muted"
                               : ""
-                            }`}
+                          }`}
                         >
                           {+parseFloat(equity)?.toFixed(2)}
                         </p>
@@ -2741,12 +2756,13 @@ export default function HomeRu() {
                       <div className="stat-box">
                         <p className="name">{t("profit")}:</p>
                         <p
-                          className={`balance-nums ${activeOrdersProfit < 0
-                            ? "text-danger"
-                            : activeOrdersProfit === 0
+                          className={`balance-nums ${
+                            activeOrdersProfit < 0
+                              ? "text-danger"
+                              : activeOrdersProfit === 0
                               ? "text-muted"
                               : ""
-                            }`}
+                          }`}
                         >
                           {+parseFloat(activeOrdersProfit)?.toFixed(2)}
                         </p>
@@ -2756,12 +2772,13 @@ export default function HomeRu() {
                       <div className="stat-box">
                         <p className="name">{t("freeMargin")}:</p>
                         <p
-                          className={`balance-nums ${freeMargin < 0
-                            ? "text-danger"
-                            : freeMargin === 0
+                          className={`balance-nums ${
+                            freeMargin < 0
+                              ? "text-danger"
+                              : freeMargin === 0
                               ? "text-muted"
                               : ""
-                            }`}
+                          }`}
                         >
                           {+parseFloat(freeMargin)?.toFixed(2)}
                         </p>
@@ -2771,12 +2788,13 @@ export default function HomeRu() {
                       <div className="stat-box">
                         <p className="name">Margin:</p>
                         <p
-                          className={`balance-nums ${totalMargin < 0
-                            ? "text-danger"
-                            : totalMargin === 0
+                          className={`balance-nums ${
+                            totalMargin < 0
+                              ? "text-danger"
+                              : totalMargin === 0
                               ? "text-muted"
                               : ""
-                            }`}
+                          }`}
                         >
                           {+parseFloat(totalMargin)?.toFixed(2)}
                         </p>
@@ -2786,12 +2804,13 @@ export default function HomeRu() {
                       <div className="stat-box">
                         <p className="name">Level:</p>
                         <p
-                          className={`balance-nums ${level < 0
-                            ? "text-danger"
-                            : level === 0
+                          className={`balance-nums ${
+                            level < 0
+                              ? "text-danger"
+                              : level === 0
                               ? "text-muted"
                               : ""
-                            }`}
+                          }`}
                         >
                           {`${+parseFloat(level)?.toFixed(2)}%`}
                         </p>
@@ -2801,12 +2820,13 @@ export default function HomeRu() {
                       <div className="stat-box">
                         <p className="name">Balance:</p>
                         <p
-                          className={`balance-nums ${level < 0
-                            ? "text-danger"
-                            : level === 0
+                          className={`balance-nums ${
+                            level < 0
+                              ? "text-danger"
+                              : level === 0
                               ? "text-muted"
                               : ""
-                            }`}
+                          }`}
                         >
                           {+parseFloat(totalBalance)?.toFixed(2)}
                         </p>
@@ -2873,8 +2893,8 @@ export default function HomeRu() {
                           data={fillArrayWithEmptyRows(
                             activeOrders,
                             dealsRow -
-                            (activeOrders.length % dealsRow) +
-                            activeOrders.length
+                              (activeOrders.length % dealsRow) +
+                              activeOrders.length
                           )}
                           dense
                           highlightOnHover
@@ -2902,8 +2922,8 @@ export default function HomeRu() {
                           data={fillArrayWithEmptyRows(
                             delayedOrders,
                             dealsRow -
-                            (delayedOrders.length % dealsRow) +
-                            delayedOrders.length
+                              (delayedOrders.length % dealsRow) +
+                              delayedOrders.length
                           )}
                           dense
                           highlightOnHover
@@ -3017,21 +3037,48 @@ export default function HomeRu() {
                       <div className="account-sublink-box hide-on-desktop">
                         <ul>
                           <li>
-                            <button type="button">
+                            <button
+                              onClick={() => {
+                                setShowAccounManagement(true);
+                                setTab("");
+                              }}
+                              type="button"
+                            >
                               <div className="">
-                                <svg width="25" height="28" viewBox="0 0 25 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  <path d="M19.2306 16.3768C18.1593 16.3768 17.1121 16.6945 16.2214 17.2897C15.3307 17.8848 14.6365 18.7307 14.2265 19.7205C13.8166 20.7102 13.7093 21.7992 13.9183 22.8499C14.1273 23.9006 14.6431 24.8657 15.4006 25.6232C16.1581 26.3807 17.1232 26.8965 18.1739 27.1055C19.2246 27.3145 20.3136 27.2073 21.3034 26.7973C22.2931 26.3873 23.139 25.6931 23.7342 24.8024C24.3293 23.9117 24.647 22.8645 24.647 21.7932C24.647 20.3567 24.0763 18.979 23.0606 17.9633C22.0448 16.9475 20.6671 16.3768 19.2306 16.3768ZM21.8484 22.5372H19.2311C19.0338 22.5372 18.8446 22.4588 18.705 22.3193C18.5655 22.1798 18.4871 21.9905 18.4871 21.7932V18.6423C18.4871 18.445 18.5655 18.2558 18.705 18.1162C18.8446 17.9767 19.0338 17.8983 19.2311 17.8983C19.4284 17.8983 19.6177 17.9767 19.7572 18.1162C19.8967 18.2558 19.9751 18.445 19.9751 18.6423V21.0492H21.8484C22.0458 21.0492 22.235 21.1276 22.3745 21.2671C22.5141 21.4067 22.5925 21.5959 22.5925 21.7932C22.5925 21.9905 22.5141 22.1798 22.3745 22.3193C22.235 22.4588 22.0458 22.5372 21.8484 22.5372Z" fill="white" />
-                                  <path d="M22.0366 9.50422C21.6827 9.51325 21.3293 9.5191 20.9775 9.5191C19.4833 9.51863 17.9901 9.43898 16.5044 9.28048H16.4916C15.6057 9.17792 14.7379 8.73842 14.0406 8.0433C13.3434 7.34819 12.9066 6.47823 12.8035 5.59286C12.8037 5.58861 12.8037 5.58435 12.8035 5.5801C12.6061 3.73326 12.5308 1.8754 12.5781 0.0186376C9.7857 -0.0486681 6.99186 0.0663664 4.21441 0.363007C2.35917 0.578238 0.58046 2.35748 0.364697 4.21272C-0.121566 8.76446 -0.121566 17.2164 0.364697 21.7681C0.579928 23.6234 2.35917 25.4026 4.21441 25.6179C7.36412 25.955 10.5345 26.0582 13.6995 25.9266C13.029 25.0276 12.5869 23.9793 12.411 22.8717C12.2351 21.7642 12.3308 20.6304 12.6897 19.568H5.27516C5.07783 19.568 4.88859 19.4896 4.74906 19.3501C4.60953 19.2106 4.53115 19.0213 4.53115 18.824C4.53115 18.6267 4.60953 18.4374 4.74906 18.2979C4.88859 18.1584 5.07783 18.08 5.27516 18.08H13.4061C13.9971 17.1583 14.7964 16.3884 15.7396 15.8325H5.27516C5.07783 15.8325 4.88859 15.7542 4.74906 15.6146C4.60953 15.4751 4.53115 15.2859 4.53115 15.0885C4.53115 14.8912 4.60953 14.702 4.74906 14.5624C4.88859 14.4229 5.07783 14.3445 5.27516 14.3445H16.8073C17.0046 14.3445 17.1939 14.4229 17.3334 14.5624C17.4729 14.702 17.5513 14.8912 17.5513 15.0885V15.0928C19.056 14.7202 20.6419 14.8605 22.0579 15.4914C22.0988 13.515 22.0913 11.4418 22.0366 9.50422ZM13.0894 12.0976H5.27728C5.07996 12.0976 4.89072 12.0192 4.75119 11.8797C4.61166 11.7402 4.53327 11.5509 4.53327 11.3536C4.53327 11.1563 4.61166 10.967 4.75119 10.8275C4.89072 10.688 5.07996 10.6096 5.27728 10.6096H13.0894C13.2867 10.6096 13.4759 10.688 13.6155 10.8275C13.755 10.967 13.8334 11.1563 13.8334 11.3536C13.8334 11.5509 13.755 11.7402 13.6155 11.8797C13.4759 12.0192 13.2867 12.0976 13.0894 12.0976Z" fill="white" />
-                                  <path d="M16.6552 7.86532C18.4256 8.05468 20.2066 8.12729 21.9866 8.08268L21.9823 8.07577C19.8802 4.90231 17.1658 2.18044 13.998 0.0697021C13.9521 1.85852 14.0247 3.64841 14.2154 5.42763C14.3514 6.60316 15.4791 7.73087 16.6552 7.86532Z" fill="white" />
+                                <svg
+                                  width="25"
+                                  height="28"
+                                  viewBox="0 0 25 28"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="M19.2306 16.3768C18.1593 16.3768 17.1121 16.6945 16.2214 17.2897C15.3307 17.8848 14.6365 18.7307 14.2265 19.7205C13.8166 20.7102 13.7093 21.7992 13.9183 22.8499C14.1273 23.9006 14.6431 24.8657 15.4006 25.6232C16.1581 26.3807 17.1232 26.8965 18.1739 27.1055C19.2246 27.3145 20.3136 27.2073 21.3034 26.7973C22.2931 26.3873 23.139 25.6931 23.7342 24.8024C24.3293 23.9117 24.647 22.8645 24.647 21.7932C24.647 20.3567 24.0763 18.979 23.0606 17.9633C22.0448 16.9475 20.6671 16.3768 19.2306 16.3768ZM21.8484 22.5372H19.2311C19.0338 22.5372 18.8446 22.4588 18.705 22.3193C18.5655 22.1798 18.4871 21.9905 18.4871 21.7932V18.6423C18.4871 18.445 18.5655 18.2558 18.705 18.1162C18.8446 17.9767 19.0338 17.8983 19.2311 17.8983C19.4284 17.8983 19.6177 17.9767 19.7572 18.1162C19.8967 18.2558 19.9751 18.445 19.9751 18.6423V21.0492H21.8484C22.0458 21.0492 22.235 21.1276 22.3745 21.2671C22.5141 21.4067 22.5925 21.5959 22.5925 21.7932C22.5925 21.9905 22.5141 22.1798 22.3745 22.3193C22.235 22.4588 22.0458 22.5372 21.8484 22.5372Z"
+                                    fill="white"
+                                  />
+                                  <path
+                                    d="M22.0366 9.50422C21.6827 9.51325 21.3293 9.5191 20.9775 9.5191C19.4833 9.51863 17.9901 9.43898 16.5044 9.28048H16.4916C15.6057 9.17792 14.7379 8.73842 14.0406 8.0433C13.3434 7.34819 12.9066 6.47823 12.8035 5.59286C12.8037 5.58861 12.8037 5.58435 12.8035 5.5801C12.6061 3.73326 12.5308 1.8754 12.5781 0.0186376C9.7857 -0.0486681 6.99186 0.0663664 4.21441 0.363007C2.35917 0.578238 0.58046 2.35748 0.364697 4.21272C-0.121566 8.76446 -0.121566 17.2164 0.364697 21.7681C0.579928 23.6234 2.35917 25.4026 4.21441 25.6179C7.36412 25.955 10.5345 26.0582 13.6995 25.9266C13.029 25.0276 12.5869 23.9793 12.411 22.8717C12.2351 21.7642 12.3308 20.6304 12.6897 19.568H5.27516C5.07783 19.568 4.88859 19.4896 4.74906 19.3501C4.60953 19.2106 4.53115 19.0213 4.53115 18.824C4.53115 18.6267 4.60953 18.4374 4.74906 18.2979C4.88859 18.1584 5.07783 18.08 5.27516 18.08H13.4061C13.9971 17.1583 14.7964 16.3884 15.7396 15.8325H5.27516C5.07783 15.8325 4.88859 15.7542 4.74906 15.6146C4.60953 15.4751 4.53115 15.2859 4.53115 15.0885C4.53115 14.8912 4.60953 14.702 4.74906 14.5624C4.88859 14.4229 5.07783 14.3445 5.27516 14.3445H16.8073C17.0046 14.3445 17.1939 14.4229 17.3334 14.5624C17.4729 14.702 17.5513 14.8912 17.5513 15.0885V15.0928C19.056 14.7202 20.6419 14.8605 22.0579 15.4914C22.0988 13.515 22.0913 11.4418 22.0366 9.50422ZM13.0894 12.0976H5.27728C5.07996 12.0976 4.89072 12.0192 4.75119 11.8797C4.61166 11.7402 4.53327 11.5509 4.53327 11.3536C4.53327 11.1563 4.61166 10.967 4.75119 10.8275C4.89072 10.688 5.07996 10.6096 5.27728 10.6096H13.0894C13.2867 10.6096 13.4759 10.688 13.6155 10.8275C13.755 10.967 13.8334 11.1563 13.8334 11.3536C13.8334 11.5509 13.755 11.7402 13.6155 11.8797C13.4759 12.0192 13.2867 12.0976 13.0894 12.0976Z"
+                                    fill="white"
+                                  />
+                                  <path
+                                    d="M16.6552 7.86532C18.4256 8.05468 20.2066 8.12729 21.9866 8.08268L21.9823 8.07577C19.8802 4.90231 17.1658 2.18044 13.998 0.0697021C13.9521 1.85852 14.0247 3.64841 14.2154 5.42763C14.3514 6.60316 15.4791 7.73087 16.6552 7.86532Z"
+                                    fill="white"
+                                  />
                                 </svg>
-
-                                <p className="name">
-                                  {t('accountManagement')}
-                                </p>
+                                <p className="name">{t("accountManagement")}</p>
                               </div>
                               <div className="">
-                                <svg width="10" height="19" viewBox="0 0 10 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  <path d="M10 9.87471C10 10.2018 9.87995 10.5288 9.64036 10.7782L2.09719 18.6256C1.61736 19.1248 0.839379 19.1248 0.359734 18.6256C-0.119911 18.1266 -0.119911 17.3174 0.359734 16.8182L7.03435 9.87471L0.359966 2.9312C-0.119679 2.432 -0.119679 1.62289 0.359966 1.12393C0.839611 0.624495 1.61759 0.624494 2.09743 1.12393L9.6406 8.97119C9.88022 9.22069 10 9.54774 10 9.87471Z" fill="#CECECE" />
+                                <svg
+                                  width="10"
+                                  height="19"
+                                  viewBox="0 0 10 19"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="M10 9.87471C10 10.2018 9.87995 10.5288 9.64036 10.7782L2.09719 18.6256C1.61736 19.1248 0.839379 19.1248 0.359734 18.6256C-0.119911 18.1266 -0.119911 17.3174 0.359734 16.8182L7.03435 9.87471L0.359966 2.9312C-0.119679 2.432 -0.119679 1.62289 0.359966 1.12393C0.839611 0.624495 1.61759 0.624494 2.09743 1.12393L9.6406 8.97119C9.88022 9.22069 10 9.54774 10 9.87471Z"
+                                    fill="#CECECE"
+                                  />
                                 </svg>
                               </div>
                             </button>
@@ -3039,20 +3086,41 @@ export default function HomeRu() {
                           <li>
                             <button type="button">
                               <div className="">
-                                <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  <path d="M11.1855 13.1152C12.9871 13.1152 14.5484 12.4666 15.8215 11.1936C17.0946 9.92047 17.7431 8.35914 17.7431 6.5576C17.7431 4.75606 17.0946 3.19473 15.8215 1.92164C14.5484 0.648554 12.9871 0 11.1855 0C9.38399 0 7.82266 0.648554 6.54957 1.92164C5.27648 3.19473 4.62793 4.75606 4.62793 6.5576C4.62793 8.35914 5.27648 9.92047 6.54957 11.1936C7.82266 12.4666 9.38399 13.1152 11.1855 13.1152Z" fill="white" />
-                                  <path d="M12.1223 23.1958V17.1746C12.1223 16.3659 12.2905 15.6774 12.5707 15.0848C12.1704 15.1729 11.762 15.237 11.3617 15.237C10.7772 15.237 10.1847 15.1409 9.6082 14.9567C9.0157 14.7646 8.52728 14.5484 8.17498 14.3242C7.75862 14.06 7.39031 13.8198 7.06203 13.6116C6.54158 13.2753 6.27736 13.1632 5.99712 13.1632C5.29252 13.1632 4.62795 13.2833 4.02744 13.5155C3.42693 13.7557 2.91449 14.076 2.49013 14.4843C2.08178 14.8687 1.72147 15.3411 1.41721 15.8775C1.12096 16.398 0.880752 16.9424 0.704602 17.4869C0.536458 18.0153 0.392335 18.5998 0.280239 19.2164C0.168144 19.8249 0.096082 20.4094 0.0560478 20.9378C0.0160137 21.4583 0 22.0028 0 22.5472C0 23.9644 0.448383 25.1174 1.34515 25.9661C2.2259 26.8069 3.38689 27.2312 4.8041 27.2312H15.0609C13.2113 26.7988 12.1223 25.3736 12.1223 23.2038V23.1958Z" fill="white" />
-                                  <path d="M23.7083 12.9391H17.6871C15.0689 12.9391 13.5076 14.5004 13.5076 17.1187V23.1398C13.5076 25.758 15.0689 27.3194 17.6871 27.3194H23.7083C26.3265 27.3194 27.8878 25.758 27.8878 23.1398V17.1187C27.8878 14.5004 26.3265 12.9391 23.7083 12.9391ZM19.2325 22.211L17.6151 23.8284C17.511 23.9325 17.3669 23.9885 17.2307 23.9885C17.0946 23.9885 16.9505 23.9405 16.8464 23.8284L16.31 23.2919C16.0938 23.0837 16.0938 22.7395 16.31 22.5313C16.5181 22.3231 16.8544 22.3231 17.0706 22.5313L17.2307 22.6914L18.4638 21.4584C18.672 21.2502 19.0083 21.2502 19.2244 21.4584C19.4326 21.6665 19.4326 22.0108 19.2244 22.219L19.2325 22.211ZM19.2325 17.1827L17.6151 18.8001C17.511 18.9042 17.3669 18.9602 17.2307 18.9602C17.0946 18.9602 16.9505 18.9122 16.8464 18.8001L16.31 18.2636C16.0938 18.0555 16.0938 17.7112 16.31 17.503C16.5181 17.2948 16.8544 17.2948 17.0706 17.503L17.2307 17.6631L18.4638 16.4301C18.672 16.2219 19.0083 16.2219 19.2244 16.4301C19.4326 16.6382 19.4326 16.9825 19.2244 17.1907L19.2325 17.1827ZM24.6931 23.4521H20.9219C20.6256 23.4521 20.3854 23.2039 20.3854 22.9156C20.3854 22.6274 20.6337 22.3791 20.9219 22.3791H24.6931C24.9974 22.3791 25.2296 22.6274 25.2296 22.9156C25.2296 23.2039 24.9894 23.4521 24.6931 23.4521ZM24.6931 18.4158H20.9219C20.6256 18.4158 20.3854 18.1676 20.3854 17.8793C20.3854 17.5911 20.6337 17.3428 20.9219 17.3428H24.6931C24.9974 17.3428 25.2296 17.5911 25.2296 17.8793C25.2296 18.1676 24.9894 18.4158 24.6931 18.4158Z" fill="white" />
+                                <svg
+                                  width="28"
+                                  height="28"
+                                  viewBox="0 0 28 28"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="M11.1855 13.1152C12.9871 13.1152 14.5484 12.4666 15.8215 11.1936C17.0946 9.92047 17.7431 8.35914 17.7431 6.5576C17.7431 4.75606 17.0946 3.19473 15.8215 1.92164C14.5484 0.648554 12.9871 0 11.1855 0C9.38399 0 7.82266 0.648554 6.54957 1.92164C5.27648 3.19473 4.62793 4.75606 4.62793 6.5576C4.62793 8.35914 5.27648 9.92047 6.54957 11.1936C7.82266 12.4666 9.38399 13.1152 11.1855 13.1152Z"
+                                    fill="white"
+                                  />
+                                  <path
+                                    d="M12.1223 23.1958V17.1746C12.1223 16.3659 12.2905 15.6774 12.5707 15.0848C12.1704 15.1729 11.762 15.237 11.3617 15.237C10.7772 15.237 10.1847 15.1409 9.6082 14.9567C9.0157 14.7646 8.52728 14.5484 8.17498 14.3242C7.75862 14.06 7.39031 13.8198 7.06203 13.6116C6.54158 13.2753 6.27736 13.1632 5.99712 13.1632C5.29252 13.1632 4.62795 13.2833 4.02744 13.5155C3.42693 13.7557 2.91449 14.076 2.49013 14.4843C2.08178 14.8687 1.72147 15.3411 1.41721 15.8775C1.12096 16.398 0.880752 16.9424 0.704602 17.4869C0.536458 18.0153 0.392335 18.5998 0.280239 19.2164C0.168144 19.8249 0.096082 20.4094 0.0560478 20.9378C0.0160137 21.4583 0 22.0028 0 22.5472C0 23.9644 0.448383 25.1174 1.34515 25.9661C2.2259 26.8069 3.38689 27.2312 4.8041 27.2312H15.0609C13.2113 26.7988 12.1223 25.3736 12.1223 23.2038V23.1958Z"
+                                    fill="white"
+                                  />
+                                  <path
+                                    d="M23.7083 12.9391H17.6871C15.0689 12.9391 13.5076 14.5004 13.5076 17.1187V23.1398C13.5076 25.758 15.0689 27.3194 17.6871 27.3194H23.7083C26.3265 27.3194 27.8878 25.758 27.8878 23.1398V17.1187C27.8878 14.5004 26.3265 12.9391 23.7083 12.9391ZM19.2325 22.211L17.6151 23.8284C17.511 23.9325 17.3669 23.9885 17.2307 23.9885C17.0946 23.9885 16.9505 23.9405 16.8464 23.8284L16.31 23.2919C16.0938 23.0837 16.0938 22.7395 16.31 22.5313C16.5181 22.3231 16.8544 22.3231 17.0706 22.5313L17.2307 22.6914L18.4638 21.4584C18.672 21.2502 19.0083 21.2502 19.2244 21.4584C19.4326 21.6665 19.4326 22.0108 19.2244 22.219L19.2325 22.211ZM19.2325 17.1827L17.6151 18.8001C17.511 18.9042 17.3669 18.9602 17.2307 18.9602C17.0946 18.9602 16.9505 18.9122 16.8464 18.8001L16.31 18.2636C16.0938 18.0555 16.0938 17.7112 16.31 17.503C16.5181 17.2948 16.8544 17.2948 17.0706 17.503L17.2307 17.6631L18.4638 16.4301C18.672 16.2219 19.0083 16.2219 19.2244 16.4301C19.4326 16.6382 19.4326 16.9825 19.2244 17.1907L19.2325 17.1827ZM24.6931 23.4521H20.9219C20.6256 23.4521 20.3854 23.2039 20.3854 22.9156C20.3854 22.6274 20.6337 22.3791 20.9219 22.3791H24.6931C24.9974 22.3791 25.2296 22.6274 25.2296 22.9156C25.2296 23.2039 24.9894 23.4521 24.6931 23.4521ZM24.6931 18.4158H20.9219C20.6256 18.4158 20.3854 18.1676 20.3854 17.8793C20.3854 17.5911 20.6337 17.3428 20.9219 17.3428H24.6931C24.9974 17.3428 25.2296 17.5911 25.2296 17.8793C25.2296 18.1676 24.9894 18.4158 24.6931 18.4158Z"
+                                    fill="white"
+                                  />
                                 </svg>
 
-
-                                <p className="name">
-                                  Portfolio
-                                </p>
+                                <p className="name">Portfolio</p>
                               </div>
                               <div className="">
-                                <svg width="10" height="19" viewBox="0 0 10 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  <path d="M10 9.87471C10 10.2018 9.87995 10.5288 9.64036 10.7782L2.09719 18.6256C1.61736 19.1248 0.839379 19.1248 0.359734 18.6256C-0.119911 18.1266 -0.119911 17.3174 0.359734 16.8182L7.03435 9.87471L0.359966 2.9312C-0.119679 2.432 -0.119679 1.62289 0.359966 1.12393C0.839611 0.624495 1.61759 0.624494 2.09743 1.12393L9.6406 8.97119C9.88022 9.22069 10 9.54774 10 9.87471Z" fill="#CECECE" />
+                                <svg
+                                  width="10"
+                                  height="19"
+                                  viewBox="0 0 10 19"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="M10 9.87471C10 10.2018 9.87995 10.5288 9.64036 10.7782L2.09719 18.6256C1.61736 19.1248 0.839379 19.1248 0.359734 18.6256C-0.119911 18.1266 -0.119911 17.3174 0.359734 16.8182L7.03435 9.87471L0.359966 2.9312C-0.119679 2.432 -0.119679 1.62289 0.359966 1.12393C0.839611 0.624495 1.61759 0.624494 2.09743 1.12393L9.6406 8.97119C9.88022 9.22069 10 9.54774 10 9.87471Z"
+                                    fill="#CECECE"
+                                  />
                                 </svg>
                               </div>
                             </button>
@@ -3060,27 +3128,54 @@ export default function HomeRu() {
                           <li>
                             <button type="button">
                               <div className="">
-                                <svg width="29" height="28" viewBox="0 0 29 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <svg
+                                  width="29"
+                                  height="28"
+                                  viewBox="0 0 29 28"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
                                   <g clip-path="url(#clip0_19_2234)">
-                                    <path d="M11.1855 13.1152C12.9871 13.1152 14.5484 12.4666 15.8215 11.1936C17.0946 9.92047 17.7431 8.35914 17.7431 6.5576C17.7431 4.75606 17.0946 3.19473 15.8215 1.92164C14.5484 0.648554 12.9871 0 11.1855 0C9.38399 0 7.82266 0.648554 6.54957 1.92164C5.27648 3.19473 4.62793 4.75606 4.62793 6.5576C4.62793 8.35914 5.27648 9.92047 6.54957 11.1936C7.82266 12.4666 9.38399 13.1152 11.1855 13.1152Z" fill="white" />
-                                    <path d="M14.3723 25.75C12.843 24.2207 12.0663 22.3471 12.0663 20.1853C12.0663 18.0234 12.843 16.1498 14.3723 14.6205C14.6605 14.3323 14.9648 14.0761 15.277 13.8439C15.0529 13.988 14.8126 14.1481 14.5484 14.3163C14.1881 14.5405 13.7077 14.7566 13.1152 14.9488C12.5307 15.141 11.9382 15.229 11.3617 15.229C10.7852 15.229 10.1847 15.133 9.6082 14.9488C9.0157 14.7566 8.52728 14.5405 8.17498 14.3163C7.75862 14.052 7.39031 13.8118 7.06203 13.6037C6.54158 13.2674 6.27736 13.1553 5.99712 13.1553C5.29252 13.1553 4.62795 13.2754 4.02744 13.5076C3.42693 13.7478 2.91449 14.0681 2.49013 14.4764C2.08178 14.8607 1.72147 15.3331 1.41721 15.8696C1.12096 16.39 0.880752 16.9345 0.704602 17.479C0.536458 18.0074 0.392335 18.5919 0.280239 19.2084C0.168144 19.817 0.096082 20.4015 0.0560478 20.9299C0.0160137 21.4504 0 21.9948 0 22.5393C0 23.9565 0.448383 25.1095 1.34515 25.9582C2.2259 26.7989 3.38689 27.2233 4.8041 27.2233H16.39C15.6694 26.855 14.9888 26.3666 14.3723 25.75Z" fill="white" />
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M20.8738 12.859C16.8304 12.859 13.5396 16.1418 13.5396 20.1933C13.5396 24.2447 16.8224 27.5275 20.8738 27.5275C24.9253 27.5275 28.2081 24.2447 28.2081 20.1933C28.2081 16.1418 24.9253 12.859 20.8738 12.859ZM19.8249 20.1853V23.6762C19.8249 24.2527 20.2973 24.7251 20.8738 24.7251C21.4503 24.7251 21.9227 24.2527 21.9227 23.6762V20.1853C21.9227 19.6088 21.4503 19.1364 20.8738 19.1364C20.2973 19.1364 19.8249 19.6088 19.8249 20.1853ZM20.8738 15.6454C21.6425 15.6454 22.267 16.2699 22.267 17.0386C22.267 17.8072 21.6425 18.4318 20.8738 18.4318C20.1052 18.4318 19.4806 17.8072 19.4806 17.0386C19.4806 16.2699 20.1052 15.6454 20.8738 15.6454Z" fill="white" />
+                                    <path
+                                      d="M11.1855 13.1152C12.9871 13.1152 14.5484 12.4666 15.8215 11.1936C17.0946 9.92047 17.7431 8.35914 17.7431 6.5576C17.7431 4.75606 17.0946 3.19473 15.8215 1.92164C14.5484 0.648554 12.9871 0 11.1855 0C9.38399 0 7.82266 0.648554 6.54957 1.92164C5.27648 3.19473 4.62793 4.75606 4.62793 6.5576C4.62793 8.35914 5.27648 9.92047 6.54957 11.1936C7.82266 12.4666 9.38399 13.1152 11.1855 13.1152Z"
+                                      fill="white"
+                                    />
+                                    <path
+                                      d="M14.3723 25.75C12.843 24.2207 12.0663 22.3471 12.0663 20.1853C12.0663 18.0234 12.843 16.1498 14.3723 14.6205C14.6605 14.3323 14.9648 14.0761 15.277 13.8439C15.0529 13.988 14.8126 14.1481 14.5484 14.3163C14.1881 14.5405 13.7077 14.7566 13.1152 14.9488C12.5307 15.141 11.9382 15.229 11.3617 15.229C10.7852 15.229 10.1847 15.133 9.6082 14.9488C9.0157 14.7566 8.52728 14.5405 8.17498 14.3163C7.75862 14.052 7.39031 13.8118 7.06203 13.6037C6.54158 13.2674 6.27736 13.1553 5.99712 13.1553C5.29252 13.1553 4.62795 13.2754 4.02744 13.5076C3.42693 13.7478 2.91449 14.0681 2.49013 14.4764C2.08178 14.8607 1.72147 15.3331 1.41721 15.8696C1.12096 16.39 0.880752 16.9345 0.704602 17.479C0.536458 18.0074 0.392335 18.5919 0.280239 19.2084C0.168144 19.817 0.096082 20.4015 0.0560478 20.9299C0.0160137 21.4504 0 21.9948 0 22.5393C0 23.9565 0.448383 25.1095 1.34515 25.9582C2.2259 26.7989 3.38689 27.2233 4.8041 27.2233H16.39C15.6694 26.855 14.9888 26.3666 14.3723 25.75Z"
+                                      fill="white"
+                                    />
+                                    <path
+                                      fill-rule="evenodd"
+                                      clip-rule="evenodd"
+                                      d="M20.8738 12.859C16.8304 12.859 13.5396 16.1418 13.5396 20.1933C13.5396 24.2447 16.8224 27.5275 20.8738 27.5275C24.9253 27.5275 28.2081 24.2447 28.2081 20.1933C28.2081 16.1418 24.9253 12.859 20.8738 12.859ZM19.8249 20.1853V23.6762C19.8249 24.2527 20.2973 24.7251 20.8738 24.7251C21.4503 24.7251 21.9227 24.2527 21.9227 23.6762V20.1853C21.9227 19.6088 21.4503 19.1364 20.8738 19.1364C20.2973 19.1364 19.8249 19.6088 19.8249 20.1853ZM20.8738 15.6454C21.6425 15.6454 22.267 16.2699 22.267 17.0386C22.267 17.8072 21.6425 18.4318 20.8738 18.4318C20.1052 18.4318 19.4806 17.8072 19.4806 17.0386C19.4806 16.2699 20.1052 15.6454 20.8738 15.6454Z"
+                                      fill="white"
+                                    />
                                   </g>
                                   <defs>
                                     <clipPath id="clip0_19_2234">
-                                      <rect width="28.2081" height="27.5195" fill="white" />
+                                      <rect
+                                        width="28.2081"
+                                        height="27.5195"
+                                        fill="white"
+                                      />
                                     </clipPath>
                                   </defs>
                                 </svg>
 
-
-                                <p className="name">
-                                  {t('personalInfo')}
-                                </p>
+                                <p className="name">{t("personalInfo")}</p>
                               </div>
                               <div className="">
-                                <svg width="10" height="19" viewBox="0 0 10 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  <path d="M10 9.87471C10 10.2018 9.87995 10.5288 9.64036 10.7782L2.09719 18.6256C1.61736 19.1248 0.839379 19.1248 0.359734 18.6256C-0.119911 18.1266 -0.119911 17.3174 0.359734 16.8182L7.03435 9.87471L0.359966 2.9312C-0.119679 2.432 -0.119679 1.62289 0.359966 1.12393C0.839611 0.624495 1.61759 0.624494 2.09743 1.12393L9.6406 8.97119C9.88022 9.22069 10 9.54774 10 9.87471Z" fill="#CECECE" />
+                                <svg
+                                  width="10"
+                                  height="19"
+                                  viewBox="0 0 10 19"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="M10 9.87471C10 10.2018 9.87995 10.5288 9.64036 10.7782L2.09719 18.6256C1.61736 19.1248 0.839379 19.1248 0.359734 18.6256C-0.119911 18.1266 -0.119911 17.3174 0.359734 16.8182L7.03435 9.87471L0.359966 2.9312C-0.119679 2.432 -0.119679 1.62289 0.359966 1.12393C0.839611 0.624495 1.61759 0.624494 2.09743 1.12393L9.6406 8.97119C9.88022 9.22069 10 9.54774 10 9.87471Z"
+                                    fill="#CECECE"
+                                  />
                                 </svg>
                               </div>
                             </button>
@@ -3088,19 +3183,41 @@ export default function HomeRu() {
                           <li>
                             <button type="button">
                               <div className="">
-                                <svg width="25" height="28" viewBox="0 0 25 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  <path d="M19.2306 16.3768C18.1593 16.3768 17.1121 16.6945 16.2214 17.2897C15.3307 17.8848 14.6365 18.7307 14.2265 19.7205C13.8166 20.7102 13.7093 21.7992 13.9183 22.8499C14.1273 23.9006 14.6431 24.8657 15.4006 25.6232C16.1581 26.3807 17.1232 26.8965 18.1739 27.1055C19.2246 27.3145 20.3136 27.2073 21.3034 26.7973C22.2931 26.3873 23.139 25.6931 23.7342 24.8024C24.3293 23.9117 24.647 22.8645 24.647 21.7932C24.647 20.3567 24.0763 18.979 23.0606 17.9633C22.0448 16.9475 20.6671 16.3768 19.2306 16.3768ZM21.8484 22.5372H19.2311C19.0338 22.5372 18.8446 22.4588 18.705 22.3193C18.5655 22.1798 18.4871 21.9905 18.4871 21.7932V18.6423C18.4871 18.445 18.5655 18.2558 18.705 18.1162C18.8446 17.9767 19.0338 17.8983 19.2311 17.8983C19.4284 17.8983 19.6177 17.9767 19.7572 18.1162C19.8967 18.2558 19.9751 18.445 19.9751 18.6423V21.0492H21.8484C22.0458 21.0492 22.235 21.1276 22.3745 21.2671C22.5141 21.4067 22.5925 21.5959 22.5925 21.7932C22.5925 21.9905 22.5141 22.1798 22.3745 22.3193C22.235 22.4588 22.0458 22.5372 21.8484 22.5372Z" fill="white" />
-                                  <path d="M22.0366 9.50422C21.6827 9.51325 21.3293 9.5191 20.9775 9.5191C19.4833 9.51863 17.9901 9.43898 16.5044 9.28048H16.4916C15.6057 9.17792 14.7379 8.73842 14.0406 8.0433C13.3434 7.34819 12.9066 6.47823 12.8035 5.59286C12.8037 5.58861 12.8037 5.58435 12.8035 5.5801C12.6061 3.73326 12.5308 1.8754 12.5781 0.0186376C9.7857 -0.0486681 6.99186 0.0663664 4.21441 0.363007C2.35917 0.578238 0.58046 2.35748 0.364697 4.21272C-0.121566 8.76446 -0.121566 17.2164 0.364697 21.7681C0.579928 23.6234 2.35917 25.4026 4.21441 25.6179C7.36412 25.955 10.5345 26.0582 13.6995 25.9266C13.029 25.0276 12.5869 23.9793 12.411 22.8717C12.2351 21.7642 12.3308 20.6304 12.6897 19.568H5.27516C5.07783 19.568 4.88859 19.4896 4.74906 19.3501C4.60953 19.2106 4.53115 19.0213 4.53115 18.824C4.53115 18.6267 4.60953 18.4374 4.74906 18.2979C4.88859 18.1584 5.07783 18.08 5.27516 18.08H13.4061C13.9971 17.1583 14.7964 16.3884 15.7396 15.8325H5.27516C5.07783 15.8325 4.88859 15.7542 4.74906 15.6146C4.60953 15.4751 4.53115 15.2859 4.53115 15.0885C4.53115 14.8912 4.60953 14.702 4.74906 14.5624C4.88859 14.4229 5.07783 14.3445 5.27516 14.3445H16.8073C17.0046 14.3445 17.1939 14.4229 17.3334 14.5624C17.4729 14.702 17.5513 14.8912 17.5513 15.0885V15.0928C19.056 14.7202 20.6419 14.8605 22.0579 15.4914C22.0988 13.515 22.0913 11.4418 22.0366 9.50422ZM13.0894 12.0976H5.27728C5.07996 12.0976 4.89072 12.0192 4.75119 11.8797C4.61166 11.7402 4.53327 11.5509 4.53327 11.3536C4.53327 11.1563 4.61166 10.967 4.75119 10.8275C4.89072 10.688 5.07996 10.6096 5.27728 10.6096H13.0894C13.2867 10.6096 13.4759 10.688 13.6155 10.8275C13.755 10.967 13.8334 11.1563 13.8334 11.3536C13.8334 11.5509 13.755 11.7402 13.6155 11.8797C13.4759 12.0192 13.2867 12.0976 13.0894 12.0976Z" fill="white" />
-                                  <path d="M16.6552 7.86532C18.4256 8.05468 20.2066 8.12729 21.9866 8.08268L21.9823 8.07577C19.8802 4.90231 17.1658 2.18044 13.998 0.0697021C13.9521 1.85852 14.0247 3.64841 14.2154 5.42763C14.3514 6.60316 15.4791 7.73087 16.6552 7.86532Z" fill="white" />
+                                <svg
+                                  width="25"
+                                  height="28"
+                                  viewBox="0 0 25 28"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="M19.2306 16.3768C18.1593 16.3768 17.1121 16.6945 16.2214 17.2897C15.3307 17.8848 14.6365 18.7307 14.2265 19.7205C13.8166 20.7102 13.7093 21.7992 13.9183 22.8499C14.1273 23.9006 14.6431 24.8657 15.4006 25.6232C16.1581 26.3807 17.1232 26.8965 18.1739 27.1055C19.2246 27.3145 20.3136 27.2073 21.3034 26.7973C22.2931 26.3873 23.139 25.6931 23.7342 24.8024C24.3293 23.9117 24.647 22.8645 24.647 21.7932C24.647 20.3567 24.0763 18.979 23.0606 17.9633C22.0448 16.9475 20.6671 16.3768 19.2306 16.3768ZM21.8484 22.5372H19.2311C19.0338 22.5372 18.8446 22.4588 18.705 22.3193C18.5655 22.1798 18.4871 21.9905 18.4871 21.7932V18.6423C18.4871 18.445 18.5655 18.2558 18.705 18.1162C18.8446 17.9767 19.0338 17.8983 19.2311 17.8983C19.4284 17.8983 19.6177 17.9767 19.7572 18.1162C19.8967 18.2558 19.9751 18.445 19.9751 18.6423V21.0492H21.8484C22.0458 21.0492 22.235 21.1276 22.3745 21.2671C22.5141 21.4067 22.5925 21.5959 22.5925 21.7932C22.5925 21.9905 22.5141 22.1798 22.3745 22.3193C22.235 22.4588 22.0458 22.5372 21.8484 22.5372Z"
+                                    fill="white"
+                                  />
+                                  <path
+                                    d="M22.0366 9.50422C21.6827 9.51325 21.3293 9.5191 20.9775 9.5191C19.4833 9.51863 17.9901 9.43898 16.5044 9.28048H16.4916C15.6057 9.17792 14.7379 8.73842 14.0406 8.0433C13.3434 7.34819 12.9066 6.47823 12.8035 5.59286C12.8037 5.58861 12.8037 5.58435 12.8035 5.5801C12.6061 3.73326 12.5308 1.8754 12.5781 0.0186376C9.7857 -0.0486681 6.99186 0.0663664 4.21441 0.363007C2.35917 0.578238 0.58046 2.35748 0.364697 4.21272C-0.121566 8.76446 -0.121566 17.2164 0.364697 21.7681C0.579928 23.6234 2.35917 25.4026 4.21441 25.6179C7.36412 25.955 10.5345 26.0582 13.6995 25.9266C13.029 25.0276 12.5869 23.9793 12.411 22.8717C12.2351 21.7642 12.3308 20.6304 12.6897 19.568H5.27516C5.07783 19.568 4.88859 19.4896 4.74906 19.3501C4.60953 19.2106 4.53115 19.0213 4.53115 18.824C4.53115 18.6267 4.60953 18.4374 4.74906 18.2979C4.88859 18.1584 5.07783 18.08 5.27516 18.08H13.4061C13.9971 17.1583 14.7964 16.3884 15.7396 15.8325H5.27516C5.07783 15.8325 4.88859 15.7542 4.74906 15.6146C4.60953 15.4751 4.53115 15.2859 4.53115 15.0885C4.53115 14.8912 4.60953 14.702 4.74906 14.5624C4.88859 14.4229 5.07783 14.3445 5.27516 14.3445H16.8073C17.0046 14.3445 17.1939 14.4229 17.3334 14.5624C17.4729 14.702 17.5513 14.8912 17.5513 15.0885V15.0928C19.056 14.7202 20.6419 14.8605 22.0579 15.4914C22.0988 13.515 22.0913 11.4418 22.0366 9.50422ZM13.0894 12.0976H5.27728C5.07996 12.0976 4.89072 12.0192 4.75119 11.8797C4.61166 11.7402 4.53327 11.5509 4.53327 11.3536C4.53327 11.1563 4.61166 10.967 4.75119 10.8275C4.89072 10.688 5.07996 10.6096 5.27728 10.6096H13.0894C13.2867 10.6096 13.4759 10.688 13.6155 10.8275C13.755 10.967 13.8334 11.1563 13.8334 11.3536C13.8334 11.5509 13.755 11.7402 13.6155 11.8797C13.4759 12.0192 13.2867 12.0976 13.0894 12.0976Z"
+                                    fill="white"
+                                  />
+                                  <path
+                                    d="M16.6552 7.86532C18.4256 8.05468 20.2066 8.12729 21.9866 8.08268L21.9823 8.07577C19.8802 4.90231 17.1658 2.18044 13.998 0.0697021C13.9521 1.85852 14.0247 3.64841 14.2154 5.42763C14.3514 6.60316 15.4791 7.73087 16.6552 7.86532Z"
+                                    fill="white"
+                                  />
                                 </svg>
 
-                                <p className="name">
-                                  {t('deposit')}
-                                </p>
+                                <p className="name">{t("deposit")}</p>
                               </div>
                               <div className="">
-                                <svg width="10" height="19" viewBox="0 0 10 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  <path d="M10 9.87471C10 10.2018 9.87995 10.5288 9.64036 10.7782L2.09719 18.6256C1.61736 19.1248 0.839379 19.1248 0.359734 18.6256C-0.119911 18.1266 -0.119911 17.3174 0.359734 16.8182L7.03435 9.87471L0.359966 2.9312C-0.119679 2.432 -0.119679 1.62289 0.359966 1.12393C0.839611 0.624495 1.61759 0.624494 2.09743 1.12393L9.6406 8.97119C9.88022 9.22069 10 9.54774 10 9.87471Z" fill="#CECECE" />
+                                <svg
+                                  width="10"
+                                  height="19"
+                                  viewBox="0 0 10 19"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="M10 9.87471C10 10.2018 9.87995 10.5288 9.64036 10.7782L2.09719 18.6256C1.61736 19.1248 0.839379 19.1248 0.359734 18.6256C-0.119911 18.1266 -0.119911 17.3174 0.359734 16.8182L7.03435 9.87471L0.359966 2.9312C-0.119679 2.432 -0.119679 1.62289 0.359966 1.12393C0.839611 0.624495 1.61759 0.624494 2.09743 1.12393L9.6406 8.97119C9.88022 9.22069 10 9.54774 10 9.87471Z"
+                                    fill="#CECECE"
+                                  />
                                 </svg>
                               </div>
                             </button>
@@ -3108,19 +3225,41 @@ export default function HomeRu() {
                           <li>
                             <button type="button">
                               <div className="">
-                                <svg width="25" height="28" viewBox="0 0 25 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  <path d="M19.2306 16.3768C18.1593 16.3768 17.1121 16.6945 16.2214 17.2897C15.3307 17.8848 14.6365 18.7307 14.2265 19.7205C13.8166 20.7102 13.7093 21.7992 13.9183 22.8499C14.1273 23.9006 14.6431 24.8657 15.4006 25.6232C16.1581 26.3807 17.1232 26.8965 18.1739 27.1055C19.2246 27.3145 20.3136 27.2073 21.3034 26.7973C22.2931 26.3873 23.139 25.6931 23.7342 24.8024C24.3293 23.9117 24.647 22.8645 24.647 21.7932C24.647 20.3567 24.0763 18.979 23.0606 17.9633C22.0448 16.9475 20.6671 16.3768 19.2306 16.3768ZM21.8484 22.5372H19.2311C19.0338 22.5372 18.8446 22.4588 18.705 22.3193C18.5655 22.1798 18.4871 21.9905 18.4871 21.7932V18.6423C18.4871 18.445 18.5655 18.2558 18.705 18.1162C18.8446 17.9767 19.0338 17.8983 19.2311 17.8983C19.4284 17.8983 19.6177 17.9767 19.7572 18.1162C19.8967 18.2558 19.9751 18.445 19.9751 18.6423V21.0492H21.8484C22.0458 21.0492 22.235 21.1276 22.3745 21.2671C22.5141 21.4067 22.5925 21.5959 22.5925 21.7932C22.5925 21.9905 22.5141 22.1798 22.3745 22.3193C22.235 22.4588 22.0458 22.5372 21.8484 22.5372Z" fill="white" />
-                                  <path d="M22.0366 9.50422C21.6827 9.51325 21.3293 9.5191 20.9775 9.5191C19.4833 9.51863 17.9901 9.43898 16.5044 9.28048H16.4916C15.6057 9.17792 14.7379 8.73842 14.0406 8.0433C13.3434 7.34819 12.9066 6.47823 12.8035 5.59286C12.8037 5.58861 12.8037 5.58435 12.8035 5.5801C12.6061 3.73326 12.5308 1.8754 12.5781 0.0186376C9.7857 -0.0486681 6.99186 0.0663664 4.21441 0.363007C2.35917 0.578238 0.58046 2.35748 0.364697 4.21272C-0.121566 8.76446 -0.121566 17.2164 0.364697 21.7681C0.579928 23.6234 2.35917 25.4026 4.21441 25.6179C7.36412 25.955 10.5345 26.0582 13.6995 25.9266C13.029 25.0276 12.5869 23.9793 12.411 22.8717C12.2351 21.7642 12.3308 20.6304 12.6897 19.568H5.27516C5.07783 19.568 4.88859 19.4896 4.74906 19.3501C4.60953 19.2106 4.53115 19.0213 4.53115 18.824C4.53115 18.6267 4.60953 18.4374 4.74906 18.2979C4.88859 18.1584 5.07783 18.08 5.27516 18.08H13.4061C13.9971 17.1583 14.7964 16.3884 15.7396 15.8325H5.27516C5.07783 15.8325 4.88859 15.7542 4.74906 15.6146C4.60953 15.4751 4.53115 15.2859 4.53115 15.0885C4.53115 14.8912 4.60953 14.702 4.74906 14.5624C4.88859 14.4229 5.07783 14.3445 5.27516 14.3445H16.8073C17.0046 14.3445 17.1939 14.4229 17.3334 14.5624C17.4729 14.702 17.5513 14.8912 17.5513 15.0885V15.0928C19.056 14.7202 20.6419 14.8605 22.0579 15.4914C22.0988 13.515 22.0913 11.4418 22.0366 9.50422ZM13.0894 12.0976H5.27728C5.07996 12.0976 4.89072 12.0192 4.75119 11.8797C4.61166 11.7402 4.53327 11.5509 4.53327 11.3536C4.53327 11.1563 4.61166 10.967 4.75119 10.8275C4.89072 10.688 5.07996 10.6096 5.27728 10.6096H13.0894C13.2867 10.6096 13.4759 10.688 13.6155 10.8275C13.755 10.967 13.8334 11.1563 13.8334 11.3536C13.8334 11.5509 13.755 11.7402 13.6155 11.8797C13.4759 12.0192 13.2867 12.0976 13.0894 12.0976Z" fill="white" />
-                                  <path d="M16.6552 7.86532C18.4256 8.05468 20.2066 8.12729 21.9866 8.08268L21.9823 8.07577C19.8802 4.90231 17.1658 2.18044 13.998 0.0697021C13.9521 1.85852 14.0247 3.64841 14.2154 5.42763C14.3514 6.60316 15.4791 7.73087 16.6552 7.86532Z" fill="white" />
+                                <svg
+                                  width="25"
+                                  height="28"
+                                  viewBox="0 0 25 28"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="M19.2306 16.3768C18.1593 16.3768 17.1121 16.6945 16.2214 17.2897C15.3307 17.8848 14.6365 18.7307 14.2265 19.7205C13.8166 20.7102 13.7093 21.7992 13.9183 22.8499C14.1273 23.9006 14.6431 24.8657 15.4006 25.6232C16.1581 26.3807 17.1232 26.8965 18.1739 27.1055C19.2246 27.3145 20.3136 27.2073 21.3034 26.7973C22.2931 26.3873 23.139 25.6931 23.7342 24.8024C24.3293 23.9117 24.647 22.8645 24.647 21.7932C24.647 20.3567 24.0763 18.979 23.0606 17.9633C22.0448 16.9475 20.6671 16.3768 19.2306 16.3768ZM21.8484 22.5372H19.2311C19.0338 22.5372 18.8446 22.4588 18.705 22.3193C18.5655 22.1798 18.4871 21.9905 18.4871 21.7932V18.6423C18.4871 18.445 18.5655 18.2558 18.705 18.1162C18.8446 17.9767 19.0338 17.8983 19.2311 17.8983C19.4284 17.8983 19.6177 17.9767 19.7572 18.1162C19.8967 18.2558 19.9751 18.445 19.9751 18.6423V21.0492H21.8484C22.0458 21.0492 22.235 21.1276 22.3745 21.2671C22.5141 21.4067 22.5925 21.5959 22.5925 21.7932C22.5925 21.9905 22.5141 22.1798 22.3745 22.3193C22.235 22.4588 22.0458 22.5372 21.8484 22.5372Z"
+                                    fill="white"
+                                  />
+                                  <path
+                                    d="M22.0366 9.50422C21.6827 9.51325 21.3293 9.5191 20.9775 9.5191C19.4833 9.51863 17.9901 9.43898 16.5044 9.28048H16.4916C15.6057 9.17792 14.7379 8.73842 14.0406 8.0433C13.3434 7.34819 12.9066 6.47823 12.8035 5.59286C12.8037 5.58861 12.8037 5.58435 12.8035 5.5801C12.6061 3.73326 12.5308 1.8754 12.5781 0.0186376C9.7857 -0.0486681 6.99186 0.0663664 4.21441 0.363007C2.35917 0.578238 0.58046 2.35748 0.364697 4.21272C-0.121566 8.76446 -0.121566 17.2164 0.364697 21.7681C0.579928 23.6234 2.35917 25.4026 4.21441 25.6179C7.36412 25.955 10.5345 26.0582 13.6995 25.9266C13.029 25.0276 12.5869 23.9793 12.411 22.8717C12.2351 21.7642 12.3308 20.6304 12.6897 19.568H5.27516C5.07783 19.568 4.88859 19.4896 4.74906 19.3501C4.60953 19.2106 4.53115 19.0213 4.53115 18.824C4.53115 18.6267 4.60953 18.4374 4.74906 18.2979C4.88859 18.1584 5.07783 18.08 5.27516 18.08H13.4061C13.9971 17.1583 14.7964 16.3884 15.7396 15.8325H5.27516C5.07783 15.8325 4.88859 15.7542 4.74906 15.6146C4.60953 15.4751 4.53115 15.2859 4.53115 15.0885C4.53115 14.8912 4.60953 14.702 4.74906 14.5624C4.88859 14.4229 5.07783 14.3445 5.27516 14.3445H16.8073C17.0046 14.3445 17.1939 14.4229 17.3334 14.5624C17.4729 14.702 17.5513 14.8912 17.5513 15.0885V15.0928C19.056 14.7202 20.6419 14.8605 22.0579 15.4914C22.0988 13.515 22.0913 11.4418 22.0366 9.50422ZM13.0894 12.0976H5.27728C5.07996 12.0976 4.89072 12.0192 4.75119 11.8797C4.61166 11.7402 4.53327 11.5509 4.53327 11.3536C4.53327 11.1563 4.61166 10.967 4.75119 10.8275C4.89072 10.688 5.07996 10.6096 5.27728 10.6096H13.0894C13.2867 10.6096 13.4759 10.688 13.6155 10.8275C13.755 10.967 13.8334 11.1563 13.8334 11.3536C13.8334 11.5509 13.755 11.7402 13.6155 11.8797C13.4759 12.0192 13.2867 12.0976 13.0894 12.0976Z"
+                                    fill="white"
+                                  />
+                                  <path
+                                    d="M16.6552 7.86532C18.4256 8.05468 20.2066 8.12729 21.9866 8.08268L21.9823 8.07577C19.8802 4.90231 17.1658 2.18044 13.998 0.0697021C13.9521 1.85852 14.0247 3.64841 14.2154 5.42763C14.3514 6.60316 15.4791 7.73087 16.6552 7.86532Z"
+                                    fill="white"
+                                  />
                                 </svg>
 
-                                <p className="name">
-                                  Withdrawal
-                                </p>
+                                <p className="name">Withdrawal</p>
                               </div>
                               <div className="">
-                                <svg width="10" height="19" viewBox="0 0 10 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  <path d="M10 9.87471C10 10.2018 9.87995 10.5288 9.64036 10.7782L2.09719 18.6256C1.61736 19.1248 0.839379 19.1248 0.359734 18.6256C-0.119911 18.1266 -0.119911 17.3174 0.359734 16.8182L7.03435 9.87471L0.359966 2.9312C-0.119679 2.432 -0.119679 1.62289 0.359966 1.12393C0.839611 0.624495 1.61759 0.624494 2.09743 1.12393L9.6406 8.97119C9.88022 9.22069 10 9.54774 10 9.87471Z" fill="#CECECE" />
+                                <svg
+                                  width="10"
+                                  height="19"
+                                  viewBox="0 0 10 19"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="M10 9.87471C10 10.2018 9.87995 10.5288 9.64036 10.7782L2.09719 18.6256C1.61736 19.1248 0.839379 19.1248 0.359734 18.6256C-0.119911 18.1266 -0.119911 17.3174 0.359734 16.8182L7.03435 9.87471L0.359966 2.9312C-0.119679 2.432 -0.119679 1.62289 0.359966 1.12393C0.839611 0.624495 1.61759 0.624494 2.09743 1.12393L9.6406 8.97119C9.88022 9.22069 10 9.54774 10 9.87471Z"
+                                    fill="#CECECE"
+                                  />
                                 </svg>
                               </div>
                             </button>
@@ -3128,19 +3267,41 @@ export default function HomeRu() {
                           <li>
                             <button type="button">
                               <div className="">
-                                <svg width="25" height="28" viewBox="0 0 25 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  <path d="M19.2306 16.3768C18.1593 16.3768 17.1121 16.6945 16.2214 17.2897C15.3307 17.8848 14.6365 18.7307 14.2265 19.7205C13.8166 20.7102 13.7093 21.7992 13.9183 22.8499C14.1273 23.9006 14.6431 24.8657 15.4006 25.6232C16.1581 26.3807 17.1232 26.8965 18.1739 27.1055C19.2246 27.3145 20.3136 27.2073 21.3034 26.7973C22.2931 26.3873 23.139 25.6931 23.7342 24.8024C24.3293 23.9117 24.647 22.8645 24.647 21.7932C24.647 20.3567 24.0763 18.979 23.0606 17.9633C22.0448 16.9475 20.6671 16.3768 19.2306 16.3768ZM21.8484 22.5372H19.2311C19.0338 22.5372 18.8446 22.4588 18.705 22.3193C18.5655 22.1798 18.4871 21.9905 18.4871 21.7932V18.6423C18.4871 18.445 18.5655 18.2558 18.705 18.1162C18.8446 17.9767 19.0338 17.8983 19.2311 17.8983C19.4284 17.8983 19.6177 17.9767 19.7572 18.1162C19.8967 18.2558 19.9751 18.445 19.9751 18.6423V21.0492H21.8484C22.0458 21.0492 22.235 21.1276 22.3745 21.2671C22.5141 21.4067 22.5925 21.5959 22.5925 21.7932C22.5925 21.9905 22.5141 22.1798 22.3745 22.3193C22.235 22.4588 22.0458 22.5372 21.8484 22.5372Z" fill="white" />
-                                  <path d="M22.0366 9.50422C21.6827 9.51325 21.3293 9.5191 20.9775 9.5191C19.4833 9.51863 17.9901 9.43898 16.5044 9.28048H16.4916C15.6057 9.17792 14.7379 8.73842 14.0406 8.0433C13.3434 7.34819 12.9066 6.47823 12.8035 5.59286C12.8037 5.58861 12.8037 5.58435 12.8035 5.5801C12.6061 3.73326 12.5308 1.8754 12.5781 0.0186376C9.7857 -0.0486681 6.99186 0.0663664 4.21441 0.363007C2.35917 0.578238 0.58046 2.35748 0.364697 4.21272C-0.121566 8.76446 -0.121566 17.2164 0.364697 21.7681C0.579928 23.6234 2.35917 25.4026 4.21441 25.6179C7.36412 25.955 10.5345 26.0582 13.6995 25.9266C13.029 25.0276 12.5869 23.9793 12.411 22.8717C12.2351 21.7642 12.3308 20.6304 12.6897 19.568H5.27516C5.07783 19.568 4.88859 19.4896 4.74906 19.3501C4.60953 19.2106 4.53115 19.0213 4.53115 18.824C4.53115 18.6267 4.60953 18.4374 4.74906 18.2979C4.88859 18.1584 5.07783 18.08 5.27516 18.08H13.4061C13.9971 17.1583 14.7964 16.3884 15.7396 15.8325H5.27516C5.07783 15.8325 4.88859 15.7542 4.74906 15.6146C4.60953 15.4751 4.53115 15.2859 4.53115 15.0885C4.53115 14.8912 4.60953 14.702 4.74906 14.5624C4.88859 14.4229 5.07783 14.3445 5.27516 14.3445H16.8073C17.0046 14.3445 17.1939 14.4229 17.3334 14.5624C17.4729 14.702 17.5513 14.8912 17.5513 15.0885V15.0928C19.056 14.7202 20.6419 14.8605 22.0579 15.4914C22.0988 13.515 22.0913 11.4418 22.0366 9.50422ZM13.0894 12.0976H5.27728C5.07996 12.0976 4.89072 12.0192 4.75119 11.8797C4.61166 11.7402 4.53327 11.5509 4.53327 11.3536C4.53327 11.1563 4.61166 10.967 4.75119 10.8275C4.89072 10.688 5.07996 10.6096 5.27728 10.6096H13.0894C13.2867 10.6096 13.4759 10.688 13.6155 10.8275C13.755 10.967 13.8334 11.1563 13.8334 11.3536C13.8334 11.5509 13.755 11.7402 13.6155 11.8797C13.4759 12.0192 13.2867 12.0976 13.0894 12.0976Z" fill="white" />
-                                  <path d="M16.6552 7.86532C18.4256 8.05468 20.2066 8.12729 21.9866 8.08268L21.9823 8.07577C19.8802 4.90231 17.1658 2.18044 13.998 0.0697021C13.9521 1.85852 14.0247 3.64841 14.2154 5.42763C14.3514 6.60316 15.4791 7.73087 16.6552 7.86532Z" fill="white" />
+                                <svg
+                                  width="25"
+                                  height="28"
+                                  viewBox="0 0 25 28"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="M19.2306 16.3768C18.1593 16.3768 17.1121 16.6945 16.2214 17.2897C15.3307 17.8848 14.6365 18.7307 14.2265 19.7205C13.8166 20.7102 13.7093 21.7992 13.9183 22.8499C14.1273 23.9006 14.6431 24.8657 15.4006 25.6232C16.1581 26.3807 17.1232 26.8965 18.1739 27.1055C19.2246 27.3145 20.3136 27.2073 21.3034 26.7973C22.2931 26.3873 23.139 25.6931 23.7342 24.8024C24.3293 23.9117 24.647 22.8645 24.647 21.7932C24.647 20.3567 24.0763 18.979 23.0606 17.9633C22.0448 16.9475 20.6671 16.3768 19.2306 16.3768ZM21.8484 22.5372H19.2311C19.0338 22.5372 18.8446 22.4588 18.705 22.3193C18.5655 22.1798 18.4871 21.9905 18.4871 21.7932V18.6423C18.4871 18.445 18.5655 18.2558 18.705 18.1162C18.8446 17.9767 19.0338 17.8983 19.2311 17.8983C19.4284 17.8983 19.6177 17.9767 19.7572 18.1162C19.8967 18.2558 19.9751 18.445 19.9751 18.6423V21.0492H21.8484C22.0458 21.0492 22.235 21.1276 22.3745 21.2671C22.5141 21.4067 22.5925 21.5959 22.5925 21.7932C22.5925 21.9905 22.5141 22.1798 22.3745 22.3193C22.235 22.4588 22.0458 22.5372 21.8484 22.5372Z"
+                                    fill="white"
+                                  />
+                                  <path
+                                    d="M22.0366 9.50422C21.6827 9.51325 21.3293 9.5191 20.9775 9.5191C19.4833 9.51863 17.9901 9.43898 16.5044 9.28048H16.4916C15.6057 9.17792 14.7379 8.73842 14.0406 8.0433C13.3434 7.34819 12.9066 6.47823 12.8035 5.59286C12.8037 5.58861 12.8037 5.58435 12.8035 5.5801C12.6061 3.73326 12.5308 1.8754 12.5781 0.0186376C9.7857 -0.0486681 6.99186 0.0663664 4.21441 0.363007C2.35917 0.578238 0.58046 2.35748 0.364697 4.21272C-0.121566 8.76446 -0.121566 17.2164 0.364697 21.7681C0.579928 23.6234 2.35917 25.4026 4.21441 25.6179C7.36412 25.955 10.5345 26.0582 13.6995 25.9266C13.029 25.0276 12.5869 23.9793 12.411 22.8717C12.2351 21.7642 12.3308 20.6304 12.6897 19.568H5.27516C5.07783 19.568 4.88859 19.4896 4.74906 19.3501C4.60953 19.2106 4.53115 19.0213 4.53115 18.824C4.53115 18.6267 4.60953 18.4374 4.74906 18.2979C4.88859 18.1584 5.07783 18.08 5.27516 18.08H13.4061C13.9971 17.1583 14.7964 16.3884 15.7396 15.8325H5.27516C5.07783 15.8325 4.88859 15.7542 4.74906 15.6146C4.60953 15.4751 4.53115 15.2859 4.53115 15.0885C4.53115 14.8912 4.60953 14.702 4.74906 14.5624C4.88859 14.4229 5.07783 14.3445 5.27516 14.3445H16.8073C17.0046 14.3445 17.1939 14.4229 17.3334 14.5624C17.4729 14.702 17.5513 14.8912 17.5513 15.0885V15.0928C19.056 14.7202 20.6419 14.8605 22.0579 15.4914C22.0988 13.515 22.0913 11.4418 22.0366 9.50422ZM13.0894 12.0976H5.27728C5.07996 12.0976 4.89072 12.0192 4.75119 11.8797C4.61166 11.7402 4.53327 11.5509 4.53327 11.3536C4.53327 11.1563 4.61166 10.967 4.75119 10.8275C4.89072 10.688 5.07996 10.6096 5.27728 10.6096H13.0894C13.2867 10.6096 13.4759 10.688 13.6155 10.8275C13.755 10.967 13.8334 11.1563 13.8334 11.3536C13.8334 11.5509 13.755 11.7402 13.6155 11.8797C13.4759 12.0192 13.2867 12.0976 13.0894 12.0976Z"
+                                    fill="white"
+                                  />
+                                  <path
+                                    d="M16.6552 7.86532C18.4256 8.05468 20.2066 8.12729 21.9866 8.08268L21.9823 8.07577C19.8802 4.90231 17.1658 2.18044 13.998 0.0697021C13.9521 1.85852 14.0247 3.64841 14.2154 5.42763C14.3514 6.60316 15.4791 7.73087 16.6552 7.86532Z"
+                                    fill="white"
+                                  />
                                 </svg>
 
-                                <p className="name">
-                                  {t('reports')}
-                                </p>
+                                <p className="name">{t("reports")}</p>
                               </div>
                               <div className="">
-                                <svg width="10" height="19" viewBox="0 0 10 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  <path d="M10 9.87471C10 10.2018 9.87995 10.5288 9.64036 10.7782L2.09719 18.6256C1.61736 19.1248 0.839379 19.1248 0.359734 18.6256C-0.119911 18.1266 -0.119911 17.3174 0.359734 16.8182L7.03435 9.87471L0.359966 2.9312C-0.119679 2.432 -0.119679 1.62289 0.359966 1.12393C0.839611 0.624495 1.61759 0.624494 2.09743 1.12393L9.6406 8.97119C9.88022 9.22069 10 9.54774 10 9.87471Z" fill="#CECECE" />
+                                <svg
+                                  width="10"
+                                  height="19"
+                                  viewBox="0 0 10 19"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="M10 9.87471C10 10.2018 9.87995 10.5288 9.64036 10.7782L2.09719 18.6256C1.61736 19.1248 0.839379 19.1248 0.359734 18.6256C-0.119911 18.1266 -0.119911 17.3174 0.359734 16.8182L7.03435 9.87471L0.359966 2.9312C-0.119679 2.432 -0.119679 1.62289 0.359966 1.12393C0.839611 0.624495 1.61759 0.624494 2.09743 1.12393L9.6406 8.97119C9.88022 9.22069 10 9.54774 10 9.87471Z"
+                                    fill="#CECECE"
+                                  />
                                 </svg>
                               </div>
                             </button>
@@ -3185,8 +3346,17 @@ export default function HomeRu() {
                   </div>
                   <div className="hide-on-desktop mb-5">
                     <button type="button" className="logout-btn">
-                      <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M18.7102 9.28113L12.8653 14.4766C12.5858 14.7232 12.146 14.5259 12.146 14.1519V11.065H5.72158C5.24478 11.065 4.85841 10.6786 4.85841 10.2018V7.06977C4.85841 6.59297 5.24478 6.2066 5.72158 6.2066H12.146V3.11974C12.146 2.7457 12.5858 2.5484 12.8653 2.79913L18.7102 7.99459C19.0966 8.33575 19.0966 8.93997 18.7102 9.28113ZM0.863169 17.2757H6.42445C6.90124 17.2757 7.28762 16.8893 7.28762 16.4125V14.8999C7.28762 14.4231 6.90124 14.0368 6.42445 14.0368H3.23894V3.23483H6.42445C6.90124 3.23483 7.28762 2.84846 7.28762 2.37166V0.863169C7.28762 0.386371 6.90124 0 6.42445 0H0.863169C0.386371 0 0 0.386371 0 0.863169V16.4125C0 16.8893 0.386371 17.2757 0.863169 17.2757Z" fill="white" />
+                      <svg
+                        width="19"
+                        height="18"
+                        viewBox="0 0 19 18"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M18.7102 9.28113L12.8653 14.4766C12.5858 14.7232 12.146 14.5259 12.146 14.1519V11.065H5.72158C5.24478 11.065 4.85841 10.6786 4.85841 10.2018V7.06977C4.85841 6.59297 5.24478 6.2066 5.72158 6.2066H12.146V3.11974C12.146 2.7457 12.5858 2.5484 12.8653 2.79913L18.7102 7.99459C19.0966 8.33575 19.0966 8.93997 18.7102 9.28113ZM0.863169 17.2757H6.42445C6.90124 17.2757 7.28762 16.8893 7.28762 16.4125V14.8999C7.28762 14.4231 6.90124 14.0368 6.42445 14.0368H3.23894V3.23483H6.42445C6.90124 3.23483 7.28762 2.84846 7.28762 2.37166V0.863169C7.28762 0.386371 6.90124 0 6.42445 0H0.863169C0.386371 0 0 0.386371 0 0.863169V16.4125C0 16.8893 0.386371 17.2757 0.863169 17.2757Z"
+                          fill="white"
+                        />
                       </svg>
                       Log Out
                     </button>
@@ -3967,131 +4137,137 @@ export default function HomeRu() {
               )}
             </div>
           )}
-          <div className="account-management hide-on-desktop">
-            <div className="swith-button-box">
-              <button>New account</button>
-              <button className="active">My account</button>
-            </div>
-            <div className="select-account-box">
-              {userProfile?.accounts?.length > 0 && (
-                <div className="acc-selection">
-                  <label className="m-4" htmlFor="symbol-input">
-                    {t("selectAccount")}:
-                  </label>
-                  <Select
-                    id="account-input"
-                    onChange={handleAccountChange}
-                    options={accounts
-                      .filter((acc) => !acc?.isDeleted)
-                      ?.map((account) => ({
-                        label: `${account.account_no} ${account.account_type}`,
-                        value: account.account_no,
-                      }))}
-                    value={{
-                      label: `${defaultAccount.account_no} ${defaultAccount.account_type}`,
-                      value: defaultAccount.account_no,
-                    }}
-                    styles={{
-                      container: (provided, state) => ({ ...provided }),
-                      control: (provided) => ({
-                        ...provided,
-                        backgroundColor: "inherit",
-                      }),
-                      dropdownIndicator: (provided, state) => ({
-                        ...provided,
-                        paddingBlock: 0,
-                      }),
-                      option: (provided, state) => ({
-                        ...provided,
-                        cursor: "pointer",
-                        backgroundColor: state.isSelected
-                          ? "var(--main-primary-button)"
-                          : "unset",
-                        color: "var(--main-text-color)",
-                        "&:hover": {
+          {showAccounManagement && (
+            <div className="account-management hide-on-desktop">
+              <div className="swith-button-box">
+                <button
+                  className={`${showAccountModal ? "active" : ""}`}
+                  onClick={() => {
+                    setShowAccountModal(true);
+                  }}
+                  type="button"
+                >
+                  New account
+                </button>
+                <button
+                  className={`${showAccountModal ? "" : "active"}`}
+                  onClick={() => {
+                    setShowAccountModal(false);
+                  }}
+                  type="button"
+                >
+                  My account
+                </button>
+              </div>
+              <div className="select-account-box">
+                {userProfile?.accounts?.length > 0 && (
+                  <div className="acc-selection">
+                    <label className="m-4" htmlFor="symbol-input">
+                      {t("selectAccount")}:
+                    </label>
+                    <Select
+                      id="account-input"
+                      onChange={handleAccountChange}
+                      options={accounts
+                        .filter((acc) => !acc?.isDeleted)
+                        ?.map((account) => ({
+                          label: `${account.account_no} ${account.account_type}`,
+                          value: account.account_no,
+                        }))}
+                      value={{
+                        label: `${defaultAccount.account_no} ${defaultAccount.account_type}`,
+                        value: defaultAccount.account_no,
+                      }}
+                      styles={{
+                        container: (provided, state) => ({ ...provided }),
+                        control: (provided) => ({
+                          ...provided,
+                          backgroundColor: "inherit",
+                        }),
+                        dropdownIndicator: (provided, state) => ({
+                          ...provided,
+                          paddingBlock: 0,
+                        }),
+                        option: (provided, state) => ({
+                          ...provided,
+                          cursor: "pointer",
                           backgroundColor: state.isSelected
-                            ? ""
-                            : "var(--main-primary-button)",
-                        },
-                      }),
-                      singleValue: (provided) => ({
-                        ...provided,
-                        color: "var(--main-text-color)",
-                      }),
-                    }}
-                    theme={(theme) => {
-                      return {
-                        ...theme,
-                        colors: {
-                          ...theme.colors,
-                          primary: "var(--main-text-color)",
-                        },
-                      };
-                    }}
-                    isSearchable={false}
-                  />
-                </div>
-              )}
+                            ? "var(--main-primary-button)"
+                            : "unset",
+                          color: "var(--main-text-color)",
+                          "&:hover": {
+                            backgroundColor: state.isSelected
+                              ? ""
+                              : "var(--main-primary-button)",
+                          },
+                        }),
+                        singleValue: (provided) => ({
+                          ...provided,
+                          color: "var(--main-text-color)",
+                        }),
+                      }}
+                      theme={(theme) => {
+                        return {
+                          ...theme,
+                          colors: {
+                            ...theme.colors,
+                            primary: "var(--main-text-color)",
+                          },
+                        };
+                      }}
+                      isSearchable={false}
+                    />
+                  </div>
+                )}
+              </div>
+              <div className="account-stat-box">
+                <ul>
+                  <li>
+                    <div className="">
+                      <p className="name">{t("balance")} (USD):</p>
+                      <p className="number">
+                        {+parseFloat(totalBalance)?.toFixed(2)}
+                      </p>
+                    </div>
+                  </li>
+                  <li>
+                    <div className="">
+                      <p className="name">{t("free")} (USD):</p>
+                      <p className="number">
+                        {+parseFloat(freeMargin - bonus)?.toFixed(2)}
+                      </p>
+                    </div>
+                  </li>
+                  <li>
+                    <div className="">
+                      <p className="name">{t("bonus")} (USD):</p>
+                      <p className="number">{+parseFloat(bonus)?.toFixed(2)}</p>
+                    </div>
+                  </li>
+                  <li>
+                    <div className="">
+                      <p className="name">{t("deposited")} (USD):</p>
+                      <p className="number">
+                        {accountDeposits
+                          .filter(({ type }) => type === "Deposit")
+                          .reduce((p, { sum }) => p + +sum, 0)}
+                      </p>
+                    </div>
+                  </li>
+                  <li className="border-0">
+                    <div className="">
+                      <p className="name">{t("withdrawn")} (USD):</p>
+                      <p className="number">
+                        {accountDeposits
+                          .filter(({ type }) => type === "Withdraw")
+                          .reduce((p, { sum }) => p + +sum, 0)}
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
             </div>
-            <div className="account-stat-box">
-              <ul>
-                <li>
-                  <div className="">
-                    <p className="name">
-                      {t("balance")} (USD):
-                    </p>
-                    <p className="number">
-                      {+parseFloat(totalBalance)?.toFixed(2)}
-                    </p>
-                  </div>
-                </li>
-                <li>
-                  <div className="">
-                    <p className="name">
-                      {t("free")} (USD):
-                    </p>
-                    <p className="number">
-                      {+parseFloat(freeMargin - bonus)?.toFixed(2)}
-                    </p>
-                  </div>
-                </li>
-                <li>
-                  <div className="">
-                    <p className="name">
-                      {t("bonus")} (USD):
-                    </p>
-                    <p className="number">
-                      {+parseFloat(bonus)?.toFixed(2)}
-                    </p>
-                  </div>
-                </li>
-                <li>
-                  <div className="">
-                    <p className="name">
-                      {t("deposited")} (USD):
-                    </p>
-                    <p className="number">
-                      {accountDeposits
-                        .filter(({ type }) => type === "Deposit")
-                        .reduce((p, { sum }) => p + +sum, 0)}
-                    </p>
-                  </div>
-                </li>
-                <li className="border-0">
-                  <div className="">
-                    <p className="name">
-                      {t("withdrawn")} (USD):
-                    </p>
-                    <p className="number">
-                      {accountDeposits
-                        .filter(({ type }) => type === "Withdraw")
-                        .reduce((p, { sum }) => p + +sum, 0)}
-                    </p>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
+          )}
           {tab === "help" && (
             <div id="faq">
               <h1>{t("FAQ")}</h1>
