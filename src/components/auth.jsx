@@ -16,12 +16,14 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import FlagNTheme from "./FlagNTheme";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function Auth() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [tab, setTab] = useState(1);
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const [signUpFormData, setSignUpFormData] = useState({
@@ -154,13 +156,13 @@ export default function Auth() {
     <>
       {tab === 1 ? (
         <form className="login_form" id="loginForm" onSubmit={handleLogin}>
-          <h1>Log in</h1>
+          <h1>{t("logIn")}</h1>
           <div className="fields">
             <input
               className="email_input"
               name="email"
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Username or Email"
+              placeholder={t("usernameOrEmail")}
               required
               type="email"
               value={email}
@@ -169,14 +171,14 @@ export default function Auth() {
               className="psw_input"
               name="psw"
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Password"
+              placeholder={t("password")}
               required
               type="password"
               value={password}
             />
           </div>
           <button className="button" type="submit">
-            Log in
+            {t("logIn")}
           </button>
           <br />
           <hr className="or_text" />
@@ -219,7 +221,7 @@ export default function Auth() {
                   width: "100%",
                 }}
               >
-                Continue with Google
+                {t("continueWithGoogle")}
               </span>
             </button>
             <button
@@ -260,24 +262,24 @@ export default function Auth() {
                   width: "100%",
                 }}
               >
-                Continue with Apple
+                {t("continueWithApple")}
               </span>
             </button>
           </div>
           <div className="signup_wrapper">
             {/* <hr className="signup_text" /> */}
             <div className="signup_text">
-              <p>Don't have an account?</p>
+              <p>{t("dontHaveAccount")}</p>
             </div>
             <button className="sign_up_link" onClick={() => setTab(2)}>
-              Sign Up
+              {t("signUp")}
             </button>
           </div>
           <FlagNTheme />
         </form>
       ) : (
         <form className="signup_form" onSubmit={handleSignUp}>
-          <h1 className="signup_title">Sign Up</h1>
+          <h1 className="signup_title">{t("signUp")}</h1>
           <div className="fields">
             <input
               className="name_input"
@@ -285,7 +287,7 @@ export default function Auth() {
               onChange={(e) =>
                 setSignUpFormData({ ...signUpFormData, name: e.target.value })
               }
-              placeholder="Name"
+              placeholder={t("name")}
               required
               type="text"
               value={signUpFormData.name}
@@ -299,7 +301,7 @@ export default function Auth() {
                   surname: e.target.value,
                 })
               }
-              placeholder="Surname"
+              placeholder={t("surname")}
               required
               type="text"
               value={signUpFormData.surname}
@@ -310,7 +312,7 @@ export default function Auth() {
               onChange={(e) =>
                 setSignUpFormData({ ...signUpFormData, email: e.target.value })
               }
-              placeholder="Email"
+              placeholder={t("email")}
               required
               type="email"
               value={signUpFormData.email}
@@ -324,7 +326,7 @@ export default function Auth() {
                   password: e.target.value,
                 })
               }
-              placeholder="Password"
+              placeholder={t("password")}
               required
               type="password"
               value={signUpFormData.password}
@@ -333,7 +335,7 @@ export default function Auth() {
               className="psw_input"
               name="confirm_password"
               onChange={(e) => setConfirmPassword(e.target.value)}
-              placeholder="Repeat Password"
+              placeholder={t("confirmPassword")}
               required
               type="password"
               value={confirmPassword}
@@ -344,7 +346,7 @@ export default function Auth() {
               onChange={(e) =>
                 setSignUpFormData({ ...signUpFormData, phone: e.target.value })
               }
-              placeholder="Phone"
+              placeholder={t("phone")}
               type="tel"
               value={signUpFormData.phone}
             />
@@ -357,7 +359,7 @@ export default function Auth() {
                   country: e.target.value,
                 })
               }
-              placeholder="Country"
+              placeholder={t("country")}
               type="text"
               value={signUpFormData.country}
             />
@@ -367,7 +369,7 @@ export default function Auth() {
               onChange={(e) =>
                 setSignUpFormData({ ...signUpFormData, city: e.target.value })
               }
-              placeholder="City"
+              placeholder={t("city")}
               type="text"
               value={signUpFormData.city}
             />
@@ -380,21 +382,21 @@ export default function Auth() {
                   refCode: e.target.value,
                 })
               }
-              placeholder="Referral Code"
+              placeholder={t("referralCode")}
               type="text"
               value={signUpFormData.refCode}
             />
           </div>
           <button className="button" type="submit">
-            Sign Up
+            {t("signUp")}
           </button>
           <div className="login_wrapper" style={{ marginTop: "16px" }}>
             {/* <hr className="login_text" /> */}
             <div className="login_text">
-              <p>Do you have an account?</p>
+              <p>{t("doYouHaveAccount")}</p>
             </div>
             <button className="login_link " onClick={() => setTab(1)}>
-              Log in
+              {t("logIn")}
             </button>
           </div>
           <FlagNTheme />

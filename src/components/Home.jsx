@@ -1137,11 +1137,7 @@ export default function HomeRu() {
             </div>
             <div className="page-title">
               <p className="">
-                {showNewOrderPageMobile
-                  ? "Portfolio"
-                  : tab === "newOrder"
-                  ? "New Order"
-                  : tab.charAt(0).toUpperCase() + tab.slice(1)}
+                {showNewOrderPageMobile ? t("portfolio") : t(tab)}
               </p>
             </div>
             <div className="balance-item hide-on-mobile">
@@ -2738,11 +2734,11 @@ export default function HomeRu() {
             {showNewOrderPageMobile && (
               <>
                 <div className="mobile-stat-box hide-on-desktop">
-                  <p className="title">Statistics</p>
+                  <p className="title">{t("statistics")}</p>
                   <div className="row g-0 mobile-stat-row">
                     <div className="col-6">
                       <div className="stat-box">
-                        <p className="name">{t("Equity")}:</p>
+                        <p className="name">{t("equity")}:</p>
                         <p
                           className={`balance-nums ${
                             equity < 0
@@ -2790,7 +2786,7 @@ export default function HomeRu() {
                     </div>
                     <div className="col-6">
                       <div className="stat-box">
-                        <p className="name">Margin:</p>
+                        <p className="name">{t("margin")}:</p>
                         <p
                           className={`balance-nums ${
                             totalMargin < 0
@@ -2806,7 +2802,7 @@ export default function HomeRu() {
                     </div>
                     <div className="col-6">
                       <div className="stat-box">
-                        <p className="name">Level:</p>
+                        <p className="name">{t("level")}:</p>
                         <p
                           className={`balance-nums ${
                             level < 0
@@ -2822,7 +2818,7 @@ export default function HomeRu() {
                     </div>
                     <div className="col-6">
                       <div className="stat-box">
-                        <p className="name">Balance:</p>
+                        <p className="name">{t("balance")}:</p>
                         <p
                           className={`balance-nums ${
                             level < 0
@@ -2838,7 +2834,9 @@ export default function HomeRu() {
                     </div>
                   </div>
                 </div>
-                <p className="orders-title hide-on-desktop">Order Details</p>
+                <p className="orders-title hide-on-desktop">
+                  {t("orderDetails")}
+                </p>
                 <div
                   id="orders"
                   style={{ height: isHidden ? "" : "38%", overflow: "auto" }}
@@ -2884,7 +2882,7 @@ export default function HomeRu() {
                       }}
                       onSelect={(k) => setDealsTab(k)}
                     >
-                      <Tab eventKey="activeTab" title="Active">
+                      <Tab eventKey="activeTab" title={t("active")}>
                         <DataTable
                           columns={dealsColumns({
                             t,
@@ -2913,7 +2911,7 @@ export default function HomeRu() {
                           theme={theme}
                         />
                       </Tab>
-                      <Tab eventKey="delayedTab" title="Delayed">
+                      <Tab eventKey="delayedTab" title={t("delayed")}>
                         <DataTable
                           columns={dealsColumns({
                             t,
@@ -2953,7 +2951,7 @@ export default function HomeRu() {
                     }}
                     type="button"
                   >
-                    new order
+                    {t("newOrder")}
                   </button>
                 </div>
               </>
@@ -3116,7 +3114,7 @@ export default function HomeRu() {
                                     fill="white"
                                   />
                                 </svg>
-                                <p className="name">Portfolio</p>
+                                <p className="name">{t("portfolio")}</p>
                               </div>
                               <div className="">
                                 <svg
@@ -3270,7 +3268,7 @@ export default function HomeRu() {
                                     fill="white"
                                   />
                                 </svg>
-                                <p className="name">Withdrawal</p>
+                                <p className="name">{t("withdraw")}</p>
                               </div>
                               <div className="">
                                 <svg
@@ -3316,7 +3314,6 @@ export default function HomeRu() {
                                     fill="white"
                                   />
                                 </svg>
-
                                 <p className="name">{t("reports")}</p>
                               </div>
                               <div className="">
@@ -3387,7 +3384,7 @@ export default function HomeRu() {
                           fill="white"
                         />
                       </svg>
-                      Log Out
+                      {t("logOut")}
                     </button>
                   </div>
                   <button
