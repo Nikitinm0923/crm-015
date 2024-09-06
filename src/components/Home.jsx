@@ -1318,7 +1318,7 @@ export default function HomeRu() {
                   setShowAccountInfo(!showAccountInfo);
                 }}
               >
-                <span>{defaultAccount?.type || "Type"} </span>
+                <span>{defaultAccount?.account_type || "Type"} </span>
                 {defaultAccount.account_no || "#"}
                 <svg
                   className="hide-on-desktop"
@@ -1341,7 +1341,7 @@ export default function HomeRu() {
                       <label>{t("activeAccount")}</label>
                       <span className="acc-tile">
                         <span className="acc-tile-type">
-                          {defaultAccount?.type || "Type"}
+                          {defaultAccount?.account_type || "Type"}
                         </span>
                         <span>{defaultAccount.account_no || "#"}</span>
                         <span>
@@ -1349,7 +1349,15 @@ export default function HomeRu() {
                         </span>
                       </span>
                     </div>
-                    <button className="deposit-acc-btn" onClick={() => {}}>
+                    <button
+                      className="deposit-acc-btn"
+                      onClick={() => {
+                        setAccTab("deposit");
+                        setDepositModal(true);
+                        setShowAccountInfo(false);
+                        setTab("account");
+                      }}
+                    >
                       {t("depositFunds")}
                     </button>
                     <div className="other-acc">
@@ -1358,7 +1366,7 @@ export default function HomeRu() {
                         <>
                           <span className="acc-tile">
                             <span className="acc-tile-type">
-                              {acc?.type || "Type"}
+                              {acc?.account_type || "Type"}
                             </span>
                             <span>{acc.account_no || "#"}</span>
                             <span>{parseInt(acc.totalBalance) || "0"} USD</span>
