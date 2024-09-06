@@ -12,6 +12,7 @@ const AccountModal = ({ onClose, userProfile }) => {
   const [accountNo, setAccountNo] = useState("");
   const [accountType, setAccountType] = useState("Standard");
   const [isLoading, setIsLoading] = useState(true);
+  const [showAccountSuccessModal, setShowAccountSuccessModal] = useState(false);
   const [type, setType] = useState("Demo");
   const { t } = useTranslation();
 
@@ -57,7 +58,7 @@ const AccountModal = ({ onClose, userProfile }) => {
       });
       await updateUserById(userProfile.id, { accounts });
       await incrementLastAccountNo();
-      toast.success("Account created successfully");
+      setShowAccountSuccessModal(true);
       onClose();
     } catch (error) {
       toast.error("Error in creating account number");
@@ -83,10 +84,6 @@ const AccountModal = ({ onClose, userProfile }) => {
           <h3 className="mb-0">{t("openAccount")}</h3>
         </Modal.Header>
         <Modal.Body className="d-flex flex-column align-items-center gap-3">
-          {/* <div className="swith-button-box hide-on-desktop">
-            <button className="active">New account</button>
-            <button>My account</button>
-          </div> */}
           <ButtonGroup className="btn-group">
             <Button
               onClick={() => {
@@ -161,6 +158,38 @@ const AccountModal = ({ onClose, userProfile }) => {
           </button>
         </Modal.Body>
       </Modal>
+      {showAccountSuccessModal && (
+        <div
+          className="modal show fade"
+          id="dep-successModal"
+          style={{ display: "flex" }}
+        >
+          <div className="modal-dialog">
+            <div
+              className="modal-content"
+              style={{ backgroundColor: "inherit" }}
+            >
+              <div
+                className="modal-header"
+                style={{ backgroundColor: "inherit" }}
+              >
+                <button
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  onClick={() => setShowAccountSuccessModal(false)}
+                  type="button"
+                />
+              </div>
+              <div
+                className="modal-body"
+                style={{ backgroundColor: "inherit" }}
+              >
+                <p>Account created Successfully!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

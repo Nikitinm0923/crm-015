@@ -1405,6 +1405,7 @@ export default function HomeRu() {
               onClick={() => {
                 setIsReportModalOpen(false);
                 setShowAccounManagement(false);
+                setShowAccountModal(false);
                 setShowNewOrderPageMobile(false);
                 setShowNewOrderPanel(false);
                 setTab("trade");
@@ -1481,6 +1482,7 @@ export default function HomeRu() {
               onClick={() => {
                 setIsReportModalOpen(false);
                 setShowAccounManagement(false);
+                setShowAccountModal(false);
                 setShowNewOrderPageMobile(false);
                 setShowNewOrderPanel(false);
                 setTab("assets");
@@ -1539,6 +1541,7 @@ export default function HomeRu() {
                 }
                 setIsReportModalOpen(false);
                 setShowAccounManagement(false);
+                setShowAccountModal(false);
                 setTab("newOrder");
               }}
               style={{
@@ -1589,6 +1592,7 @@ export default function HomeRu() {
                 setAccTab("acc-info");
                 setIsReportModalOpen(false);
                 setShowAccounManagement(false);
+                setShowAccountModal(false);
                 setShowNewOrderPageMobile(false);
                 setShowNewOrderPanel(false);
                 setTab("account");
