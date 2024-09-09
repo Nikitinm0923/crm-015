@@ -3589,8 +3589,9 @@ export default function HomeRu() {
                   {personalInfoTab === "verification" && (
                     <div id="verification-docs">
                       <h3>{t("uploadDocuments")}</h3>
+                      <p className="hide-on-dekstop">{t("fileSizeLimit")}</p>
                       <h6>{t("chooseFile")}</h6>
-                      <p>{t("fileSizeLimit")}</p>
+                      <p className="hide-on-mobile">{t("fileSizeLimit")}</p>
                       <form encType="multipart/form-data">
                         <div>
                           <label htmlFor="idFront">{t("frontSideId")}</label>
@@ -3643,7 +3644,10 @@ export default function HomeRu() {
                             type="file"
                           />
                         </div>
-                        <button type="submit">{t("submit")}</button>
+                        <div className="verification-button-box">
+                          <button type="submit">{t("submit")}</button>
+                          <button className="hide-on-desktop" type="button">{t("cancel")}</button>
+                        </div>
                       </form>
                     </div>
                   )}

@@ -883,6 +883,95 @@
     .personal-info-options button {
         font-size: 12px;
         font-weight: 600;
-        padding: 12px!important;
+        padding: 5px 12px !important;
+    }
+
+    /* Verification Tab */
+    #personal-info {
+        min-height: 100vh;
+    }
+
+    #verification-docs {
+        width: 90%;
+        padding: 30px 10px;
+    }
+
+    #verification-docs h3 {
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+
+    #verification-docs h6 {
+
+        margin-bottom: 15px;
+    }
+
+    #verification-docs form div label {
+        font-size: 12px;
+        font-weight: 500;
+        margin-bottom: 5px;
+    }
+
+    #verification-docs form div input {
+        min-height: 40px;
+        margin-bottom: 20px;
+        padding: 0;
+    }
+
+    #verification-docs form div input::file-selector-button {
+        background-color: rgba(255, 255, 255, 0.15);
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--main-text-color);
+        height: 100%;
+        padding: 0.5em;
+        border: none;
+        border-radius: 3px;
+    }
+
+    #verification-docs form .verification-button-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+    }
+
+    #verification-docs form .verification-button-box button:nth-child(1) {
+        width: fit-content;
+        padding: 10px 30px;
+        margin-right: 5px;
+    }
+
+    #verification-docs form .verification-button-box button:nth-child(2) {
+        width: fit-content;
+        padding: 10px 30px;
+        margin-left: 5px;
+        background-color: #3C3E43;
+    }
+
+    #acc-info-personal,
+    #acc-change-pass {
+        padding: 20px 20px;
+    }
+
+    .acc-change-pass-btn {
+        justify-content: center;
+        position: absolute;
+        width: 100%;
+        left: 0;
+        margin-top: 50px;
+        background-color: var(--main-background-color);
+    }
+
+    .acc-change-pass-btn button:nth-child(1) {
+        width: fit-content;
+        padding: 10px 30px;
+    }
+
+    .acc-change-pass-btn button:nth-child(2) {
+        width: fit-content;
+        padding: 10px 30px;
+        background-color: #3C3E43;
     }
 }
