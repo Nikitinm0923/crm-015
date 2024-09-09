@@ -38,7 +38,7 @@
   --chart-gain-color: #28a79b;
   --chart-loss-color: #e10000;
 
-  --main-tertiary-color: #282C35;
+  --main-tertiary-color: #282c35;
 }
 
 .light {
@@ -817,6 +817,14 @@ button {
   opacity: 0.8;
 }
 
+#deposit-modal .btn-grp-withdraw {
+  width: 100%;
+}
+
+#deposit-modal .btn-grp-withdraw button {
+  color: var(--main-text-color);
+}
+
 #dep-successModal .modal-dialog {
   background-color: var(--main-secondary-color);
   border-radius: 5px;
@@ -1497,7 +1505,7 @@ thead {
   margin-top: 16px;
 }
 
-.flag_theme>* {
+.flag_theme > * {
   margin: 0 8px;
 }
 
@@ -1555,7 +1563,7 @@ thead {
   background-color: gray !important;
 }
 
-.Toastify__toast-body>div:last-child {
+.Toastify__toast-body > div:last-child {
   background-color: gray !important;
 }
 
@@ -1776,7 +1784,8 @@ hr {
   fill: var(--main-text-color) !important;
 }
 
-.highcharts-axis-labels.highcharts-xaxis-labels.highcharts-navigator-xaxis .highcharts-text-outline {
+.highcharts-axis-labels.highcharts-xaxis-labels.highcharts-navigator-xaxis
+  .highcharts-text-outline {
   stroke-width: 0px;
 }
 
@@ -1792,7 +1801,7 @@ hr {
   width: 60px !important;
 }
 
-.highcharts-bindings-wrapper li>button.highcharts-menu-item-btn {
+.highcharts-bindings-wrapper li > button.highcharts-menu-item-btn {
   filter: invert(1);
 }
 
@@ -1839,8 +1848,6 @@ hr {
   border-color: var(--main-primary-button);
 }
 
-
-
 /* .hide-on-mobile {
   display: block!important;
 } */
@@ -1864,7 +1871,6 @@ hr {
 /* .min-h-100{
   min-height: 0%;
 } */
-
 
 .modal-body .reports-overview-box {
   /* background-color: #fff; */

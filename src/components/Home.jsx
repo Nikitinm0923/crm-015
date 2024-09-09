@@ -11,6 +11,7 @@ import {
   addPlayerLogs,
   addQuotesToUser,
   changeUserPassword,
+  deleteDocument,
   fetchAllOrdersByUserId,
   getAllSymbols,
   getAssetGroups,
@@ -95,7 +96,7 @@ export default function HomeRu() {
   const [depositSuccessModal, setDepositSuccessModal] = useState(false);
   const [withdrawlSuccessModal, setWithdrawlSuccessModal] = useState(false);
   const [passwordShown, setPasswordShown] = useState(false);
-  const [activeTab, setActiveTab] = useState(gameConfigs.activeTab || "Gold");
+  const [activeTab, setActiveTab] = useState(gameConfigs.activeTab);
   const [tabs, setTabs] = useState([]);
   const [isHidden, setIsHidden] = useState(false);
   const [showNewOrderPanel, setShowNewOrderPanel] = useState(
@@ -128,6 +129,7 @@ export default function HomeRu() {
   const [personalInfoTab, setPersonalInfoTab] = useState("personal-info");
   const [showAccountInfo, setShowAccountInfo] = useState(false);
   const [transType, setTransType] = useState("Deposit");
+  const [withdrawType, setWithdrawType] = useState("newApplication");
 
   const [userProfile, setUserProfile] = useState({
     name: "",
@@ -994,6 +996,14 @@ export default function HomeRu() {
     card: "",
     method: "VISA",
     phone_no: "",
+  });
+
+  const [withdrawAppData, setWithdrawAppData] = useState({
+    account_no: "",
+    date: "",
+    id: "",
+    status: "",
+    sum: "",
   });
 
   const handleDepositWithdraw = async (type) => {
@@ -4004,129 +4014,259 @@ export default function HomeRu() {
                                 id="modal-contents"
                                 style={{ backgroundColor: "inherit" }}
                               >
-                                <div className="deposit-modal-item">
-                                  <label htmlFor="acc-num">
-                                    {t("account")}:
-                                  </label>
-                                  <Form.Select
-                                    id="acc-num"
-                                    onChange={(e) => {
-                                      setWithdrawData({
-                                        ...withdrawData,
-                                        account_no: e.target.value,
-                                      });
-                                    }}
-                                    style={{ height: "32px", width: "60%" }}
-                                    value={withdrawData.account_no}
-                                  >
-                                    <option>{t("selectAccount")}</option>
-                                    {accounts
-                                      .filter((acc) => !acc?.isDeleted)
-                                      ?.map((a) => (
-                                        <option value={a.account_no}>
-                                          {a.account_no}
-                                        </option>
-                                      ))}
-                                  </Form.Select>
-                                </div>
-                                <div className="deposit-modal-item">
-                                  <label htmlFor="amount">{t("amount")}:</label>
-                                  <input
-                                    className="text-center"
-                                    id="amount"
-                                    onChange={(e) => {
-                                      setWithdrawData({
-                                        ...withdrawData,
-                                        amount: e.target.value,
-                                      });
-                                    }}
-                                    type="number"
-                                    value={withdrawData.amount}
-                                  />
-                                </div>
-                                <div className="deposit-modal-item">
-                                  <label htmlFor="method">
-                                    {t("paymentMethod")}:
-                                  </label>
-                                  <Form.Select
-                                    id="method"
-                                    onChange={(e) => {
-                                      setWithdrawData({
-                                        ...depositData,
-                                        method: e.target.value,
-                                      });
-                                    }}
-                                    style={{ height: "32px", width: "60%" }}
-                                    value={withdrawData.method}
-                                  >
-                                    <option disabled>
-                                      {t("chooseMethod")}
-                                    </option>
-                                    <option value="VISA">
-                                      VISA/MasterCard
-                                    </option>
-                                    <option value="Crypto">Crypto</option>
-                                    <option value="Other">Other</option>
-                                  </Form.Select>
-                                </div>
-                                <div className="deposit-modal-item">
-                                  <label htmlFor="card-num">
-                                    {t("cardWalletNumber")}:
-                                  </label>
-                                  <input
-                                    className="text-center"
-                                    id="card-num"
-                                    onChange={(e) => {
-                                      setWithdrawData({
-                                        ...withdrawData,
-                                        card: e.target.value,
-                                      });
-                                    }}
-                                    type="text"
-                                    value={withdrawData.card}
-                                  />
-                                </div>
-                                <div className="deposit-modal-item">
-                                  <label htmlFor="phone-num">
-                                    {t("phoneNumber")}:
-                                  </label>
-                                  <input
-                                    className="text-center"
-                                    id="phone-num"
-                                    onChange={(e) => {
-                                      setWithdrawData({
-                                        ...withdrawData,
-                                        phone_no: e.target.value,
-                                      });
-                                    }}
-                                    type="text"
-                                    value={withdrawData.phone_no}
-                                  />
-                                </div>
-                                <div className="btn-grp">
-                                  <button
-                                    className="btn-i"
-                                    disabled={isLoading}
-                                    id="accept-deposit"
+                                <ButtonGroup className="btn-grp-withdraw">
+                                  <Button
                                     onClick={() => {
-                                      handleDepositWithdraw(transType);
+                                      setWithdrawType("newApplication");
                                     }}
                                     style={{
                                       backgroundColor:
-                                        "var(--main-primary-button)",
+                                        withdrawType === "newApplication"
+                                          ? "var(--main-primary-button)"
+                                          : "var(--main-tertiary-color)",
                                     }}
-                                    type="button"
+                                    variant=""
                                   >
-                                    {t("submit")}
-                                  </button>
-                                  <button
-                                    className="btn-i"
+                                    {t("newApplication")}
+                                  </Button>
+                                  <Button
                                     onClick={() => {
-                                      setWithdrawlModal(false);
+                                      setWithdrawType("applicationManagement");
                                     }}
+                                    style={{
+                                      backgroundColor:
+                                        withdrawType === "applicationManagement"
+                                          ? "var(--main-primary-button)"
+                                          : "var(--main-tertiary-color)",
+                                    }}
+                                    variant=""
                                   >
-                                    {t("cancel")}
-                                  </button>
+                                    {t("applicationManagement")}
+                                  </Button>
+                                </ButtonGroup>
+                                {withdrawType === "newApplication" ? (
+                                  <>
+                                    <div className="deposit-modal-item">
+                                      <label htmlFor="acc-num">
+                                        {t("account")}:
+                                      </label>
+                                      <Form.Select
+                                        id="acc-num"
+                                        onChange={(e) => {
+                                          setWithdrawData({
+                                            ...withdrawData,
+                                            account_no: e.target.value,
+                                          });
+                                        }}
+                                        style={{ height: "32px", width: "60%" }}
+                                        value={withdrawData.account_no}
+                                      >
+                                        <option>{t("selectAccount")}</option>
+                                        {accounts
+                                          .filter((acc) => !acc?.isDeleted)
+                                          ?.map((a) => (
+                                            <option value={a.account_no}>
+                                              {a.account_no}
+                                            </option>
+                                          ))}
+                                      </Form.Select>
+                                    </div>
+                                    <div className="deposit-modal-item">
+                                      <label htmlFor="amount">
+                                        {t("amount")}:
+                                      </label>
+                                      <input
+                                        className="text-center"
+                                        id="amount"
+                                        onChange={(e) => {
+                                          setWithdrawData({
+                                            ...withdrawData,
+                                            amount: e.target.value,
+                                          });
+                                        }}
+                                        type="number"
+                                        value={withdrawData.amount}
+                                      />
+                                    </div>
+                                    <div className="deposit-modal-item">
+                                      <label htmlFor="method">
+                                        {t("paymentMethod")}:
+                                      </label>
+                                      <Form.Select
+                                        id="method"
+                                        onChange={(e) => {
+                                          setWithdrawData({
+                                            ...depositData,
+                                            method: e.target.value,
+                                          });
+                                        }}
+                                        style={{ height: "32px", width: "60%" }}
+                                        value={withdrawData.method}
+                                      >
+                                        <option disabled>
+                                          {t("chooseMethod")}
+                                        </option>
+                                        <option value="VISA">
+                                          VISA/MasterCard
+                                        </option>
+                                        <option value="Crypto">Crypto</option>
+                                        <option value="Other">Other</option>
+                                      </Form.Select>
+                                    </div>
+                                    <div className="deposit-modal-item">
+                                      <label htmlFor="card-num">
+                                        {t("cardWalletNumber")}:
+                                      </label>
+                                      <input
+                                        className="text-center"
+                                        id="card-num"
+                                        onChange={(e) => {
+                                          setWithdrawData({
+                                            ...withdrawData,
+                                            card: e.target.value,
+                                          });
+                                        }}
+                                        type="text"
+                                        value={withdrawData.card}
+                                      />
+                                    </div>
+                                    <div className="deposit-modal-item">
+                                      <label htmlFor="phone-num">
+                                        {t("phoneNumber")}:
+                                      </label>
+                                      <input
+                                        className="text-center"
+                                        id="phone-num"
+                                        onChange={(e) => {
+                                          setWithdrawData({
+                                            ...withdrawData,
+                                            phone_no: e.target.value,
+                                          });
+                                        }}
+                                        type="text"
+                                        value={withdrawData.phone_no}
+                                      />
+                                    </div>
+                                  </>
+                                ) : (
+                                  <>
+                                    <div className="deposit-modal-item">
+                                      <label htmlFor="app-id">
+                                        {t("applicationID")}:
+                                      </label>
+                                      <Form.Select
+                                        id="app-id"
+                                        onChange={(e) => {
+                                          const data = accountWithdraws.find(
+                                            (w) => w.id === e.target?.value
+                                          );
+                                          if (!data) return;
+                                          setWithdrawAppData({
+                                            account_no: data.account_no,
+                                            date: data.createdAt,
+                                            id: data.id,
+                                            status: data.status,
+                                            sum: data.sum,
+                                          });
+                                        }}
+                                        style={{ height: "32px", width: "60%" }}
+                                        value={withdrawAppData.id}
+                                      >
+                                        <option>
+                                          {t("selectApplicationID")}
+                                        </option>
+                                        {accountWithdraws.map((w) => (
+                                          <option value={w.id}>{w.id}</option>
+                                        ))}
+                                      </Form.Select>
+                                    </div>
+                                    <div className="deposit-modal-item">
+                                      <label>{t("status")}:</label>
+                                      <input
+                                        className="text-center"
+                                        disabled
+                                        value={withdrawAppData.status}
+                                      />
+                                    </div>
+                                    <div className="deposit-modal-item">
+                                      <label>{t("dateOfCreation")}:</label>
+                                      <input
+                                        className="text-center"
+                                        disabled
+                                        value={withdrawAppData.date}
+                                      />
+                                    </div>
+                                    <div className="deposit-modal-item">
+                                      <label>{t("account")}:</label>
+                                      <input
+                                        className="text-center"
+                                        disabled
+                                        value={withdrawAppData.account_no}
+                                      />
+                                    </div>
+                                    <div className="deposit-modal-item">
+                                      <label>{t("sum")}:</label>
+                                      <input
+                                        className="text-center"
+                                        disabled
+                                        value={withdrawAppData.sum}
+                                      />
+                                    </div>
+                                  </>
+                                )}
+                                <div className="btn-grp">
+                                  {withdrawType === "newApplication" ? (
+                                    <>
+                                      <button
+                                        className="btn-i"
+                                        disabled={isLoading}
+                                        id="accept-deposit"
+                                        onClick={() => {
+                                          handleDepositWithdraw(transType);
+                                        }}
+                                        style={{
+                                          backgroundColor:
+                                            "var(--main-primary-button)",
+                                        }}
+                                        type="button"
+                                      >
+                                        {t("submit")}
+                                      </button>
+                                      <button
+                                        className="btn-i"
+                                        onClick={() => {
+                                          setWithdrawlModal(false);
+                                        }}
+                                      >
+                                        {t("cancel")}
+                                      </button>
+                                    </>
+                                  ) : (
+                                    <button
+                                      className="btn-i"
+                                      disabled={
+                                        withdrawAppData.status ===
+                                          "Completed" || !withdrawAppData.id
+                                      }
+                                      onClick={async () => {
+                                        await deleteDocument(
+                                          "deposits",
+                                          withdrawAppData.id
+                                        );
+                                        toastify(
+                                          "Withdrawal request canceled",
+                                          "success"
+                                        );
+                                      }}
+                                      style={{
+                                        backgroundColor:
+                                          "var(--main-tertiary-color)",
+                                        width: "45%",
+                                      }}
+                                    >
+                                      {t("cancelApplication")}
+                                    </button>
+                                  )}
                                 </div>
                               </div>
                             </div>
