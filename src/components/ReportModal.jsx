@@ -55,8 +55,8 @@ const ReportModal = ({
     withdrawn = 0;
 
   deposits.forEach(({ type, sum }) => {
-    if (type === "Deposit") deposited += sum;
-    else if (type === "Withdraw") withdrawn += sum;
+    if (type === "Deposit") deposited += +sum;
+    else if (type === "Withdraw") withdrawn += +sum;
   });
 
   const today = moment();
