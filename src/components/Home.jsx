@@ -3951,7 +3951,7 @@ export default function HomeRu() {
                                     {t("deposit")}
                                   </button>
                                   <button
-                                    className="btn-i"
+                                    className="btn-i hide-on-mobile"
                                     onClick={() => {
                                       setDepositModal(false);
                                     }}
@@ -4319,7 +4319,7 @@ export default function HomeRu() {
                                         {t("submit")}
                                       </button>
                                       <button
-                                        className="btn-i"
+                                        className="btn-i hide-on-mobile"
                                         onClick={() => {
                                           setWithdrawlModal(false);
                                         }}
