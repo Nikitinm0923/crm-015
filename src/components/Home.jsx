@@ -65,13 +65,13 @@ export default function HomeRu() {
     return obj
       ? JSON.parse(obj)
       : {
-        showNewOrderPanel: false,
-        tab: "trade",
-        activeTab: "",
-        tabs: [],
-        isReportModalOpen: false,
-        showHistoryPanel: false,
-      };
+          showNewOrderPanel: false,
+          tab: "trade",
+          activeTab: "",
+          tabs: [],
+          isReportModalOpen: false,
+          showHistoryPanel: false,
+        };
   });
   const [tab, setTab] = useState(gameConfigs.tab || "trade");
   const [dealsTab, setDealsTab] = useState("activeTab");
@@ -270,8 +270,9 @@ export default function HomeRu() {
   const setOrders = useCallback((data) => {
     const mappedOrders = data.map((order) => ({
       ...order,
-      sltp: `${+parseFloat(order?.sl)?.toFixed(2) || ""} / ${+parseFloat(order?.tp)?.toFixed(2) || ""
-        }`,
+      sltp: `${+parseFloat(order?.sl)?.toFixed(2) || ""} / ${
+        +parseFloat(order?.tp)?.toFixed(2) || ""
+      }`,
     }));
     dispatch(setOrdersState(mappedOrders));
   }, []);
@@ -470,8 +471,8 @@ export default function HomeRu() {
     .filter((s) => s);
   const filteredQuotesSymbols = quoteSearch
     ? userQuotesSymbols.filter(({ symbol }) =>
-      symbol.toUpperCase().includes(quoteSearch.toUpperCase())
-    )
+        symbol.toUpperCase().includes(quoteSearch.toUpperCase())
+      )
     : userQuotesSymbols;
 
   // const crypto = [],
@@ -698,7 +699,8 @@ export default function HomeRu() {
       const hour = today.hour();
       if (weekDay === 0 || weekDay === 6 || hour < 9 || hour >= 23) {
         return toast.error(
-          `${group === "commodities" ? "Commodities" : group
+          `${
+            group === "commodities" ? "Commodities" : group
           } Market open on Mon-Fri: 9AM-23PM`
         );
       }
@@ -1132,8 +1134,8 @@ export default function HomeRu() {
                       tab === "help"
                         ? "var(--main-primary-button)"
                         : theme === "purple"
-                          ? "var(--separator-line-color)"
-                          : "var(--main-text-color)",
+                        ? "var(--separator-line-color)"
+                        : "var(--main-text-color)",
                   }}
                   viewBox="0 0 26 26"
                   width="26"
@@ -1151,8 +1153,9 @@ export default function HomeRu() {
             <div className="balance-item hide-on-mobile">
               <h2 className="balance-title">{t("equity")}:</h2>
               <input
-                className={`balance-nums ${equity < 0 ? "text-danger" : equity === 0 ? "text-muted" : ""
-                  }`}
+                className={`balance-nums ${
+                  equity < 0 ? "text-danger" : equity === 0 ? "text-muted" : ""
+                }`}
                 readOnly={true}
                 type="number"
                 value={+parseFloat(equity)?.toFixed(2)}
@@ -1161,12 +1164,13 @@ export default function HomeRu() {
             <div className="balance-item hide-on-mobile">
               <h2 className="balance-title">{t("profit")}:</h2>
               <input
-                className={`balance-nums ${activeOrdersProfit < 0
-                  ? "text-danger"
-                  : activeOrdersProfit === 0
+                className={`balance-nums ${
+                  activeOrdersProfit < 0
+                    ? "text-danger"
+                    : activeOrdersProfit === 0
                     ? "text-muted"
                     : ""
-                  }`}
+                }`}
                 readOnly={true}
                 type="number"
                 value={+parseFloat(activeOrdersProfit)?.toFixed(2)}
@@ -1175,12 +1179,13 @@ export default function HomeRu() {
             <div className="balance-item hide-on-mobile">
               <h2 className="balance-title">{t("freeMargin")}:</h2>
               <input
-                className={`balance-nums ${freeMargin < 0
-                  ? "text-danger"
-                  : freeMargin === 0
+                className={`balance-nums ${
+                  freeMargin < 0
+                    ? "text-danger"
+                    : freeMargin === 0
                     ? "text-muted"
                     : ""
-                  }`}
+                }`}
                 readOnly={true}
                 type="number"
                 value={+parseFloat(freeMargin)?.toFixed(2)}
@@ -1189,12 +1194,13 @@ export default function HomeRu() {
             <div className="balance-item hide-on-mobile">
               <h2 className="balance-title">{t("margin")}:</h2>
               <input
-                className={`balance-nums ${totalMargin < 0
-                  ? "text-danger"
-                  : totalMargin === 0
+                className={`balance-nums ${
+                  totalMargin < 0
+                    ? "text-danger"
+                    : totalMargin === 0
                     ? "text-muted"
                     : ""
-                  }`}
+                }`}
                 readOnly={true}
                 type="number"
                 value={+parseFloat(totalMargin)?.toFixed(2)}
@@ -1203,8 +1209,9 @@ export default function HomeRu() {
             <div className="balance-item hide-on-mobile">
               <h2 className="balance-title">{t("level")}:</h2>
               <input
-                className={`balance-nums ${level < 0 ? "text-danger" : level === 0 ? "text-muted" : ""
-                  }`}
+                className={`balance-nums ${
+                  level < 0 ? "text-danger" : level === 0 ? "text-muted" : ""
+                }`}
                 readOnly={true}
                 type="text"
                 value={`${+parseFloat(level)?.toFixed(2)}%`}
@@ -1410,12 +1417,14 @@ export default function HomeRu() {
             <div
               className="side-btn"
               onClick={() => {
+                setDepositModal(false);
                 setIsReportModalOpen(false);
                 setShowAccounManagement(false);
                 setShowAccountModal(false);
                 setShowNewOrderPageMobile(false);
                 setShowNewOrderPanel(false);
                 setTab("trade");
+                setWithdrawlModal(false);
               }}
               style={{
                 backgroundColor:
@@ -1430,8 +1439,8 @@ export default function HomeRu() {
                     tab === "trade"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                        ? "var(--separator-line-color)"
-                        : "var(--main-text-color)",
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
                 }}
                 viewBox="0 0 30 30"
                 width="30"
@@ -1477,8 +1486,8 @@ export default function HomeRu() {
                     tab === "trade"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                        ? "var(--separator-line-color)"
-                        : "var(--main-text-color)",
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
                 }}
               >
                 {t("trade")}
@@ -1487,12 +1496,14 @@ export default function HomeRu() {
             <div
               className="side-btn"
               onClick={() => {
+                setDepositModal(false);
                 setIsReportModalOpen(false);
                 setShowAccounManagement(false);
                 setShowAccountModal(false);
                 setShowNewOrderPageMobile(false);
                 setShowNewOrderPanel(false);
                 setTab("assets");
+                setWithdrawlModal(false);
               }}
               style={{
                 backgroundColor:
@@ -1507,8 +1518,8 @@ export default function HomeRu() {
                     tab === "assets"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                        ? "var(--separator-line-color)"
-                        : "var(--main-text-color)",
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
                 }}
                 viewBox="0 0 39 39"
                 width="39"
@@ -1531,8 +1542,8 @@ export default function HomeRu() {
                     tab === "assets"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                        ? "var(--separator-line-color)"
-                        : "var(--main-text-color)",
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
                 }}
               >
                 {t("assets")}
@@ -1546,10 +1557,12 @@ export default function HomeRu() {
                 } else {
                   setShowNewOrderPanel(true);
                 }
+                setDepositModal(false);
                 setIsReportModalOpen(false);
                 setShowAccounManagement(false);
                 setShowAccountModal(false);
                 setTab("newOrder");
+                setWithdrawlModal(false);
               }}
               style={{
                 backgroundColor:
@@ -1564,8 +1577,8 @@ export default function HomeRu() {
                     tab === "newOrder"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                        ? "var(--separator-line-color)"
-                        : "var(--main-text-color)",
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
                 }}
                 viewBox="0 0 45 34"
                 width="45"
@@ -1586,8 +1599,8 @@ export default function HomeRu() {
                     tab === "newOrder"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                        ? "var(--separator-line-color)"
-                        : "var(--main-text-color)",
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
                 }}
               >
                 {t("newOrder")}
@@ -1597,12 +1610,14 @@ export default function HomeRu() {
               className="side-btn"
               onClick={() => {
                 setAccTab("acc-info");
+                setDepositModal(false);
                 setIsReportModalOpen(false);
                 setShowAccounManagement(false);
                 setShowAccountModal(false);
                 setShowNewOrderPageMobile(false);
                 setShowNewOrderPanel(false);
                 setTab("account");
+                setWithdrawlModal(false);
               }}
               style={{
                 backgroundColor:
@@ -1617,8 +1632,8 @@ export default function HomeRu() {
                     tab === "account"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                        ? "var(--separator-line-color)"
-                        : "var(--main-text-color)",
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
                 }}
                 viewBox="0 0 34 34"
                 width="34"
@@ -1643,8 +1658,8 @@ export default function HomeRu() {
                     tab === "account"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                        ? "var(--separator-line-color)"
-                        : "var(--main-text-color)",
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
                 }}
               >
                 {t("account")}
@@ -1683,8 +1698,8 @@ export default function HomeRu() {
                     accTab === "acc-info"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                        ? "var(--separator-line-color)"
-                        : "var(--main-text-color)",
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
                 }}
                 viewBox="0 0 28 28"
                 width="28"
@@ -1703,8 +1718,8 @@ export default function HomeRu() {
                     accTab === "acc-info"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                        ? "var(--separator-line-color)"
-                        : "var(--main-text-color)",
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
                 }}
               >
                 {t("accountInfo")}
@@ -1730,8 +1745,8 @@ export default function HomeRu() {
                     accTab === "personal-info"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                        ? "var(--separator-line-color)"
-                        : "var(--main-text-color)",
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
                 }}
                 viewBox="0 0 29 28"
                 width="29"
@@ -1757,8 +1772,9 @@ export default function HomeRu() {
                 </defs>
               </svg>
               <button
-                className={`side-button ${accTab === "personal-info" && " active"
-                  }`}
+                className={`side-button ${
+                  accTab === "personal-info" && " active"
+                }`}
                 id="side-button-account"
                 style={{
                   backgroundColor: "transparent",
@@ -1766,8 +1782,8 @@ export default function HomeRu() {
                     accTab === "personal-info"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                        ? "var(--separator-line-color)"
-                        : "var(--main-text-color)",
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
                 }}
               >
                 {t("personalInfo")}
@@ -1792,8 +1808,8 @@ export default function HomeRu() {
                     accTab === "deposit"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                        ? "var(--separator-line-color)"
-                        : "var(--main-text-color)",
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
                 }}
                 viewBox="0 0 25 29"
                 width="25"
@@ -1812,8 +1828,8 @@ export default function HomeRu() {
                     accTab === "deposit"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                        ? "var(--separator-line-color)"
-                        : "var(--main-text-color)",
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
                 }}
               >
                 {t("deposit")}
@@ -1837,8 +1853,8 @@ export default function HomeRu() {
                     accTab === "report"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                        ? "var(--separator-line-color)"
-                        : "var(--main-text-color)",
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
                 }}
                 viewBox="0 0 28 28"
                 width="28"
@@ -1862,11 +1878,11 @@ export default function HomeRu() {
                     accTab === "report"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                        ? "var(--separator-line-color)"
-                        : "var(--main-text-color)",
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
                 }}
               >
-                {t("report")}
+                {t("reports")}
               </button>
             </div>
           </div>
@@ -1887,8 +1903,8 @@ export default function HomeRu() {
                     tab === "help"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                        ? "var(--separator-line-color)"
-                        : "var(--main-text-color)",
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
                 }}
                 viewBox="0 0 26 26"
                 width="26"
@@ -1905,8 +1921,8 @@ export default function HomeRu() {
                     tab === "help"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                        ? "var(--separator-line-color)"
-                        : "var(--main-text-color)",
+                      ? "var(--separator-line-color)"
+                      : "var(--main-text-color)",
                 }}
               >
                 {t("help")}
@@ -1943,10 +1959,11 @@ export default function HomeRu() {
         </div>
         <div id="content">
           <div
-            className={`h-100 ${tab === "trade" || tab === "assets" || tab === "newOrder"
-              ? ""
-              : "d-none"
-              }`}
+            className={`h-100 ${
+              tab === "trade" || tab === "assets" || tab === "newOrder"
+                ? ""
+                : "d-none"
+            }`}
             id="trade-div"
           >
             <div
@@ -2691,8 +2708,8 @@ export default function HomeRu() {
                         data={fillArrayWithEmptyRows(
                           activeOrders,
                           dealsRow -
-                          (activeOrders.length % dealsRow) +
-                          activeOrders.length
+                            (activeOrders.length % dealsRow) +
+                            activeOrders.length
                         )}
                         dense
                         highlightOnHover
@@ -2720,8 +2737,8 @@ export default function HomeRu() {
                         data={fillArrayWithEmptyRows(
                           delayedOrders,
                           dealsRow -
-                          (delayedOrders.length % dealsRow) +
-                          delayedOrders.length
+                            (delayedOrders.length % dealsRow) +
+                            delayedOrders.length
                         )}
                         dense
                         highlightOnHover
@@ -2749,12 +2766,13 @@ export default function HomeRu() {
                       <div className="stat-box">
                         <p className="name">{t("equity")}:</p>
                         <p
-                          className={`balance-nums ${equity < 0
-                            ? "text-danger"
-                            : equity === 0
+                          className={`balance-nums ${
+                            equity < 0
+                              ? "text-danger"
+                              : equity === 0
                               ? "text-muted"
                               : ""
-                            }`}
+                          }`}
                         >
                           {+parseFloat(equity)?.toFixed(2)}
                         </p>
@@ -2764,12 +2782,13 @@ export default function HomeRu() {
                       <div className="stat-box">
                         <p className="name">{t("profit")}:</p>
                         <p
-                          className={`balance-nums ${activeOrdersProfit < 0
-                            ? "text-danger"
-                            : activeOrdersProfit === 0
+                          className={`balance-nums ${
+                            activeOrdersProfit < 0
+                              ? "text-danger"
+                              : activeOrdersProfit === 0
                               ? "text-muted"
                               : ""
-                            }`}
+                          }`}
                         >
                           {+parseFloat(activeOrdersProfit)?.toFixed(2)}
                         </p>
@@ -2779,12 +2798,13 @@ export default function HomeRu() {
                       <div className="stat-box">
                         <p className="name">{t("freeMargin")}:</p>
                         <p
-                          className={`balance-nums ${freeMargin < 0
-                            ? "text-danger"
-                            : freeMargin === 0
+                          className={`balance-nums ${
+                            freeMargin < 0
+                              ? "text-danger"
+                              : freeMargin === 0
                               ? "text-muted"
                               : ""
-                            }`}
+                          }`}
                         >
                           {+parseFloat(freeMargin)?.toFixed(2)}
                         </p>
@@ -2794,12 +2814,13 @@ export default function HomeRu() {
                       <div className="stat-box">
                         <p className="name">{t("margin")}:</p>
                         <p
-                          className={`balance-nums ${totalMargin < 0
-                            ? "text-danger"
-                            : totalMargin === 0
+                          className={`balance-nums ${
+                            totalMargin < 0
+                              ? "text-danger"
+                              : totalMargin === 0
                               ? "text-muted"
                               : ""
-                            }`}
+                          }`}
                         >
                           {+parseFloat(totalMargin)?.toFixed(2)}
                         </p>
@@ -2809,12 +2830,13 @@ export default function HomeRu() {
                       <div className="stat-box">
                         <p className="name">{t("level")}:</p>
                         <p
-                          className={`balance-nums ${level < 0
-                            ? "text-danger"
-                            : level === 0
+                          className={`balance-nums ${
+                            level < 0
+                              ? "text-danger"
+                              : level === 0
                               ? "text-muted"
                               : ""
-                            }`}
+                          }`}
                         >
                           {`${+parseFloat(level)?.toFixed(2)}%`}
                         </p>
@@ -2824,12 +2846,13 @@ export default function HomeRu() {
                       <div className="stat-box">
                         <p className="name">{t("balance")}:</p>
                         <p
-                          className={`balance-nums ${level < 0
-                            ? "text-danger"
-                            : level === 0
+                          className={`balance-nums ${
+                            level < 0
+                              ? "text-danger"
+                              : level === 0
                               ? "text-muted"
                               : ""
-                            }`}
+                          }`}
                         >
                           {+parseFloat(totalBalance)?.toFixed(2)}
                         </p>
@@ -2898,8 +2921,8 @@ export default function HomeRu() {
                           data={fillArrayWithEmptyRows(
                             activeOrders,
                             dealsRow -
-                            (activeOrders.length % dealsRow) +
-                            activeOrders.length
+                              (activeOrders.length % dealsRow) +
+                              activeOrders.length
                           )}
                           dense
                           highlightOnHover
@@ -2927,8 +2950,8 @@ export default function HomeRu() {
                           data={fillArrayWithEmptyRows(
                             delayedOrders,
                             dealsRow -
-                            (delayedOrders.length % dealsRow) +
-                            delayedOrders.length
+                              (delayedOrders.length % dealsRow) +
+                              delayedOrders.length
                           )}
                           dense
                           highlightOnHover
@@ -3199,7 +3222,9 @@ export default function HomeRu() {
                             <button
                               onClick={() => {
                                 setAccTab("deposit");
+                                setDepositModal(true);
                                 setTab("account");
+                                setWithdrawlModal(false);
                               }}
                               type="button"
                             >
@@ -3246,7 +3271,9 @@ export default function HomeRu() {
                             <button
                               onClick={() => {
                                 setAccTab("deposit");
+                                setDepositModal(false);
                                 setTab("account");
+                                setWithdrawlModal(true);
                               }}
                               type="button"
                             >
@@ -3631,7 +3658,9 @@ export default function HomeRu() {
                         </div>
                         <div className="verification-button-box">
                           <button type="submit">{t("submit")}</button>
-                          <button className="hide-on-desktop" type="button">{t("cancel")}</button>
+                          <button className="hide-on-desktop" type="button">
+                            {t("cancel")}
+                          </button>
                         </div>
                       </form>
                     </div>
@@ -3887,7 +3916,9 @@ export default function HomeRu() {
                                     </Form.Select>
                                   </div>
                                   <div className="deposit-modal-item">
-                                    <label htmlFor="amount">{t("amount")}:</label>
+                                    <label htmlFor="amount">
+                                      {t("amount")}:
+                                    </label>
                                     <input
                                       className="text-center"
                                       id="amount"
@@ -4050,7 +4081,10 @@ export default function HomeRu() {
                                               account_no: e.target.value,
                                             });
                                           }}
-                                          style={{ height: "32px", width: "60%" }}
+                                          style={{
+                                            height: "32px",
+                                            width: "60%",
+                                          }}
                                           value={withdrawData.account_no}
                                         >
                                           <option>{t("selectAccount")}</option>
@@ -4092,7 +4126,10 @@ export default function HomeRu() {
                                               method: e.target.value,
                                             });
                                           }}
-                                          style={{ height: "32px", width: "60%" }}
+                                          style={{
+                                            height: "32px",
+                                            width: "60%",
+                                          }}
                                           value={withdrawData.method}
                                         >
                                           <option disabled>
@@ -4163,7 +4200,10 @@ export default function HomeRu() {
                                               sum: data.sum,
                                             });
                                           }}
-                                          style={{ height: "32px", width: "60%" }}
+                                          style={{
+                                            height: "32px",
+                                            width: "60%",
+                                          }}
                                           value={withdrawAppData.id}
                                         >
                                           <option>
@@ -4218,12 +4258,14 @@ export default function HomeRu() {
                                           customStyles={{
                                             cells: {
                                               style: {
-                                                backgroundColor: "var(--main-secondary-color)",
+                                                backgroundColor:
+                                                  "var(--main-secondary-color)",
                                               },
                                             },
                                             headCells: {
                                               style: {
-                                                backgroundColor: "var(--main-secondary-color)",
+                                                backgroundColor:
+                                                  "var(--main-secondary-color)",
                                               },
                                             },
                                             rows: {
@@ -4249,7 +4291,9 @@ export default function HomeRu() {
                                           dense
                                           key={transType}
                                           pagination
-                                          paginationRowsPerPageOptions={[5, 10, 15, 20, 50]}
+                                          paginationRowsPerPageOptions={[
+                                            5, 10, 15, 20, 50,
+                                          ]}
                                           theme={theme}
                                         />
                                       </div>
@@ -4285,10 +4329,10 @@ export default function HomeRu() {
                                     </>
                                   ) : (
                                     <button
-                                        className="btn-i  hide-on-mobile"
+                                      className="btn-i  hide-on-mobile"
                                       disabled={
                                         withdrawAppData.status ===
-                                        "Completed" || !withdrawAppData.id
+                                          "Completed" || !withdrawAppData.id
                                       }
                                       onClick={async () => {
                                         await deleteDocument(
