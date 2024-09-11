@@ -65,13 +65,13 @@ export default function HomeRu() {
     return obj
       ? JSON.parse(obj)
       : {
-          showNewOrderPanel: false,
-          tab: "trade",
-          activeTab: "",
-          tabs: [],
-          isReportModalOpen: false,
-          showHistoryPanel: false,
-        };
+        showNewOrderPanel: false,
+        tab: "trade",
+        activeTab: "",
+        tabs: [],
+        isReportModalOpen: false,
+        showHistoryPanel: false,
+      };
   });
   const [tab, setTab] = useState(gameConfigs.tab || "trade");
   const [dealsTab, setDealsTab] = useState("activeTab");
@@ -270,9 +270,8 @@ export default function HomeRu() {
   const setOrders = useCallback((data) => {
     const mappedOrders = data.map((order) => ({
       ...order,
-      sltp: `${+parseFloat(order?.sl)?.toFixed(2) || ""} / ${
-        +parseFloat(order?.tp)?.toFixed(2) || ""
-      }`,
+      sltp: `${+parseFloat(order?.sl)?.toFixed(2) || ""} / ${+parseFloat(order?.tp)?.toFixed(2) || ""
+        }`,
     }));
     dispatch(setOrdersState(mappedOrders));
   }, []);
@@ -471,8 +470,8 @@ export default function HomeRu() {
     .filter((s) => s);
   const filteredQuotesSymbols = quoteSearch
     ? userQuotesSymbols.filter(({ symbol }) =>
-        symbol.toUpperCase().includes(quoteSearch.toUpperCase())
-      )
+      symbol.toUpperCase().includes(quoteSearch.toUpperCase())
+    )
     : userQuotesSymbols;
 
   // const crypto = [],
@@ -699,8 +698,7 @@ export default function HomeRu() {
       const hour = today.hour();
       if (weekDay === 0 || weekDay === 6 || hour < 9 || hour >= 23) {
         return toast.error(
-          `${
-            group === "commodities" ? "Commodities" : group
+          `${group === "commodities" ? "Commodities" : group
           } Market open on Mon-Fri: 9AM-23PM`
         );
       }
@@ -1134,8 +1132,8 @@ export default function HomeRu() {
                       tab === "help"
                         ? "var(--main-primary-button)"
                         : theme === "purple"
-                        ? "var(--separator-line-color)"
-                        : "var(--main-text-color)",
+                          ? "var(--separator-line-color)"
+                          : "var(--main-text-color)",
                   }}
                   viewBox="0 0 26 26"
                   width="26"
@@ -1153,9 +1151,8 @@ export default function HomeRu() {
             <div className="balance-item hide-on-mobile">
               <h2 className="balance-title">{t("equity")}:</h2>
               <input
-                className={`balance-nums ${
-                  equity < 0 ? "text-danger" : equity === 0 ? "text-muted" : ""
-                }`}
+                className={`balance-nums ${equity < 0 ? "text-danger" : equity === 0 ? "text-muted" : ""
+                  }`}
                 readOnly={true}
                 type="number"
                 value={+parseFloat(equity)?.toFixed(2)}
@@ -1164,13 +1161,12 @@ export default function HomeRu() {
             <div className="balance-item hide-on-mobile">
               <h2 className="balance-title">{t("profit")}:</h2>
               <input
-                className={`balance-nums ${
-                  activeOrdersProfit < 0
-                    ? "text-danger"
-                    : activeOrdersProfit === 0
+                className={`balance-nums ${activeOrdersProfit < 0
+                  ? "text-danger"
+                  : activeOrdersProfit === 0
                     ? "text-muted"
                     : ""
-                }`}
+                  }`}
                 readOnly={true}
                 type="number"
                 value={+parseFloat(activeOrdersProfit)?.toFixed(2)}
@@ -1179,13 +1175,12 @@ export default function HomeRu() {
             <div className="balance-item hide-on-mobile">
               <h2 className="balance-title">{t("freeMargin")}:</h2>
               <input
-                className={`balance-nums ${
-                  freeMargin < 0
-                    ? "text-danger"
-                    : freeMargin === 0
+                className={`balance-nums ${freeMargin < 0
+                  ? "text-danger"
+                  : freeMargin === 0
                     ? "text-muted"
                     : ""
-                }`}
+                  }`}
                 readOnly={true}
                 type="number"
                 value={+parseFloat(freeMargin)?.toFixed(2)}
@@ -1194,13 +1189,12 @@ export default function HomeRu() {
             <div className="balance-item hide-on-mobile">
               <h2 className="balance-title">{t("margin")}:</h2>
               <input
-                className={`balance-nums ${
-                  totalMargin < 0
-                    ? "text-danger"
-                    : totalMargin === 0
+                className={`balance-nums ${totalMargin < 0
+                  ? "text-danger"
+                  : totalMargin === 0
                     ? "text-muted"
                     : ""
-                }`}
+                  }`}
                 readOnly={true}
                 type="number"
                 value={+parseFloat(totalMargin)?.toFixed(2)}
@@ -1209,9 +1203,8 @@ export default function HomeRu() {
             <div className="balance-item hide-on-mobile">
               <h2 className="balance-title">{t("level")}:</h2>
               <input
-                className={`balance-nums ${
-                  level < 0 ? "text-danger" : level === 0 ? "text-muted" : ""
-                }`}
+                className={`balance-nums ${level < 0 ? "text-danger" : level === 0 ? "text-muted" : ""
+                  }`}
                 readOnly={true}
                 type="text"
                 value={`${+parseFloat(level)?.toFixed(2)}%`}
@@ -1437,8 +1430,8 @@ export default function HomeRu() {
                     tab === "trade"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                      ? "var(--separator-line-color)"
-                      : "var(--main-text-color)",
+                        ? "var(--separator-line-color)"
+                        : "var(--main-text-color)",
                 }}
                 viewBox="0 0 30 30"
                 width="30"
@@ -1484,8 +1477,8 @@ export default function HomeRu() {
                     tab === "trade"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                      ? "var(--separator-line-color)"
-                      : "var(--main-text-color)",
+                        ? "var(--separator-line-color)"
+                        : "var(--main-text-color)",
                 }}
               >
                 {t("trade")}
@@ -1514,8 +1507,8 @@ export default function HomeRu() {
                     tab === "assets"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                      ? "var(--separator-line-color)"
-                      : "var(--main-text-color)",
+                        ? "var(--separator-line-color)"
+                        : "var(--main-text-color)",
                 }}
                 viewBox="0 0 39 39"
                 width="39"
@@ -1538,8 +1531,8 @@ export default function HomeRu() {
                     tab === "assets"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                      ? "var(--separator-line-color)"
-                      : "var(--main-text-color)",
+                        ? "var(--separator-line-color)"
+                        : "var(--main-text-color)",
                 }}
               >
                 {t("assets")}
@@ -1571,8 +1564,8 @@ export default function HomeRu() {
                     tab === "newOrder"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                      ? "var(--separator-line-color)"
-                      : "var(--main-text-color)",
+                        ? "var(--separator-line-color)"
+                        : "var(--main-text-color)",
                 }}
                 viewBox="0 0 45 34"
                 width="45"
@@ -1593,8 +1586,8 @@ export default function HomeRu() {
                     tab === "newOrder"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                      ? "var(--separator-line-color)"
-                      : "var(--main-text-color)",
+                        ? "var(--separator-line-color)"
+                        : "var(--main-text-color)",
                 }}
               >
                 {t("newOrder")}
@@ -1624,8 +1617,8 @@ export default function HomeRu() {
                     tab === "account"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                      ? "var(--separator-line-color)"
-                      : "var(--main-text-color)",
+                        ? "var(--separator-line-color)"
+                        : "var(--main-text-color)",
                 }}
                 viewBox="0 0 34 34"
                 width="34"
@@ -1650,8 +1643,8 @@ export default function HomeRu() {
                     tab === "account"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                      ? "var(--separator-line-color)"
-                      : "var(--main-text-color)",
+                        ? "var(--separator-line-color)"
+                        : "var(--main-text-color)",
                 }}
               >
                 {t("account")}
@@ -1690,8 +1683,8 @@ export default function HomeRu() {
                     accTab === "acc-info"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                      ? "var(--separator-line-color)"
-                      : "var(--main-text-color)",
+                        ? "var(--separator-line-color)"
+                        : "var(--main-text-color)",
                 }}
                 viewBox="0 0 28 28"
                 width="28"
@@ -1710,8 +1703,8 @@ export default function HomeRu() {
                     accTab === "acc-info"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                      ? "var(--separator-line-color)"
-                      : "var(--main-text-color)",
+                        ? "var(--separator-line-color)"
+                        : "var(--main-text-color)",
                 }}
               >
                 {t("accountInfo")}
@@ -1737,8 +1730,8 @@ export default function HomeRu() {
                     accTab === "personal-info"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                      ? "var(--separator-line-color)"
-                      : "var(--main-text-color)",
+                        ? "var(--separator-line-color)"
+                        : "var(--main-text-color)",
                 }}
                 viewBox="0 0 29 28"
                 width="29"
@@ -1764,9 +1757,8 @@ export default function HomeRu() {
                 </defs>
               </svg>
               <button
-                className={`side-button ${
-                  accTab === "personal-info" && " active"
-                }`}
+                className={`side-button ${accTab === "personal-info" && " active"
+                  }`}
                 id="side-button-account"
                 style={{
                   backgroundColor: "transparent",
@@ -1774,8 +1766,8 @@ export default function HomeRu() {
                     accTab === "personal-info"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                      ? "var(--separator-line-color)"
-                      : "var(--main-text-color)",
+                        ? "var(--separator-line-color)"
+                        : "var(--main-text-color)",
                 }}
               >
                 {t("personalInfo")}
@@ -1800,8 +1792,8 @@ export default function HomeRu() {
                     accTab === "deposit"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                      ? "var(--separator-line-color)"
-                      : "var(--main-text-color)",
+                        ? "var(--separator-line-color)"
+                        : "var(--main-text-color)",
                 }}
                 viewBox="0 0 25 29"
                 width="25"
@@ -1820,8 +1812,8 @@ export default function HomeRu() {
                     accTab === "deposit"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                      ? "var(--separator-line-color)"
-                      : "var(--main-text-color)",
+                        ? "var(--separator-line-color)"
+                        : "var(--main-text-color)",
                 }}
               >
                 {t("deposit")}
@@ -1845,8 +1837,8 @@ export default function HomeRu() {
                     accTab === "report"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                      ? "var(--separator-line-color)"
-                      : "var(--main-text-color)",
+                        ? "var(--separator-line-color)"
+                        : "var(--main-text-color)",
                 }}
                 viewBox="0 0 28 28"
                 width="28"
@@ -1870,8 +1862,8 @@ export default function HomeRu() {
                     accTab === "report"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                      ? "var(--separator-line-color)"
-                      : "var(--main-text-color)",
+                        ? "var(--separator-line-color)"
+                        : "var(--main-text-color)",
                 }}
               >
                 {t("report")}
@@ -1895,8 +1887,8 @@ export default function HomeRu() {
                     tab === "help"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                      ? "var(--separator-line-color)"
-                      : "var(--main-text-color)",
+                        ? "var(--separator-line-color)"
+                        : "var(--main-text-color)",
                 }}
                 viewBox="0 0 26 26"
                 width="26"
@@ -1913,8 +1905,8 @@ export default function HomeRu() {
                     tab === "help"
                       ? "var(--main-primary-button)"
                       : theme === "purple"
-                      ? "var(--separator-line-color)"
-                      : "var(--main-text-color)",
+                        ? "var(--separator-line-color)"
+                        : "var(--main-text-color)",
                 }}
               >
                 {t("help")}
@@ -1951,11 +1943,10 @@ export default function HomeRu() {
         </div>
         <div id="content">
           <div
-            className={`h-100 ${
-              tab === "trade" || tab === "assets" || tab === "newOrder"
-                ? ""
-                : "d-none"
-            }`}
+            className={`h-100 ${tab === "trade" || tab === "assets" || tab === "newOrder"
+              ? ""
+              : "d-none"
+              }`}
             id="trade-div"
           >
             <div
@@ -2700,8 +2691,8 @@ export default function HomeRu() {
                         data={fillArrayWithEmptyRows(
                           activeOrders,
                           dealsRow -
-                            (activeOrders.length % dealsRow) +
-                            activeOrders.length
+                          (activeOrders.length % dealsRow) +
+                          activeOrders.length
                         )}
                         dense
                         highlightOnHover
@@ -2729,8 +2720,8 @@ export default function HomeRu() {
                         data={fillArrayWithEmptyRows(
                           delayedOrders,
                           dealsRow -
-                            (delayedOrders.length % dealsRow) +
-                            delayedOrders.length
+                          (delayedOrders.length % dealsRow) +
+                          delayedOrders.length
                         )}
                         dense
                         highlightOnHover
@@ -2758,13 +2749,12 @@ export default function HomeRu() {
                       <div className="stat-box">
                         <p className="name">{t("equity")}:</p>
                         <p
-                          className={`balance-nums ${
-                            equity < 0
-                              ? "text-danger"
-                              : equity === 0
+                          className={`balance-nums ${equity < 0
+                            ? "text-danger"
+                            : equity === 0
                               ? "text-muted"
                               : ""
-                          }`}
+                            }`}
                         >
                           {+parseFloat(equity)?.toFixed(2)}
                         </p>
@@ -2774,13 +2764,12 @@ export default function HomeRu() {
                       <div className="stat-box">
                         <p className="name">{t("profit")}:</p>
                         <p
-                          className={`balance-nums ${
-                            activeOrdersProfit < 0
-                              ? "text-danger"
-                              : activeOrdersProfit === 0
+                          className={`balance-nums ${activeOrdersProfit < 0
+                            ? "text-danger"
+                            : activeOrdersProfit === 0
                               ? "text-muted"
                               : ""
-                          }`}
+                            }`}
                         >
                           {+parseFloat(activeOrdersProfit)?.toFixed(2)}
                         </p>
@@ -2790,13 +2779,12 @@ export default function HomeRu() {
                       <div className="stat-box">
                         <p className="name">{t("freeMargin")}:</p>
                         <p
-                          className={`balance-nums ${
-                            freeMargin < 0
-                              ? "text-danger"
-                              : freeMargin === 0
+                          className={`balance-nums ${freeMargin < 0
+                            ? "text-danger"
+                            : freeMargin === 0
                               ? "text-muted"
                               : ""
-                          }`}
+                            }`}
                         >
                           {+parseFloat(freeMargin)?.toFixed(2)}
                         </p>
@@ -2806,13 +2794,12 @@ export default function HomeRu() {
                       <div className="stat-box">
                         <p className="name">{t("margin")}:</p>
                         <p
-                          className={`balance-nums ${
-                            totalMargin < 0
-                              ? "text-danger"
-                              : totalMargin === 0
+                          className={`balance-nums ${totalMargin < 0
+                            ? "text-danger"
+                            : totalMargin === 0
                               ? "text-muted"
                               : ""
-                          }`}
+                            }`}
                         >
                           {+parseFloat(totalMargin)?.toFixed(2)}
                         </p>
@@ -2822,13 +2809,12 @@ export default function HomeRu() {
                       <div className="stat-box">
                         <p className="name">{t("level")}:</p>
                         <p
-                          className={`balance-nums ${
-                            level < 0
-                              ? "text-danger"
-                              : level === 0
+                          className={`balance-nums ${level < 0
+                            ? "text-danger"
+                            : level === 0
                               ? "text-muted"
                               : ""
-                          }`}
+                            }`}
                         >
                           {`${+parseFloat(level)?.toFixed(2)}%`}
                         </p>
@@ -2838,13 +2824,12 @@ export default function HomeRu() {
                       <div className="stat-box">
                         <p className="name">{t("balance")}:</p>
                         <p
-                          className={`balance-nums ${
-                            level < 0
-                              ? "text-danger"
-                              : level === 0
+                          className={`balance-nums ${level < 0
+                            ? "text-danger"
+                            : level === 0
                               ? "text-muted"
                               : ""
-                          }`}
+                            }`}
                         >
                           {+parseFloat(totalBalance)?.toFixed(2)}
                         </p>
@@ -2913,8 +2898,8 @@ export default function HomeRu() {
                           data={fillArrayWithEmptyRows(
                             activeOrders,
                             dealsRow -
-                              (activeOrders.length % dealsRow) +
-                              activeOrders.length
+                            (activeOrders.length % dealsRow) +
+                            activeOrders.length
                           )}
                           dense
                           highlightOnHover
@@ -2942,8 +2927,8 @@ export default function HomeRu() {
                           data={fillArrayWithEmptyRows(
                             delayedOrders,
                             dealsRow -
-                              (delayedOrders.length % dealsRow) +
-                              delayedOrders.length
+                            (delayedOrders.length % dealsRow) +
+                            delayedOrders.length
                           )}
                           dense
                           highlightOnHover
@@ -3589,7 +3574,7 @@ export default function HomeRu() {
                   {personalInfoTab === "verification" && (
                     <div id="verification-docs">
                       <h3>{t("uploadDocuments")}</h3>
-                      <p className="hide-on-dekstop">{t("fileSizeLimit")}</p>
+                      <p className="hide-on-desktop">{t("fileSizeLimit")}</p>
                       <h6>{t("chooseFile")}</h6>
                       <p className="hide-on-mobile">{t("fileSizeLimit")}</p>
                       <form encType="multipart/form-data">
@@ -3850,71 +3835,73 @@ export default function HomeRu() {
                                 id="modal-contents"
                                 style={{ backgroundColor: "inherit" }}
                               >
-                                <div className="deposit-modal-item">
-                                  <label htmlFor="method">
-                                    {t("chooseMethod")}:
-                                  </label>
-                                  <Form.Select
-                                    id="method"
-                                    onChange={(e) => {
-                                      setDepositData({
-                                        ...depositData,
-                                        method: e.target.value,
-                                      });
-                                    }}
-                                    style={{ height: "32px", width: "60%" }}
-                                    value={depositData.method}
-                                  >
-                                    <option disabled>
-                                      {t("chooseMethod")}
-                                    </option>
-                                    <option value="VISA">
-                                      VISA/MasterCard
-                                    </option>
-                                    <option value="Crypto">Crypto</option>
-                                    <option value="Other">Other</option>
-                                  </Form.Select>
-                                </div>
-                                <div className="deposit-modal-item">
-                                  <label htmlFor="acc-num">
-                                    {t("accountNumber")}:
-                                  </label>
-                                  <Form.Select
-                                    id="acc-num"
-                                    onChange={(e) => {
-                                      setDepositData({
-                                        ...depositData,
-                                        account_no: e.target.value,
-                                      });
-                                    }}
-                                    style={{ height: "32px", width: "60%" }}
-                                    value={depositData.account_no}
-                                  >
-                                    <option>{t("selectAccount")}</option>
-                                    {accounts
-                                      .filter((acc) => !acc?.isDeleted)
-                                      ?.map((a) => (
-                                        <option value={a.account_no}>
-                                          {a.account_no}
-                                        </option>
-                                      ))}
-                                  </Form.Select>
-                                </div>
-                                <div className="deposit-modal-item">
-                                  <label htmlFor="amount">{t("amount")}:</label>
-                                  <input
-                                    className="text-center"
-                                    id="amount"
-                                    onChange={(e) => {
-                                      setDepositData({
-                                        ...depositData,
-                                        amount: e.target.value,
-                                      });
-                                    }}
-                                    required
-                                    type="number"
-                                    value={depositData.amount}
-                                  />
+                                <div className="dp-dp-box">
+                                  <div className="deposit-modal-item">
+                                    <label htmlFor="method">
+                                      {t("chooseMethod")}:
+                                    </label>
+                                    <Form.Select
+                                      id="method"
+                                      onChange={(e) => {
+                                        setDepositData({
+                                          ...depositData,
+                                          method: e.target.value,
+                                        });
+                                      }}
+                                      style={{ height: "32px", width: "60%" }}
+                                      value={depositData.method}
+                                    >
+                                      <option disabled>
+                                        {t("chooseMethod")}
+                                      </option>
+                                      <option value="VISA">
+                                        VISA/MasterCard
+                                      </option>
+                                      <option value="Crypto">Crypto</option>
+                                      <option value="Other">Other</option>
+                                    </Form.Select>
+                                  </div>
+                                  <div className="deposit-modal-item">
+                                    <label htmlFor="acc-num">
+                                      {t("accountNumber")}:
+                                    </label>
+                                    <Form.Select
+                                      id="acc-num"
+                                      onChange={(e) => {
+                                        setDepositData({
+                                          ...depositData,
+                                          account_no: e.target.value,
+                                        });
+                                      }}
+                                      style={{ height: "32px", width: "60%" }}
+                                      value={depositData.account_no}
+                                    >
+                                      <option>{t("selectAccount")}</option>
+                                      {accounts
+                                        .filter((acc) => !acc?.isDeleted)
+                                        ?.map((a) => (
+                                          <option value={a.account_no}>
+                                            {a.account_no}
+                                          </option>
+                                        ))}
+                                    </Form.Select>
+                                  </div>
+                                  <div className="deposit-modal-item">
+                                    <label htmlFor="amount">{t("amount")}:</label>
+                                    <input
+                                      className="text-center"
+                                      id="amount"
+                                      onChange={(e) => {
+                                        setDepositData({
+                                          ...depositData,
+                                          amount: e.target.value,
+                                        });
+                                      }}
+                                      required
+                                      type="number"
+                                      value={depositData.amount}
+                                    />
+                                  </div>
                                 </div>
                                 <div className="btn-grp">
                                   <button
@@ -4027,7 +4014,7 @@ export default function HomeRu() {
                                       backgroundColor:
                                         withdrawType === "newApplication"
                                           ? "var(--main-primary-button)"
-                                          : "var(--main-tertiary-color)",
+                                          : "#3C3E43",
                                     }}
                                     variant=""
                                   >
@@ -4041,7 +4028,7 @@ export default function HomeRu() {
                                       backgroundColor:
                                         withdrawType === "applicationManagement"
                                           ? "var(--main-primary-button)"
-                                          : "var(--main-tertiary-color)",
+                                          : "#3C3E43",
                                     }}
                                     variant=""
                                   >
@@ -4050,171 +4037,222 @@ export default function HomeRu() {
                                 </ButtonGroup>
                                 {withdrawType === "newApplication" ? (
                                   <>
-                                    <div className="deposit-modal-item">
-                                      <label htmlFor="acc-num">
-                                        {t("account")}:
-                                      </label>
-                                      <Form.Select
-                                        id="acc-num"
-                                        onChange={(e) => {
-                                          setWithdrawData({
-                                            ...withdrawData,
-                                            account_no: e.target.value,
-                                          });
-                                        }}
-                                        style={{ height: "32px", width: "60%" }}
-                                        value={withdrawData.account_no}
-                                      >
-                                        <option>{t("selectAccount")}</option>
-                                        {accounts
-                                          .filter((acc) => !acc?.isDeleted)
-                                          ?.map((a) => (
-                                            <option value={a.account_no}>
-                                              {a.account_no}
-                                            </option>
-                                          ))}
-                                      </Form.Select>
-                                    </div>
-                                    <div className="deposit-modal-item">
-                                      <label htmlFor="amount">
-                                        {t("amount")}:
-                                      </label>
-                                      <input
-                                        className="text-center"
-                                        id="amount"
-                                        onChange={(e) => {
-                                          setWithdrawData({
-                                            ...withdrawData,
-                                            amount: e.target.value,
-                                          });
-                                        }}
-                                        type="number"
-                                        value={withdrawData.amount}
-                                      />
-                                    </div>
-                                    <div className="deposit-modal-item">
-                                      <label htmlFor="method">
-                                        {t("paymentMethod")}:
-                                      </label>
-                                      <Form.Select
-                                        id="method"
-                                        onChange={(e) => {
-                                          setWithdrawData({
-                                            ...depositData,
-                                            method: e.target.value,
-                                          });
-                                        }}
-                                        style={{ height: "32px", width: "60%" }}
-                                        value={withdrawData.method}
-                                      >
-                                        <option disabled>
-                                          {t("chooseMethod")}
-                                        </option>
-                                        <option value="VISA">
-                                          VISA/MasterCard
-                                        </option>
-                                        <option value="Crypto">Crypto</option>
-                                        <option value="Other">Other</option>
-                                      </Form.Select>
-                                    </div>
-                                    <div className="deposit-modal-item">
-                                      <label htmlFor="card-num">
-                                        {t("cardWalletNumber")}:
-                                      </label>
-                                      <input
-                                        className="text-center"
-                                        id="card-num"
-                                        onChange={(e) => {
-                                          setWithdrawData({
-                                            ...withdrawData,
-                                            card: e.target.value,
-                                          });
-                                        }}
-                                        type="text"
-                                        value={withdrawData.card}
-                                      />
-                                    </div>
-                                    <div className="deposit-modal-item">
-                                      <label htmlFor="phone-num">
-                                        {t("phoneNumber")}:
-                                      </label>
-                                      <input
-                                        className="text-center"
-                                        id="phone-num"
-                                        onChange={(e) => {
-                                          setWithdrawData({
-                                            ...withdrawData,
-                                            phone_no: e.target.value,
-                                          });
-                                        }}
-                                        type="text"
-                                        value={withdrawData.phone_no}
-                                      />
+                                    <div className="dp-con-box">
+                                      <div className="deposit-modal-item">
+                                        <label htmlFor="acc-num">
+                                          {t("account")}:
+                                        </label>
+                                        <Form.Select
+                                          id="acc-num"
+                                          onChange={(e) => {
+                                            setWithdrawData({
+                                              ...withdrawData,
+                                              account_no: e.target.value,
+                                            });
+                                          }}
+                                          style={{ height: "32px", width: "60%" }}
+                                          value={withdrawData.account_no}
+                                        >
+                                          <option>{t("selectAccount")}</option>
+                                          {accounts
+                                            .filter((acc) => !acc?.isDeleted)
+                                            ?.map((a) => (
+                                              <option value={a.account_no}>
+                                                {a.account_no}
+                                              </option>
+                                            ))}
+                                        </Form.Select>
+                                      </div>
+                                      <div className="deposit-modal-item">
+                                        <label htmlFor="amount">
+                                          {t("amount")}:
+                                        </label>
+                                        <input
+                                          className="text-center"
+                                          id="amount"
+                                          onChange={(e) => {
+                                            setWithdrawData({
+                                              ...withdrawData,
+                                              amount: e.target.value,
+                                            });
+                                          }}
+                                          type="number"
+                                          value={withdrawData.amount}
+                                        />
+                                      </div>
+                                      <div className="deposit-modal-item">
+                                        <label htmlFor="method">
+                                          {t("paymentMethod")}:
+                                        </label>
+                                        <Form.Select
+                                          id="method"
+                                          onChange={(e) => {
+                                            setWithdrawData({
+                                              ...depositData,
+                                              method: e.target.value,
+                                            });
+                                          }}
+                                          style={{ height: "32px", width: "60%" }}
+                                          value={withdrawData.method}
+                                        >
+                                          <option disabled>
+                                            {t("chooseMethod")}
+                                          </option>
+                                          <option value="VISA">
+                                            VISA/MasterCard
+                                          </option>
+                                          <option value="Crypto">Crypto</option>
+                                          <option value="Other">Other</option>
+                                        </Form.Select>
+                                      </div>
+                                      <div className="deposit-modal-item">
+                                        <label htmlFor="card-num">
+                                          {t("cardWalletNumber")}:
+                                        </label>
+                                        <input
+                                          className="text-center"
+                                          id="card-num"
+                                          onChange={(e) => {
+                                            setWithdrawData({
+                                              ...withdrawData,
+                                              card: e.target.value,
+                                            });
+                                          }}
+                                          type="text"
+                                          value={withdrawData.card}
+                                        />
+                                      </div>
+                                      <div className="deposit-modal-item">
+                                        <label htmlFor="phone-num">
+                                          {t("phoneNumber")}:
+                                        </label>
+                                        <input
+                                          className="text-center"
+                                          id="phone-num"
+                                          onChange={(e) => {
+                                            setWithdrawData({
+                                              ...withdrawData,
+                                              phone_no: e.target.value,
+                                            });
+                                          }}
+                                          type="text"
+                                          value={withdrawData.phone_no}
+                                        />
+                                      </div>
                                     </div>
                                   </>
                                 ) : (
                                   <>
-                                    <div className="deposit-modal-item">
-                                      <label htmlFor="app-id">
-                                        {t("applicationID")}:
-                                      </label>
-                                      <Form.Select
-                                        id="app-id"
-                                        onChange={(e) => {
-                                          const data = accountWithdraws.find(
-                                            (w) => w.id === e.target?.value
-                                          );
-                                          if (!data) return;
-                                          setWithdrawAppData({
-                                            account_no: data.account_no,
-                                            date: data.createdAt,
-                                            id: data.id,
-                                            status: data.status,
-                                            sum: data.sum,
-                                          });
-                                        }}
-                                        style={{ height: "32px", width: "60%" }}
-                                        value={withdrawAppData.id}
-                                      >
-                                        <option>
-                                          {t("selectApplicationID")}
-                                        </option>
-                                        {accountWithdraws.map((w) => (
-                                          <option value={w.id}>{w.id}</option>
-                                        ))}
-                                      </Form.Select>
+                                    <div className="hide-on-mobile">
+                                      <div className="deposit-modal-item">
+                                        <label htmlFor="app-id">
+                                          {t("applicationID")}:
+                                        </label>
+                                        <Form.Select
+                                          id="app-id"
+                                          onChange={(e) => {
+                                            const data = accountWithdraws.find(
+                                              (w) => w.id === e.target?.value
+                                            );
+                                            if (!data) return;
+                                            setWithdrawAppData({
+                                              account_no: data.account_no,
+                                              date: data.createdAt,
+                                              id: data.id,
+                                              status: data.status,
+                                              sum: data.sum,
+                                            });
+                                          }}
+                                          style={{ height: "32px", width: "60%" }}
+                                          value={withdrawAppData.id}
+                                        >
+                                          <option>
+                                            {t("selectApplicationID")}
+                                          </option>
+                                          {accountWithdraws.map((w) => (
+                                            <option value={w.id}>{w.id}</option>
+                                          ))}
+                                        </Form.Select>
+                                      </div>
+                                      <div className="deposit-modal-item">
+                                        <label>{t("status")}:</label>
+                                        <input
+                                          className="text-center"
+                                          disabled
+                                          value={withdrawAppData.status}
+                                        />
+                                      </div>
+                                      <div className="deposit-modal-item">
+                                        <label>{t("dateOfCreation")}:</label>
+                                        <input
+                                          className="text-center"
+                                          disabled
+                                          value={withdrawAppData.date}
+                                        />
+                                      </div>
+                                      <div className="deposit-modal-item">
+                                        <label>{t("account")}:</label>
+                                        <input
+                                          className="text-center"
+                                          disabled
+                                          value={withdrawAppData.account_no}
+                                        />
+                                      </div>
+                                      <div className="deposit-modal-item">
+                                        <label>{t("sum")}:</label>
+                                        <input
+                                          className="text-center"
+                                          disabled
+                                          value={withdrawAppData.sum}
+                                        />
+                                      </div>
                                     </div>
-                                    <div className="deposit-modal-item">
-                                      <label>{t("status")}:</label>
-                                      <input
-                                        className="text-center"
-                                        disabled
-                                        value={withdrawAppData.status}
-                                      />
-                                    </div>
-                                    <div className="deposit-modal-item">
-                                      <label>{t("dateOfCreation")}:</label>
-                                      <input
-                                        className="text-center"
-                                        disabled
-                                        value={withdrawAppData.date}
-                                      />
-                                    </div>
-                                    <div className="deposit-modal-item">
-                                      <label>{t("account")}:</label>
-                                      <input
-                                        className="text-center"
-                                        disabled
-                                        value={withdrawAppData.account_no}
-                                      />
-                                    </div>
-                                    <div className="deposit-modal-item">
-                                      <label>{t("sum")}:</label>
-                                      <input
-                                        className="text-center"
-                                        disabled
-                                        value={withdrawAppData.sum}
-                                      />
+                                    <div className="hide-on-desktop">
+                                      <div className="transactions-table">
+                                        <DataTable
+                                          columns={
+                                            transType === "Deposit"
+                                              ? depositsColumns
+                                              : withdrawColumns
+                                          }
+                                          customStyles={{
+                                            cells: {
+                                              style: {
+                                                backgroundColor: "var(--main-secondary-color)",
+                                              },
+                                            },
+                                            headCells: {
+                                              style: {
+                                                backgroundColor: "var(--main-secondary-color)",
+                                              },
+                                            },
+                                            rows: {
+                                              style: {
+                                                backgroundColor:
+                                                  "var(--main-secondary-color) !important",
+                                              },
+                                            },
+                                            table: {
+                                              style: {
+                                                backgroundColor:
+                                                  "var(--main-secondary-color) !important",
+                                                minHeight: "50vh",
+                                              },
+                                            },
+                                          }}
+                                          data={fillArrayWithEmptyRows(
+                                            transType === "Deposit"
+                                              ? accountDeposits
+                                              : accountWithdraws,
+                                            10
+                                          )}
+                                          dense
+                                          key={transType}
+                                          pagination
+                                          paginationRowsPerPageOptions={[5, 10, 15, 20, 50]}
+                                          theme={theme}
+                                        />
+                                      </div>
                                     </div>
                                   </>
                                 )}
@@ -4247,10 +4285,10 @@ export default function HomeRu() {
                                     </>
                                   ) : (
                                     <button
-                                      className="btn-i"
+                                        className="btn-i  hide-on-mobile"
                                       disabled={
                                         withdrawAppData.status ===
-                                          "Completed" || !withdrawAppData.id
+                                        "Completed" || !withdrawAppData.id
                                       }
                                       onClick={async () => {
                                         await deleteDocument(

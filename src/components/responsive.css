@@ -974,4 +974,111 @@
         padding: 10px 30px;
         background-color: #3C3E43;
     }
+
+
+    /* Deposit Screen */
+    #deposit-modal {
+        background-color: transparent;
+        height: calc(100vh - 139px);
+        top: 63px;
+    }
+
+    #deposit-modal .modal-dialog {
+        width: 100%;
+        height: 100%;
+        background-color: var(--main-tertiary-color);
+    }
+
+    #deposit-modal .modal-header {
+        display: none;
+    }
+
+    #deposit-modal .modal-content {
+        border: 0;
+    }
+
+    #deposit-modal .modal-body,
+    #deposit-modal #modal-contents {
+        background-color: var(--main-tertiary-color) !important;
+    }
+
+    .dp-con-box {
+        background-color: var(--main-background-color);
+        padding: 40px 20px;
+        border-radius: 5px;
+        margin-top: 30px;
+    }
+
+    #deposit-modal .deposit-modal-item {
+        margin-left: 0;
+        margin-right: 0;
+        display: block;
+        margin-bottom: 20px;
+    }
+
+    #deposit-modal .deposit-modal-item label {
+        margin-bottom: 5px;
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    #deposit-modal .deposit-modal-item input {
+        width: 100%;
+        background-color: var(--main-secondary-color);
+        min-height: 40px;
+        text-align: left !important;
+    }
+
+    .deposit-modal-item select {
+        width: 100% !important;
+        background-color: var(--main-secondary-color) !important;
+        min-height: 40px !important;
+    }
+
+    #deposit-modal .btn-grp {
+        justify-content: center;
+    }
+
+    #deposit-modal .btn-grp .btn-i {
+        padding: 13px 30px;
+        font-size: 12px;
+        font-weight: 600;
+        width: auto;
+    }
+
+    #deposit-modal .btn-grp-withdraw {
+        width: 70%;
+        margin-left: 15%;
+        background-color: #3C3E43;
+        margin-top: 20px;
+    }
+
+    #deposit-modal .btn-grp-withdraw button {
+        background-color: #3C3E43;
+    }
+
+    #deposit-modal .transactions-table {
+        border-radius: 5px;
+        margin-top: 30px;
+    }
+
+    #deposit-modal .hide-on-desktop {
+        border-radius: 5px;
+    }
+
+    #deposit-modal .hkQLoy,
+    #deposit-modal .bTKzGX {
+        background-color: var(--main-background-color) !important;
+    }
+
+    .dp-dp-box {
+        margin-top: 50px;
+        background-color: inherit;
+        margin-bottom: 30px;
+    }
+
+    .dp-dp-box input,
+    .dp-dp-box select {
+        background-color: var(--main-background-color) !important;
+    }
 }
