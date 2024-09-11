@@ -4,11 +4,14 @@ import React, { useState } from "react";
 import { Modal, Form } from "react-bootstrap";
 import { db } from "../firebase";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const EditOrderModal = ({ onClose, selectedOrder, theme }) => {
   const [newSl, setNewSl] = useState(selectedOrder?.sl);
   const [newTp, setNewTp] = useState(selectedOrder?.tp);
   const [loading, setLoading] = useState(false);
+
+  const { t } = useTranslation();
 
   const updateOrder = async (e) => {
     e.preventDefault();
@@ -84,13 +87,13 @@ const EditOrderModal = ({ onClose, selectedOrder, theme }) => {
             as="h5"
             className={`bg-transparent mb-0 w-100 text-center ${theme}`}
           >
-            Edit order - {selectedOrder?.orderId} - {selectedOrder?.symbol}
+            {t("editOrder")}: {selectedOrder?.orderId} - {selectedOrder?.symbol}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form className="my-2 row row-gap-3" onSubmit={updateOrder}>
             <Form.Group className="d-flex justify-content-around align-items-center">
-              <Form.Label htmlFor="sl">Stop Loss:</Form.Label>
+              <Form.Label htmlFor="sl">{t("SL")}:</Form.Label>
               <div>
                 <Form.Control
                   id="sl"
@@ -100,7 +103,7 @@ const EditOrderModal = ({ onClose, selectedOrder, theme }) => {
                   value={newSl}
                 />
                 <label className="mt-1">
-                  Potential:{" "}
+                  {t("potential")}:{" "}
                   <label className="ms-2">
                     {+parseFloat(potentialSL)?.toFixed(2)}
                   </label>
@@ -108,7 +111,7 @@ const EditOrderModal = ({ onClose, selectedOrder, theme }) => {
               </div>
             </Form.Group>
             <Form.Group className="d-flex justify-content-around align-items-center">
-              <Form.Label htmlFor="tp">Take Profit:</Form.Label>
+              <Form.Label htmlFor="tp">{t("TP")}:</Form.Label>
               <div>
                 <Form.Control
                   id="tp"
@@ -118,7 +121,7 @@ const EditOrderModal = ({ onClose, selectedOrder, theme }) => {
                   value={newTp}
                 />
                 <label className="mt-1">
-                  Potential:{" "}
+                  {t("potential")}:{" "}
                   <label className="ms-2">
                     {+parseFloat(potentialTP)?.toFixed(2)}
                   </label>
@@ -126,7 +129,7 @@ const EditOrderModal = ({ onClose, selectedOrder, theme }) => {
               </div>
             </Form.Group>
             <label className="text-center fs-5 mb-2">
-              Current market Price:
+              {t("currentMarketPrice")}:
               <span className="ms-2">{selectedOrder.currentMarketPrice}</span>
             </label>
             <button
@@ -135,7 +138,7 @@ const EditOrderModal = ({ onClose, selectedOrder, theme }) => {
               onClick={updateOrder}
               disabled={loading}
             >
-              Change
+              {t("change")}
             </button>
           </Form>
         </Modal.Body>

@@ -3,6 +3,7 @@ import { Modal } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 let groups = [
   { key: "Commodities", value: "commodities" },
@@ -22,6 +23,8 @@ const AddTradingSymbol = ({
   const [group, setGroup] = useState("commodities");
   const { symbol } = formData;
   const assetGroups = useSelector((state) => state.assetGroups);
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     setFormData({
@@ -83,7 +86,7 @@ const AddTradingSymbol = ({
             fontWeight: "600",
           }}
         >
-          Add Symbol
+          {t("addSymbol")}
         </Modal.Header>
         <Modal.Body
           style={{
@@ -93,7 +96,7 @@ const AddTradingSymbol = ({
         >
           <form style={{ backgroundColor: "inherit" }} onSubmit={handleSubmit}>
             <div className="form-item">
-              <label htmlFor="group">Group:</label>
+              <label htmlFor="group">{t("group")}:</label>
               <select
                 id="group"
                 name="group"
@@ -107,10 +110,10 @@ const AddTradingSymbol = ({
               </select>
             </div>
             <div className="form-item">
-              <label htmlFor="symbol">Select Symbol:</label>
+              <label htmlFor="symbol">{t("selectSymbol")}:</label>
               <select id="symbol" name="symbol" onChange={handleChange}>
                 <option value="" disabled>
-                  Select Symbol
+                  {t("selectSymbol")}
                 </option>
                 {filteredSymbols?.map((el, idx) => (
                   <option key={idx} value={el?.id}>
@@ -124,9 +127,9 @@ const AddTradingSymbol = ({
                 style={{ backgroundColor: "var(--main-primary-button)" }}
                 type="submit"
               >
-                Submit
+                {t("submit")}
               </button>
-              <button onClick={handleCloseModal}>Cancel</button>
+              <button onClick={handleCloseModal}>{t("cancel")}</button>
             </div>
           </form>
         </Modal.Body>

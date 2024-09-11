@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { deleteDocument, updateUserById } from "../helper/firebaseHelpers";
+import { useTranslation } from "react-i18next";
 
 const CancelOrderModal = ({
   setShow,
@@ -10,6 +11,8 @@ const CancelOrderModal = ({
   defaultAccount,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
+
+  const { t } = useTranslation();
 
   const closeModal = () => setShow(false);
   const handleCancelOrder = async () => {
@@ -47,7 +50,7 @@ const CancelOrderModal = ({
         centered
       >
         <Modal.Header className="bg-transparent text-center" closeButton>
-          Cancel order -- {selectedOrder?.id} + {selectedOrder?.symbol}
+          {t("cancelOrder")}: {selectedOrder?.id} - {selectedOrder?.symbol}
         </Modal.Header>
         <Modal.Body className="bg-transparent border-0 py-0">
           Are you sure to cancel this order?
@@ -59,7 +62,7 @@ const CancelOrderModal = ({
             onClick={closeModal}
             size="sm"
           >
-            No
+            {t("no")}
           </Button>
           <Button
             className="px-3"
@@ -68,7 +71,7 @@ const CancelOrderModal = ({
             size="sm"
             disabled={isLoading}
           >
-            Yes
+            {t("yes")}
           </Button>
         </Modal.Footer>
       </Modal>
