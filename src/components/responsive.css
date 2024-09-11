@@ -1078,4 +1078,8 @@
   .dp-dp-box select {
     background-color: var(--main-background-color) !important;
   }
+
+  #faq {
+    overflow: auto;
+  }
 }
