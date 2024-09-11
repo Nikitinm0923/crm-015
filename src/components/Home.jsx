@@ -4407,7 +4407,7 @@ export default function HomeRu() {
                   }}
                   type="button"
                 >
-                  New account
+                  {t("newAccount")}
                 </button>
                 <button
                   className={`${showAccountModal ? "" : "active"}`}
@@ -4416,7 +4416,7 @@ export default function HomeRu() {
                   }}
                   type="button"
                 >
-                  My account
+                  {t("myAccount")}
                 </button>
               </div>
               <div className="select-account-box">

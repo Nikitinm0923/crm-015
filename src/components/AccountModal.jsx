@@ -154,7 +154,7 @@ const AccountModal = ({ onClose, userProfile }) => {
             onClick={createNewAccount}
             style={{ width: "50%" }}
           >
-            Create
+            {t("create")}
           </button>
         </Modal.Body>
       </Modal>
