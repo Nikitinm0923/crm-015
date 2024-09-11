@@ -1,1084 +1,1081 @@
 @media only screen and (max-width: 768px) {
-    /* AUTH start */
-
-    #loginForm,
-    .signup_form {
-        background-color: transparent;
-        width: 90%;
-    }
-
-    #loginForm h1,
-    .signup_form h1 {
-        background-color: inherit;
-        font-size: xx-large;
-        font-weight: 700;
-        text-align: center;
-    }
-
-    #loginForm .fields,
-    .signup_form .fields {
-        background-color: inherit;
-        margin: 64px 0;
-    }
-
-    .signup_form .fields {
-        margin: 32px 0;
-    }
-
-    #loginForm .fields input,
-    .signup_form .fields input {
-        background-color: var(--main-text-color);
-        color: var(--main-background-color);
-    }
-
-    #loginForm .fields input::placeholder,
-    .signup_form .fields input::placeholder {
-        color: var(--main-background-color);
-        font-weight: 400;
-    }
-
-    #loginForm .or_text,
-    #loginForm .login_other {
-        display: none;
-    }
-
-    .login_wrapper,
-    .signup_wrapper {
-        background-color: inherit;
-    }
-
-    .login_wrapper .login_text,
-    .login_wrapper .login_text p,
-    .signup_wrapper .signup_text,
-    .signup_wrapper .signup_text p {
-        background-color: inherit;
-    }
-
-    .login_wrapper .login_link,
-    .signup_wrapper .sign_up_link {
-        background-color: inherit;
-        margin: 16px 0;
-    }
-
-    .flag_theme,
-    .flag_theme .dropdown,
-    .flag_theme .dropdown svg {
-        background-color: inherit;
-    }
-
-    /* AUTH end */
-
-    .hide-on-mobile {
-        display: none !important;
-    }
-
-    .hide-on-desktop {
-        display: block !important;
-    }
-
-    #main-container {
-        height: calc(100% - 130px);
-    }
-
-    #main-container #content {
-        width: 100%;
-        height: 100%;
-    }
-
-    #side-out-menu {
-        display: none;
-    }
-
-    #sidebar {
-        width: 100%;
-        height: auto;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        z-index: 1;
-    }
-
-    #side-main-menu {
-        flex-direction: row;
-        justify-content: space-between;
-        padding: 0 30px;
-        margin: 0;
-    }
-
-    .side-btn svg {
-        height: 30px;
-        width: auto;
-        margin-bottom: 5px;
-    }
-
-    .side-btn-acc {
-        display: none;
-    }
-
-    .navbar-sperater {
-        display: none;
-    }
-
-    #header {
-        background-color: var(--main-secondary-color);
-        height: 7%;
-        padding-top: 4%;
-    }
-
-    #header #header-info {
-        background-color: var(--main-secondary-color);
-        margin: 0;
-    }
-
-    #header #balance {
-        background-color: var(--main-secondary-color);
-        align-items: center;
-    }
-
-    #header #balance .help-box {
-        background-color: var(--main-secondary-color);
-        margin-left: 10px;
-        width: 33.33%;
-        text-align: left;
-        display: block;
-    }
-
-    #header #balance .help-box a {
-        background-color: var(--main-secondary-color);
-    }
-
-    #header #balance .page-title {
-        background-color: var(--main-secondary-color);
-        text-align: center;
-        width: 33.33%;
-        display: block;
-    }
-
-    #header #balance .page-title p {
-        background-color: var(--main-secondary-color);
-        text-align: center;
-        font-size: 20px;
-        font-weight: 600;
-        margin-bottom: 0;
-    }
-
-    #balance-item-lang {
-        flex: unset;
-        width: 33.33%;
-        text-align: end;
-        margin: 0;
-        justify-content: end;
-    }
-
-    .id-btn {
-        margin: 0;
-        background-color: var(--main-tertiary-color);
-        border-radius: 5px;
-        /* padding: 5px 35px 5px 15px; */
-        padding: 5px 15px;
-        font-size: 12px;
-        font-weight: 500;
-        color: var(--main-primary-button);
-        margin-right: 10px;
-        position: relative;
-    }
-
-    .id-btn span {
-        background-color: var(--main-tertiary-color);
-        display: block;
-        font-size: 10px;
-        font-weight: 700;
-        line-height: 12px;
-    }
-
-    .id-btn svg {
-        position: absolute;
-        top: 16px;
-        right: 10px;
-        display: none !important;
-    }
-
-    /* Orders */
-    #orders {
-        /* display: none; */
-    }
-
-    #trade-div {
-        padding: 10px;
-        background-color: var(--main-tertiary-color);
-        overflow: scroll;
-    }
-
-    #trade {
-        height: auto !important;
-        /* border-radius: 5px 5px 0 0; */
-        border-radius: 5px;
-        padding: 20px;
-        background-color: var(--main-background-color);
-    }
-
-    #chart {
-        min-height: 70vh;
-    }
-
-    /* Mobile Trade Dropdown */
-    .mobile-tabs {
-        padding: 10px 15px;
-        text-align: left;
-        display: block;
-    }
-
-    .mobile-tabs .drpdwn,
-    .mobile-tabs .drpdwn:focus {
-        background-color: var(--bs-body-bg);
-        font-size: 16px;
-        font-weight: 600;
-    }
-
-    .mobile-tabs .drpdwn::after {
-        margin-left: 15px;
-    }
-
-    /* Mobile Trade Box */
-    .mobile-trade-box {
-        padding: 10px 10px 10px 10px;
-        background-color: var(--main-background-color);
-        border-radius: 0 0 5px 5px;
-    }
-
-    .mobile-trade-box .inner-box {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        gap: 15px;
-    }
-
-    .mobile-trade-box .title {
-        font-size: 15px;
-        font-weight: 600;
-        display: block;
-        width: 100%;
-        text-align: center;
-    }
-
-    .mobile-trade-box .inner-box .left-box {
-        width: 35%;
-    }
-
-    .mobile-trade-box .inner-box .center-box {
-        width: 25%;
-    }
-
-    .mobile-trade-box .inner-box .right-box {
-        width: 35%;
-    }
-
-    .mobile-trade-box .inner-box button {
-        padding: 10px 15px;
-        font-size: 16px;
-        font-weight: 600;
-    }
-
-    .mobile-trade-box .inner-box .center-box input {
-        width: 100%;
-        height: 45px;
-        font-size: 15px;
-        font-weight: 400;
-    }
-
-    /* New Order  */
-    #newOrder {
-        width: 100%;
-    }
-
-    /* Mobile stats Section */
-    .mobile-stat-box {
-        padding: 20px 0px;
-        background-color: var(--main-tertiary-color);
-    }
-
-    .mobile-stat-box .title {
-        color: var(--main-text-color);
-        font-size: 18px;
-        font-weight: 600;
-        background-color: var(--main-tertiary-color);
-    }
-
-    .mobile-stat-box .row,
-    .mobile-stat-box .col-6 {
-        background-color: var(--main-tertiary-color);
-    }
-
-    .mobile-stat-box .stat-box {
-        text-align: center;
-        border: 1px solid var(--main-tertiary-color);
-        padding: 10px 0;
-    }
-
-    .mobile-stat-box .stat-box .name {
-        font-size: 12px;
-        font-weight: 700;
-        margin-bottom: 0px;
-    }
-
-    .mobile-stat-box .stat-box .balance-nums {
-        font-size: 16px;
-        font-weight: 600;
-        margin-bottom: 0px;
-    }
-
-    /* First item (top-left corner) */
-    .mobile-stat-row .col-6:nth-child(1) .stat-box {
-        border-radius: 5px 0 0 0;
-    }
-
-    /* Second item (top-right corner) */
-    .mobile-stat-row .col-6:nth-child(2) .stat-box {
-        border-radius: 0 5px 0 0;
-    }
-
-    /* Second last item (bottom-left corner) */
-    .mobile-stat-row .col-6:nth-last-child(2) .stat-box {
-        border-radius: 0 0 0 5px;
-    }
-
-    /* Last item (bottom-right corner) */
-    .mobile-stat-row .col-6:last-child .stat-box {
-        border-radius: 0 0 5px 0;
-    }
-
-    .orders-title {
-        color: var(--main-text-color);
-        font-size: 18px;
-        font-weight: 600;
-        background-color: var(--main-tertiary-color);
-    }
-
-    #orders .orders-side {
-        display: none;
-    }
-
-    #orders .order-tabs {
-        justify-content: center;
-        padding: 10px 0;
-    }
-
-    #orders .order-tabs .nav-item {
-        margin: 0;
-    }
-
-    #orders .order-tabs .nav-item button {
-        margin: 0;
-        border: 0;
-        padding: 10px 10px;
-    }
-
-    #orders .order-tabs .nav-item button.active {
-        background-color: var(--main-primary-button);
-        color: var(--main-text-color) !important;
-    }
-
-    #orders .order-tabs .nav-item:nth-child(1) button {
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
-    }
-
-    #orders .order-tabs .nav-item:nth-child(2) button {
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-    }
-
-    .order-bnt-box {
-        text-align: center;
-        background-color: var(--main-tertiary-color);
-        padding-top: 15px;
-        padding-bottom: 10px;
-    }
-
-    .order-bnt-box button {
-        width: 80%;
-    }
-
-    .regular-dark-btn {
-        background-color: var(--main-background-color);
-        border: 0;
-        padding: 10px 20px;
-        border-radius: 5px;
-        text-align: center;
-        font-size: 14px;
-        font-weight: 600;
-    }
-
-    .regular-dark-btn:hover {
-        background-color: var(--main-primary-button);
-    }
-
-    /* Assets CSS */
-
-    #assets .add-symbol-btn {
-        position: absolute;
-        bottom: 90px;
-        right: 20px;
-        border-radius: 50rem;
-        width: 50px;
-        height: 50px;
-        font-size: 28px;
-        padding: 0;
-    }
-
-    #assets .add-symbol-btn span {
-        display: none;
-    }
-
-    .search-input-icon {
-        top: -27px !important;
-        fill: var(--main-text-color) !important;
-    }
-
-    .sc-dItHI {
-        color: var(--main-primary-button) !important;
-    }
-
-    /* HEader Account Modal CSS */
-    .acc-info {
-        right: 3.5%;
-        top: 7.75%;
-    }
-
-    /* Reports Modal CSS */
-
-    .reports-modal {
-        height: 82.5%;
-        top: 63px;
-        background-color: var(--main-tertiary-color);
-    }
-
-    .reports-modal .modal-header {
-        display: none;
-    }
-
-    .reports-modal .modal-body {
-        background-color: var(--main-tertiary-color) !important;
-    }
-
-    .reports-modal .modal-body .reports-overview-box {
-        /* background-color: #fff; */
-        background-color: var(--main-tertiary-color);
-        margin-bottom: 30px;
-    }
-
-    .reports-modal .modal-body .reports-overview-box .title {
-        color: var(--main-text-color);
-        font-weight: 600;
-        font-size: 18px;
-        background-color: var(--main-tertiary-color);
-
-    }
-
-    .reports-modal .modal-body .reports-overview-box ul {
-        display: block;
-        list-style-type: none;
-        background-color: var(--main-background-color);
-        padding: 0;
-        margin: 0;
-        border-radius: 5px;
-        overflow: hidden;
-    }
-
-    .reports-modal .modal-body .reports-overview-box ul li {
-        background-color: var(--main-background-color);
-        margin: 0;
-        padding: 15px 10px;
-        border-bottom: 1px solid var(--main-tertiary-color);
-    }
-
-    .reports-modal .modal-body .reports-overview-box ul li div {
-        background-color: var(--main-background-color);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    .reports-modal .modal-body .reports-overview-box ul li div p {
-        background-color: var(--main-background-color);
-        margin-bottom: 0;
-    }
-
-    .reports-modal .modal-body .reports-overview-box ul li div .name {
-        font-size: 13px;
-        font-weight: 700;
-        color: var(--main-text-color);
-    }
-
-    .reports-modal .modal-body .reports-overview-box ul li div .number {
-        font-size: 14px;
-        font-weight: 600;
-        color: var(--main-primary-button);
-    }
-
-    .report-tabs {
-        background-color: var(--main-tertiary-color) !important;
-        border-radius: 5px;
-        position: relative;
-    }
-
-    .report-tabs ul {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: var(--main-tertiary-color) !important;
-        margin-bottom: 50px;
-        border-bottom: 0;
-    }
-
-    .report-tabs ul li {
-        margin-right: 0;
-    }
-
-    .report-tabs ul li button {
-        width: auto;
-        padding: 10px 20px;
-        margin-bottom: 0 !important;
-    }
-
-    .report-tabs ul li:nth-child(1) button {
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
-    }
-
-    .report-tabs ul li:nth-child(2) button {
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-    }
-
-    .reports-modal .bXLDzR {
-        border-radius: 5px;
-    }
-
-    .reports-modal .ehBmlw {
-        height: 30vh;
-        background-color: var(--main-tertiary-color);
-    }
-
-    .report-tabs .tab-pane {
-        border-radius: 5px;
-    }
-
-    .reports-modal .tab-content .cGYvNk {
-        background-color: var(--main-tertiary-color);
-        padding: 0;
-    }
-
-    .report-tabs select {
-        position: absolute;
-        top: 70px;
-        background-color: var(--main-tertiary-color);
-        border: 0;
-        font-size: 16px;
-        font-weight: 600;
-        color: var(--main-text-color);
-        padding-right: 5px;
-    }
-
-    .report-tabs select:focus-visible {
-        border: 0;
-        outline: 0;
-        box-shadow: none;
-    }
-
-    /* Account Page */
-
-    #account {
-        background-color: var(--main-tertiary-color);
-        overflow-y: scroll;
-    }
-
-    #account #account-profile {
-        background-color: var(--main-tertiary-color);
-    }
-
-    #account h1 {
-        display: none;
-    }
-
-    .account-card {
-        width: 100%;
-        background-color: var(--main-tertiary-color);
-        margin-bottom: 0;
-    }
-
-    .account-card .acc-selection {
-        display: none;
-    }
-
-    .account-card #acc-profile-main {
-        display: none;
-    }
-
-    .account-card .acc-main-content {
-        display: block;
-    }
-
-    .account-card .acc-img-name {
-        margin-bottom: 50px;
-    }
-
-    .account-card .account-sublink-box ul {
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
-        background-color: var(--main-background-color);
-    }
-
-    .account-card .account-sublink-box ul li {
-        border-bottom: 1px solid var(--main-secondary-color);
-    }
-
-    .account-card .account-sublink-box ul li button {
-        background-color: var(--main-background-color);
-        border: none;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 16px 25px;
-    }
-
-    .account-card .account-sublink-box ul li button:nth-child(1) div {
-        display: flex;
-        align-items: center;
-        justify-content: start;
-        gap: 25px;
-    }
-
-    .account-card .account-sublink-box ul li button p {
-        margin-bottom: 0;
-        font-size: 16px;
-        font-weight: 600;
-    }
-
-    .account-card .acc-img-name label:nth-of-type(1) {
-        font-size: 16px;
-        font-weight: 700;
-        padding-top: 5px;
-    }
-
-    .account-card .acc-img-name label:nth-of-type(2) {
-        display: none;
-    }
-
-    .account-card .acc-img-name label:nth-of-type(3) {
-        font-size: 14px;
-        font-weight: 500;
-    }
-
-    .logout-btn {
-        background-color: #7C7C7C;
-        padding: 11px 30px;
-        border-radius: 5px;
-        font-size: 14px;
-        font-weight: 600;
-        color: var(--main-text-color);
-        border: none;
-    }
-
-    .logout-btn svg {
-        background-color: transparent;
-        margin-right: 10px;
-    }
-
-    /* Account Management Screen */
-    .account-management {
-        min-height: calc(100vh - 142px);
-        background-color: var(--main-tertiary-color);
-        padding: 50px 10px 20px 10px;
-
-    }
-
-    .account-management .account-stat-box {
-        width: 100%;
-        background-color: var(--main-background-color);
-        margin: 50px 0 30px 0;
-        border-radius: 5px;
-        overflow: hidden;
-    }
-
-    .account-management .account-stat-box ul {
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
-    }
-
-    .account-management .account-stat-box ul li {
-        border-bottom: 1px solid var(--main-tertiary-color);
-    }
-
-    .account-management .account-stat-box ul li div {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 14px 22px;
-    }
-
-    .account-management .account-stat-box ul li div p {
-        font-size: 14px;
-        font-weight: 500;
-        color: var(--main-text-color);
-        margin-bottom: 0;
-    }
-
-    .account-management .select-account-box {
-        background-color: var(--main-tertiary-color);
-        padding-top: 50px;
-    }
-
-    .account-management .select-account-box .acc-selection {
-        display: block;
-        text-align: center;
-        background-color: var(--main-tertiary-color);
-    }
-
-    .account-management .select-account-box .acc-selection #account-input {
-        width: 80%;
-        margin: 0 auto;
-        text-align: left;
-    }
-
-    .account-management .select-account-box .acc-selection #account-input span {
-        display: none;
-    }
-
-    .account-management .swith-button-box {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: var(--main-tertiary-color);
-    }
-
-    .account-management .swith-button-box button {
-        background: #3C3E43;
-        border: 0;
-        padding: 10px 20px;
-        border-radius: 5px;
-        font-size: 16px;
-        font-weight: 600;
-    }
-
-    .account-management .swith-button-box button.active {
-        background-color: var(--main-primary-button);
-    }
-
-    .account-management .swith-button-box button:nth-child(1) {
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
-    }
-
-    .account-management .swith-button-box button:nth-child(2) {
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-    }
-
-
-    /* Acount Modal CSS */
-    .acc-modal-ne {
-        background: var(--main-tertiary-color);
-        height: calc(70vh - 135px);
-        top: 200px;
-    }
-
-    .acc-modal-ne .modal-dialog {
-        margin: 0;
-        height: fit-content;
-    }
-
-    .acc-modal-ne .modal-content {
-
-        background-color: var(--main-tertiary-color);
-        border: 0;
-    }
-
-    .acc-modal-ne .modal-content .modal-header {
-        display: none;
-    }
-
-    .acc-modal-ne .modal-content .modal-body {
-        padding: 50px 10px;
-        background-color: var(--main-tertiary-color);
-    }
-
-    .acc-modal-ne .modal-content .modal-body div,
-    .acc-modal-ne .modal-content .modal-body div label,
-    .acc-modal-ne .modal-content .modal-body div span {
-        background-color: var(--main-tertiary-color);
-    }
-
-
-    .acc-modal-ne .modal-content .modal-body .swith-button-box {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: var(--main-tertiary-color);
-        margin-bottom: 100px;
-    }
-
-    .acc-modal-ne .modal-content .modal-body .swith-button-box button {
-        background: #3C3E43;
-        border: 0;
-        padding: 10px 20px;
-        border-radius: 5px;
-        font-size: 16px;
-        font-weight: 600;
-    }
-
-    .acc-modal-ne .modal-content .modal-body .swith-button-box button.active {
-        background-color: var(--main-primary-button);
-    }
-
-    .acc-modal-ne .modal-content .modal-body .swith-button-box button:nth-child(1) {
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
-    }
-
-    .acc-modal-ne .modal-content .modal-body .swith-button-box button:nth-child(2) {
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-    }
-
-    /* Personal Info Page CSS */
-    #acc-info-personal,
-    #acc-change-pass {
-        width: 90%;
-        margin-bottom: 20px;
-    }
-
-    .acc-profile-main-item,
-    .acc-info-personal-item,
-    .acc-change-pass-item {
-        display: block;
-        margin-bottom: 20px;
-        padding: 0;
-    }
-
-    .acc-info-personal-item input,
-    .acc-change-pass-item input {
-        min-height: 40px;
-        text-align: left;
-        width: 100%;
-    }
-
-    .acc-info-personal-item h6,
-    .acc-change-pass-item h6 {
-        font-size: 12px;
-        font-weight: 700;
-        color: var(--main-text-color);
-        margin-bottom: 5px;
-    }
-
-    .eye-icon {
-        right: 10px;
-        top: 16px !important;
-    }
-
-    .personal-info-options button {
-        font-size: 12px;
-        font-weight: 600;
-        padding: 5px 12px !important;
-    }
-
-    /* Verification Tab */
-    #personal-info {
-        min-height: 100vh;
-    }
-
-    #verification-docs {
-        width: 90%;
-        padding: 30px 10px;
-    }
-
-    #verification-docs h3 {
-        font-size: 14px;
-        font-weight: 600;
-        margin-bottom: 10px;
-    }
-
-    #verification-docs h6 {
-
-        margin-bottom: 15px;
-    }
-
-    #verification-docs form div label {
-        font-size: 12px;
-        font-weight: 500;
-        margin-bottom: 5px;
-    }
-
-    #verification-docs form div input {
-        min-height: 40px;
-        margin-bottom: 20px;
-        padding: 0;
-    }
-
-    #verification-docs form div input::file-selector-button {
-        background-color: rgba(255, 255, 255, 0.15);
-        font-size: 12px;
-        font-weight: 500;
-        color: var(--main-text-color);
-        height: 100%;
-        padding: 0.5em;
-        border: none;
-        border-radius: 3px;
-    }
-
-    #verification-docs form .verification-button-box {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: row;
-    }
-
-    #verification-docs form .verification-button-box button:nth-child(1) {
-        width: fit-content;
-        padding: 10px 30px;
-        margin-right: 5px;
-    }
-
-    #verification-docs form .verification-button-box button:nth-child(2) {
-        width: fit-content;
-        padding: 10px 30px;
-        margin-left: 5px;
-        background-color: #3C3E43;
-    }
-
-    #acc-info-personal,
-    #acc-change-pass {
-        padding: 20px 20px;
-    }
-
-    .acc-change-pass-btn {
-        justify-content: center;
-        position: absolute;
-        width: 100%;
-        left: 0;
-        margin-top: 50px;
-        background-color: var(--main-background-color);
-    }
-
-    .acc-change-pass-btn button:nth-child(1) {
-        width: fit-content;
-        padding: 10px 30px;
-    }
-
-    .acc-change-pass-btn button:nth-child(2) {
-        width: fit-content;
-        padding: 10px 30px;
-        background-color: #3C3E43;
-    }
-
-
-    /* Deposit Screen */
-    #deposit-modal {
-        background-color: transparent;
-        height: calc(100vh - 139px);
-        top: 63px;
-    }
-
-    #deposit-modal .modal-dialog {
-        width: 100%;
-        height: 100%;
-        background-color: var(--main-tertiary-color);
-    }
-
-    #deposit-modal .modal-header {
-        display: none;
-    }
-
-    #deposit-modal .modal-content {
-        border: 0;
-    }
-
-    #deposit-modal .modal-body,
-    #deposit-modal #modal-contents {
-        background-color: var(--main-tertiary-color) !important;
-    }
-
-    .dp-con-box {
-        background-color: var(--main-background-color);
-        padding: 40px 20px;
-        border-radius: 5px;
-        margin-top: 30px;
-    }
-
-    #deposit-modal .deposit-modal-item {
-        margin-left: 0;
-        margin-right: 0;
-        display: block;
-        margin-bottom: 20px;
-    }
-
-    #deposit-modal .deposit-modal-item label {
-        margin-bottom: 5px;
-        font-size: 12px;
-        font-weight: 700;
-    }
-
-    #deposit-modal .deposit-modal-item input {
-        width: 100%;
-        background-color: var(--main-secondary-color);
-        min-height: 40px;
-        text-align: left !important;
-    }
-
-    .deposit-modal-item select {
-        width: 100% !important;
-        background-color: var(--main-secondary-color) !important;
-        min-height: 40px !important;
-    }
-
-    #deposit-modal .btn-grp {
-        justify-content: center;
-    }
-
-    #deposit-modal .btn-grp .btn-i {
-        padding: 13px 30px;
-        font-size: 12px;
-        font-weight: 600;
-        width: auto;
-    }
-
-    #deposit-modal .btn-grp-withdraw {
-        width: 70%;
-        margin-left: 15%;
-        background-color: #3C3E43;
-        margin-top: 20px;
-    }
-
-    #deposit-modal .btn-grp-withdraw button {
-        background-color: #3C3E43;
-    }
-
-    #deposit-modal .transactions-table {
-        border-radius: 5px;
-        margin-top: 30px;
-    }
-
-    #deposit-modal .hide-on-desktop {
-        border-radius: 5px;
-    }
-
-    #deposit-modal .hkQLoy,
-    #deposit-modal .bTKzGX {
-        background-color: var(--main-background-color) !important;
-    }
-
-    .dp-dp-box {
-        margin-top: 50px;
-        background-color: inherit;
-        margin-bottom: 30px;
-    }
-
-    .dp-dp-box input,
-    .dp-dp-box select {
-        background-color: var(--main-background-color) !important;
-    }
+  /* AUTH start */
+
+  #loginForm,
+  .signup_form {
+    background-color: transparent;
+    width: 90%;
+  }
+
+  #loginForm h1,
+  .signup_form h1 {
+    background-color: inherit;
+    font-size: xx-large;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  #loginForm .fields,
+  .signup_form .fields {
+    background-color: inherit;
+    margin: 64px 0;
+  }
+
+  .signup_form .fields {
+    margin: 32px 0;
+  }
+
+  #loginForm .fields input,
+  .signup_form .fields input {
+    background-color: var(--main-text-color);
+    color: var(--main-background-color);
+  }
+
+  #loginForm .fields input::placeholder,
+  .signup_form .fields input::placeholder {
+    color: var(--main-background-color);
+    font-weight: 400;
+  }
+
+  #loginForm .or_text,
+  #loginForm .login_other {
+    display: none;
+  }
+
+  .login_wrapper,
+  .signup_wrapper {
+    background-color: inherit;
+  }
+
+  .login_wrapper .login_text,
+  .login_wrapper .login_text p,
+  .signup_wrapper .signup_text,
+  .signup_wrapper .signup_text p {
+    background-color: inherit;
+  }
+
+  .login_wrapper .login_link,
+  .signup_wrapper .sign_up_link {
+    background-color: inherit;
+    margin: 16px 0;
+  }
+
+  .flag_theme,
+  .flag_theme .dropdown,
+  .flag_theme .dropdown svg {
+    background-color: inherit;
+  }
+
+  /* AUTH end */
+
+  .hide-on-mobile {
+    display: none !important;
+  }
+
+  .hide-on-desktop {
+    display: block !important;
+  }
+
+  #main-container {
+    height: calc(100% - 130px);
+  }
+
+  #main-container #content {
+    width: 100%;
+    height: 100%;
+  }
+
+  #side-out-menu {
+    display: none;
+  }
+
+  #sidebar {
+    width: 100%;
+    height: auto;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+  }
+
+  #side-main-menu {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 30px;
+    margin: 0;
+  }
+
+  .side-btn svg {
+    height: 30px;
+    width: auto;
+    margin-bottom: 5px;
+  }
+
+  .side-btn-acc {
+    display: none;
+  }
+
+  .navbar-sperater {
+    display: none;
+  }
+
+  #header {
+    background-color: var(--main-secondary-color);
+    height: 7%;
+    padding-top: 4%;
+  }
+
+  #header #header-info {
+    background-color: var(--main-secondary-color);
+    margin: 0;
+  }
+
+  #header #balance {
+    background-color: var(--main-secondary-color);
+    align-items: center;
+  }
+
+  #header #balance .help-box {
+    background-color: var(--main-secondary-color);
+    margin-left: 10px;
+    width: 33.33%;
+    text-align: left;
+    display: block;
+  }
+
+  #header #balance .help-box a {
+    background-color: var(--main-secondary-color);
+  }
+
+  #header #balance .page-title {
+    background-color: var(--main-secondary-color);
+    text-align: center;
+    width: 33.33%;
+    display: block;
+  }
+
+  #header #balance .page-title p {
+    background-color: var(--main-secondary-color);
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 0;
+  }
+
+  #balance-item-lang {
+    flex: unset;
+    width: 33.33%;
+    text-align: end;
+    margin: 0;
+    justify-content: end;
+  }
+
+  .id-btn {
+    margin: 0;
+    background-color: var(--main-tertiary-color);
+    border-radius: 5px;
+    padding: 5px 15px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--main-primary-button);
+    margin-right: 10px;
+    position: relative;
+  }
+
+  .id-btn span {
+    background-color: var(--main-tertiary-color);
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 12px;
+  }
+
+  .id-btn svg {
+    position: absolute;
+    top: 16px;
+    right: 10px;
+    display: none !important;
+  }
+
+  /* Orders */
+
+  #trade-div {
+    padding: 10px;
+    background-color: var(--main-tertiary-color);
+    overflow: scroll;
+  }
+
+  #trade {
+    height: auto !important;
+    border-radius: 5px;
+    padding: 20px;
+    background-color: var(--main-background-color);
+  }
+
+  #chart {
+    min-height: 70vh;
+  }
+
+  /* Mobile Trade Dropdown */
+  .mobile-tabs {
+    padding: 10px 15px;
+    text-align: left;
+    display: block;
+  }
+
+  .mobile-tabs .drpdwn,
+  .mobile-tabs .drpdwn:focus {
+    background-color: var(--bs-body-bg);
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .mobile-tabs .drpdwn::after {
+    margin-left: 15px;
+  }
+
+  /* Mobile Trade Box */
+  .mobile-trade-box {
+    padding: 10px 10px 10px 10px;
+    background-color: var(--main-background-color);
+    border-radius: 0 0 5px 5px;
+  }
+
+  .mobile-trade-box .inner-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 15px;
+  }
+
+  .mobile-trade-box .title {
+    font-size: 15px;
+    font-weight: 600;
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
+  .mobile-trade-box .inner-box .left-box {
+    width: 35%;
+  }
+
+  .mobile-trade-box .inner-box .center-box {
+    width: 25%;
+  }
+
+  .mobile-trade-box .inner-box .right-box {
+    width: 35%;
+  }
+
+  .mobile-trade-box .inner-box button {
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .mobile-trade-box .inner-box .center-box input {
+    width: 100%;
+    height: 45px;
+    font-size: 15px;
+    font-weight: 400;
+  }
+
+  /* New Order  */
+  #newOrder {
+    width: 100%;
+  }
+
+  /* Mobile stats Section */
+  .mobile-stat-box {
+    padding: 20px 0px;
+    background-color: var(--main-tertiary-color);
+  }
+
+  .mobile-stat-box .title {
+    color: var(--main-text-color);
+    font-size: 18px;
+    font-weight: 600;
+    background-color: var(--main-tertiary-color);
+  }
+
+  .mobile-stat-box .row,
+  .mobile-stat-box .col-6 {
+    background-color: var(--main-tertiary-color);
+  }
+
+  .mobile-stat-box .stat-box {
+    text-align: center;
+    border: 1px solid var(--main-tertiary-color);
+    padding: 10px 0;
+  }
+
+  .mobile-stat-box .stat-box .name {
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 0px;
+  }
+
+  .mobile-stat-box .stat-box .balance-nums {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 0px;
+  }
+
+  /* First item (top-left corner) */
+  .mobile-stat-row .col-6:nth-child(1) .stat-box {
+    border-radius: 5px 0 0 0;
+  }
+
+  /* Second item (top-right corner) */
+  .mobile-stat-row .col-6:nth-child(2) .stat-box {
+    border-radius: 0 5px 0 0;
+  }
+
+  /* Second last item (bottom-left corner) */
+  .mobile-stat-row .col-6:nth-last-child(2) .stat-box {
+    border-radius: 0 0 0 5px;
+  }
+
+  /* Last item (bottom-right corner) */
+  .mobile-stat-row .col-6:last-child .stat-box {
+    border-radius: 0 0 5px 0;
+  }
+
+  .orders-title {
+    color: var(--main-text-color);
+    font-size: 18px;
+    font-weight: 600;
+    background-color: var(--main-tertiary-color);
+  }
+
+  #orders .orders-side {
+    display: none;
+  }
+
+  #orders .order-tabs {
+    justify-content: center;
+    padding: 10px 0;
+  }
+
+  #orders .order-tabs .nav-item {
+    margin: 0;
+  }
+
+  #orders .order-tabs .nav-item button {
+    margin: 0;
+    border: 0;
+    padding: 10px 10px;
+  }
+
+  #orders .order-tabs .nav-item button.active {
+    background-color: var(--main-primary-button);
+    color: var(--main-text-color) !important;
+  }
+
+  #orders .order-tabs .nav-item:nth-child(1) button {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  #orders .order-tabs .nav-item:nth-child(2) button {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .order-bnt-box {
+    text-align: center;
+    background-color: var(--main-tertiary-color);
+    padding-top: 15px;
+    padding-bottom: 10px;
+  }
+
+  .order-bnt-box button {
+    width: 80%;
+  }
+
+  .regular-dark-btn {
+    background-color: var(--main-background-color);
+    border: 0;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .regular-dark-btn:hover {
+    background-color: var(--main-primary-button);
+  }
+
+  /* Assets CSS */
+
+  #assets .add-symbol-btn {
+    position: absolute;
+    bottom: 90px;
+    right: 20px;
+    border-radius: 50rem;
+    width: 50px;
+    height: 50px;
+    font-size: 28px;
+    padding: 0;
+  }
+
+  #assets .add-symbol-btn span {
+    display: none;
+  }
+
+  .search-input-icon {
+    top: -27px !important;
+    fill: var(--main-text-color) !important;
+  }
+
+  .sc-dItHI {
+    color: var(--main-primary-button) !important;
+  }
+
+  /* HEader Account Modal CSS */
+  .acc-info {
+    right: 3.5%;
+    top: 7.75%;
+    z-index: 9999;
+  }
+
+  /* Reports Modal CSS */
+
+  .reports-modal {
+    height: 83.5%;
+    top: 63px;
+    background-color: var(--main-tertiary-color);
+  }
+
+  .reports-modal .modal-header {
+    display: none;
+  }
+
+  .reports-modal .modal-body {
+    background-color: var(--main-tertiary-color) !important;
+  }
+
+  .reports-modal .modal-body .reports-overview-box {
+    /* background-color: #fff; */
+    background-color: var(--main-tertiary-color);
+    margin-bottom: 30px;
+  }
+
+  .reports-modal .modal-body .reports-overview-box .title {
+    color: var(--main-text-color);
+    font-weight: 600;
+    font-size: 18px;
+    background-color: var(--main-tertiary-color);
+  }
+
+  .reports-modal .modal-body .reports-overview-box ul {
+    display: block;
+    list-style-type: none;
+    background-color: var(--main-background-color);
+    padding: 0;
+    margin: 0;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  .reports-modal .modal-body .reports-overview-box ul li {
+    background-color: var(--main-background-color);
+    margin: 0;
+    padding: 15px 10px;
+    border-bottom: 1px solid var(--main-tertiary-color);
+  }
+
+  .reports-modal .modal-body .reports-overview-box ul li div {
+    background-color: var(--main-background-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .reports-modal .modal-body .reports-overview-box ul li div p {
+    background-color: var(--main-background-color);
+    margin-bottom: 0;
+  }
+
+  .reports-modal .modal-body .reports-overview-box ul li div .name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--main-text-color);
+  }
+
+  .reports-modal .modal-body .reports-overview-box ul li div .number {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--main-primary-button);
+  }
+
+  .report-tabs {
+    background-color: var(--main-tertiary-color) !important;
+    border-radius: 5px;
+    position: relative;
+  }
+
+  .report-tabs ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--main-tertiary-color) !important;
+    margin-bottom: 50px;
+    border-bottom: 0;
+  }
+
+  .report-tabs ul li {
+    margin-right: 0;
+  }
+
+  .report-tabs ul li button {
+    width: auto;
+    padding: 10px 20px;
+    margin-bottom: 0 !important;
+  }
+
+  .report-tabs ul li:nth-child(1) button {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .report-tabs ul li:nth-child(2) button {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .reports-modal .bXLDzR {
+    border-radius: 5px;
+  }
+
+  .reports-modal .ehBmlw {
+    height: 30vh;
+    background-color: var(--main-tertiary-color);
+  }
+
+  .report-tabs .tab-pane {
+    border-radius: 5px;
+  }
+
+  .reports-modal .tab-content .cGYvNk {
+    background-color: var(--main-tertiary-color);
+    padding: 0;
+  }
+
+  .report-tabs select {
+    position: absolute;
+    top: 70px;
+    background-color: var(--main-tertiary-color);
+    border: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--main-text-color);
+    padding-right: 5px;
+  }
+
+  .report-tabs select:focus-visible {
+    border: 0;
+    outline: 0;
+    box-shadow: none;
+  }
+
+  /* Account Page */
+
+  #account {
+    background-color: var(--main-tertiary-color);
+    overflow-y: scroll;
+  }
+
+  #account #account-profile {
+    background-color: var(--main-tertiary-color);
+  }
+
+  #account h1 {
+    display: none;
+  }
+
+  .account-card {
+    width: 100%;
+    background-color: var(--main-tertiary-color);
+    margin-bottom: 0;
+  }
+
+  .account-card .acc-selection {
+    display: none;
+  }
+
+  .account-card #acc-profile-main {
+    display: none;
+  }
+
+  .account-card .acc-main-content {
+    display: block;
+  }
+
+  .account-card .acc-img-name {
+    margin-bottom: 50px;
+  }
+
+  .account-card .account-sublink-box ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    background-color: var(--main-background-color);
+  }
+
+  .account-card .account-sublink-box ul li {
+    border-bottom: 1px solid var(--main-secondary-color);
+  }
+
+  .account-card .account-sublink-box ul li button {
+    background-color: var(--main-background-color);
+    border: none;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 25px;
+  }
+
+  .account-card .account-sublink-box ul li button:nth-child(1) div {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 25px;
+  }
+
+  .account-card .account-sublink-box ul li button p {
+    margin-bottom: 0;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .account-card .acc-img-name label:nth-of-type(1) {
+    font-size: 16px;
+    font-weight: 700;
+    padding-top: 5px;
+  }
+
+  .account-card .acc-img-name label:nth-of-type(2) {
+    display: none;
+  }
+
+  .account-card .acc-img-name label:nth-of-type(3) {
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .logout-btn {
+    background-color: #7c7c7c;
+    padding: 11px 30px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--main-text-color);
+    border: none;
+  }
+
+  .logout-btn svg {
+    background-color: transparent;
+    margin-right: 10px;
+  }
+
+  /* Account Management Screen */
+  .account-management {
+    min-height: calc(100vh - 142px);
+    background-color: var(--main-tertiary-color);
+    padding: 50px 10px 20px 10px;
+  }
+
+  .account-management .account-stat-box {
+    width: 100%;
+    background-color: var(--main-background-color);
+    margin: 50px 0 30px 0;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  .account-management .account-stat-box ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .account-management .account-stat-box ul li {
+    border-bottom: 1px solid var(--main-tertiary-color);
+  }
+
+  .account-management .account-stat-box ul li div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 22px;
+  }
+
+  .account-management .account-stat-box ul li div p {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--main-text-color);
+    margin-bottom: 0;
+  }
+
+  .account-management .select-account-box {
+    background-color: var(--main-tertiary-color);
+    padding-top: 50px;
+  }
+
+  .account-management .select-account-box .acc-selection {
+    display: block;
+    text-align: center;
+    background-color: var(--main-tertiary-color);
+  }
+
+  .account-management .select-account-box .acc-selection #account-input {
+    width: 80%;
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  .account-management .select-account-box .acc-selection #account-input span {
+    display: none;
+  }
+
+  .account-management .swith-button-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--main-tertiary-color);
+  }
+
+  .account-management .swith-button-box button {
+    background: #3c3e43;
+    border: 0;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .account-management .swith-button-box button.active {
+    background-color: var(--main-primary-button);
+  }
+
+  .account-management .swith-button-box button:nth-child(1) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .account-management .swith-button-box button:nth-child(2) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  /* Acount Modal CSS */
+  .acc-modal-ne {
+    background: var(--main-tertiary-color);
+    height: calc(70vh - 135px);
+    top: 200px;
+  }
+
+  .acc-modal-ne .modal-dialog {
+    margin: 0;
+    height: fit-content;
+  }
+
+  .acc-modal-ne .modal-content {
+    background-color: var(--main-tertiary-color);
+    border: 0;
+  }
+
+  .acc-modal-ne .modal-content .modal-header {
+    display: none;
+  }
+
+  .acc-modal-ne .modal-content .modal-body {
+    padding: 50px 10px;
+    background-color: var(--main-tertiary-color);
+  }
+
+  .acc-modal-ne .modal-content .modal-body div,
+  .acc-modal-ne .modal-content .modal-body div label,
+  .acc-modal-ne .modal-content .modal-body div span {
+    background-color: var(--main-tertiary-color);
+  }
+
+  .acc-modal-ne .modal-content .modal-body .swith-button-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--main-tertiary-color);
+    margin-bottom: 100px;
+  }
+
+  .acc-modal-ne .modal-content .modal-body .swith-button-box button {
+    background: #3c3e43;
+    border: 0;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .acc-modal-ne .modal-content .modal-body .swith-button-box button.active {
+    background-color: var(--main-primary-button);
+  }
+
+  .acc-modal-ne
+    .modal-content
+    .modal-body
+    .swith-button-box
+    button:nth-child(1) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .acc-modal-ne
+    .modal-content
+    .modal-body
+    .swith-button-box
+    button:nth-child(2) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  /* Personal Info Page CSS */
+  #acc-info-personal,
+  #acc-change-pass {
+    width: 90%;
+    margin-bottom: 20px;
+  }
+
+  .acc-profile-main-item,
+  .acc-info-personal-item,
+  .acc-change-pass-item {
+    display: block;
+    margin-bottom: 20px;
+    padding: 0;
+  }
+
+  .acc-info-personal-item input,
+  .acc-change-pass-item input {
+    min-height: 40px;
+    text-align: left;
+    width: 100%;
+  }
+
+  .acc-info-personal-item h6,
+  .acc-change-pass-item h6 {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--main-text-color);
+    margin-bottom: 5px;
+  }
+
+  .eye-icon {
+    right: 10px;
+    top: 16px !important;
+  }
+
+  .personal-info-options button {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 12px !important;
+  }
+
+  /* Verification Tab */
+  #personal-info {
+    min-height: 100vh;
+  }
+
+  #verification-docs {
+    width: 90%;
+    padding: 30px 10px;
+  }
+
+  #verification-docs h3 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  #verification-docs h6 {
+    margin-bottom: 15px;
+  }
+
+  #verification-docs form div label {
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 5px;
+  }
+
+  #verification-docs form div input {
+    min-height: 40px;
+    margin-bottom: 20px;
+    padding: 0;
+  }
+
+  #verification-docs form div input::file-selector-button {
+    background-color: rgba(255, 255, 255, 0.15);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--main-text-color);
+    height: 100%;
+    padding: 0.5em;
+    border: none;
+    border-radius: 3px;
+  }
+
+  #verification-docs form .verification-button-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+  }
+
+  #verification-docs form .verification-button-box button:nth-child(1) {
+    width: fit-content;
+    padding: 10px 30px;
+    margin-right: 5px;
+  }
+
+  #verification-docs form .verification-button-box button:nth-child(2) {
+    width: fit-content;
+    padding: 10px 30px;
+    margin-left: 5px;
+    background-color: #3c3e43;
+  }
+
+  #acc-info-personal,
+  #acc-change-pass {
+    padding: 20px 20px;
+  }
+
+  .acc-change-pass-btn {
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    margin-top: 50px;
+    background-color: var(--main-background-color);
+  }
+
+  .acc-change-pass-btn button:nth-child(1) {
+    width: fit-content;
+    padding: 10px 30px;
+  }
+
+  .acc-change-pass-btn button:nth-child(2) {
+    width: fit-content;
+    padding: 10px 30px;
+    background-color: #3c3e43;
+  }
+
+  /* Deposit Screen */
+  #deposit-modal {
+    background-color: transparent;
+    height: calc(100vh - 139px);
+    top: 63px;
+  }
+
+  #deposit-modal .modal-dialog {
+    width: 100%;
+    height: 100%;
+    background-color: var(--main-tertiary-color);
+  }
+
+  #deposit-modal .modal-header {
+    display: none;
+  }
+
+  #deposit-modal .modal-content {
+    border: 0;
+  }
+
+  #deposit-modal .modal-body,
+  #deposit-modal #modal-contents {
+    background-color: var(--main-tertiary-color) !important;
+  }
+
+  .dp-con-box {
+    background-color: var(--main-background-color);
+    padding: 40px 20px;
+    border-radius: 5px;
+    margin-top: 30px;
+  }
+
+  #deposit-modal .deposit-modal-item {
+    margin-left: 0;
+    margin-right: 0;
+    display: block;
+    margin-bottom: 20px;
+  }
+
+  #deposit-modal .deposit-modal-item label {
+    margin-bottom: 5px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  #deposit-modal .deposit-modal-item input {
+    width: 100%;
+    background-color: var(--main-secondary-color);
+    min-height: 40px;
+    text-align: left !important;
+  }
+
+  .deposit-modal-item select {
+    width: 100% !important;
+    background-color: var(--main-secondary-color) !important;
+    min-height: 40px !important;
+  }
+
+  #deposit-modal .btn-grp {
+    justify-content: center;
+  }
+
+  #deposit-modal .btn-grp .btn-i {
+    padding: 13px 30px;
+    font-size: 12px;
+    font-weight: 600;
+    width: auto;
+  }
+
+  #deposit-modal .btn-grp-withdraw {
+    width: 70%;
+    margin-left: 15%;
+    background-color: #3c3e43;
+    margin-top: 20px;
+  }
+
+  #deposit-modal .btn-grp-withdraw button {
+    background-color: #3c3e43;
+  }
+
+  #deposit-modal .transactions-table {
+    border-radius: 5px;
+    margin-top: 30px;
+  }
+
+  #deposit-modal .hide-on-desktop {
+    border-radius: 5px;
+  }
+
+  #deposit-modal .hkQLoy,
+  #deposit-modal .bTKzGX {
+    background-color: var(--main-background-color) !important;
+  }
+
+  .dp-dp-box {
+    margin-top: 50px;
+    background-color: inherit;
+    margin-bottom: 30px;
+  }
+
+  .dp-dp-box input,
+  .dp-dp-box select {
+    background-color: var(--main-background-color) !important;
+  }
 }
